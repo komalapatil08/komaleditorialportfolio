@@ -26,24 +26,24 @@ export const Route = createFileRoute("/")({
 type FeaturedProject = {
   question: string;
   title: string;
-  status: "Live Case Study" | "Coming Soon";
+  tag: string;
 };
 
 const featured: FeaturedProject[] = [
   {
     question: "What if networking was intentional?",
     title: "MeetCraft",
-    status: "Live Case Study",
+    tag: "Community Platform • Product Strategy",
   },
   {
     question: "Who made this?",
     title: "KalaVansh",
-    status: "Coming Soon",
+    tag: "Marketplace • Social Impact",
   },
   {
     question: "Can hospitality be predictive?",
     title: "Taj Hotels Digital Transformation",
-    status: "Coming Soon",
+    tag: "Digital Transformation • Hospitality",
   },
 ];
 
@@ -109,7 +109,7 @@ function Nav() {
             href="/resume.pdf"
             target="_blank"
             rel="noreferrer"
-            className="resume-cta inline-flex items-center gap-1.5 border border-[var(--gold)] px-4 py-2 text-[13px] tracking-wide text-foreground transition-colors duration-300"
+            className="resume-cta inline-flex items-center gap-1.5 border border-[var(--gold)] px-4 py-2 text-[13px] font-semibold tracking-wide text-foreground transition-colors duration-300"
           >
             Resume <span aria-hidden>↗</span>
           </a>
@@ -121,8 +121,8 @@ function Nav() {
 
 /**
  * Hero: portrait sticks on the left and fades as the story unfolds.
- * Each story paragraph gains visual emphasis as it nears the viewport's
- * focal line; previous paragraphs fade and drift slightly upward.
+ * Story paragraphs gently gain emphasis near the focal line; previous lines
+ * remain softly visible so the section reads like prose, not slides.
  */
 function HeroStory() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -142,7 +142,7 @@ function HeroStory() {
         const total = section.offsetHeight - window.innerHeight;
         const scrolled = Math.min(Math.max(-rect.top, 0), total);
         const p = total > 0 ? scrolled / total : 0;
-        const fade = Math.min(1, Math.pow(p, 1.35) * 1.1);
+        const fade = Math.min(1, Math.pow(p, 1.2) * 1.1);
         el.style.opacity = String(1 - fade);
       }
 
@@ -154,23 +154,20 @@ function HeroStory() {
         return;
       }
 
-      const focal = window.innerHeight * 0.42;
+      const focal = window.innerHeight * 0.45;
       paragraphs.forEach((para) => {
         const r = para.getBoundingClientRect();
         const center = r.top + r.height / 2;
         const dist = center - focal;
-        // Distance normalized by viewport — closer to focal = more emphasis.
-        const norm = Math.abs(dist) / (window.innerHeight * 0.55);
+        const norm = Math.abs(dist) / (window.innerHeight * 0.6);
         let opacity: number;
         let translate: number;
         if (dist > 0) {
-          // Below focal — hasn't arrived yet. Fade in from dim.
-          opacity = Math.max(0.18, 1 - norm * 0.9);
-          translate = Math.min(14, norm * 14);
+          opacity = Math.max(0.45, 1 - norm * 0.75);
+          translate = Math.min(10, norm * 10);
         } else {
-          // Above focal — already read. Fade and drift up.
-          opacity = Math.max(0.22, 1 - norm * 0.85);
-          translate = -Math.min(18, norm * 18);
+          opacity = Math.max(0.5, 1 - norm * 0.7);
+          translate = -Math.min(12, norm * 12);
         }
         para.style.opacity = String(Math.min(1, opacity));
         para.style.transform = `translate3d(0, ${translate}px, 0)`;
@@ -186,16 +183,14 @@ function HeroStory() {
     };
   }, []);
 
-  const paragraph =
-    "text-foreground/90 text-2xl md:text-[1.75rem] leading-[1.55] tracking-tight";
-  const serifLine =
-    "font-serif text-foreground text-3xl md:text-5xl leading-[1.15] tracking-tight";
+  const editorial =
+    "font-editorial text-[1.6rem] md:text-[2rem] leading-[1.4] tracking-[-0.005em] text-charcoal font-medium max-w-[34ch]";
 
   return (
     <section id="top" ref={sectionRef} className="relative">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 pt-32 md:grid-cols-[45%_1fr] md:gap-20 md:px-12 md:pt-40">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 pt-28 md:grid-cols-[45%_1fr] md:gap-20 md:px-12 md:pt-32">
         {/* Sticky portrait */}
-        <div className="md:sticky md:top-32 md:h-[calc(100vh-10rem)]">
+        <div className="md:sticky md:top-28 md:h-[calc(100vh-8rem)]">
           <div
             ref={portraitRef}
             className="relative aspect-[7/9] w-full overflow-hidden will-change-[opacity]"
@@ -213,22 +208,24 @@ function HeroStory() {
 
         {/* Story column */}
         <div className="flex flex-col">
-          <div className="flex min-h-[70vh] flex-col justify-center">
+          <div className="flex min-h-[60vh] flex-col justify-center">
             <p
               data-story
-              className="story-step mb-12 text-[15px] tracking-wide text-muted-foreground"
+              className="story-step mb-8 font-editorial text-2xl italic leading-tight tracking-tight text-foreground/80 md:text-[1.75rem]"
             >
               Hi there <span aria-hidden>👋</span>
             </p>
             <h1
               data-story
-              className="story-step font-serif text-6xl font-medium leading-[1.02] tracking-tight md:text-[7.5rem]"
+              className="story-step font-serif text-6xl font-medium leading-[1] tracking-[-0.02em] md:text-[7.5rem]"
             >
-              <span style={{ color: "var(--gold)" }}>I’m Komal.</span>
+              <span style={{ color: "var(--gold)" }}>
+                I’m<span style={{ display: "inline-block", width: "0.18em" }} />Komal.
+              </span>
             </h1>
             <p
               data-story
-              className="story-step mt-16 text-xl leading-[1.6] text-foreground/85 md:text-2xl"
+              className={`story-step mt-12 ${editorial}`}
             >
               Before you scroll,
               <br />
@@ -236,14 +233,17 @@ function HeroStory() {
             </p>
           </div>
 
-          <div className="flex min-h-[85vh] items-center">
-            <p data-story className={`story-step ${serifLine}`}>
+          <div className="flex min-h-[50vh] items-center">
+            <p
+              data-story
+              className="story-step font-editorial text-[2.5rem] md:text-[3.5rem] leading-[1.1] tracking-[-0.015em] text-charcoal font-medium italic max-w-[18ch]"
+            >
               I like collecting questions.
             </p>
           </div>
 
-          <div className="flex min-h-[85vh] items-center">
-            <p data-story className={`story-step ${paragraph}`}>
+          <div className="flex min-h-[50vh] items-center">
+            <p data-story className={`story-step ${editorial}`}>
               The kind that keep me awake,
               <br />
               send me down research rabbit holes,
@@ -252,24 +252,25 @@ function HeroStory() {
             </p>
           </div>
 
-          <div className="flex min-h-[90vh] flex-col justify-center gap-6">
-            {["People.", "Communities.", "Culture.", "Behavior.", "Connections."].map(
-              (w) => (
-                <span
-                  key={w}
-                  data-story
-                  className="story-step font-serif text-3xl leading-tight md:text-5xl"
-                >
-                  {w}
-                </span>
-              ),
-            )}
+          {/* Vertical list — one editorial block */}
+          <div className="flex min-h-[60vh] flex-col justify-center">
+            <ul data-story className="story-step space-y-2 md:space-y-3">
+              {["People.", "Communities.", "Culture.", "Behavior.", "Connections."].map(
+                (w) => (
+                  <li
+                    key={w}
+                    className="font-serif text-4xl leading-[1.1] tracking-tight text-charcoal md:text-6xl"
+                  >
+                    {w}
+                  </li>
+                ),
+              )}
+            </ul>
           </div>
 
-          <div className="flex min-h-[85vh] items-center">
-            <p data-story className={`story-step ${paragraph}`}>
+          <div className="flex min-h-[55vh] items-center">
+            <p data-story className={`story-step ${editorial}`}>
               Every once in a while,
-              <br />
               <br />
               one of those questions
               <br />
@@ -277,15 +278,10 @@ function HeroStory() {
             </p>
           </div>
 
-          <div className="flex min-h-[80vh] flex-col justify-center">
-            <p data-story className={`story-step ${serifLine}`}>
-              Here are a few
-              <br />
-              I’ve had the chance to explore.
-            </p>
+          <div className="flex min-h-[30vh] items-center pb-4">
             <div
               data-reveal
-              className="reveal mt-20 h-px w-24 bg-[var(--gold)]"
+              className="reveal h-px w-24 bg-[var(--gold)]"
               aria-hidden
             />
           </div>
@@ -295,39 +291,26 @@ function HeroStory() {
   );
 }
 
-function StatusLabel({ status }: { status: FeaturedProject["status"] }) {
-  if (status === "Live Case Study") {
-    return (
-      <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.2em] text-[var(--gold)]">
-        <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
-        Live Case Study
-      </span>
-    );
-  }
-  return (
-    <span className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-      Coming Soon
-    </span>
-  );
-}
-
 function FeaturedCard({ p }: { p: FeaturedProject }) {
   return (
     <article
       data-reveal
-      className="reveal group relative flex aspect-[4/5] flex-col justify-between border border-border bg-background p-7 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_18px_36px_-28px_rgba(31,31,31,0.28)] md:p-9"
+      className="project-card reveal group relative flex aspect-[4/5] flex-col justify-between border border-border bg-background p-7 transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-foreground/40 hover:shadow-[0_30px_60px_-30px_rgba(31,31,31,0.35)] md:p-9"
     >
-      <p className="font-serif text-xl leading-[1.3] text-foreground/75 md:text-2xl">
+      <p className="card-question font-serif italic text-[1.75rem] leading-[1.25] tracking-tight text-foreground/85 md:text-[2rem]">
         “{p.question}”
       </p>
 
       <div>
-        <h3 className="font-serif text-3xl leading-[1.1] tracking-tight text-foreground md:text-[2.25rem]">
+        <h3 className="font-serif text-2xl leading-[1.15] tracking-tight text-foreground md:text-[1.75rem]">
           {p.title}
         </h3>
-        <div className="mt-6">
-          <StatusLabel status={p.status} />
-        </div>
+        <p className="card-tag mt-4 text-[10.5px] uppercase tracking-[0.22em] text-muted-foreground">
+          {p.tag}
+        </p>
+        <p className="reveal-hover mt-5 text-[12px] tracking-wide text-foreground/70">
+          Read the Story →
+        </p>
       </div>
     </article>
   );
@@ -335,18 +318,23 @@ function FeaturedCard({ p }: { p: FeaturedProject }) {
 
 function FeaturedProjects() {
   return (
-    <section id="work" className="relative pt-24 md:pt-32">
+    <section id="work" className="relative pt-16 md:pt-20">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <div
           data-reveal
-          className="reveal mb-16 flex items-end justify-between md:mb-20"
+          className="reveal mb-12 flex items-end justify-between gap-6 md:mb-16"
         >
-          <h2 className="font-serif text-4xl leading-tight tracking-tight md:text-6xl">
-            Featured Projects
-          </h2>
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+              Featured Projects
+            </p>
+            <h2 className="mt-4 font-serif text-5xl leading-[1.05] tracking-tight md:text-7xl">
+              Questions I’ve Explored
+            </h2>
+          </div>
           <Link
             to="/projects"
-            className="story-link text-sm tracking-wide text-foreground md:text-base"
+            className="story-link shrink-0 text-sm tracking-wide text-foreground md:text-base"
           >
             View All Projects →
           </Link>
