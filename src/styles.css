@@ -91,6 +91,42 @@
   font-style: italic;
 }
 
+@utility font-editorial {
+  font-family: var(--font-editorial);
+  font-feature-settings: "ss01", "ss02";
+}
+
+/* Keep story paragraphs subtly visible even when far from focal line. */
+.story-step {
+  opacity: 0.35;
+}
+
+/* Project card hover behaviors */
+.project-card .reveal-hover {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.project-card:hover .reveal-hover,
+.project-card:focus-within .reveal-hover {
+  opacity: 1;
+  transform: translateY(0);
+}
+.project-card .card-tag {
+  transition: color 400ms ease;
+}
+.project-card:hover .card-tag,
+.project-card:focus-within .card-tag {
+  color: var(--gold);
+}
+.project-card .card-question {
+  transition: color 400ms ease;
+}
+.project-card:hover .card-question {
+  color: var(--charcoal);
+}
+
 @utility hairline {
   background: var(--hairline);
   height: 1px;
