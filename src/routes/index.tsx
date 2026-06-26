@@ -66,31 +66,52 @@ function useReveal() {
   }, []);
 }
 
+function scrollToTop() {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+}
+
 function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 md:px-12">
-        <a href="#top" className="font-serif text-lg tracking-tight text-foreground">
+        <a
+          href="#top"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToTop();
+          }}
+          className="font-serif text-[1.35rem] tracking-tight text-foreground"
+          aria-label="Komal Patil — back to top"
+        >
           Komal Patil
         </a>
         <nav className="flex items-center gap-7 md:gap-10">
           <Link
             to="/projects"
-            className="text-[13px] tracking-wide text-foreground/80 transition-colors hover:text-foreground"
+            className="story-link text-[13px] tracking-wide text-foreground/80"
           >
             All Projects
           </Link>
           <a
             href="#achievements"
-            className="text-[13px] tracking-wide text-foreground/80 transition-colors hover:text-foreground"
+            className="story-link text-[13px] tracking-wide text-foreground/80"
           >
             Achievements
           </a>
           <a
             href="#connect"
-            className="text-[13px] tracking-wide text-foreground/80 transition-colors hover:text-foreground"
+            className="story-link text-[13px] tracking-wide text-foreground/80"
           >
             Let’s Connect
+          </a>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="resume-cta inline-flex items-center gap-1.5 border border-[var(--gold)] px-4 py-2 text-[13px] tracking-wide text-foreground transition-colors duration-300"
+          >
+            Resume <span aria-hidden>↗</span>
           </a>
         </nav>
       </div>
@@ -99,27 +120,63 @@ function Nav() {
 }
 
 /**
- * Hero: portrait sticks on the left, story paragraphs reveal one-by-one on the right.
- * The portrait fades out across the scroll of this section so it has fully
- * disappeared before Featured Projects begins.
+ * Hero: portrait sticks on the left and fades as the story unfolds.
+ * Each story paragraph gains visual emphasis as it nears the viewport's
+ * focal line; previous paragraphs fade and drift slightly upward.
  */
 function HeroStory() {
   const sectionRef = useRef<HTMLElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const paragraphs = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-story]"),
+    );
+
     const onScroll = () => {
       const section = sectionRef.current;
       const el = portraitRef.current;
-      if (!section || !el) return;
-      const rect = section.getBoundingClientRect();
-      const total = section.offsetHeight - window.innerHeight;
-      const scrolled = Math.min(Math.max(-rect.top, 0), total);
-      const p = total > 0 ? scrolled / total : 0;
-      // Fade slowly at first, then disappear in the last 25%.
-      const fade = Math.min(1, Math.pow(p, 1.4) * 1.15);
-      el.style.opacity = String(1 - fade);
+      if (section && el) {
+        const rect = section.getBoundingClientRect();
+        const total = section.offsetHeight - window.innerHeight;
+        const scrolled = Math.min(Math.max(-rect.top, 0), total);
+        const p = total > 0 ? scrolled / total : 0;
+        const fade = Math.min(1, Math.pow(p, 1.35) * 1.1);
+        el.style.opacity = String(1 - fade);
+      }
+
+      if (reduced) {
+        paragraphs.forEach((p) => {
+          p.style.opacity = "1";
+          p.style.transform = "none";
+        });
+        return;
+      }
+
+      const focal = window.innerHeight * 0.42;
+      paragraphs.forEach((para) => {
+        const r = para.getBoundingClientRect();
+        const center = r.top + r.height / 2;
+        const dist = center - focal;
+        // Distance normalized by viewport — closer to focal = more emphasis.
+        const norm = Math.abs(dist) / (window.innerHeight * 0.55);
+        let opacity: number;
+        let translate: number;
+        if (dist > 0) {
+          // Below focal — hasn't arrived yet. Fade in from dim.
+          opacity = Math.max(0.18, 1 - norm * 0.9);
+          translate = Math.min(14, norm * 14);
+        } else {
+          // Above focal — already read. Fade and drift up.
+          opacity = Math.max(0.22, 1 - norm * 0.85);
+          translate = -Math.min(18, norm * 18);
+        }
+        para.style.opacity = String(Math.min(1, opacity));
+        para.style.transform = `translate3d(0, ${translate}px, 0)`;
+      });
     };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
@@ -130,22 +187,19 @@ function HeroStory() {
   }, []);
 
   const paragraph =
-    "reveal text-foreground/85 text-2xl md:text-3xl leading-[1.5] tracking-tight";
+    "text-foreground/90 text-2xl md:text-[1.75rem] leading-[1.55] tracking-tight";
   const serifLine =
-    "reveal font-serif text-foreground text-3xl md:text-5xl leading-[1.15] tracking-tight";
+    "font-serif text-foreground text-3xl md:text-5xl leading-[1.15] tracking-tight";
 
   return (
-    <section
-      id="top"
-      ref={sectionRef}
-      className="relative"
-    >
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 pt-32 md:grid-cols-[45%_1fr] md:gap-16 md:px-12 md:pt-40">
+    <section id="top" ref={sectionRef} className="relative">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 pt-32 md:grid-cols-[45%_1fr] md:gap-20 md:px-12 md:pt-40">
         {/* Sticky portrait */}
         <div className="md:sticky md:top-32 md:h-[calc(100vh-10rem)]">
           <div
             ref={portraitRef}
-            className="relative aspect-[7/9] w-full overflow-hidden will-change-[opacity] transition-opacity duration-200"
+            className="relative aspect-[7/9] w-full overflow-hidden will-change-[opacity]"
+            style={{ transition: "opacity 200ms linear" }}
           >
             <img
               src={portrait}
@@ -159,20 +213,22 @@ function HeroStory() {
 
         {/* Story column */}
         <div className="flex flex-col">
-          <div className="flex min-h-[60vh] flex-col justify-center">
-            <p data-reveal className="reveal mb-10 text-[15px] tracking-wide text-muted-foreground">
+          <div className="flex min-h-[70vh] flex-col justify-center">
+            <p
+              data-story
+              className="story-step mb-12 text-[15px] tracking-wide text-muted-foreground"
+            >
               Hi there <span aria-hidden>👋</span>
             </p>
             <h1
-              data-reveal
-              className="reveal font-serif text-5xl leading-[1.05] tracking-tight md:text-7xl"
+              data-story
+              className="story-step font-serif text-6xl font-medium leading-[1.02] tracking-tight md:text-[7.5rem]"
             >
               <span style={{ color: "var(--gold)" }}>I’m Komal.</span>
             </h1>
-            <div data-reveal className="reveal mt-12 h-px w-16 bg-[var(--gold)]" />
             <p
-              data-reveal
-              className="reveal mt-12 text-xl leading-[1.55] text-foreground/85 md:text-2xl"
+              data-story
+              className="story-step mt-16 text-xl leading-[1.6] text-foreground/85 md:text-2xl"
             >
               Before you scroll,
               <br />
@@ -180,14 +236,14 @@ function HeroStory() {
             </p>
           </div>
 
-          <div className="flex min-h-[80vh] items-center">
-            <p data-reveal className={serifLine}>
+          <div className="flex min-h-[85vh] items-center">
+            <p data-story className={`story-step ${serifLine}`}>
               I like collecting questions.
             </p>
           </div>
 
-          <div className="flex min-h-[80vh] items-center">
-            <p data-reveal className={paragraph}>
+          <div className="flex min-h-[85vh] items-center">
+            <p data-story className={`story-step ${paragraph}`}>
               The kind that keep me awake,
               <br />
               send me down research rabbit holes,
@@ -196,13 +252,13 @@ function HeroStory() {
             </p>
           </div>
 
-          <div className="flex min-h-[80vh] flex-col justify-center gap-5">
+          <div className="flex min-h-[90vh] flex-col justify-center gap-6">
             {["People.", "Communities.", "Culture.", "Behavior.", "Connections."].map(
               (w) => (
                 <span
                   key={w}
-                  data-reveal
-                  className="reveal font-serif text-3xl leading-tight md:text-5xl"
+                  data-story
+                  className="story-step font-serif text-3xl leading-tight md:text-5xl"
                 >
                   {w}
                 </span>
@@ -210,8 +266,8 @@ function HeroStory() {
             )}
           </div>
 
-          <div className="flex min-h-[80vh] items-center">
-            <p data-reveal className={paragraph}>
+          <div className="flex min-h-[85vh] items-center">
+            <p data-story className={`story-step ${paragraph}`}>
               Every once in a while,
               <br />
               <br />
@@ -221,12 +277,17 @@ function HeroStory() {
             </p>
           </div>
 
-          <div className="flex min-h-[70vh] items-center pb-24">
-            <p data-reveal className={serifLine}>
+          <div className="flex min-h-[80vh] flex-col justify-center">
+            <p data-story className={`story-step ${serifLine}`}>
               Here are a few
               <br />
               I’ve had the chance to explore.
             </p>
+            <div
+              data-reveal
+              className="reveal mt-20 h-px w-24 bg-[var(--gold)]"
+              aria-hidden
+            />
           </div>
         </div>
       </div>
@@ -274,7 +335,7 @@ function FeaturedCard({ p }: { p: FeaturedProject }) {
 
 function FeaturedProjects() {
   return (
-    <section id="work" className="relative pt-16 md:pt-24">
+    <section id="work" className="relative pt-24 md:pt-32">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <div
           data-reveal
@@ -346,10 +407,7 @@ function Connect() {
             If something here sparked your curiosity, let’s connect.
           </h2>
           <div className="mt-14 flex flex-col gap-4 text-lg md:text-xl">
-            <a
-              className="story-link w-fit"
-              href="mailto:hello@komalpatil.com"
-            >
+            <a className="story-link w-fit" href="mailto:hello@komalpatil.com">
               Email →
             </a>
             <a
