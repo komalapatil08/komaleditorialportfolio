@@ -137,3 +137,27 @@
   transform-origin: left;
   transform: scaleX(1);
 }
+
+/* Story paragraph emphasis — driven by JS on scroll. */
+.story-step {
+  opacity: 0.22;
+  will-change: opacity, transform;
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Resume CTA hover — gold fill, dark text. */
+.resume-cta {
+  background: transparent;
+}
+.resume-cta:hover,
+.resume-cta:focus-visible {
+  background: var(--gold);
+  color: var(--charcoal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .story-step { opacity: 1 !important; transform: none !important; transition: none; }
+}
