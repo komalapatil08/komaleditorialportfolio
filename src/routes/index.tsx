@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
+import { Mail, Linkedin } from "lucide-react";
 import portrait from "@/assets/portrait.jpg";
 
 export const Route = createFileRoute("/")({
@@ -33,17 +34,17 @@ const featured: FeaturedProject[] = [
   {
     question: "What if networking was intentional?",
     title: "MeetCraft",
-    tag: "Community Platform • Product Strategy",
+    tag: "Intent-based Networking • Product Strategy",
   },
   {
-    question: "Who made this?",
+    question: "What if every handmade product told a story?",
     title: "KalaVansh",
-    tag: "Marketplace • Social Impact",
+    tag: "Marketplace Design • Artisan Ecosystem",
   },
   {
-    question: "Can hospitality be predictive?",
+    question: "What does personalized luxury actually look like?",
     title: "Taj Hotels Digital Transformation",
-    tag: "Digital Transformation • Hospitality",
+    tag: "Digital Transformation • Guest Experience",
   },
 ];
 
@@ -109,7 +110,7 @@ function Nav() {
             href="/resume.pdf"
             target="_blank"
             rel="noreferrer"
-            className="resume-cta inline-flex items-center gap-1.5 border border-[var(--gold)] px-4 py-2 text-[13px] font-semibold tracking-wide text-foreground transition-colors duration-300"
+            className="resume-cta inline-flex items-center gap-1.5 border border-[var(--gold)] px-4 py-2 text-[13px] font-bold uppercase tracking-[0.14em] text-foreground transition-colors duration-300"
           >
             Resume <span aria-hidden>↗</span>
           </a>
@@ -121,8 +122,7 @@ function Nav() {
 
 /**
  * Hero: portrait sticks on the left and fades as the story unfolds.
- * Story paragraphs gently gain emphasis near the focal line; previous lines
- * remain softly visible so the section reads like prose, not slides.
+ * Story paragraphs gently gain emphasis near the focal line.
  */
 function HeroStory() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -164,10 +164,10 @@ function HeroStory() {
         let translate: number;
         if (dist > 0) {
           opacity = Math.max(0.45, 1 - norm * 0.75);
-          translate = Math.min(10, norm * 10);
+          translate = Math.min(8, norm * 8);
         } else {
           opacity = Math.max(0.5, 1 - norm * 0.7);
-          translate = -Math.min(12, norm * 12);
+          translate = -Math.min(10, norm * 10);
         }
         para.style.opacity = String(Math.min(1, opacity));
         para.style.transform = `translate3d(0, ${translate}px, 0)`;
@@ -184,13 +184,13 @@ function HeroStory() {
   }, []);
 
   const editorial =
-    "font-editorial text-[1.6rem] md:text-[2rem] leading-[1.4] tracking-[-0.005em] text-charcoal font-medium max-w-[34ch]";
+    "font-editorial text-[1.45rem] md:text-[1.75rem] leading-[1.5] tracking-[-0.005em] text-charcoal/90 font-normal max-w-[32ch]";
 
   return (
     <section id="top" ref={sectionRef} className="relative">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 pt-28 md:grid-cols-[45%_1fr] md:gap-20 md:px-12 md:pt-32">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 pt-24 md:grid-cols-[45%_1fr] md:gap-20 md:px-12 md:pt-28">
         {/* Sticky portrait */}
-        <div className="md:sticky md:top-28 md:h-[calc(100vh-8rem)]">
+        <div className="md:sticky md:top-24 md:h-[calc(100vh-7rem)]">
           <div
             ref={portraitRef}
             className="relative aspect-[7/9] w-full overflow-hidden will-change-[opacity]"
@@ -208,10 +208,10 @@ function HeroStory() {
 
         {/* Story column */}
         <div className="flex flex-col">
-          <div className="flex min-h-[60vh] flex-col justify-center">
+          <div className="flex min-h-[48vh] flex-col justify-center">
             <p
               data-story
-              className="story-step mb-8 font-editorial text-2xl italic leading-tight tracking-tight text-foreground/80 md:text-[1.75rem]"
+              className="story-step mb-6 font-editorial text-4xl italic leading-[1.15] tracking-tight text-foreground/85 md:text-[3rem]"
             >
               Hi there <span aria-hidden>👋</span>
             </p>
@@ -220,29 +220,26 @@ function HeroStory() {
               className="story-step font-serif text-6xl font-medium leading-[1] tracking-[-0.02em] md:text-[7.5rem]"
             >
               <span style={{ color: "var(--gold)" }}>
-                I’m<span style={{ display: "inline-block", width: "0.18em" }} />Komal.
+                I’m<span style={{ display: "inline-block", width: "0.1em" }} />Komal.
               </span>
             </h1>
-            <p
-              data-story
-              className={`story-step mt-12 ${editorial}`}
-            >
+            <p data-story className={`story-step mt-8 ${editorial}`}>
               Before you scroll,
               <br />
               there’s something I’d like you to know about me.
             </p>
           </div>
 
-          <div className="flex min-h-[50vh] items-center">
+          <div className="flex min-h-[36vh] items-center">
             <p
               data-story
-              className="story-step font-editorial text-[2.5rem] md:text-[3.5rem] leading-[1.1] tracking-[-0.015em] text-charcoal font-medium italic max-w-[18ch]"
+              className="story-step font-editorial text-[2.25rem] md:text-[3rem] leading-[1.1] tracking-[-0.015em] text-charcoal font-medium italic max-w-[18ch]"
             >
               I like collecting questions.
             </p>
           </div>
 
-          <div className="flex min-h-[50vh] items-center">
+          <div className="flex min-h-[34vh] items-center">
             <p data-story className={`story-step ${editorial}`}>
               The kind that keep me awake,
               <br />
@@ -252,23 +249,16 @@ function HeroStory() {
             </p>
           </div>
 
-          {/* Vertical list — one editorial block */}
-          <div className="flex min-h-[60vh] flex-col justify-center">
-            <ul data-story className="story-step space-y-2 md:space-y-3">
-              {["People.", "Communities.", "Culture.", "Behavior.", "Connections."].map(
-                (w) => (
-                  <li
-                    key={w}
-                    className="font-serif text-4xl leading-[1.1] tracking-tight text-charcoal md:text-6xl"
-                  >
-                    {w}
-                  </li>
-                ),
-              )}
-            </ul>
+          {/* Five words — one editorial block */}
+          <div className="flex min-h-[42vh] flex-col justify-center">
+            <p data-story className="story-step font-editorial text-[2rem] md:text-[2.75rem] leading-[1.18] tracking-tight text-charcoal font-medium italic">
+              People. Communities. Culture.
+              <br />
+              Behavior. Connections.
+            </p>
           </div>
 
-          <div className="flex min-h-[55vh] items-center">
+          <div className="flex min-h-[38vh] items-center">
             <p data-story className={`story-step ${editorial}`}>
               Every once in a while,
               <br />
@@ -278,7 +268,7 @@ function HeroStory() {
             </p>
           </div>
 
-          <div className="flex min-h-[30vh] items-center pb-4">
+          <div className="flex min-h-[18vh] items-center pb-2">
             <div
               data-reveal
               className="reveal h-px w-24 bg-[var(--gold)]"
@@ -295,20 +285,20 @@ function FeaturedCard({ p }: { p: FeaturedProject }) {
   return (
     <article
       data-reveal
-      className="project-card reveal group relative flex aspect-[4/5] flex-col justify-between border border-border bg-background p-7 transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-foreground/40 hover:shadow-[0_30px_60px_-30px_rgba(31,31,31,0.35)] md:p-9"
+      className="project-card reveal group relative flex aspect-[4/5] flex-col justify-between border border-border bg-background p-7 transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-foreground/60 hover:shadow-[0_40px_70px_-30px_rgba(31,31,31,0.45)] md:p-9"
     >
-      <p className="card-question font-serif italic text-[1.75rem] leading-[1.25] tracking-tight text-foreground/85 md:text-[2rem]">
+      <p className="card-question font-serif italic text-[2rem] leading-[1.18] tracking-tight text-foreground/85 md:text-[2.35rem]">
         “{p.question}”
       </p>
 
       <div>
-        <h3 className="font-serif text-2xl leading-[1.15] tracking-tight text-foreground md:text-[1.75rem]">
+        <h3 className="font-serif text-xl leading-[1.2] tracking-tight text-foreground/90 md:text-[1.4rem]">
           {p.title}
         </h3>
-        <p className="card-tag mt-4 text-[10.5px] uppercase tracking-[0.22em] text-muted-foreground">
+        <p className="card-tag mt-3 text-[10.5px] uppercase tracking-[0.22em] text-muted-foreground">
           {p.tag}
         </p>
-        <p className="reveal-hover mt-5 text-[12px] tracking-wide text-foreground/70">
+        <p className="reveal-hover mt-4 text-[12px] tracking-wide text-foreground/70">
           Read the Story →
         </p>
       </div>
@@ -318,11 +308,11 @@ function FeaturedCard({ p }: { p: FeaturedProject }) {
 
 function FeaturedProjects() {
   return (
-    <section id="work" className="relative pt-16 md:pt-20">
+    <section id="work" className="relative pt-12 md:pt-16">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <div
           data-reveal
-          className="reveal mb-12 flex items-end justify-between gap-6 md:mb-16"
+          className="reveal mb-10 flex items-end justify-between gap-6 md:mb-14"
         >
           <div>
             <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -350,33 +340,133 @@ function FeaturedProjects() {
   );
 }
 
-function Achievements() {
-  return (
-    <section id="achievements" className="relative pt-28 md:pt-40">
-      <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-        <div data-reveal className="reveal mb-12 md:mb-16">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-            Achievements
-          </p>
-          <h2 className="mt-4 font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-            Moments worth marking.
-          </h2>
-        </div>
+type EditorialCard = {
+  icon?: string;
+  title: string;
+  meta?: string;
+  body?: string;
+  tag?: string;
+};
 
-        <div className="grid grid-cols-1 gap-6 md:max-w-2xl">
-          <article
-            data-reveal
-            className="reveal border border-border bg-background p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_18px_36px_-28px_rgba(31,31,31,0.28)] md:p-10"
-          >
-            <p className="font-serif text-3xl leading-tight text-foreground md:text-4xl">
-              <span aria-hidden className="mr-2">🏆</span>
-              Skillathon Winner
-            </p>
-            <p className="mt-5 text-base leading-[1.6] text-foreground/75 md:text-lg">
-              Recognized for building and presenting MeetCraft, an intent-based
-              networking platform.
-            </p>
-          </article>
+function SectionHeader({ label, heading }: { label: string; heading: string }) {
+  return (
+    <div data-reveal className="reveal mb-10 md:mb-14">
+      <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+        {label}
+      </p>
+      <h2 className="mt-4 font-serif text-5xl leading-[1.05] tracking-tight md:text-7xl">
+        {heading}
+      </h2>
+    </div>
+  );
+}
+
+function EditorialEntry({ c }: { c: EditorialCard }) {
+  return (
+    <article
+      data-reveal
+      className="reveal border border-border bg-background p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_18px_36px_-28px_rgba(31,31,31,0.28)] md:p-10"
+    >
+      <p className="font-serif text-3xl leading-[1.2] text-foreground md:text-[2rem]">
+        {c.icon && <span aria-hidden className="mr-2">{c.icon}</span>}
+        {c.title}
+      </p>
+      {c.meta && (
+        <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+          {c.meta}
+        </p>
+      )}
+      {c.body && (
+        <p className="mt-4 text-base leading-[1.6] text-foreground/75 md:text-[1.05rem]">
+          {c.body}
+        </p>
+      )}
+      {c.tag && (
+        <p className="mt-4 text-[10.5px] uppercase tracking-[0.22em] text-muted-foreground">
+          {c.tag}
+        </p>
+      )}
+    </article>
+  );
+}
+
+function Achievements() {
+  const items: EditorialCard[] = [
+    {
+      icon: "🏆",
+      title: "Skillathon Winner",
+      body: "For MeetCraft — an intent-based networking platform.",
+    },
+    {
+      icon: "🌏",
+      title: "Shortlisted — CAUSE 2026",
+      body: "For KalaVansh — an artisan marketplace platform.",
+    },
+  ];
+  return (
+    <section id="achievements" className="relative pt-24 md:pt-32">
+      <div className="mx-auto max-w-[1400px] px-6 md:px-12">
+        <SectionHeader label="Achievements" heading="Moments Worth Marking" />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {items.map((c) => (
+            <EditorialEntry key={c.title} c={c} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Education() {
+  const items: EditorialCard[] = [
+    {
+      title: "Institute of Product Leadership",
+      body: "Technology Management MBA",
+      meta: "2025 – Present",
+    },
+    {
+      title: "D. Y. Patil Institute of Technology",
+      body: "B.Tech in Bioengineering",
+      meta: "2021 – 2025",
+    },
+  ];
+  return (
+    <section id="education" className="relative pt-24 md:pt-32">
+      <div className="mx-auto max-w-[1400px] px-6 md:px-12">
+        <SectionHeader label="Education" heading="Building the Foundation" />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {items.map((c) => (
+            <EditorialEntry key={c.title} c={c} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Experience() {
+  const items: EditorialCard[] = [
+    {
+      title: "Food Monk Consultants",
+      body: "Product Development Intern",
+      meta: "Feb 2025 – Jun 2025",
+      tag: "Product Innovation • Beverage R&D",
+    },
+    {
+      title: "Rebel Foods",
+      body: "Quality Assurance Intern",
+      meta: "Dates to be updated",
+      tag: "Cloud Kitchens • Food Safety • Operations Excellence",
+    },
+  ];
+  return (
+    <section id="experience" className="relative pt-24 md:pt-32">
+      <div className="mx-auto max-w-[1400px] px-6 md:px-12">
+        <SectionHeader label="Experience" heading="Where Theory Met Practice" />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {items.map((c) => (
+            <EditorialEntry key={c.title} c={c} />
+          ))}
         </div>
       </div>
     </section>
@@ -385,26 +475,34 @@ function Achievements() {
 
 function Connect() {
   return (
-    <section id="connect" className="relative pt-28 md:pt-40">
+    <section id="connect" className="relative pt-24 md:pt-32">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <div data-reveal className="reveal">
           <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
             Let’s Connect
           </p>
-          <h2 className="mt-4 max-w-3xl font-serif text-4xl leading-tight tracking-tight md:text-6xl">
-            If something here sparked your curiosity, let’s connect.
+          <h2 className="mt-4 font-serif text-5xl leading-[1.05] tracking-tight md:text-7xl">
+            Let’s Connect
           </h2>
-          <div className="mt-14 flex flex-col gap-4 text-lg md:text-xl">
-            <a className="story-link w-fit" href="mailto:hello@komalpatil.com">
-              Email →
+          <p className="mt-6 max-w-2xl font-editorial text-xl leading-[1.5] text-foreground/80 md:text-2xl">
+            If something here sparked your curiosity, let’s connect.
+          </p>
+          <div className="mt-10 flex flex-col gap-4 text-lg md:text-xl">
+            <a
+              className="story-link inline-flex w-fit items-center gap-3"
+              href="mailto:hello@komalpatil.com"
+            >
+              <Mail size={20} aria-hidden className="text-[var(--gold)]" />
+              hello@komalpatil.com
             </a>
             <a
-              className="story-link w-fit"
+              className="story-link inline-flex w-fit items-center gap-3"
               href="https://www.linkedin.com/"
               target="_blank"
               rel="noreferrer"
             >
-              LinkedIn →
+              <Linkedin size={20} aria-hidden className="text-[var(--gold)]" />
+              linkedin.com/in/komalpatil
             </a>
           </div>
         </div>
@@ -415,7 +513,7 @@ function Connect() {
 
 function Footer() {
   return (
-    <footer className="mt-32 border-t border-border">
+    <footer className="mt-28 border-t border-border">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-10 text-[11px] uppercase tracking-[0.25em] text-muted-foreground md:px-12">
         <span>© {new Date().getFullYear()} Komal Patil</span>
         <span>Made with intention</span>
@@ -432,6 +530,8 @@ function Index() {
       <HeroStory />
       <FeaturedProjects />
       <Achievements />
+      <Education />
+      <Experience />
       <Connect />
       <Footer />
     </main>
