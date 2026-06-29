@@ -208,7 +208,7 @@ function HeroStory() {
 
         {/* Story column */}
         <div className="flex flex-col">
-          <div className="flex min-h-[48vh] flex-col justify-center">
+          <div className="flex min-h-[calc(100vh-8rem)] flex-col justify-center">
             <p
               data-story
               className="story-step mb-6 font-editorial text-4xl italic leading-[1.15] tracking-tight text-foreground/85 md:text-[3rem]"
