@@ -249,13 +249,15 @@ function HeroStory() {
             </p>
           </div>
 
-          {/* Five words — one editorial block */}
+          {/* Five words — stacked vertically */}
           <div className="flex min-h-[42vh] flex-col justify-center">
-            <p data-story className="story-step font-editorial text-[2rem] md:text-[2.75rem] leading-[1.18] tracking-tight text-charcoal font-medium italic">
-              People. Communities. Culture.
-              <br />
-              Behavior. Connections.
-            </p>
+            <div data-story className="story-step font-editorial text-[2rem] md:text-[2.75rem] leading-[1.3] tracking-tight text-charcoal font-medium italic">
+              <span className="block">People.</span>
+              <span className="block">Communities.</span>
+              <span className="block">Culture.</span>
+              <span className="block">Behavior.</span>
+              <span className="block">Connections.</span>
+            </div>
           </div>
 
           <div className="flex min-h-[38vh] items-center">
