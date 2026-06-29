@@ -230,7 +230,7 @@ function HeroStory() {
             </p>
           </div>
 
-          <div className="flex min-h-[36vh] items-center">
+          <div className="mt-[8vh] flex min-h-[36vh] items-center">
             <p
               data-story
               className="story-step font-editorial text-[2.25rem] md:text-[3rem] leading-[1.1] tracking-[-0.015em] text-charcoal font-medium italic max-w-[18ch]"
