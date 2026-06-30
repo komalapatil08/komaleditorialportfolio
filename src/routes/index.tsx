@@ -2,6 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { Mail, Linkedin } from "lucide-react";
 import portrait from "@/assets/portrait.jpg";
+import meetcraftImg from "@/assets/meetcraft.png.asset.json";
+import kalavanshImg from "@/assets/kalavansh.png.asset.json";
+import tajImg from "@/assets/taj.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,6 +31,8 @@ type FeaturedProject = {
   question: string;
   title: string;
   tag: string;
+  image: string;
+  alt: string;
 };
 
 const featured: FeaturedProject[] = [
@@ -35,16 +40,22 @@ const featured: FeaturedProject[] = [
     question: "What if networking was intentional?",
     title: "MeetCraft",
     tag: "Intent-based Networking • Product Strategy",
+    image: meetcraftImg.url,
+    alt: "Two women in conversation at a MeetCraft event",
   },
   {
     question: "What if every handmade product told a story?",
     title: "KalaVansh",
     tag: "Marketplace Design • Artisan Ecosystem",
+    image: kalavanshImg.url,
+    alt: "An artisan embroidering a floral motif by hand",
   },
   {
     question: "What does personalized luxury actually look like?",
-    title: "Taj Hotels Digital Transformation",
+    title: "Taj Digital Transformation",
     tag: "Digital Transformation • Guest Experience",
+    image: tajImg.url,
+    alt: "A Taj host serving tea overlooking the lake at golden hour",
   },
 ];
 
@@ -287,21 +298,35 @@ function FeaturedCard({ p }: { p: FeaturedProject }) {
   return (
     <article
       data-reveal
-      className="project-card reveal group relative flex aspect-[4/5] flex-col justify-between border border-border bg-background p-7 transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-foreground/60 hover:shadow-[0_40px_70px_-30px_rgba(31,31,31,0.45)] md:p-9"
+      className="project-card reveal group relative flex h-full flex-col border border-border/70 bg-background p-7 transition-all duration-[400ms] ease-in-out hover:-translate-y-1.5 hover:border-foreground/40 hover:shadow-[0_50px_90px_-40px_rgba(31,31,31,0.45)] md:p-9"
     >
-      <p className="card-question font-serif italic text-[2rem] leading-[1.18] tracking-tight text-foreground/85 md:text-[2.35rem]">
-        “{p.question}”
+      {/* 1. Question */}
+      <p className="card-question font-serif text-[1.7rem] leading-[1.15] tracking-tight text-foreground transition-colors duration-[400ms] group-hover:text-foreground md:text-[2rem]">
+        {p.question}
       </p>
 
-      <div>
-        <h3 className="font-serif text-xl leading-[1.2] tracking-tight text-foreground/90 md:text-[1.4rem]">
+      {/* 2. Editorial photograph */}
+      <div className="mt-7 overflow-hidden rounded-[2px] bg-muted md:mt-9">
+        <div className="aspect-[4/5] w-full overflow-hidden">
+          <img
+            src={p.image}
+            alt={p.alt}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-[500ms] ease-in-out group-hover:scale-[1.025]"
+          />
+        </div>
+      </div>
+
+      {/* 3. Project name + 4. Editorial tag */}
+      <div className="mt-7 md:mt-8">
+        <h3 className="font-serif text-[1.1rem] leading-[1.25] tracking-tight text-foreground/90 md:text-[1.2rem]">
           {p.title}
         </h3>
-        <p className="card-tag mt-3 text-[10.5px] uppercase tracking-[0.22em] text-muted-foreground">
+        <p className="card-tag mt-3 text-[10.5px] uppercase tracking-[0.24em] text-muted-foreground transition-colors duration-[400ms] group-hover:text-[color:var(--gold,#C9A227)]">
           {p.tag}
         </p>
-        <p className="reveal-hover mt-4 text-[12px] tracking-wide text-foreground/70">
-          Read the Story →
+        <p className="reveal-hover mt-5 text-[11.5px] uppercase tracking-[0.22em] text-foreground/80">
+          Read Case Study →
         </p>
       </div>
     </article>
