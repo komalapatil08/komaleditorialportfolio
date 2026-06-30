@@ -517,19 +517,19 @@ function Connect() {
           <div className="mt-10 flex flex-col gap-4 text-lg md:text-xl">
             <a
               className="story-link inline-flex w-fit items-center gap-3"
-              href="mailto:hello@komalpatil.com"
+              href="mailto:komalapatil08@gmail.com"
             >
               <Mail size={20} aria-hidden className="text-[var(--gold)]" />
-              hello@komalpatil.com
+              komalapatil08@gmail.com
             </a>
             <a
               className="story-link inline-flex w-fit items-center gap-3"
-              href="https://www.linkedin.com/"
+              href="https://www.linkedin.com/in/komalpatil"
               target="_blank"
               rel="noreferrer"
             >
               <Linkedin size={20} aria-hidden className="text-[var(--gold)]" />
-              linkedin.com/in/komalpatil
+              Komal Patil | LinkedIn
             </a>
           </div>
         </div>
