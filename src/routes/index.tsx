@@ -31,6 +31,8 @@ type FeaturedProject = {
   question: string;
   title: string;
   tag: string;
+  image: string;
+  alt: string;
 };
 
 const featured: FeaturedProject[] = [
@@ -38,16 +40,22 @@ const featured: FeaturedProject[] = [
     question: "What if networking was intentional?",
     title: "MeetCraft",
     tag: "Intent-based Networking • Product Strategy",
+    image: meetcraftImg.url,
+    alt: "Two women in conversation at a MeetCraft event",
   },
   {
     question: "What if every handmade product told a story?",
     title: "KalaVansh",
     tag: "Marketplace Design • Artisan Ecosystem",
+    image: kalavanshImg.url,
+    alt: "An artisan embroidering a floral motif by hand",
   },
   {
     question: "What does personalized luxury actually look like?",
-    title: "Taj Hotels Digital Transformation",
+    title: "Taj Digital Transformation",
     tag: "Digital Transformation • Guest Experience",
+    image: tajImg.url,
+    alt: "A Taj host serving tea overlooking the lake at golden hour",
   },
 ];
 
