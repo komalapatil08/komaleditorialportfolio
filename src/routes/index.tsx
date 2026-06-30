@@ -204,15 +204,19 @@ function HeroStory() {
         <div className="md:sticky md:top-24 md:h-[calc(100vh-7rem)]">
           <div
             ref={portraitRef}
-            className="relative aspect-[7/9] w-full overflow-hidden will-change-[opacity]"
-            style={{ transition: "opacity 200ms linear" }}
+            className="relative aspect-[7/9] w-full overflow-hidden rounded-[6px] shadow-[0_30px_80px_-40px_rgba(31,31,31,0.35)] will-change-[opacity]"
+            style={{
+              transition: "opacity 200ms linear",
+              background:
+                "linear-gradient(180deg, #F2EBDD 0%, #E8DFCC 100%)",
+            }}
           >
             <img
-              src={portrait}
+              src={portrait.url}
               alt="Portrait of Komal Patil"
               width={896}
               height={1280}
-              className="h-full w-full object-cover"
+              className="absolute inset-x-0 bottom-0 mx-auto h-[98%] w-auto object-contain object-bottom"
             />
           </div>
         </div>
