@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { Mail, Linkedin } from "lucide-react";
-import portrait from "@/assets/komal-portrait.png.asset.json";
+import portrait from "@/assets/komal-portrait-v2.png.asset.json";
 import meetcraftImg from "@/assets/meetcraft.png.asset.json";
 import kalavanshImg from "@/assets/kalavansh.png.asset.json";
 import tajImg from "@/assets/taj.png.asset.json";
@@ -204,11 +204,11 @@ function HeroStory() {
         <div className="md:sticky md:top-24 md:h-[calc(100vh-7rem)]">
           <div
             ref={portraitRef}
-            className="relative aspect-[7/9] w-full overflow-hidden rounded-[6px] shadow-[0_30px_80px_-40px_rgba(31,31,31,0.35)] will-change-[opacity]"
+            className="relative aspect-[7/9] w-full will-change-[opacity]"
             style={{
               transition: "opacity 200ms linear",
-              background:
-                "linear-gradient(180deg, #F2EBDD 0%, #E8DFCC 100%)",
+              filter:
+                "drop-shadow(0 30px 50px rgba(80, 55, 25, 0.12)) drop-shadow(0 10px 20px rgba(80, 55, 25, 0.08))",
             }}
           >
             <img
@@ -216,7 +216,7 @@ function HeroStory() {
               alt="Portrait of Komal Patil"
               width={896}
               height={1280}
-              className="absolute inset-x-0 bottom-0 mx-auto h-[98%] w-auto object-contain object-bottom"
+              className="absolute inset-x-0 bottom-0 mx-auto h-full w-auto object-contain object-bottom"
             />
           </div>
         </div>
