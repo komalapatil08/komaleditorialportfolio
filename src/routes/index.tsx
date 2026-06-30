@@ -2,6 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { Mail, Linkedin } from "lucide-react";
 import portrait from "@/assets/portrait.jpg";
+import meetcraftImg from "@/assets/meetcraft.png.asset.json";
+import kalavanshImg from "@/assets/kalavansh.png.asset.json";
+import tajImg from "@/assets/taj.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
