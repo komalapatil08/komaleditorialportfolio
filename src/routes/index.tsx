@@ -202,21 +202,14 @@ function HeroStory() {
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 pt-24 md:grid-cols-[45%_1fr] md:gap-20 md:px-12 md:pt-28">
         {/* Sticky portrait */}
         <div className="md:sticky md:top-24 md:h-[calc(100vh-7rem)]">
-          <div
-            ref={portraitRef}
-            className="relative aspect-[4/5] w-full overflow-hidden rounded-[6px] will-change-[opacity]"
-            style={{
-              transition: "opacity 200ms linear",
-              boxShadow:
-                "0 30px 60px rgba(0, 0, 0, 0.18), 0 10px 24px rgba(0, 0, 0, 0.12)",
-            }}
-          >
+          <div ref={portraitRef} className="will-change-[opacity]" style={{ transition: "opacity 200ms linear" }}>
             <img
               src={portrait.url}
               alt="Portrait of Komal Patil"
               width={896}
               height={1280}
-              className="h-full w-full object-cover"
+              className="w-full"
+              style={{ filter: "drop-shadow(0 24px 48px rgba(0,0,0,0.07))" }}
             />
           </div>
         </div>
