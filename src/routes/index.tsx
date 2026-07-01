@@ -204,11 +204,11 @@ function HeroStory() {
         <div className="md:sticky md:top-24 md:h-[calc(100vh-7rem)]">
           <div
             ref={portraitRef}
-            className="relative aspect-[7/9] w-full will-change-[opacity]"
+            className="relative aspect-[4/5] w-full overflow-hidden rounded-[6px] will-change-[opacity]"
             style={{
               transition: "opacity 200ms linear",
-              filter:
-                "drop-shadow(0 30px 50px rgba(80, 55, 25, 0.12)) drop-shadow(0 10px 20px rgba(80, 55, 25, 0.08))",
+              boxShadow:
+                "0 30px 60px rgba(0, 0, 0, 0.18), 0 10px 24px rgba(0, 0, 0, 0.12)",
             }}
           >
             <img
@@ -216,7 +216,7 @@ function HeroStory() {
               alt="Portrait of Komal Patil"
               width={896}
               height={1280}
-              className="absolute inset-x-0 bottom-0 mx-auto h-full w-auto object-contain object-bottom"
+              className="h-full w-full object-cover"
             />
           </div>
         </div>
