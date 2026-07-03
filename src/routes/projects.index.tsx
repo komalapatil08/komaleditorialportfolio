@@ -24,7 +24,7 @@ export const Route = createFileRoute("/projects/")({
 type Project = {
   title: string;
   status: "Live Case Study" | "Coming Soon";
-  href?: string;
+  href?: "/projects/meetcraft";
 };
 
 const projects: Project[] = [
@@ -105,9 +105,9 @@ function Card({ p }: { p: Project }) {
 
   if (p.href) {
     return (
-      <a href={p.href} className="block">
+      <Link to={p.href} className="block">
         {inner}
-      </a>
+      </Link>
     );
   }
   return inner;

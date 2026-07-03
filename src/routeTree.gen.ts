@@ -9,28 +9,35 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
 import { Route as ProjectsMeetcraftRouteImport } from './routes/projects.meetcraft'
 
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
-  id: '/projects/',
-  path: '/projects/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProjectsRoute,
 } as any)
 const ProjectsMeetcraftRoute = ProjectsMeetcraftRouteImport.update({
-  id: '/projects/meetcraft',
-  path: '/projects/meetcraft',
-  getParentRoute: () => rootRouteImport,
+  id: '/meetcraft',
+  path: '/meetcraft',
+  getParentRoute: () => ProjectsRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/projects': typeof ProjectsRouteWithChildren
   '/projects/meetcraft': typeof ProjectsMeetcraftRoute
   '/projects/': typeof ProjectsIndexRoute
 }
@@ -42,25 +49,32 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/projects': typeof ProjectsRouteWithChildren
   '/projects/meetcraft': typeof ProjectsMeetcraftRoute
   '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/projects/meetcraft' | '/projects/'
+  fullPaths: '/' | '/projects' | '/projects/meetcraft' | '/projects/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/projects/meetcraft' | '/projects'
-  id: '__root__' | '/' | '/projects/meetcraft' | '/projects/'
+  id: '__root__' | '/' | '/projects' | '/projects/meetcraft' | '/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ProjectsMeetcraftRoute: typeof ProjectsMeetcraftRoute
-  ProjectsIndexRoute: typeof ProjectsIndexRoute
+  ProjectsRoute: typeof ProjectsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -70,25 +84,38 @@ declare module '@tanstack/react-router' {
     }
     '/projects/': {
       id: '/projects/'
-      path: '/projects'
+      path: '/'
       fullPath: '/projects/'
       preLoaderRoute: typeof ProjectsIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ProjectsRoute
     }
     '/projects/meetcraft': {
       id: '/projects/meetcraft'
-      path: '/projects/meetcraft'
+      path: '/meetcraft'
       fullPath: '/projects/meetcraft'
       preLoaderRoute: typeof ProjectsMeetcraftRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ProjectsRoute
     }
   }
 }
 
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+interface ProjectsRouteChildren {
+  ProjectsMeetcraftRoute: typeof ProjectsMeetcraftRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
+}
+
+const ProjectsRouteChildren: ProjectsRouteChildren = {
   ProjectsMeetcraftRoute: ProjectsMeetcraftRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
+}
+
+const ProjectsRouteWithChildren = ProjectsRoute._addFileChildren(
+  ProjectsRouteChildren,
+)
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  ProjectsRoute: ProjectsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
