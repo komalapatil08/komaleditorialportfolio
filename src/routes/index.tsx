@@ -355,10 +355,17 @@ function FeaturedProjects() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {featured.map((p) => (
-            <FeaturedCard key={p.title} p={p} />
-          ))}
+          {featured.map((p) =>
+            p.title === "MeetCraft" ? (
+              <Link key={p.title} to="/projects/meetcraft" className="block h-full">
+                <FeaturedCard p={p} />
+              </Link>
+            ) : (
+              <FeaturedCard key={p.title} p={p} />
+            ),
+          )}
         </div>
+
       </div>
     </section>
   );
