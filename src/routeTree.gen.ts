@@ -24,9 +24,9 @@ const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsMeetcraftRoute = ProjectsMeetcraftRouteImport.update({
-  id: '/meetcraft',
-  path: '/meetcraft',
-  getParentRoute: () => ProjectsRoute,
+  id: '/projects/meetcraft',
+  path: '/projects/meetcraft',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -55,6 +55,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProjectsMeetcraftRoute: typeof ProjectsMeetcraftRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
 
@@ -76,28 +77,19 @@ declare module '@tanstack/react-router' {
     }
     '/projects/meetcraft': {
       id: '/projects/meetcraft'
-      path: '/meetcraft'
+      path: '/projects/meetcraft'
       fullPath: '/projects/meetcraft'
       preLoaderRoute: typeof ProjectsMeetcraftRouteImport
-      parentRoute: typeof ProjectsRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProjectsMeetcraftRoute: ProjectsMeetcraftRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
