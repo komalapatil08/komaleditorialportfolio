@@ -5,6 +5,7 @@ import interviewKomal from "@/assets/mc-interview-komal.png.asset.json";
 import interviewShristy from "@/assets/mc-interview-shristy.png.asset.json";
 import interviewPrashant from "@/assets/mc-interview-prashant.png.asset.json";
 import surveyEvidence from "@/assets/mc-survey.png.asset.json";
+import chapter3Insight from "@/assets/mc-chapter3-insight.png.asset.json";
 
 
 
@@ -572,32 +573,45 @@ function MeetCraftPage() {
       </section>
 
 
-      {/* CHAPTER 3 — The Turn ————————————————————————————————— */}
-      <section className="pt-40 md:pt-56">
+      {/* CHAPTER 3 — INSIGHT ————————————————————————————————— */}
+      <section className="pt-40 md:pt-56 pb-16 md:pb-28">
         <Container>
-          <ChapterHeader
-            number="Three"
-            eyebrow="The Turn"
-            title="The Moment Everything Changed."
-          />
-        </Container>
+          <div className="grid grid-cols-1 gap-14 md:grid-cols-[5fr_7fr] md:gap-16 lg:gap-20 items-start">
+            {/* Left column — text (~42%) */}
+            <div>
+              <div data-reveal className="reveal">
+                <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+                  Chapter Three · Insight
+                </p>
+                <h2 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
+                  The Moment Everything Changed
+                </h2>
+                <div className="mt-8 h-px w-12 bg-[var(--gold)]" />
+                <p className="mt-10 max-w-[32ch] font-editorial text-[1.05rem] leading-[1.58] tracking-[-0.003em] text-foreground/75 md:text-[1.1rem]">
+                  <span className="font-medium text-foreground/95">One conversation changed everything.</span><br />
+                  We met a student searching for mentors to build his sustainability startup.<br />
+                  He knew what he was looking for.<br />
+                  He just didn't know who to approach.<br />
+                  That single conversation made us realize—<br />
+                  <span className="italic font-semibold text-foreground/90">Networking wasn't broken. Finding the right people was.</span>
+                </p>
+              </div>
+            </div>
 
-        <div className="mt-10 md:mt-16">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
-            <ImagePlaceholder ratio="aspect-[21/9]" label="Full-width photograph" />
-          </div>
-        </div>
-
-        <Container className="mt-16 md:mt-24">
-          <PullQuote attribution="Field note, week four">
-            Placeholder — the one sentence that reframed the entire project.
-          </PullQuote>
-          <div className="mt-16 grid grid-cols-1 gap-16 md:grid-cols-12">
-            <div className="md:col-span-6 md:col-start-4">
-              <Prose>
-                Placeholder — the paragraph that explains why this moment
-                mattered. Written softly. No exclamation marks.
-              </Prose>
+            {/* Right column — image (~58%) */}
+            <div>
+              <div
+                data-reveal
+                className="reveal"
+                style={{ transitionDelay: "160ms" }}
+              >
+                <img
+                  src={chapter3Insight.url}
+                  alt="A student with a notebook, pausing at the edge of a networking event, searching for someone to approach while others converse around him."
+                  className="w-full h-auto rounded-2xl"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
         </Container>
