@@ -263,8 +263,9 @@ function MeetCraftPage() {
                 </h2>
                 <div className="mt-8 h-px w-12 bg-[var(--gold)]" />
                 <p className="mt-10 max-w-[32ch] font-editorial text-[1.05rem] leading-[1.58] tracking-[-0.003em] text-foreground/75 md:text-[1.1rem]">
-                  <span className="font-medium text-foreground/95">We came expecting conversations.</span>{" "}
-                  Instead, we noticed hesitation. We weren't the only ones wondering who to approach.{" "}
+                  <span className="font-medium text-foreground/95">We came expecting conversations.</span><br />
+                  Instead, we noticed hesitation.<br />
+                  We weren't the only ones wondering who to approach.<br />
                   <span className="italic text-foreground/90">That's where the story began.</span>
                 </p>
               </div>
