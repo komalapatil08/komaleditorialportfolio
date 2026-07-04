@@ -1,11 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import chapter1Room from "@/assets/meetcraft-chapter1-room.png.asset.json";
 import interviewKomal from "@/assets/mc-interview-komal.png.asset.json";
 import interviewShristy from "@/assets/mc-interview-shristy.png.asset.json";
 import interviewPrashant from "@/assets/mc-interview-prashant.png.asset.json";
 import surveyEvidence from "@/assets/mc-survey.png.asset.json";
 import chapter3Insight from "@/assets/mc-chapter3-insight.png.asset.json";
+import ch7Presentation from "@/assets/mc-ch7-presentation.jpeg.asset.json";
+import ch7Judges from "@/assets/mc-ch7-judges.jpeg.asset.json";
+import ch7Award from "@/assets/mc-ch7-award.jpeg.asset.json";
+import ch7Certificate from "@/assets/mc-ch7-certificate.png.asset.json";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+
 
 
 
