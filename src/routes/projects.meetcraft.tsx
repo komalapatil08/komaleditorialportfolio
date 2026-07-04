@@ -1,6 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import chapter1Room from "@/assets/meetcraft-chapter1-room.png.asset.json";
+import interviewKomal from "@/assets/mc-interview-komal.png.asset.json";
+import interviewShristy from "@/assets/mc-interview-shristy.png.asset.json";
+import interviewPrashant from "@/assets/mc-interview-prashant.png.asset.json";
+import surveyEvidence from "@/assets/mc-survey.png.asset.json";
+
 
 
 export const Route = createFileRoute("/projects/meetcraft")({
