@@ -5,6 +5,7 @@ import interviewKomal from "@/assets/mc-interview-komal.png.asset.json";
 import interviewShristy from "@/assets/mc-interview-shristy.png.asset.json";
 import interviewPrashant from "@/assets/mc-interview-prashant.png.asset.json";
 import surveyEvidence from "@/assets/mc-survey.png.asset.json";
+import chapter3Insight from "@/assets/mc-chapter3-insight.png.asset.json";
 
 
 
