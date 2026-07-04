@@ -639,35 +639,40 @@ function ChapterSeven() {
 
           <figure
             data-reveal
-            className="reveal group col-span-6 overflow-hidden rounded-[20px] border border-black/[0.08] bg-white shadow-[0_16px_40px_-25px_rgba(0,0,0,0.25)] transition-transform duration-500 ease-out md:col-span-3 md:hover:-translate-y-1"
+            className="reveal group col-span-6 overflow-hidden rounded-[20px] border border-black/[0.08] bg-[#F5F3EE] shadow-[0_16px_40px_-25px_rgba(0,0,0,0.25)] transition-transform duration-500 ease-out md:col-span-3 md:hover:-translate-y-1"
             style={{ transitionDelay: "120ms" }}
           >
-            <img
-              src={ch7Judges.url}
-              alt="Defending product decisions during the judge Q&A"
-              className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
-              loading="lazy"
-            />
-            <figcaption className="border-t border-black/[0.06] px-5 py-3 text-[10.5px] uppercase tracking-[0.28em] text-muted-foreground">
+            <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden">
+              <img
+                src={ch7Judges.url}
+                alt="Defending product decisions during the judge Q&A"
+                className="h-full w-full object-contain transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
+                loading="lazy"
+              />
+            </div>
+            <figcaption className="border-t border-black/[0.06] bg-white px-5 py-3 text-[10.5px] uppercase tracking-[0.28em] text-muted-foreground">
               Judge Q&amp;A
             </figcaption>
           </figure>
 
           <figure
             data-reveal
-            className="reveal group col-span-6 overflow-hidden rounded-[20px] border border-black/[0.08] bg-white shadow-[0_16px_40px_-25px_rgba(0,0,0,0.25)] transition-transform duration-500 ease-out md:col-span-3 md:hover:-translate-y-1"
+            className="reveal group col-span-6 overflow-hidden rounded-[20px] border border-black/[0.08] bg-[#F5F3EE] shadow-[0_16px_40px_-25px_rgba(0,0,0,0.25)] transition-transform duration-500 ease-out md:col-span-3 md:hover:-translate-y-1"
             style={{ transitionDelay: "220ms" }}
           >
-            <img
-              src={ch7Award.url}
-              alt="Receiving the Skillathon Winner recognition"
-              className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
-              loading="lazy"
-            />
-            <figcaption className="border-t border-black/[0.06] px-5 py-3 text-[10.5px] uppercase tracking-[0.28em] text-muted-foreground">
+            <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden">
+              <img
+                src={ch7Award.url}
+                alt="Receiving the Skillathon Winner recognition"
+                className="h-full w-full object-contain transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
+                loading="lazy"
+              />
+            </div>
+            <figcaption className="border-t border-black/[0.06] bg-white px-5 py-3 text-[10.5px] uppercase tracking-[0.28em] text-muted-foreground">
               Award Ceremony
             </figcaption>
           </figure>
+
         </div>
 
         {/* Block 3 — Recognition Proof */}
