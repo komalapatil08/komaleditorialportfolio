@@ -73,7 +73,7 @@ function Nav() {
             hash="connect"
             className="story-link text-[13px] tracking-wide text-foreground/80"
           >
-            Let’s Connect
+            Let's Connect
           </Link>
           <Link
             to="/"
@@ -158,7 +158,7 @@ function PullQuote({ children, attribution }: { children: React.ReactNode; attri
       className="reveal mx-auto max-w-[26ch] py-8 text-center md:py-12"
     >
       <p className="font-editorial text-3xl italic leading-[1.2] tracking-tight text-charcoal md:text-[2.75rem]">
-        “{children}”
+        "{children}"
       </p>
       {attribution && (
         <footer className="mt-6 text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -251,9 +251,9 @@ function MeetCraftPage() {
       {/* CHAPTER 1 ——————————————————————————————————————————— */}
       <section className="pt-40 md:pt-56 pb-16 md:pb-28">
         <Container>
-          <div className="grid grid-cols-1 gap-14 md:grid-cols-12 md:gap-16 lg:gap-20 items-center">
-            {/* Left column — text (~40%) */}
-            <div className="md:col-span-5">
+          <div className="grid grid-cols-1 gap-14 md:grid-cols-[5fr_8fr] md:gap-16 lg:gap-20 items-center">
+            {/* Left column — text (~38%) */}
+            <div>
               <div data-reveal className="reveal">
                 <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
                   Chapter One · Beginnings
@@ -262,25 +262,16 @@ function MeetCraftPage() {
                   We Walked Into the Room.
                 </h2>
                 <div className="mt-8 h-px w-12 bg-[var(--gold)]" />
-                <div
-                  className="mt-10 max-w-[32ch] font-editorial text-[1.15rem] leading-[1.55] tracking-[-0.003em] text-foreground/80 md:text-[1.2rem] space-y-3"
-                >
-                  <p className="text-foreground/95 font-medium">
-                    We walked into the room expecting conversations.
-                  </p>
-                  <p>Instead, we noticed hesitation.</p>
-                  <p>
-                    We weren’t the only ones wondering who to approach.
-                  </p>
-                  <p className="italic text-foreground/90">
-                    That’s where the story began.
-                  </p>
-                </div>
+                <p className="mt-10 max-w-[32ch] font-editorial text-[1.05rem] leading-[1.58] tracking-[-0.003em] text-foreground/75 md:text-[1.1rem]">
+                  <span className="font-medium text-foreground/95">We came expecting conversations.</span>{" "}
+                  Instead, we noticed hesitation. We weren't the only ones wondering who to approach.{" "}
+                  <span className="italic text-foreground/90">That's where the story began.</span>
+                </p>
               </div>
             </div>
 
-            {/* Right column — image (~60%) */}
-            <div className="md:col-span-7">
+            {/* Right column — image (~62%) */}
+            <div>
               <div
                 data-reveal
                 className="reveal"
@@ -289,7 +280,7 @@ function MeetCraftPage() {
                 <img
                   src={chapter1Room.url}
                   alt="A room of attendees standing in quiet hesitation at the start of a networking event."
-                  className="w-full h-auto object-cover aspect-[4/5] md:aspect-[5/6]"
+                  className="w-full h-auto"
                   loading="lazy"
                 />
               </div>
@@ -320,8 +311,8 @@ function MeetCraftPage() {
                   Interview Snippet
                 </p>
                 <p className="mt-4 font-editorial text-xl italic leading-[1.4] text-foreground/85 md:text-2xl">
-                  “Placeholder for a verbatim quote from an interview — kept
-                  raw, unedited, human.”
+                  "Placeholder for a verbatim quote from an interview — kept
+                  raw, unedited, human."
                 </p>
                 <p className="mt-4 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
                   Attendee, 27 · Bengaluru
@@ -426,7 +417,7 @@ function MeetCraftPage() {
           <ChapterHeader
             number="Five"
             eyebrow="Strategy"
-            title="The Customer Wasn’t the User."
+            title="The Customer Wasn't the User."
           />
           <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-20">
             <div className="md:col-span-5">
@@ -564,8 +555,8 @@ function MeetCraftPage() {
                 className="reveal mt-10 border-l border-[var(--gold)] pl-6"
               >
                 <p className="font-editorial text-lg italic leading-[1.5] text-foreground/85 md:text-xl">
-                  “Placeholder — a sentence from a judge or observer, kept in
-                  their voice.”
+                  "Placeholder — a sentence from a judge or observer, kept in
+                  their voice."
                 </p>
                 <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
                   Placeholder attribution
