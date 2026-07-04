@@ -617,39 +617,206 @@ function MeetCraftPage() {
         </Container>
       </section>
 
-      {/* CHAPTER 4 ——————————————————————————————————————————— */}
-      <section className="pt-40 md:pt-56">
-        <Container>
-          <ChapterHeader
-            number="Four"
-            eyebrow="Exploration"
-            title="The Ideas We Walked Away From."
-          />
-          <Prose>
-            Placeholder — a short paragraph about the discipline of saying no.
-          </Prose>
-          <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <article
-                key={i}
-                data-reveal
-                className="reveal flex aspect-[4/5] flex-col justify-between border border-border p-8"
-              >
-                <span className="text-[10.5px] uppercase tracking-[0.3em] text-muted-foreground">
-                  Concept 0{i} · Rejected
-                </span>
-                <div>
-                  <h3 className="font-serif text-2xl leading-[1.15] text-foreground md:text-3xl">
-                    Placeholder concept title
-                  </h3>
-                  <p className="mt-4 text-[12.5px] leading-[1.6] text-muted-foreground">
-                    Why we walked away — one clean sentence of reasoning.
-                  </p>
+      {/* CHAPTER 4 — The Product We Chose to Build ————————————— */}
+      <section className="overflow-hidden bg-background">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12">
+
+          {/* Block 1 — Hero */}
+          <div className="grid grid-cols-1 items-center gap-16 pt-32 md:grid-cols-2 md:gap-20 md:pt-48">
+            {/* Left — Text */}
+            <div data-reveal className="reveal">
+              <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+                Chapter Four · Product
+              </p>
+              <h2 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight md:text-5xl lg:text-[3.5rem]">
+                The Product We Chose to Build
+              </h2>
+              <div className="mt-8 max-w-[500px]">
+                <p className="font-editorial text-[1.15rem] leading-[1.7] tracking-[-0.003em] text-foreground/80 md:text-[1.25rem]">
+                  The insight was clear.
+                </p>
+                <p className="mt-4 font-editorial text-[1.15rem] leading-[1.7] tracking-[-0.003em] text-foreground/80 md:text-[1.25rem]">
+                  Professionals didn't need more networking opportunities.
+                </p>
+                <p className="mt-4 font-editorial text-[1.15rem] leading-[1.7] tracking-[-0.003em] text-foreground/80 md:text-[1.25rem]">
+                  They needed a better way to discover the right people before the event.
+                </p>
+                <p className="mt-4 font-editorial text-[1.15rem] leading-[1.7] tracking-[-0.003em] text-foreground/80 md:text-[1.25rem]">
+                  That's how MeetCraft was born.
+                </p>
+              </div>
+            </div>
+
+            {/* Right — Phone Mockup */}
+            <div data-reveal className="reveal flex justify-center md:justify-end" style={{ transitionDelay: "120ms" }}>
+              <div className="animate-float-gentle">
+                <div className="relative mx-auto w-[260px] rounded-[36px] border border-border/60 bg-charcoal p-2 shadow-[0_32px_80px_-24px_rgba(31,31,31,0.35)] md:w-[300px]">
+                  {/* Notch */}
+                  <div className="absolute left-1/2 top-2 h-[22px] w-[90px] -translate-x-1/2 rounded-full bg-charcoal" />
+                  {/* Screen */}
+                  <div className="aspect-[9/19] w-full overflow-hidden rounded-[28px] bg-[oklch(0.955_0.012_82)]">
+                    <div className="flex h-full w-full items-center justify-center">
+                      <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                        Product Demo
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </article>
-            ))}
+              </div>
+            </div>
           </div>
-        </Container>
+
+          {/* Block 2 — Product Introduction */}
+          <div className="mx-auto max-w-[650px] pt-24 text-center md:pt-32">
+            <div data-reveal className="reveal">
+              <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+                Intent-based networking before the event
+              </p>
+              <h3 className="mt-5 font-serif text-5xl leading-[1.05] tracking-tight md:text-6xl">
+                MeetCraft
+              </h3>
+              <p className="mx-auto mt-8 text-[1.05rem] leading-[1.7] text-foreground/75 md:text-[1.15rem]">
+                MeetCraft helps attendees discover relevant people before and during professional events by matching them based on their goals, interests and networking intent—making every conversation more meaningful.
+              </p>
+            </div>
+          </div>
+
+          {/* Block 3 — How MeetCraft Works */}
+          <div className="pt-24 md:pt-32">
+            <div data-reveal className="reveal text-center">
+              <h3 className="font-serif text-3xl leading-[1.1] tracking-tight md:text-4xl">
+                How MeetCraft Works
+              </h3>
+            </div>
+
+            <div className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-6">
+              {[
+                {
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
+                      <circle cx="12" cy="12" r="10" />
+                      <circle cx="12" cy="12" r="4" />
+                      <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+                    </svg>
+                  ),
+                  title: "Define Intent",
+                },
+                {
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
+                      <circle cx="11" cy="11" r="8" />
+                      <path d="m21 21-4.5-4.5" />
+                    </svg>
+                  ),
+                  title: "Discover Relevant People",
+                },
+                {
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                  ),
+                  title: "Connect at the Event",
+                },
+                {
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                  ),
+                  title: "Build Meaningful Relationships",
+                },
+              ].map((step, i) => (
+                <div key={step.title} data-reveal className="reveal relative flex flex-col items-center text-center" style={{ transitionDelay: `${i * 100}ms` }}>
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border/70 bg-background text-foreground/70">
+                    {step.icon}
+                  </div>
+                  <p className="mt-5 font-serif text-lg leading-[1.3] text-foreground md:text-xl">
+                    {step.title}
+                  </p>
+                  {/* Arrow — hidden on last item and on mobile */}
+                  {i < 3 && (
+                    <div className="mt-6 text-muted-foreground md:hidden">
+                      <svg width="16" height="24" viewBox="0 0 16 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <path d="M8 4v16M4 16l4 4 4-4" />
+                      </svg>
+                    </div>
+                  )}
+                  {/* Horizontal arrow — desktop only, hidden on last item */}
+                  {i < 3 && (
+                    <div className="absolute right-[-12px] top-7 hidden text-muted-foreground md:block">
+                      <svg width="24" height="16" viewBox="0 0 24 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <path d="M4 8h16M16 4l4 4-4 4" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Block 4 — Core Features */}
+          <div className="pt-24 md:pt-32">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+              {[
+                {
+                  emoji: "🎯",
+                  title: "Intent-Based Matching",
+                  body: "Find attendees based on why they're attending—not just their designation or company.",
+                },
+                {
+                  emoji: "🤝",
+                  title: "Smart Recommendations",
+                  body: "Discover mentors, founders, recruiters and collaborators aligned with your networking goals.",
+                },
+                {
+                  emoji: "📍",
+                  title: "QR Unlock",
+                  body: "Unlock networking once you arrive at the venue.",
+                },
+              ].map((card, i) => (
+                <article
+                  key={card.title}
+                  data-reveal
+                  className="reveal rounded-2xl border border-border bg-background p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_12px_32px_-16px_rgba(31,31,31,0.18)] md:p-10"
+                  style={{ transitionDelay: `${i * 100}ms` }}
+                >
+                  <span className="text-2xl" aria-hidden>{card.emoji}</span>
+                  <h4 className="mt-5 font-serif text-xl leading-[1.2] text-foreground md:text-[1.35rem]">
+                    {card.title}
+                  </h4>
+                  <p className="mt-4 text-[14px] leading-[1.65] text-foreground/70 md:text-[15px]">
+                    {card.body}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          {/* Block 5 — Transition */}
+          <div className="pb-24 pt-24 text-center md:pb-32 md:pt-32">
+            <div data-reveal className="reveal">
+              <p className="mx-auto max-w-[28ch] font-serif text-3xl leading-[1.15] tracking-tight text-foreground md:text-5xl">
+                Designed to create meaningful networking—without compromising event exclusivity.
+              </p>
+              <div className="mt-10 flex justify-center">
+                <svg
+                  className="animate-arrow-pulse h-6 w-6 text-muted-foreground"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path d="M12 5v14M5 12l7 7 7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </section>
 
       {/* CHAPTER 5 ——————————————————————————————————————————— */}
