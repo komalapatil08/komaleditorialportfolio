@@ -261,27 +261,39 @@ function JourneyStep({
   tone = "neutral",
   size = "md",
   emphasis = false,
+  step,
 }: {
   icon: string;
   label: string;
   tone?: Tone;
   size?: "sm" | "md" | "lg";
   emphasis?: boolean;
+  step?: number;
 }) {
   const pad =
     size === "lg" ? "px-5 py-4" : size === "sm" ? "px-3.5 py-2.5" : "px-4 py-3";
   const text =
     size === "lg" ? "text-[14px]" : size === "sm" ? "text-[12px]" : "text-[13px]";
   return (
-    <div
-      className={`flex w-full items-center gap-3 rounded-xl border ${pad} ${text} ${toneStyles[tone]} ${
-        emphasis ? "font-medium" : ""
-      }`}
-    >
-      <span className="text-[16px] leading-none" aria-hidden>
-        {icon}
-      </span>
-      <span className="flex-1 leading-tight">{label}</span>
+    <div className="relative w-full">
+      {step !== undefined && (
+        <span
+          className="absolute -left-3 top-1/2 hidden -translate-y-1/2 select-none font-serif text-[11px] italic text-foreground/30 md:block"
+          aria-hidden
+        >
+          {String(step).padStart(2, "0")}
+        </span>
+      )}
+      <div
+        className={`flex w-full items-center justify-center gap-2.5 rounded-xl border ${pad} ${text} ${toneStyles[tone]} ${
+          emphasis ? "font-medium" : ""
+        }`}
+      >
+        <span className="text-[16px] leading-none" aria-hidden>
+          {icon}
+        </span>
+        <span className="leading-tight">{label}</span>
+      </div>
     </div>
   );
 }
@@ -289,9 +301,11 @@ function JourneyStep({
 function Connector({
   variant = "solid",
   tone = "neutral",
+  flow = false,
 }: {
   variant?: "solid" | "dotted";
   tone?: "neutral" | "danger" | "success" | "accent";
+  flow?: boolean;
 }) {
   const color =
     tone === "danger"
@@ -301,33 +315,59 @@ function Connector({
       : tone === "accent"
       ? "#4CA5C3"
       : "#C9C4BB";
+  const dotColor =
+    tone === "danger"
+      ? "#D96A6A"
+      : tone === "success"
+      ? "#4CAF7A"
+      : tone === "accent"
+      ? "#4CA5C3"
+      : "#B8B2A6";
   return (
-    <div className="flex h-8 items-center justify-center" aria-hidden>
-      <svg width="2" height="32" viewBox="0 0 2 32" className="overflow-visible">
+    <div className="relative flex h-9 items-center justify-center" aria-hidden>
+      <svg width="14" height="36" viewBox="0 0 14 36" className="overflow-visible">
         <line
-          x1="1"
+          x1="7"
           y1="0"
-          x2="1"
-          y2="26"
+          x2="7"
+          y2="28"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeDasharray={variant === "dotted" ? "3 4" : undefined}
-          opacity={tone === "neutral" ? 0.5 : 0.8}
+          opacity={tone === "neutral" ? 0.45 : 0.8}
+        >
+          {flow && variant === "dotted" && (
+            <animate
+              attributeName="stroke-dashoffset"
+              from="0"
+              to="-14"
+              dur="1.1s"
+              repeatCount="indefinite"
+            />
+          )}
+        </line>
+        <circle
+          cx="7"
+          cy="14"
+          r="2"
+          fill={dotColor}
+          opacity={tone === "neutral" ? 0.35 : 0.9}
         />
         <path
-          d="M -3 24 L 1 30 L 5 24"
+          d="M 3 25 L 7 31 L 11 25"
           fill="none"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
-          opacity={tone === "neutral" ? 0.55 : 0.85}
+          opacity={tone === "neutral" ? 0.55 : 0.9}
         />
       </svg>
     </div>
   );
 }
+
 
 function JourneyBefore() {
   return (
