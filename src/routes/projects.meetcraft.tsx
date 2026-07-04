@@ -622,26 +622,26 @@ function MeetCraftPage() {
         <div className="mx-auto max-w-[1200px] px-6 md:px-12">
 
           {/* Block 1 — Hero */}
-          <div className="grid grid-cols-1 items-center gap-16 pt-32 md:grid-cols-2 md:gap-20 md:pt-48">
+          <div className="grid grid-cols-1 items-center gap-10 pt-20 md:grid-cols-2 md:gap-12 md:pt-24">
             {/* Left — Text */}
             <div data-reveal className="reveal">
               <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
                 Chapter Four · Product
               </p>
-              <h2 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight md:text-5xl lg:text-[3.5rem]">
+              <h2 className="mt-4 font-serif text-4xl leading-[1.05] tracking-tight md:text-[2.75rem] lg:text-5xl">
                 The Product We Chose to Build
               </h2>
-              <div className="mt-8 max-w-[500px]">
-                <p className="font-editorial text-[1.15rem] leading-[1.7] tracking-[-0.003em] text-foreground/80 md:text-[1.25rem]">
+              <div className="mt-5 max-w-[480px] space-y-1">
+                <p className="text-[0.95rem] leading-[1.65] text-foreground/75 md:text-[1rem]">
                   The insight was clear.
                 </p>
-                <p className="mt-4 font-editorial text-[1.15rem] leading-[1.7] tracking-[-0.003em] text-foreground/80 md:text-[1.25rem]">
-                  Professionals didn't need more networking opportunities.
+                <p className="text-[0.95rem] leading-[1.65] text-foreground/75 md:text-[1rem]">
+                  People didn't need more networking opportunities.
                 </p>
-                <p className="mt-4 font-editorial text-[1.15rem] leading-[1.7] tracking-[-0.003em] text-foreground/80 md:text-[1.25rem]">
-                  They needed a better way to discover the right people before the event.
+                <p className="text-[0.95rem] leading-[1.65] text-foreground/75 md:text-[1rem]">
+                  They needed a better way to discover the right people.
                 </p>
-                <p className="mt-4 font-editorial text-[1.15rem] leading-[1.7] tracking-[-0.003em] text-foreground/80 md:text-[1.25rem]">
+                <p className="text-[0.95rem] leading-[1.65] text-foreground/75 md:text-[1rem]">
                   That's how MeetCraft was born.
                 </p>
               </div>
@@ -650,11 +650,9 @@ function MeetCraftPage() {
             {/* Right — Phone Mockup */}
             <div data-reveal className="reveal flex justify-center md:justify-end" style={{ transitionDelay: "120ms" }}>
               <div className="animate-float-gentle">
-                <div className="relative mx-auto w-[260px] rounded-[36px] border border-border/60 bg-charcoal p-2 shadow-[0_32px_80px_-24px_rgba(31,31,31,0.35)] md:w-[300px]">
-                  {/* Notch */}
-                  <div className="absolute left-1/2 top-2 h-[22px] w-[90px] -translate-x-1/2 rounded-full bg-charcoal" />
-                  {/* Screen */}
-                  <div className="aspect-[9/19] w-full overflow-hidden rounded-[28px] bg-[oklch(0.955_0.012_82)]">
+                <div className="relative mx-auto w-[200px] rounded-[30px] border border-border/60 bg-charcoal p-1.5 shadow-[0_24px_64px_-20px_rgba(31,31,31,0.3)] md:w-[240px]">
+                  <div className="absolute left-1/2 top-1.5 h-[18px] w-[70px] -translate-x-1/2 rounded-full bg-charcoal" />
+                  <div className="aspect-[9/19] w-full overflow-hidden rounded-[22px] bg-[oklch(0.955_0.012_82)]">
                     <div className="flex h-full w-full items-center justify-center">
                       <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                         Product Demo
@@ -667,29 +665,26 @@ function MeetCraftPage() {
           </div>
 
           {/* Block 2 — Product Introduction */}
-          <div className="mx-auto max-w-[650px] pt-24 text-center md:pt-32">
+          <div className="mx-auto max-w-[600px] pt-10 text-center md:pt-12">
             <div data-reveal className="reveal">
-              <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-                Intent-based networking before the event
-              </p>
-              <h3 className="mt-5 font-serif text-5xl leading-[1.05] tracking-tight md:text-6xl">
+              <h3 className="font-serif text-4xl leading-[1.05] tracking-tight md:text-5xl">
                 MeetCraft
               </h3>
-              <p className="mx-auto mt-8 text-[1.05rem] leading-[1.7] text-foreground/75 md:text-[1.15rem]">
-                MeetCraft helps attendees discover relevant people before and during professional events by matching them based on their goals, interests and networking intent—making every conversation more meaningful.
+              <p className="mx-auto mt-4 max-w-[540px] text-[0.95rem] leading-[1.65] text-foreground/75 md:text-[1rem]">
+                MeetCraft helps attendees discover relevant people before and during professional events based on their networking intent.
               </p>
             </div>
           </div>
 
           {/* Block 3 — How MeetCraft Works */}
-          <div className="pt-24 md:pt-32">
+          <div className="pt-8 md:pt-10">
             <div data-reveal className="reveal text-center">
-              <h3 className="font-serif text-3xl leading-[1.1] tracking-tight md:text-4xl">
+              <h3 className="font-serif text-2xl leading-[1.1] tracking-tight md:text-[1.75rem]">
                 How MeetCraft Works
               </h3>
             </div>
 
-            <div className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-6">
+            <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-4 md:gap-4">
               {[
                 {
                   icon: (
@@ -730,26 +725,24 @@ function MeetCraftPage() {
                   title: "Build Meaningful Relationships",
                 },
               ].map((step, i) => (
-                <div key={step.title} data-reveal className="reveal relative flex flex-col items-center text-center" style={{ transitionDelay: `${i * 100}ms` }}>
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border/70 bg-background text-foreground/70">
+                <div key={step.title} data-reveal className="reveal relative flex flex-col items-center text-center" style={{ transitionDelay: `${i * 60}ms` }}>
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-background text-foreground/70">
                     {step.icon}
                   </div>
-                  <p className="mt-5 font-serif text-lg leading-[1.3] text-foreground md:text-xl">
+                  <p className="mt-3 text-[14px] leading-[1.35] text-foreground md:text-[15px]">
                     {step.title}
                   </p>
-                  {/* Arrow — hidden on last item and on mobile */}
                   {i < 3 && (
-                    <div className="mt-6 text-muted-foreground md:hidden">
-                      <svg width="16" height="24" viewBox="0 0 16 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <div className="mt-3 text-muted-foreground md:hidden">
+                      <svg width="14" height="20" viewBox="0 0 16 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                         <path d="M8 4v16M4 16l4 4 4-4" />
                       </svg>
                     </div>
                   )}
-                  {/* Horizontal arrow — desktop only, hidden on last item */}
                   {i < 3 && (
-                    <div className="absolute right-[-12px] top-7 hidden text-muted-foreground md:block">
-                      <svg width="24" height="16" viewBox="0 0 24 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path d="M4 8h16M16 4l4 4-4 4" />
+                    <div className="absolute right-[-8px] top-5 hidden text-muted-foreground md:block">
+                      <svg width="16" height="10" viewBox="0 0 20 12" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <path d="M2 6h16M14 2l4 4-4 4" />
                       </svg>
                     </div>
                   )}
@@ -758,53 +751,12 @@ function MeetCraftPage() {
             </div>
           </div>
 
-          {/* Block 4 — Core Features */}
-          <div className="pt-24 md:pt-32">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-              {[
-                {
-                  emoji: "🎯",
-                  title: "Intent-Based Matching",
-                  body: "Find attendees based on why they're attending—not just their designation or company.",
-                },
-                {
-                  emoji: "🤝",
-                  title: "Smart Recommendations",
-                  body: "Discover mentors, founders, recruiters and collaborators aligned with your networking goals.",
-                },
-                {
-                  emoji: "📍",
-                  title: "QR Unlock",
-                  body: "Unlock networking once you arrive at the venue.",
-                },
-              ].map((card, i) => (
-                <article
-                  key={card.title}
-                  data-reveal
-                  className="reveal rounded-2xl border border-border bg-background p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_12px_32px_-16px_rgba(31,31,31,0.18)] md:p-10"
-                  style={{ transitionDelay: `${i * 100}ms` }}
-                >
-                  <span className="text-2xl" aria-hidden>{card.emoji}</span>
-                  <h4 className="mt-5 font-serif text-xl leading-[1.2] text-foreground md:text-[1.35rem]">
-                    {card.title}
-                  </h4>
-                  <p className="mt-4 text-[14px] leading-[1.65] text-foreground/70 md:text-[15px]">
-                    {card.body}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          {/* Block 5 — Transition */}
-          <div className="pb-24 pt-24 text-center md:pb-32 md:pt-32">
+          {/* Transition */}
+          <div className="pb-12 pt-10 text-center md:pb-16 md:pt-12">
             <div data-reveal className="reveal">
-              <p className="mx-auto max-w-[28ch] font-serif text-3xl leading-[1.15] tracking-tight text-foreground md:text-5xl">
-                Designed to create meaningful networking—without compromising event exclusivity.
-              </p>
-              <div className="mt-10 flex justify-center">
+              <div className="flex justify-center">
                 <svg
-                  className="animate-arrow-pulse h-6 w-6 text-muted-foreground"
+                  className="animate-arrow-pulse h-5 w-5 text-muted-foreground"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
