@@ -193,9 +193,52 @@ function Container({ children, className = "" }: { children: React.ReactNode; cl
   );
 }
 
+function DonutChart({ value }: { value: number }) {
+  const size = 132;
+  const stroke = 16;
+  const r = (size - stroke) / 2;
+  const c = 2 * Math.PI * r;
+  const dash = (value / 100) * c;
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={r}
+        fill="none"
+        stroke="oklch(0.42 0.05 155)"
+        strokeWidth={stroke}
+      />
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={r}
+        fill="none"
+        stroke="var(--gold)"
+        strokeWidth={stroke}
+        strokeDasharray={`${dash} ${c - dash}`}
+        strokeDashoffset={c / 4}
+        strokeLinecap="butt"
+        transform={`rotate(-90 ${size / 2} ${size / 2}) scale(1,-1) translate(0,-${size})`}
+      />
+      <text
+        x="50%"
+        y="52%"
+        textAnchor="middle"
+        dominantBaseline="middle"
+        className="font-serif"
+        style={{ fontSize: 24, fill: "currentColor", fontWeight: 500 }}
+      >
+        {value}%
+      </text>
+    </svg>
+  );
+}
+
 /* ————————————————————————————————————————————————————————
    Page
    ———————————————————————————————————————————————————————— */
+
 
 function MeetCraftPage() {
   useReveal();
