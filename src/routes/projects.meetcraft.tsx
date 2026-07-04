@@ -249,26 +249,55 @@ function MeetCraftPage() {
       </section>
 
       {/* CHAPTER 1 ——————————————————————————————————————————— */}
-      <section className="pt-40 md:pt-56">
+      <section className="pt-40 md:pt-56 pb-16 md:pb-28">
         <Container>
-          <ChapterHeader number="One" eyebrow="Beginnings" title="We Walked Into the Room." />
-          <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-20">
+          <div className="grid grid-cols-1 gap-14 md:grid-cols-12 md:gap-16 lg:gap-20 items-center">
+            {/* Left column — text (~40%) */}
             <div className="md:col-span-5">
-              <Prose>
-                Placeholder — a short, atmospheric opening. What did the room
-                feel like. Who was in it. What was missing.
-              </Prose>
+              <div data-reveal className="reveal">
+                <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+                  Chapter One · Beginnings
+                </p>
+                <h2 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
+                  We Walked Into the Room.
+                </h2>
+                <div className="mt-8 h-px w-12 bg-[var(--gold)]" />
+                <div
+                  className="mt-10 max-w-[32ch] font-editorial text-[1.15rem] leading-[1.55] tracking-[-0.003em] text-foreground/80 md:text-[1.2rem] space-y-3"
+                >
+                  <p className="text-foreground/95 font-medium">
+                    We walked into the room expecting conversations.
+                  </p>
+                  <p>Instead, we noticed hesitation.</p>
+                  <p>
+                    We weren’t the only ones wondering who to approach.
+                  </p>
+                  <p className="italic text-foreground/90">
+                    That’s where the story began.
+                  </p>
+                </div>
+              </div>
             </div>
+
+            {/* Right column — image (~60%) */}
             <div className="md:col-span-7">
-              <ImagePlaceholder
-                ratio="aspect-[4/5]"
-                label="Documentary photograph"
-                caption="Placeholder — a candid frame from the first event we attended."
-              />
+              <div
+                data-reveal
+                className="reveal"
+                style={{ transitionDelay: "160ms" }}
+              >
+                <img
+                  src={chapter1Room.url}
+                  alt="A room of attendees standing in quiet hesitation at the start of a networking event."
+                  className="w-full h-auto object-cover aspect-[4/5] md:aspect-[5/6]"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
         </Container>
       </section>
+
 
       {/* CHAPTER 2 ——————————————————————————————————————————— */}
       <section className="pt-40 md:pt-56">
