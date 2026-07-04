@@ -10,6 +10,7 @@ import ch7Presentation from "@/assets/mc-ch7-presentation.jpeg.asset.json";
 import ch7Judges from "@/assets/mc-ch7-judges.jpeg.asset.json";
 import ch7Award from "@/assets/mc-ch7-award.jpeg.asset.json";
 import ch7Certificate from "@/assets/mc-ch7-certificate.png.asset.json";
+import meetcraftCoverHero from "@/assets/meetcraft-cover-hero.png.asset.json";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 
@@ -41,12 +42,16 @@ export const Route = createFileRoute("/projects/meetcraft")({
 
 function useReveal() {
   useEffect(() => {
-    const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    const els = document.querySelectorAll<HTMLElement>("[data-reveal], [data-reveal-hero]");
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
           if (e.isIntersecting) {
-            e.target.classList.add("reveal-visible");
+            if (e.target.hasAttribute("data-reveal-hero")) {
+              e.target.classList.add("reveal-hero-visible");
+            } else {
+              e.target.classList.add("reveal-visible");
+            }
             io.unobserve(e.target);
           }
         }
@@ -792,7 +797,7 @@ function MeetCraftPage() {
       <Nav />
 
       {/* HERO ————————————————————————————————————————————————— */}
-      <section id="top" className="relative pt-40 md:pt-48">
+      <section id="top" className="relative pt-40 md:pt-48 pb-16">
         <Container>
           <div data-reveal className="reveal">
             <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -804,44 +809,26 @@ function MeetCraftPage() {
             <p className="mt-8 font-editorial text-2xl italic leading-[1.2] tracking-tight text-foreground/80 md:text-4xl">
               From Conversation to Connection.
             </p>
-            <p className="mt-10 max-w-[46ch] text-[1.05rem] leading-[1.7] text-foreground/70 md:text-[1.15rem]">
-              A quiet documentary about a loud room — and the product that
-              came from paying attention to what people were actually asking
-              for.
+            <p className="mt-6 text-[13px] tracking-wide text-foreground/50">
+              Product Strategy · 12 Weeks · Four PMs
             </p>
           </div>
 
-          {/* Hero image */}
-          <div className="mt-20 md:mt-24">
-            <ImagePlaceholder ratio="aspect-[16/9]" label="Hero photograph" />
-          </div>
-
-          {/* Meta strip */}
-          <div
-            data-reveal
-            className="reveal mt-20 grid grid-cols-2 gap-y-8 border-y border-border py-8 md:mt-28 md:grid-cols-4"
-          >
-            {[
-              ["Role", "Product Strategy · Research"],
-              ["Team", "Four PMs · One Question"],
-              ["Timeline", "12 Weeks · Skillathon"],
-              ["Outcome", "Winning Concept"],
-            ].map(([k, v]) => (
-              <div key={k}>
-                <p className="text-[10.5px] uppercase tracking-[0.3em] text-muted-foreground">
-                  {k}
-                </p>
-                <p className="mt-3 font-serif text-lg leading-[1.3] text-foreground md:text-xl">
-                  {v}
-                </p>
-              </div>
-            ))}
+          {/* Cover hero image */}
+          <div data-reveal-hero className="reveal-hero mt-8 md:mt-10">
+            <div className="mx-auto max-w-[1200px]">
+              <img
+                src={meetcraftCoverHero.url}
+                alt="MeetCraft — a cinematic view of professionals networking through an intelligent connection app"
+                className="w-full h-auto rounded-[22px] shadow-[0_12px_40px_-16px_rgba(0,0,0,0.18)]"
+              />
+            </div>
           </div>
         </Container>
       </section>
 
       {/* CHAPTER 1 ——————————————————————————————————————————— */}
-      <section className="pt-40 md:pt-56 pb-16 md:pb-28">
+      <section className="pt-0 pb-16 md:pb-28">
         <Container>
           <div className="grid grid-cols-1 gap-14 md:grid-cols-[5fr_8fr] md:gap-16 lg:gap-20 items-center">
             {/* Left column — text (~38%) */}
