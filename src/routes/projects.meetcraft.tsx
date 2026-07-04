@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
+import chapter1Room from "@/assets/meetcraft-chapter1-room.png.asset.json";
+
 
 export const Route = createFileRoute("/projects/meetcraft")({
   head: () => ({
