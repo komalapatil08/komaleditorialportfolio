@@ -369,54 +369,101 @@ function Connector({
 }
 
 
+function JourneyDecor({ tone }: { tone: "danger" | "success" }) {
+  const c = tone === "danger" ? "#D96A6A" : "#4CAF7A";
+  return (
+    <>
+      {/* Dotted grid backdrop */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-[24px] opacity-[0.35]"
+        style={{
+          backgroundImage: `radial-gradient(circle, rgba(31,31,31,0.08) 1px, transparent 1px)`,
+          backgroundSize: "14px 14px",
+          maskImage:
+            "radial-gradient(ellipse at 50% 40%, black 40%, transparent 85%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at 50% 40%, black 40%, transparent 85%)",
+        }}
+      />
+      {/* Corner accent glow */}
+      <div
+        className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-[0.14]"
+        style={{
+          background: `radial-gradient(closest-side, ${c}, transparent 70%)`,
+        }}
+      />
+      {/* Vertical hairline spine */}
+      <div
+        className="pointer-events-none absolute inset-y-24 left-1/2 hidden w-px -translate-x-1/2 md:block"
+        style={{
+          background: `linear-gradient(to bottom, transparent, ${c}22 12%, ${c}22 88%, transparent)`,
+        }}
+      />
+    </>
+  );
+}
+
+function OutcomeBar({
+  tone,
+  icon,
+  label,
+}: {
+  tone: "danger" | "success";
+  icon: string;
+  label: string;
+}) {
+  const cls =
+    tone === "danger"
+      ? "border-[#E4B4B4] bg-gradient-to-br from-[#FBEDED] to-[#F7DADA] text-[#B54848]"
+      : "border-[#B4DCC4] bg-gradient-to-br from-[#EDF7F1] to-[#D7EEE0] text-[#2F7A4F]";
+  return (
+    <div
+      className={`relative flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-xl border px-5 py-4 text-[14px] font-medium ${cls}`}
+    >
+      <span
+        className="pointer-events-none absolute inset-0 opacity-40"
+        style={{
+          background:
+            tone === "danger"
+              ? "radial-gradient(circle at 20% 50%, rgba(217,106,106,0.18), transparent 60%)"
+              : "radial-gradient(circle at 20% 50%, rgba(76,175,122,0.2), transparent 60%)",
+        }}
+        aria-hidden
+      />
+      <span className="relative text-[18px]" aria-hidden>
+        {icon}
+      </span>
+      <span className="relative leading-tight">{label}</span>
+    </div>
+  );
+}
+
 function JourneyBefore() {
   return (
-    <div className="relative rounded-[24px] border border-border bg-white p-7 shadow-[0_1px_2px_rgba(0,0,0,0.03),0_10px_30px_-14px_rgba(0,0,0,0.08)] md:p-9">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.3em] text-[#B54848]">
-          <span className="inline-block h-2 w-2 rounded-full bg-[#D96A6A]" />
+    <div className="relative overflow-hidden rounded-[24px] border border-border bg-white p-7 shadow-[0_1px_2px_rgba(0,0,0,0.03),0_10px_30px_-14px_rgba(0,0,0,0.08)] md:p-9">
+      <JourneyDecor tone="danger" />
+      <div className="relative flex justify-center">
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#E4B4B4] bg-[#FBEDED]/60 px-3 py-1 text-[10.5px] uppercase tracking-[0.3em] text-[#B54848]">
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#D96A6A]" />
           Before · Without constraints
         </div>
       </div>
-      <h3 className="mt-4 font-serif text-2xl leading-[1.2] text-foreground md:text-[26px]">
+      <h3 className="relative mt-4 text-center font-serif text-2xl leading-[1.2] text-foreground md:text-[26px]">
         Unlimited networking before the event
       </h3>
 
-      <div className="mt-8 flex flex-col items-stretch">
-        <JourneyStep icon="👀" label="Browse Attendees" />
+      <div className="relative mt-8 flex flex-col items-stretch">
+        <JourneyStep icon="👀" label="Browse Attendees" step={1} />
         <Connector />
-        <JourneyStep icon="❤️" label="Match" />
+        <JourneyStep icon="❤️" label="Match" step={2} />
         <Connector />
-        <JourneyStep icon="🤝" label="Connect" />
+        <JourneyStep icon="🤝" label="Connect" step={3} />
         <Connector />
-        <JourneyStep icon="💬" label="Unlimited Chat" tone="warn" />
+        <JourneyStep icon="💬" label="Unlimited Chat" tone="warn" step={4} />
         <Connector tone="danger" />
-        <JourneyStep icon="🏠" label="Skip the Event" tone="danger" emphasis />
+        <JourneyStep icon="🏠" label="Skip the Event" tone="danger" emphasis step={5} />
         <Connector tone="danger" />
-        <div className="flex w-full items-center gap-3 rounded-xl border border-[#E4B4B4] bg-[#FBEDED] px-5 py-4 text-[14px] font-medium text-[#B54848]">
-          <span className="text-[18px]" aria-hidden>
-            📉
-          </span>
-          <span className="flex-1 leading-tight">Lower Event Value</span>
-          <svg width="42" height="18" viewBox="0 0 42 18" aria-hidden>
-            <path
-              d="M2 3 L14 8 L24 6 L40 15"
-              fill="none"
-              stroke="#B54848"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M40 15 L34 15 L40 15 L40 9"
-              fill="none"
-              stroke="#B54848"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
+        <OutcomeBar tone="danger" icon="📉" label="Lower Event Value" />
       </div>
     </div>
   );
@@ -424,18 +471,32 @@ function JourneyBefore() {
 
 function QRCheckpoint() {
   return (
-    <div className="relative my-2 flex justify-center">
-      {/* Halo */}
+    <div className="relative my-3 flex justify-center">
+      {/* Outer halo */}
       <div
-        className="animate-qr-halo pointer-events-none absolute inset-0 -m-6 rounded-[32px]"
+        className="animate-qr-halo pointer-events-none absolute inset-0 -m-8 rounded-[36px]"
         style={{
           background:
-            "radial-gradient(closest-side, rgba(76,165,195,0.45), rgba(76,165,195,0) 70%)",
-          filter: "blur(10px)",
+            "radial-gradient(closest-side, rgba(76,165,195,0.5), rgba(76,165,195,0) 70%)",
+          filter: "blur(14px)",
         }}
       />
+      {/* Corner brackets */}
+      <div className="pointer-events-none absolute inset-0 -m-1.5">
+        {[
+          "left-0 top-0 border-l border-t rounded-tl-lg",
+          "right-0 top-0 border-r border-t rounded-tr-lg",
+          "left-0 bottom-0 border-l border-b rounded-bl-lg",
+          "right-0 bottom-0 border-r border-b rounded-br-lg",
+        ].map((p, i) => (
+          <span
+            key={i}
+            className={`absolute h-3 w-3 border-[#4CA5C3]/70 ${p}`}
+          />
+        ))}
+      </div>
       <div
-        className={`relative w-full max-w-[300px] overflow-hidden rounded-2xl border p-5 ${toneStyles.accent}`}
+        className={`relative w-full max-w-[320px] overflow-hidden rounded-2xl border p-5 ${toneStyles.accent}`}
       >
         {/* Scan line */}
         <div className="pointer-events-none absolute inset-x-4 top-0 h-full overflow-hidden">
@@ -495,62 +556,41 @@ function QRCheckpoint() {
 
 function JourneyAfter() {
   return (
-    <div className="relative rounded-[24px] border border-border bg-white p-7 shadow-[0_1px_2px_rgba(0,0,0,0.03),0_14px_40px_-16px_rgba(42,107,130,0.18)] md:p-9">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.3em] text-[#2F7A4F]">
-          <span className="inline-block h-2 w-2 rounded-full bg-[#4CAF7A]" />
+    <div className="relative overflow-hidden rounded-[24px] border border-border bg-white p-7 shadow-[0_1px_2px_rgba(0,0,0,0.03),0_14px_40px_-16px_rgba(42,107,130,0.18)] md:p-9">
+      <JourneyDecor tone="success" />
+      <div className="relative flex justify-center">
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#B4DCC4] bg-[#EDF7F1]/70 px-3 py-1 text-[10.5px] uppercase tracking-[0.3em] text-[#2F7A4F]">
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#4CAF7A]" />
           After · MeetCraft's Solution
         </div>
       </div>
-      <h3 className="mt-4 font-serif text-2xl leading-[1.2] text-foreground md:text-[26px]">
+      <h3 className="relative mt-4 text-center font-serif text-2xl leading-[1.2] text-foreground md:text-[26px]">
         Network with purpose
       </h3>
 
-      <div className="mt-8 flex flex-col items-stretch">
-        <JourneyStep icon="👀" label="Browse Attendees" />
+      <div className="relative mt-8 flex flex-col items-stretch">
+        <JourneyStep icon="👀" label="Browse Attendees" step={1} />
         <Connector />
-        <JourneyStep icon="❤️" label="Match" />
+        <JourneyStep icon="❤️" label="Match" step={2} />
         <Connector />
-        <JourneyStep icon="🤝" label="Connect" />
-        <Connector variant="dotted" />
-        <JourneyStep icon="💬" label="10-Minute Chat" />
-        <Connector variant="dotted" tone="accent" />
+        <JourneyStep icon="🤝" label="Connect" step={3} />
+        <Connector variant="dotted" flow />
+        <JourneyStep icon="💬" label="10-Minute Chat" step={4} />
+        <Connector variant="dotted" tone="accent" flow />
 
         <QRCheckpoint />
 
         <Connector tone="success" />
-        <JourneyStep icon="💬" label="Continue Conversation" tone="success" />
+        <JourneyStep icon="💬" label="Continue Conversation" tone="success" step={5} />
         <Connector tone="success" />
-        <JourneyStep icon="🤝" label="Meet at the Event" tone="success" emphasis />
+        <JourneyStep icon="🤝" label="Meet at the Event" tone="success" emphasis step={6} />
         <Connector tone="success" />
-        <div className="flex w-full items-center gap-3 rounded-xl border border-[#B4DCC4] bg-[#EDF7F1] px-5 py-4 text-[14px] font-medium text-[#2F7A4F]">
-          <span className="text-[18px]" aria-hidden>
-            📈
-          </span>
-          <span className="flex-1 leading-tight">Higher Event Value</span>
-          <svg width="42" height="18" viewBox="0 0 42 18" aria-hidden>
-            <path
-              d="M2 15 L14 10 L24 12 L40 3"
-              fill="none"
-              stroke="#2F7A4F"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M40 3 L34 3 L40 3 L40 9"
-              fill="none"
-              stroke="#2F7A4F"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
+        <OutcomeBar tone="success" icon="📈" label="Higher Event Value" />
       </div>
     </div>
   );
 }
+
 
 /* ————————————————————————————————————————————————————————
    Page
