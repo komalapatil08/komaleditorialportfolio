@@ -10,6 +10,7 @@ import ch7Presentation from "@/assets/mc-ch7-presentation.jpeg.asset.json";
 import ch7Judges from "@/assets/mc-ch7-judges.jpeg.asset.json";
 import ch7Award from "@/assets/mc-ch7-award.jpeg.asset.json";
 import ch7Certificate from "@/assets/mc-ch7-certificate.png.asset.json";
+import meetcraftCoverHero from "@/assets/meetcraft-cover-hero.png.asset.json";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 
@@ -41,12 +42,16 @@ export const Route = createFileRoute("/projects/meetcraft")({
 
 function useReveal() {
   useEffect(() => {
-    const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    const els = document.querySelectorAll<HTMLElement>("[data-reveal], [data-reveal-hero]");
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
           if (e.isIntersecting) {
-            e.target.classList.add("reveal-visible");
+            if (e.target.hasAttribute("data-reveal-hero")) {
+              e.target.classList.add("reveal-hero-visible");
+            } else {
+              e.target.classList.add("reveal-visible");
+            }
             io.unobserve(e.target);
           }
         }
