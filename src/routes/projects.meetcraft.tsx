@@ -217,10 +217,10 @@ function DonutChart({ value }: { value: number }) {
         stroke="var(--gold)"
         strokeWidth={stroke}
         strokeDasharray={`${dash} ${c - dash}`}
-        strokeDashoffset={c / 4}
         strokeLinecap="butt"
-        transform={`rotate(-90 ${size / 2} ${size / 2}) scale(1,-1) translate(0,-${size})`}
+        transform={`rotate(-90 ${size / 2} ${size / 2})`}
       />
+
       <text
         x="50%"
         y="52%"
