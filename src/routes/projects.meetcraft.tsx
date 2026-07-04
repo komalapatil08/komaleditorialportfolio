@@ -623,7 +623,7 @@ function ChapterSeven() {
         </div>
 
         {/* Block 2 — Editorial Story Gallery */}
-        <div className="mx-auto mt-16 grid max-w-[1120px] grid-cols-6 gap-4 md:mt-20 md:gap-6">
+        <div className="mx-auto mt-16 grid max-w-[1120px] grid-cols-6 items-start gap-4 md:mt-20 md:gap-6">
           <figure
             data-reveal
             className="reveal group col-span-6 overflow-hidden rounded-[20px] border border-black/[0.08] bg-white shadow-[0_20px_50px_-25px_rgba(0,0,0,0.25)] transition-transform duration-500 ease-out md:hover:-translate-y-1"
