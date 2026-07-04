@@ -651,7 +651,8 @@ function ChapterSeven() {
               <img
                 src={ch7Judges.url}
                 alt="Defending product decisions during the judge Q&A"
-                className="h-full w-full object-contain transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
+                className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
+
                 loading="lazy"
               />
             </div>
