@@ -645,7 +645,8 @@ function ChapterSeven() {
             className="reveal group col-span-6 overflow-hidden rounded-[20px] border border-black/[0.08] bg-[#F5F3EE] shadow-[0_16px_40px_-25px_rgba(0,0,0,0.25)] transition-transform duration-500 ease-out md:col-span-3 md:hover:-translate-y-1"
             style={{ transitionDelay: "120ms" }}
           >
-            <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden">
+            <div className="flex aspect-[16/9] w-full items-center justify-center overflow-hidden">
+
               <img
                 src={ch7Judges.url}
                 alt="Defending product decisions during the judge Q&A"
