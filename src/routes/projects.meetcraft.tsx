@@ -266,7 +266,7 @@ function MeetCraftPage() {
                   <span className="font-medium text-foreground/95">We came expecting conversations.</span><br />
                   Instead, we noticed hesitation.<br />
                   We weren't the only ones wondering who to approach.<br />
-                  <span className="italic text-foreground/90">That's where the story began.</span>
+                  <span className="italic font-semibold text-foreground/90">That's where the story began.</span>
                 </p>
               </div>
             </div>
