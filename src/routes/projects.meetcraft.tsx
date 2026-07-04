@@ -730,7 +730,7 @@ function MeetCraftPage() {
                   title: "Build Meaningful Relationships",
                 },
               ].map((step, i) => (
-                <div key={step.title} data-reveal className="reveal flex flex-col items-center text-center" style={{ transitionDelay: `${i * 100}ms` }}>
+                <div key={step.title} data-reveal className="reveal relative flex flex-col items-center text-center" style={{ transitionDelay: `${i * 100}ms` }}>
                   <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border/70 bg-background text-foreground/70">
                     {step.icon}
                   </div>
