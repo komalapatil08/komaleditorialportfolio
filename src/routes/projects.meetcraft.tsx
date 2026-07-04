@@ -599,8 +599,177 @@ function JourneyAfter() {
 
 
 /* ————————————————————————————————————————————————————————
+   Chapter 7 — From Concept to Recognition
+   ———————————————————————————————————————————————————————— */
+
+function ChapterSeven() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <section className="pt-32 md:pt-40">
+      <Container>
+        {/* Block 1 — Heading */}
+        <div data-reveal className="reveal mx-auto max-w-[820px] text-center">
+          <p className="text-[10.5px] uppercase tracking-[0.32em] text-muted-foreground">
+            Chapter Seven · Recognition
+          </p>
+          <h2 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight text-foreground md:text-6xl">
+            From Concept to Recognition.
+          </h2>
+          <p className="mx-auto mt-6 max-w-[52ch] text-[15px] leading-[1.7] text-foreground/65 md:text-base">
+            Every interview, insight, product decision, and trade-off led to one
+            defining moment — presenting MeetCraft at the VPD Skillathon.
+          </p>
+        </div>
+
+        {/* Block 2 — Editorial Story Gallery */}
+        <div className="mx-auto mt-16 grid max-w-[1120px] grid-cols-6 gap-4 md:mt-20 md:gap-6">
+          <figure
+            data-reveal
+            className="reveal group col-span-6 overflow-hidden rounded-[20px] border border-black/[0.08] bg-white shadow-[0_20px_50px_-25px_rgba(0,0,0,0.25)] transition-transform duration-500 ease-out md:hover:-translate-y-1"
+            style={{ transitionDelay: "0ms" }}
+          >
+            <img
+              src={ch7Presentation.url}
+              alt="Komal presenting the MeetCraft value proposition on stage at the VPD Skillathon"
+              className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure
+            data-reveal
+            className="reveal group col-span-6 overflow-hidden rounded-[20px] border border-black/[0.08] bg-white shadow-[0_16px_40px_-25px_rgba(0,0,0,0.25)] transition-transform duration-500 ease-out md:col-span-3 md:hover:-translate-y-1"
+            style={{ transitionDelay: "120ms" }}
+          >
+            <img
+              src={ch7Judges.url}
+              alt="Defending product decisions during the judge Q&A"
+              className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
+              loading="lazy"
+            />
+            <figcaption className="border-t border-black/[0.06] px-5 py-3 text-[10.5px] uppercase tracking-[0.28em] text-muted-foreground">
+              Judge Q&amp;A
+            </figcaption>
+          </figure>
+
+          <figure
+            data-reveal
+            className="reveal group col-span-6 overflow-hidden rounded-[20px] border border-black/[0.08] bg-white shadow-[0_16px_40px_-25px_rgba(0,0,0,0.25)] transition-transform duration-500 ease-out md:col-span-3 md:hover:-translate-y-1"
+            style={{ transitionDelay: "220ms" }}
+          >
+            <img
+              src={ch7Award.url}
+              alt="Receiving the Skillathon Winner recognition"
+              className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
+              loading="lazy"
+            />
+            <figcaption className="border-t border-black/[0.06] px-5 py-3 text-[10.5px] uppercase tracking-[0.28em] text-muted-foreground">
+              Award Ceremony
+            </figcaption>
+          </figure>
+        </div>
+
+        {/* Block 3 — Recognition Proof */}
+        <div
+          data-reveal
+          className="reveal mx-auto mt-14 max-w-[720px] md:mt-20"
+        >
+          <div className="overflow-hidden rounded-[20px] border border-black/[0.08] bg-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.22)]">
+            <div className="flex items-center gap-3 border-b border-black/[0.06] px-6 py-4">
+              <span aria-hidden className="text-lg">🏆</span>
+              <p className="text-[10.5px] uppercase tracking-[0.3em] text-muted-foreground">
+                Recognition
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-8 p-6 md:grid-cols-5 md:gap-10 md:p-8">
+              <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                  <button
+                    type="button"
+                    className="group md:col-span-3 overflow-hidden rounded-[12px] border border-black/[0.08] bg-[#FAFAFA] focus:outline-none focus:ring-2 focus:ring-[var(--gold)]"
+                    aria-label="View full certificate"
+                  >
+                    <img
+                      src={ch7Certificate.url}
+                      alt="Certificate of Recognition — Skillathon Winner for Value Proposition and Digital Business Models"
+                      className="h-full w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.035]"
+                      loading="lazy"
+                    />
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl border-none bg-white p-2 sm:p-4">
+                  <img
+                    src={ch7Certificate.url}
+                    alt="Certificate of Recognition — Skillathon Winner for Value Proposition and Digital Business Models"
+                    className="h-auto w-full rounded-md"
+                  />
+                </DialogContent>
+              </Dialog>
+
+              <div className="md:col-span-2 flex flex-col justify-center">
+                <p className="font-serif text-2xl not-italic leading-[1.15] text-foreground md:text-3xl" style={{ fontStyle: "normal" }}>
+                  Winner
+                </p>
+                <p className="mt-1 text-[13px] uppercase tracking-[0.22em] text-foreground/70">
+                  VPD Skillathon
+                </p>
+                <p className="mt-5 max-w-[32ch] text-[14px] leading-[1.65] text-foreground/65">
+                  Recognized for product thinking, business strategy, and
+                  execution.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setOpen(true)}
+                  className="mt-7 inline-flex w-fit items-center gap-2 rounded-full border border-foreground/15 px-5 py-2.5 text-[12px] uppercase tracking-[0.22em] text-foreground transition-colors duration-300 hover:border-foreground hover:bg-foreground hover:text-background"
+                >
+                  View Certificate
+                  <span aria-hidden>→</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Block 4 — Closing Statement */}
+        <div
+          data-reveal
+          className="reveal mx-auto mt-20 max-w-[680px] text-center md:mt-28"
+        >
+          <p className="font-serif text-2xl leading-[1.4] text-foreground/70 md:text-3xl" style={{ fontStyle: "normal" }}>
+            Winning wasn't just recognition.
+          </p>
+          <p className="mt-3 font-serif text-2xl font-medium leading-[1.4] text-foreground md:text-3xl" style={{ fontStyle: "normal" }}>
+            It validated the way we approached product thinking.
+          </p>
+          <div className="mt-14 flex justify-center" aria-hidden>
+            <svg
+              className="animate-arrow-pulse text-foreground/40"
+              width="22"
+              height="34"
+              viewBox="0 0 22 34"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M11 2 V30" />
+              <path d="M3 22 L11 30 L19 22" />
+            </svg>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/* ————————————————————————————————————————————————————————
    Page
    ———————————————————————————————————————————————————————— */
+
+
 
 
 
