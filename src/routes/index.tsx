@@ -206,8 +206,8 @@ function HeroStory() {
             <img
               src={portrait.url}
               alt="Portrait of Komal Patil"
-              width={1086}
-              height={1448}
+              width={896}
+              height={1280}
               className="w-full"
               style={{ filter: "drop-shadow(0 24px 48px rgba(0,0,0,0.07))" }}
             />
