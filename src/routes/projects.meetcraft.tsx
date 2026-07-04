@@ -349,7 +349,7 @@ function MeetCraftPage() {
                 <img
                   src={interviewKomal.url}
                   alt="Komal conducting an in-depth attendee interview"
-                  className="w-full h-auto rounded-2xl object-cover aspect-[4/3]"
+                  className="w-full h-auto rounded-2xl object-cover object-top aspect-[4/3]"
                   loading="lazy"
                 />
               </div>
