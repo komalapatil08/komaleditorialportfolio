@@ -1270,84 +1270,9 @@ function MeetCraftPage() {
       </section>
 
 
-      {/* CHAPTER 7 ——————————————————————————————————————————— */}
-      <section className="pt-40 md:pt-56">
-        <Container>
-          <ChapterHeader
-            number="Seven"
-            eyebrow="The Build"
-            title="The Product We Chose to Build."
-          />
-          <Prose>
-            Placeholder — a short, quiet introduction to the MVP.
-          </Prose>
-        </Container>
+      {/* CHAPTER 7 — From Concept to Recognition —————————————— */}
+      <ChapterSeven />
 
-        <div className="mx-auto mt-16 max-w-[1600px] px-6 md:mt-24 md:px-12">
-          <ImagePlaceholder ratio="aspect-[16/9]" label="Product screen · Hero" />
-        </div>
-
-        <Container className="mt-24">
-          <div className="grid grid-cols-1 gap-16 md:grid-cols-2 md:gap-20">
-            {[
-              "Onboarding — intent, not identity",
-              "The Match — quiet, deliberate",
-              "The Room — QR unlock",
-              "After — the conversation continues",
-            ].map((title, i) => (
-              <div key={i} className="grid grid-cols-1 gap-6">
-                <ImagePlaceholder ratio="aspect-[4/3]" label={`Screen 0${i + 1}`} />
-                <div>
-                  <p className="text-[10.5px] uppercase tracking-[0.3em] text-muted-foreground">
-                    Feature 0{i + 1}
-                  </p>
-                  <h3 className="mt-3 font-serif text-2xl leading-[1.2] text-foreground md:text-3xl">
-                    {title}
-                  </h3>
-                  <p className="mt-4 max-w-[42ch] text-[15px] leading-[1.7] text-foreground/70">
-                    Placeholder — one sentence about the intent behind this
-                    screen, not the pixels on it.
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* CHAPTER 8 ——————————————————————————————————————————— */}
-      <section className="pt-40 md:pt-56">
-        <Container>
-          <ChapterHeader
-            number="Eight"
-            eyebrow="Validation"
-            title="Putting Our Thinking to the Test."
-          />
-          <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-20">
-            <div className="md:col-span-7">
-              <ImagePlaceholder ratio="aspect-[4/3]" label="Skillathon · presentation" />
-            </div>
-            <div className="md:col-span-5 flex flex-col justify-center">
-              <Prose>
-                Placeholder — a paragraph about the day we tested the thinking
-                in front of people who had no reason to be kind.
-              </Prose>
-              <div
-                data-reveal
-                className="reveal mt-10 border-l border-[var(--gold)] pl-6"
-              >
-                <p className="font-editorial text-lg italic leading-[1.5] text-foreground/85 md:text-xl">
-                  "Placeholder — a sentence from a judge or observer, kept in
-                  their voice."
-                </p>
-                <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-                  Placeholder attribution
-                </p>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
 
       {/* CHAPTER 9 — Quiet ending ———————————————————————————— */}
       <section className="pt-40 md:pt-64">
