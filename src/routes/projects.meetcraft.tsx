@@ -1441,20 +1441,33 @@ function MeetCraftPage() {
       <ChapterSeven />
 
 
-      {/* CHAPTER 9 — Quiet ending ———————————————————————————— */}
-      <section className="pt-40 md:pt-64">
+      {/* CHAPTER 8 — Reflections & Learnings ————————————————— */}
+      <section className="py-32 md:py-48">
         <Container>
-          <div data-reveal className="reveal mx-auto max-w-[720px] text-center">
+          <div data-reveal className="reveal mx-auto max-w-[1200px] text-center">
+            {/* Chapter Label */}
             <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-              Chapter Nine · Reflection
+              Chapter Eight · Reflection
             </p>
-            <h2 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight md:text-6xl">
-              What This Project Changed.
+
+            {/* Heading */}
+            <h2 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight text-foreground md:text-6xl">
+              Reflections &amp; Learnings
             </h2>
-            <div className="mx-auto mt-10 h-px w-16 bg-[var(--gold)]" />
-            <p className="mx-auto mt-14 max-w-[38ch] font-editorial text-xl italic leading-[1.5] text-foreground/80 md:text-2xl">
-              Placeholder — one paragraph. Written like the last page of a
-              short book.
+
+            <div className="mx-auto mt-8 h-px w-16 bg-[var(--gold)]" />
+
+            {/* Reflection */}
+            <p className="mx-auto mt-14 max-w-[700px] text-[1.15rem] leading-[1.7] text-foreground/75 md:mt-16 md:text-[1.25rem]">
+              Before MeetCraft, I thought product management was primarily about building solutions. This project taught me that it's really about asking better questions, understanding the ecosystem, and making thoughtful decisions long before a feature is designed.
+            </p>
+
+            {/* Closing divider */}
+            <div className="mx-auto mt-20 h-px w-12 bg-border md:mt-24" />
+
+            {/* Closing statement */}
+            <p className="mt-8 text-[13px] tracking-wide text-muted-foreground md:mt-10">
+              Thank you for reading the MeetCraft case study.
             </p>
           </div>
         </Container>
