@@ -237,8 +237,285 @@ function DonutChart({ value }: { value: number }) {
 }
 
 /* ————————————————————————————————————————————————————————
+   Chapter 6 — Journey visualisation
+   ———————————————————————————————————————————————————————— */
+
+type Tone = "neutral" | "warn" | "danger" | "accent" | "success";
+
+const toneStyles: Record<Tone, string> = {
+  neutral:
+    "border-border bg-white text-foreground/80",
+  warn:
+    "border-[#EED9C4] bg-[#FBF3E9] text-[#8A5A2B]",
+  danger:
+    "border-[#E4B4B4] bg-[#FBEDED] text-[#B54848]",
+  accent:
+    "border-[#B8D8E4] bg-white text-[#1F3A48] shadow-[0_0_0_1px_rgba(76,175,203,0.15),0_14px_36px_-14px_rgba(42,107,130,0.45)]",
+  success:
+    "border-[#B4DCC4] bg-[#EDF7F1] text-[#2F7A4F]",
+};
+
+function JourneyStep({
+  icon,
+  label,
+  tone = "neutral",
+  size = "md",
+  emphasis = false,
+}: {
+  icon: string;
+  label: string;
+  tone?: Tone;
+  size?: "sm" | "md" | "lg";
+  emphasis?: boolean;
+}) {
+  const pad =
+    size === "lg" ? "px-5 py-4" : size === "sm" ? "px-3.5 py-2.5" : "px-4 py-3";
+  const text =
+    size === "lg" ? "text-[14px]" : size === "sm" ? "text-[12px]" : "text-[13px]";
+  return (
+    <div
+      className={`flex w-full items-center gap-3 rounded-xl border ${pad} ${text} ${toneStyles[tone]} ${
+        emphasis ? "font-medium" : ""
+      }`}
+    >
+      <span className="text-[16px] leading-none" aria-hidden>
+        {icon}
+      </span>
+      <span className="flex-1 leading-tight">{label}</span>
+    </div>
+  );
+}
+
+function Connector({
+  variant = "solid",
+  tone = "neutral",
+}: {
+  variant?: "solid" | "dotted";
+  tone?: "neutral" | "danger" | "success" | "accent";
+}) {
+  const color =
+    tone === "danger"
+      ? "#D96A6A"
+      : tone === "success"
+      ? "#4CAF7A"
+      : tone === "accent"
+      ? "#4CA5C3"
+      : "#C9C4BB";
+  return (
+    <div className="flex h-8 items-center justify-center" aria-hidden>
+      <svg width="2" height="32" viewBox="0 0 2 32" className="overflow-visible">
+        <line
+          x1="1"
+          y1="0"
+          x2="1"
+          y2="26"
+          stroke={color}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeDasharray={variant === "dotted" ? "3 4" : undefined}
+          opacity={tone === "neutral" ? 0.5 : 0.8}
+        />
+        <path
+          d="M -3 24 L 1 30 L 5 24"
+          fill="none"
+          stroke={color}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          opacity={tone === "neutral" ? 0.55 : 0.85}
+        />
+      </svg>
+    </div>
+  );
+}
+
+function JourneyBefore() {
+  return (
+    <div className="relative rounded-[24px] border border-border bg-white p-7 shadow-[0_1px_2px_rgba(0,0,0,0.03),0_10px_30px_-14px_rgba(0,0,0,0.08)] md:p-9">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.3em] text-[#B54848]">
+          <span className="inline-block h-2 w-2 rounded-full bg-[#D96A6A]" />
+          Before · Without constraints
+        </div>
+      </div>
+      <h3 className="mt-4 font-serif text-2xl leading-[1.2] text-foreground md:text-[26px]">
+        Unlimited networking before the event
+      </h3>
+
+      <div className="mt-8 flex flex-col items-stretch">
+        <JourneyStep icon="👀" label="Browse Attendees" />
+        <Connector />
+        <JourneyStep icon="❤️" label="Match" />
+        <Connector />
+        <JourneyStep icon="🤝" label="Connect" />
+        <Connector />
+        <JourneyStep icon="💬" label="Unlimited Chat" tone="warn" />
+        <Connector tone="danger" />
+        <JourneyStep icon="🏠" label="Skip the Event" tone="danger" emphasis />
+        <Connector tone="danger" />
+        <div className="flex w-full items-center gap-3 rounded-xl border border-[#E4B4B4] bg-[#FBEDED] px-5 py-4 text-[14px] font-medium text-[#B54848]">
+          <span className="text-[18px]" aria-hidden>
+            📉
+          </span>
+          <span className="flex-1 leading-tight">Lower Event Value</span>
+          <svg width="42" height="18" viewBox="0 0 42 18" aria-hidden>
+            <path
+              d="M2 3 L14 8 L24 6 L40 15"
+              fill="none"
+              stroke="#B54848"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M40 15 L34 15 L40 15 L40 9"
+              fill="none"
+              stroke="#B54848"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function QRCheckpoint() {
+  return (
+    <div className="relative my-2 flex justify-center">
+      {/* Halo */}
+      <div
+        className="animate-qr-halo pointer-events-none absolute inset-0 -m-6 rounded-[32px]"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(76,165,195,0.45), rgba(76,165,195,0) 70%)",
+          filter: "blur(10px)",
+        }}
+      />
+      <div
+        className={`relative w-full max-w-[300px] overflow-hidden rounded-2xl border p-5 ${toneStyles.accent}`}
+      >
+        {/* Scan line */}
+        <div className="pointer-events-none absolute inset-x-4 top-0 h-full overflow-hidden">
+          <div
+            className="animate-qr-scan h-[2px] w-full"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(76,165,195,0) 0%, rgba(76,165,195,0.9) 50%, rgba(76,165,195,0) 100%)",
+              boxShadow: "0 0 12px 2px rgba(76,165,195,0.55)",
+            }}
+          />
+        </div>
+
+        <div className="flex items-center gap-4">
+          <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-[#B8D8E4] bg-[#F4FAFC]">
+            <svg
+              width="34"
+              height="34"
+              viewBox="0 0 42 42"
+              className="text-[#2A6B82]"
+              aria-hidden
+            >
+              <g fill="currentColor">
+                <rect x="3" y="3" width="12" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
+                <rect x="7" y="7" width="4" height="4" />
+                <rect x="27" y="3" width="12" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
+                <rect x="31" y="7" width="4" height="4" />
+                <rect x="3" y="27" width="12" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
+                <rect x="7" y="31" width="4" height="4" />
+                <rect x="20" y="20" width="3" height="3" />
+                <rect x="26" y="20" width="3" height="3" />
+                <rect x="32" y="20" width="3" height="3" />
+                <rect x="20" y="26" width="3" height="3" />
+                <rect x="26" y="32" width="3" height="3" />
+                <rect x="32" y="20" width="3" height="3" />
+                <rect x="32" y="32" width="3" height="3" />
+              </g>
+            </svg>
+          </div>
+          <div className="flex-1">
+            <div className="text-[10px] font-medium uppercase tracking-[0.28em] text-[#2A6B82]/80">
+              Checkpoint
+            </div>
+            <div className="mt-1 font-serif text-[18px] leading-[1.15] text-[#1F3A48]">
+              QR Unlock
+            </div>
+            <div className="mt-1.5 flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.22em] text-[#2F7A4F]">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#4CAF7A]" />
+              Unlocked at the event
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function JourneyAfter() {
+  return (
+    <div className="relative rounded-[24px] border border-border bg-white p-7 shadow-[0_1px_2px_rgba(0,0,0,0.03),0_14px_40px_-16px_rgba(42,107,130,0.18)] md:p-9">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.3em] text-[#2F7A4F]">
+          <span className="inline-block h-2 w-2 rounded-full bg-[#4CAF7A]" />
+          After · MeetCraft's Solution
+        </div>
+      </div>
+      <h3 className="mt-4 font-serif text-2xl leading-[1.2] text-foreground md:text-[26px]">
+        Network with purpose
+      </h3>
+
+      <div className="mt-8 flex flex-col items-stretch">
+        <JourneyStep icon="👀" label="Browse Attendees" />
+        <Connector />
+        <JourneyStep icon="❤️" label="Match" />
+        <Connector />
+        <JourneyStep icon="🤝" label="Connect" />
+        <Connector variant="dotted" />
+        <JourneyStep icon="💬" label="10-Minute Chat" />
+        <Connector variant="dotted" tone="accent" />
+
+        <QRCheckpoint />
+
+        <Connector tone="success" />
+        <JourneyStep icon="💬" label="Continue Conversation" tone="success" />
+        <Connector tone="success" />
+        <JourneyStep icon="🤝" label="Meet at the Event" tone="success" emphasis />
+        <Connector tone="success" />
+        <div className="flex w-full items-center gap-3 rounded-xl border border-[#B4DCC4] bg-[#EDF7F1] px-5 py-4 text-[14px] font-medium text-[#2F7A4F]">
+          <span className="text-[18px]" aria-hidden>
+            📈
+          </span>
+          <span className="flex-1 leading-tight">Higher Event Value</span>
+          <svg width="42" height="18" viewBox="0 0 42 18" aria-hidden>
+            <path
+              d="M2 15 L14 10 L24 12 L40 3"
+              fill="none"
+              stroke="#2F7A4F"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M40 3 L34 3 L40 3 L40 9"
+              fill="none"
+              stroke="#2F7A4F"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ————————————————————————————————————————————————————————
    Page
    ———————————————————————————————————————————————————————— */
+
 
 
 function MeetCraftPage() {
@@ -864,199 +1141,48 @@ function MeetCraftPage() {
       {/* CHAPTER 6 ——————————————————————————————————————————— */}
       <section className="pt-40 md:pt-56">
         <Container>
-          <ChapterHeader
-            number="Six"
-            eyebrow="Trade-offs"
-            title="Protecting the Event."
-          />
-
-          {/* Block 1 — Heading intro */}
-          <div data-reveal className="reveal mx-auto max-w-[720px] text-center">
-            <p className="font-serif text-xl leading-[1.5] text-foreground/70 md:text-2xl">
+          {/* Compressed header — tight spacing to the intro line */}
+          <div data-reveal className="reveal">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+              Chapter Six · Trade-offs
+            </p>
+            <h2 className="mt-5 font-serif text-4xl leading-[1.05] tracking-tight md:text-6xl">
+              Protecting the Event.
+            </h2>
+            <div className="mt-6 h-px w-16 bg-[var(--gold)]" />
+            <p className="mt-6 font-serif text-xl leading-[1.5] text-foreground/70 md:text-2xl">
               We faced a critical product trade-off.
             </p>
           </div>
 
-          {/* Block 2 — Before vs After */}
+          {/* Two journeys — side by side */}
           <div
             data-reveal
-            className="reveal mt-16 grid grid-cols-1 gap-6 md:mt-20 md:grid-cols-2 md:gap-8"
+            className="reveal mt-12 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 md:gap-10"
           >
-            {/* BEFORE */}
-            <div className="relative rounded-[20px] border border-border bg-white p-8 shadow-[0_1px_2px_rgba(0,0,0,0.03),0_8px_24px_-12px_rgba(0,0,0,0.08)] md:p-10">
-              <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.3em] text-[#B54848]">
-                <span className="inline-block h-2 w-2 rounded-full bg-[#D96A6A]" />
-                Before
-              </div>
-              <h3 className="mt-4 font-serif text-2xl leading-[1.2] text-foreground md:text-[28px]">
-                Unlimited networking before the event
-              </h3>
-
-              <ul className="mt-8 space-y-3">
-                {[
-                  { label: "Browse Attendees", muted: false },
-                  { label: "Match", muted: false },
-                  { label: "Connect", muted: false },
-                  { label: "Unlimited Chat", muted: false, warn: true },
-                ].map((step, i) => (
-                  <li key={i} className="flex flex-col items-center">
-                    <div className="w-full rounded-lg border border-border bg-[var(--ivory)] px-4 py-3 text-center text-[13px] text-foreground/80">
-                      {step.label}
-                    </div>
-                    {i < 3 && (
-                      <span className="my-1 text-foreground/30">↓</span>
-                    )}
-                  </li>
-                ))}
-                <li className="mt-1 flex flex-col items-center">
-                  <span className="my-1 text-[#D96A6A]/60">↓</span>
-                  <div className="w-full rounded-lg border border-[#E4B4B4] bg-[#FBEDED] px-4 py-3 text-center text-[13px] font-medium text-[#B54848]">
-                    ✕ People skip attending the event
-                  </div>
-                </li>
-              </ul>
-
-              <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-[#E4B4B4] bg-[#FBEDED]/60 px-3 py-1.5 text-[11px] uppercase tracking-[0.2em] text-[#B54848]">
-                ⚠ Lower event attendance
-              </div>
-            </div>
-
-            {/* AFTER */}
-            <div className="relative rounded-[20px] border border-border bg-white p-8 shadow-[0_1px_2px_rgba(0,0,0,0.03),0_8px_24px_-12px_rgba(0,0,0,0.08)] md:p-10">
-              <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.3em] text-[#2F7A4F]">
-                <span className="inline-block h-2 w-2 rounded-full bg-[#4CAF7A]" />
-                After
-              </div>
-              <h3 className="mt-4 font-serif text-2xl leading-[1.2] text-foreground md:text-[28px]">
-                Network with purpose
-              </h3>
-
-              <ul className="mt-8 space-y-3">
-                {["Browse Attendees", "Match", "Connect", "10-minute Chat Window"].map(
-                  (label, i) => (
-                    <li key={i} className="flex flex-col items-center">
-                      <div className="w-full rounded-lg border border-border bg-[var(--ivory)] px-4 py-3 text-center text-[13px] text-foreground/70">
-                        {label}
-                      </div>
-                      <span
-                        className={`my-1 ${
-                          i === 3 ? "text-foreground/25" : "text-foreground/30"
-                        }`}
-                        style={
-                          i === 3
-                            ? { letterSpacing: "2px" }
-                            : undefined
-                        }
-                      >
-                        {i === 3 ? "⋮" : "↓"}
-                      </span>
-                    </li>
-                  ),
-                )}
-
-                {/* QR Unlock — focal point */}
-                <li className="flex flex-col items-center">
-                  <div className="relative">
-                    <div
-                      className="absolute inset-0 -m-4 rounded-2xl"
-                      style={{
-                        background:
-                          "radial-gradient(closest-side, rgba(76,175,203,0.35), rgba(76,175,203,0) 70%)",
-                        filter: "blur(6px)",
-                      }}
-                    />
-                    <div className="relative flex flex-col items-center gap-2 rounded-2xl border border-[#B8D8E4] bg-white px-6 py-5 shadow-[0_0_0_1px_rgba(76,175,203,0.15),0_10px_30px_-10px_rgba(76,175,203,0.5)]">
-                      <svg
-                        width="42"
-                        height="42"
-                        viewBox="0 0 42 42"
-                        className="text-[#2A6B82]"
-                        aria-hidden
-                      >
-                        <g fill="currentColor">
-                          <rect x="3" y="3" width="12" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
-                          <rect x="7" y="7" width="4" height="4" />
-                          <rect x="27" y="3" width="12" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
-                          <rect x="31" y="7" width="4" height="4" />
-                          <rect x="3" y="27" width="12" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
-                          <rect x="7" y="31" width="4" height="4" />
-                          <rect x="20" y="20" width="3" height="3" />
-                          <rect x="26" y="20" width="3" height="3" />
-                          <rect x="32" y="20" width="3" height="3" />
-                          <rect x="20" y="26" width="3" height="3" />
-                          <rect x="26" y="32" width="3" height="3" />
-                          <rect x="32" y="26" width="3" height="3" />
-                          <rect x="32" y="32" width="3" height="3" />
-                        </g>
-                      </svg>
-                      <div className="text-[11px] font-medium uppercase tracking-[0.25em] text-[#2A6B82]">
-                        Scan QR at Event
-                      </div>
-                      <div className="text-[10px] uppercase tracking-[0.2em] text-[#4CAF7A]">
-                        ● Unlocked
-                      </div>
-                    </div>
-                  </div>
-                  <span className="my-1 text-[#4CAF7A]/70">↓</span>
-                </li>
-
-                {[
-                  { label: "Chat Unlocks" },
-                  { label: "Real Networking Happens", accent: true },
-                ].map((step, i, arr) => (
-                  <li key={i} className="flex flex-col items-center">
-                    <div
-                      className={`w-full rounded-lg border px-4 py-3 text-center text-[13px] ${
-                        step.accent
-                          ? "border-[#B4DCC4] bg-[#EDF7F1] font-medium text-[#2F7A4F]"
-                          : "border-border bg-[var(--ivory)] text-foreground/90"
-                      }`}
-                    >
-                      {step.label}
-                    </div>
-                    {i < arr.length - 1 && (
-                      <span className="my-1 text-foreground/30">↓</span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <JourneyBefore />
+            <JourneyAfter />
           </div>
 
-          {/* Outcome bar */}
+          {/* Key insight */}
           <div
             data-reveal
-            className="reveal mt-8 flex flex-col items-center gap-3 rounded-[20px] border border-[#B4DCC4] bg-[#EDF7F1] px-6 py-5 text-[13px] text-[#2F7A4F] md:flex-row md:justify-center md:gap-8"
+            className="reveal mx-auto mt-24 max-w-[760px] text-center md:mt-32"
           >
-            <span className="flex items-center gap-2">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#4CAF7A]" />
-              People attend the event
-            </span>
-            <span className="text-[#4CAF7A]/70">→</span>
-            <span className="flex items-center gap-2">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#4CAF7A]" />
-              Organizers deliver real networking value
-            </span>
-          </div>
-
-          {/* Block 3 — Key insight */}
-          <div
-            data-reveal
-            className="reveal mx-auto mt-20 max-w-[680px] text-center md:mt-24"
-          >
-            <p className="font-serif text-2xl leading-[1.4] text-foreground md:text-3xl">
+            <p className="font-serif text-2xl leading-[1.35] text-foreground/70 md:text-[2.25rem]">
               The best networking experience shouldn't happen online.
             </p>
-            <p className="mt-2 font-serif text-2xl font-semibold leading-[1.4] text-foreground md:text-3xl">
+            <p className="mt-3 font-serif text-3xl font-semibold leading-[1.25] tracking-tight text-foreground md:text-[2.75rem]">
               It should happen at the event.
             </p>
-            <p className="mx-auto mt-6 max-w-[520px] text-[14px] leading-[1.7] text-muted-foreground">
-              MeetCraft encourages meaningful connections early while reserving
-              full conversations for the event itself.
+            <p className="mx-auto mt-8 max-w-[520px] text-[14px] leading-[1.7] text-muted-foreground">
+              MeetCraft encourages meaningful connections early — while
+              reserving full conversations for the moment people meet.
             </p>
           </div>
         </Container>
       </section>
+
 
       {/* CHAPTER 7 ——————————————————————————————————————————— */}
       <section className="pt-40 md:pt-56">
