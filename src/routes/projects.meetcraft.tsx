@@ -629,14 +629,15 @@ function ChapterSeven() {
             className="reveal group col-span-6 overflow-hidden rounded-[20px] border border-black/[0.08] bg-white shadow-[0_20px_50px_-25px_rgba(0,0,0,0.25)] transition-transform duration-500 ease-out md:hover:-translate-y-1"
             style={{ transitionDelay: "0ms" }}
           >
-            <div className="flex aspect-[16/9] w-full items-center justify-center overflow-hidden bg-[#F5F3EE]">
+            <div className="w-full overflow-hidden bg-[#F5F3EE]" style={{ aspectRatio: "10 / 9" }}>
               <img
                 src={ch7Presentation.url}
                 alt="Komal presenting the MeetCraft value proposition on stage at the VPD Skillathon"
-                className="h-full w-full object-contain transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
+                className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
                 loading="lazy"
               />
             </div>
+
           </figure>
 
 
