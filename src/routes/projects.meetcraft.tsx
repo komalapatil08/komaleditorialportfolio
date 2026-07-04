@@ -820,38 +820,93 @@ function MeetCraftPage() {
       </section>
 
       {/* CHAPTER 5 ——————————————————————————————————————————— */}
-      <section className="pt-40 md:pt-56">
-        <Container>
-          <ChapterHeader
-            number="Five"
-            eyebrow="Strategy"
-            title="The Customer Wasn't the User."
-          />
-          <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-20">
-            <div className="md:col-span-5">
-              <Prose>
-                Placeholder — a paragraph that quietly separates the buyer, the
-                user, and the marketplace.
-              </Prose>
+      <section className="pt-40 md:pt-56 pb-16 md:pb-28">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12">
+
+          {/* Heading */}
+          <div data-reveal className="reveal">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+              Chapter Five · Strategy
+            </p>
+            <h2 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
+              The Customer Wasn't the User
+            </h2>
+            <div className="mt-8 h-px w-12 bg-[var(--gold)]" />
+          </div>
+
+          {/* Two-column layout */}
+          <div className="mt-16 grid grid-cols-1 gap-16 md:mt-20 md:grid-cols-2 md:gap-20">
+            {/* Left — Text */}
+            <div data-reveal className="reveal" style={{ transitionDelay: "80ms" }}>
+              <p className="max-w-[48ch] text-[1.05rem] leading-[1.7] text-foreground/75 md:text-[1.15rem]">
+                We started by designing MeetCraft for attendees.
+              </p>
+              <p className="mt-5 max-w-[48ch] text-[1.05rem] leading-[1.7] text-foreground/75 md:text-[1.15rem]">
+                But as we refined the product, we realized something important.
+              </p>
+              <p className="mt-5 max-w-[48ch] text-[1.05rem] leading-[1.7] text-foreground md:text-[1.15rem]">
+                <span className="font-semibold">Attendees use MeetCraft. Event organizers pay for it.</span>
+              </p>
             </div>
-            <div className="md:col-span-7 space-y-6">
-              {["The Event Host", "The Attendee", "The Marketplace"].map((t) => (
-                <div
-                  key={t}
-                  data-reveal
-                  className="reveal flex items-baseline justify-between border-b border-border pb-6"
-                >
-                  <p className="font-serif text-xl text-foreground md:text-2xl">
-                    {t}
-                  </p>
-                  <p className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-                    Placeholder motivation
-                  </p>
+
+            {/* Right — Comparison card */}
+            <div data-reveal className="reveal" style={{ transitionDelay: "160ms" }}>
+              <div className="rounded-2xl border border-border bg-background p-8 shadow-[0_4px_24px_-12px_rgba(31,31,31,0.12)] md:p-10">
+                <p className="text-center font-serif text-xl tracking-tight text-foreground md:text-2xl">
+                  MeetCraft
+                </p>
+                <div className="mt-8 grid grid-cols-2 gap-8">
+                  <div className="text-center">
+                    <p className="text-2xl md:text-3xl">👥</p>
+                    <p className="mt-3 text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
+                      Users
+                    </p>
+                    <p className="mt-2 font-serif text-lg text-foreground md:text-xl">
+                      Attendees
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-2xl md:text-3xl">🏢</p>
+                    <p className="mt-3 text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
+                      Customers
+                    </p>
+                    <p className="mt-2 font-serif text-lg text-foreground md:text-xl">
+                      Organizers
+                    </p>
+                  </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
-        </Container>
+
+          {/* Bottom insight */}
+          <div className="mt-20 text-center md:mt-24">
+            <p data-reveal className="reveal mx-auto max-w-[52ch] text-[1.15rem] leading-[1.6] text-foreground/85 md:text-[1.35rem]">
+              Better networking creates more valuable events—making organizers the real customer.
+            </p>
+          </div>
+
+          {/* Transition */}
+          <div className="mt-28 pb-8 text-center md:mt-36">
+            <div data-reveal className="reveal">
+              <p className="font-serif text-2xl leading-[1.2] tracking-tight text-foreground/70 md:text-3xl">
+                But solving for organizers introduced a new challenge...
+              </p>
+              <div className="mt-10 flex justify-center">
+                <svg
+                  className="animate-arrow-pulse h-6 w-6 text-muted-foreground"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path d="M12 5v14M5 12l7 7 7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </section>
 
       {/* CHAPTER 6 ——————————————————————————————————————————— */}
