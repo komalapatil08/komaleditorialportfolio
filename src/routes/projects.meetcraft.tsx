@@ -296,60 +296,238 @@ function MeetCraftPage() {
       </section>
 
 
-      {/* CHAPTER 2 ——————————————————————————————————————————— */}
-      <section className="pt-40 md:pt-56">
+      {/* CHAPTER 2 — DISCOVERY ————————————————————————————————— */}
+      <section className="pt-40 md:pt-56 pb-16 md:pb-28">
         <Container>
-          <ChapterHeader number="Two" eyebrow="Research" title="We Stopped Guessing." />
-          <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-x-20 md:gap-y-24">
-            <div className="md:col-span-6">
-              <ImagePlaceholder ratio="aspect-[4/5]" label="Interview" />
-            </div>
-            <div className="md:col-span-6 flex flex-col justify-center">
-              <Prose>
-                Placeholder — methodology written like a paragraph, not a
-                bullet list. Interviews, observation, listening for patterns.
-              </Prose>
+          <div className="grid grid-cols-1 gap-14 md:grid-cols-12 md:gap-x-16 lg:gap-x-20">
+            {/* LEFT — Research collage */}
+            <div className="md:col-span-5">
+              <div data-reveal className="reveal">
+                <img
+                  src={interviewKomal.url}
+                  alt="Komal conducting an in-depth attendee interview"
+                  className="w-full h-auto rounded-2xl object-cover aspect-[4/3]"
+                  loading="lazy"
+                />
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-4">
+                <div data-reveal className="reveal" style={{ transitionDelay: "80ms" }}>
+                  <img
+                    src={interviewShristy.url}
+                    alt="Shristy interviewing an attendee"
+                    className="w-full h-auto rounded-2xl object-cover aspect-[4/5]"
+                    loading="lazy"
+                  />
+                </div>
+                <div data-reveal className="reveal" style={{ transitionDelay: "140ms" }}>
+                  <img
+                    src={interviewPrashant.url}
+                    alt="Prashant interviewing organizers on the floor"
+                    className="w-full h-auto rounded-2xl object-cover aspect-[4/5]"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
               <div
                 data-reveal
-                className="reveal mt-10 border border-border p-6 md:p-8"
+                className="reveal mt-8 rounded-2xl border border-border/70 bg-[oklch(0.975_0.008_82)] p-3"
+                style={{ transitionDelay: "200ms" }}
               >
-                <p className="text-[10.5px] uppercase tracking-[0.3em] text-muted-foreground">
-                  Interview Snippet
-                </p>
-                <p className="mt-4 font-editorial text-xl italic leading-[1.4] text-foreground/85 md:text-2xl">
-                  "Placeholder for a verbatim quote from an interview — kept
-                  raw, unedited, human."
-                </p>
-                <p className="mt-4 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-                  Attendee, 27 · Bengaluru
+                <img
+                  src={surveyEvidence.url}
+                  alt="Snippet of the raw survey response spreadsheet used to validate interview findings"
+                  className="w-full h-auto rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              <div
+                data-reveal
+                className="reveal mt-6 flex items-start gap-4"
+                style={{ transitionDelay: "260ms" }}
+              >
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[var(--gold)]/40">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="text-[var(--gold)]">
+                    <rect x="6" y="4" width="12" height="16" rx="2" />
+                    <path d="M9 4v-1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1" />
+                    <path d="M9 10h6M9 14h6M9 18h4" />
+                  </svg>
+                </div>
+                <p className="text-[12.5px] leading-[1.7] text-foreground/70">
+                  <span className="font-semibold text-foreground">10+ In-depth Interviews</span> ·{" "}
+                  <span className="font-semibold text-foreground">20+ Survey Responses</span>
+                  <br />
+                  We combined qualitative interviews with quantitative survey data to validate our observations.
                 </p>
               </div>
             </div>
 
-            <div className="md:col-span-12">
-              <ImagePlaceholder
-                ratio="aspect-[16/9]"
-                label="Affinity mapping · workshop wall"
-                caption="Placeholder — sticky notes clustered into the questions that mattered."
-              />
-            </div>
+            {/* RIGHT — Heading + body */}
+            <div className="md:col-span-7">
+              <div data-reveal className="reveal">
+                <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+                  Chapter Two · Discovery
+                </p>
+              </div>
 
-            {/* Stats row */}
-            <div className="md:col-span-12 grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4">
-              {["1 in 3", "48 hrs", "27", "6"].map((n, i) => (
-                <div key={i} data-reveal className="reveal">
-                  <p className="font-serif text-5xl leading-[1] tracking-tight text-foreground md:text-6xl">
-                    {n}
+              <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-[1.15fr_1fr] md:gap-12">
+                <div data-reveal className="reveal" style={{ transitionDelay: "80ms" }}>
+                  <h2 className="font-serif text-5xl leading-[1.02] tracking-[-0.015em] md:text-[4.25rem]">
+                    We Stopped<br />Guessing.
+                  </h2>
+                </div>
+                <div
+                  data-reveal
+                  className="reveal border-l border-border/70 pl-6 md:pl-8"
+                  style={{ transitionDelay: "160ms" }}
+                >
+                  <p className="text-[1rem] leading-[1.7] text-foreground/80 md:text-[1.05rem]">
+                    Observation wasn't enough.
                   </p>
-                  <p className="mt-4 text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-                    Placeholder statistic
+                  <p className="mt-3 text-[1.05rem] font-semibold leading-[1.6] text-[var(--gold)] md:text-[1.1rem]">
+                    So we started listening.
+                  </p>
+                  <p className="mt-5 text-[1rem] leading-[1.7] text-foreground/75 md:text-[1.05rem]">
+                    We spoke to attendees, organizers, and speakers—not about solutions, but about their experiences.
+                  </p>
+                  <p className="mt-5 text-[1rem] font-semibold leading-[1.7] text-foreground md:text-[1.05rem]">
+                    The same patterns kept resurfacing.
                   </p>
                 </div>
-              ))}
+              </div>
+
+              {/* Research Dashboard */}
+              <div
+                data-reveal
+                className="reveal mt-14 rounded-3xl border border-border/70 bg-[oklch(0.975_0.008_82)] p-6 md:p-10 shadow-[0_20px_50px_-30px_rgba(31,31,31,0.18)]"
+                style={{ transitionDelay: "200ms" }}
+              >
+                <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8 md:divide-x md:divide-border/60">
+                  {/* Card 1 — Donut */}
+                  <div className="md:pr-6">
+                    <h3 className="text-center font-serif text-[1.05rem] leading-[1.3] text-foreground md:text-[1.1rem]">
+                      Only 23% Met<br />the Right People
+                    </h3>
+                    <div className="mt-6 flex items-center justify-center">
+                      <DonutChart value={23} />
+                    </div>
+                    <p className="mt-6 text-center text-[12.5px] leading-[1.6] text-foreground/70">
+                      <span className="font-semibold text-[var(--gold)]">77%</span> left without meeting someone valuable.
+                    </p>
+                  </div>
+
+                  {/* Card 2 — Bars */}
+                  <div className="md:px-6">
+                    <h3 className="text-center font-serif text-[1.05rem] text-foreground md:text-[1.1rem]">
+                      Top Challenges Faced
+                    </h3>
+                    <ul className="mt-6 space-y-5">
+                      {[
+                        {
+                          label: "Didn't know who to approach",
+                          value: 82,
+                          icon: (
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4">
+                              <circle cx="9" cy="8" r="3" />
+                              <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" />
+                              <circle cx="17" cy="7" r="2" />
+                              <path d="M15 13c2.5 0 4 1.8 4 4" />
+                            </svg>
+                          ),
+                        },
+                        {
+                          label: "Conversations felt random",
+                          value: 74,
+                          icon: (
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4">
+                              <path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" />
+                            </svg>
+                          ),
+                        },
+                        {
+                          label: "Couldn't find relevant people",
+                          value: 65,
+                          icon: (
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-4 w-4">
+                              <circle cx="11" cy="11" r="6" />
+                              <path d="m20 20-4.5-4.5" />
+                            </svg>
+                          ),
+                        },
+                      ].map((row) => (
+                        <li key={row.label}>
+                          <div className="flex items-start gap-3">
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-background text-foreground/70 border border-border/60">
+                              {row.icon}
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-baseline justify-between gap-3">
+                                <p className="text-[12.5px] leading-[1.35] text-foreground/85">
+                                  {row.label}
+                                </p>
+                                <span className="text-[12px] font-semibold text-foreground tabular-nums">
+                                  {row.value}%
+                                </span>
+                              </div>
+                              <div className="mt-2 h-[6px] w-full overflow-hidden rounded-full bg-border/50">
+                                <div
+                                  className="h-full rounded-full bg-[var(--gold)]"
+                                  style={{ width: `${row.value}%` }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Card 3 — Organizers */}
+                  <div className="md:pl-6">
+                    <h3 className="text-center font-serif text-[1.05rem] leading-[1.3] text-foreground md:text-[1.1rem]">
+                      Organizers Saw<br />the Same Pattern
+                    </h3>
+                    <div className="mt-6 flex flex-col items-center rounded-2xl border border-border/60 bg-background/60 px-4 py-6">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-7 w-7 text-foreground/70">
+                        <circle cx="9" cy="8" r="3" />
+                        <circle cx="17" cy="9" r="2.4" />
+                        <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" />
+                        <path d="M15 14c2.6 0 4.5 1.8 4.5 4" />
+                      </svg>
+                      <p className="mt-4 font-serif text-3xl leading-none tracking-tight text-[var(--gold)] md:text-[2rem]">
+                        7 <span className="text-foreground/80 text-[1rem] font-sans font-normal">out of</span> 10
+                      </p>
+                      <p className="mt-4 text-center text-[12.5px] leading-[1.6] text-foreground/70">
+                        organizers felt attendees weren't making meaningful connections.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom insight card */}
+              <div
+                data-reveal
+                className="reveal mt-6 flex items-center gap-5 rounded-3xl border border-border/70 bg-[oklch(0.965_0.012_82)] p-6 md:gap-8 md:p-8"
+                style={{ transitionDelay: "260ms" }}
+              >
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-foreground text-background md:h-16 md:w-16">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-6 w-6 md:h-7 md:w-7">
+                    <path d="M9 18h6M10 21h4" />
+                    <path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1.2 1.5 1.4 2.5h5.2c.2-1 .6-1.7 1.4-2.5A6 6 0 0 0 12 3z" />
+                  </svg>
+                </div>
+                <p className="font-serif text-2xl leading-[1.2] tracking-tight text-foreground md:text-[1.9rem]">
+                  Every conversation pointed in the{" "}
+                  <span className="text-[var(--gold)]">same direction.</span>
+                </p>
+              </div>
             </div>
           </div>
         </Container>
       </section>
+
 
       {/* CHAPTER 3 — The Turn ————————————————————————————————— */}
       <section className="pt-40 md:pt-56">
