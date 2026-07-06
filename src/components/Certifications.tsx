@@ -84,29 +84,27 @@ function CertificationCard({ c, onOpen }: { c: Certification; onOpen: () => void
       className="reveal group relative flex items-center gap-5 border border-border bg-[#FBF8F1] p-5 text-left transition-all duration-[400ms] ease-in-out hover:-translate-y-1 hover:border-[color:var(--gold,#C9A227)] hover:shadow-[0_20px_40px_-20px_rgba(31,31,31,0.22)] md:gap-6 md:p-6"
       aria-label={`Open ${c.title} certificate`}
     >
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[2px] border border-border/70 bg-background/60 font-serif text-[12px] tracking-tight text-foreground/70 md:h-12 md:w-12">
-        IPL
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center text-[28px] leading-none md:h-14 md:w-14 md:text-[32px]">
+        <span aria-hidden>{c.emoji}</span>
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <div className="flex items-center justify-between gap-3">
-          <h3 className="truncate font-serif text-[1.05rem] leading-[1.25] tracking-tight text-foreground md:text-[1.15rem]">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="font-serif text-[1.05rem] leading-[1.25] tracking-tight text-foreground md:text-[1.15rem]">
             {c.title}
           </h3>
-          <span className="hidden shrink-0 items-center gap-1 text-[10px] uppercase tracking-[0.22em] text-[color:var(--gold,#C9A227)] sm:inline-flex">
-            <BadgeCheck size={12} aria-hidden />
+          <span className="hidden shrink-0 items-center gap-1.5 text-[10px] uppercase tracking-[0.22em] text-[color:var(--gold,#C9A227)] sm:inline-flex">
+            <img src={iplLogo} alt="" className="h-4 w-4 object-contain" aria-hidden />
             Verified
           </span>
         </div>
-        <div className="mt-1 flex items-center gap-3">
-          <p className="text-[12px] leading-[1.4] text-foreground/60">{c.organization}</p>
+        <div className="mt-2 flex items-center gap-2">
+          <span className="inline-block border border-border/80 px-2 py-0.5 text-[9.5px] uppercase tracking-[0.2em] text-foreground/60 transition-colors duration-300 group-hover:border-[color:var(--gold,#C9A227)] group-hover:text-[color:var(--gold,#C9A227)]">
+            {c.category}
+          </span>
           <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{c.year}</span>
         </div>
       </div>
-
-      <span className="hidden shrink-0 border border-border/80 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.2em] text-foreground/60 transition-colors duration-300 group-hover:border-[color:var(--gold,#C9A227)] group-hover:text-[color:var(--gold,#C9A227)] lg:inline-block">
-        {c.category}
-      </span>
     </button>
   );
 }
