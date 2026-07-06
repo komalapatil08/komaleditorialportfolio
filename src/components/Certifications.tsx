@@ -244,7 +244,7 @@ export function Certifications() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-x-10 md:gap-y-4">
           {certifications.map((c, i) => (
             <CertificationCard key={c.title} c={c} onOpen={() => setActiveIndex(i)} />
           ))}
