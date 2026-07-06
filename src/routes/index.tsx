@@ -4,7 +4,7 @@ import { Mail, Linkedin } from "lucide-react";
 import { Certifications } from "@/components/Certifications";
 import portrait from "@/assets/komal-portrait.png.asset.json";
 import meetcraftImg from "@/assets/meetcraft.png.asset.json";
-import kalavanshImg from "@/assets/kalavansh.png.asset.json";
+
 import tajImg from "@/assets/taj.png.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -46,14 +46,6 @@ const featured: FeaturedProject[] = [
     alt: "Two women in conversation at a MeetCraft event",
     href: "/projects/meetcraft",
     prototypeUrl: "https://meet-craft.vercel.app/",
-  },
-  {
-    question: "What if every handmade product told a story?",
-    title: "KalaVansh",
-    tag: "Marketplace Design • Artisan Ecosystem",
-    image: kalavanshImg.url,
-    alt: "An artisan embroidering a floral motif by hand",
-    href: "/projects/kalavansh",
   },
   {
     question: "What does personalized luxury actually look like?",
@@ -428,11 +420,6 @@ function Achievements() {
       icon: "🏆",
       title: "Skillathon Winner",
       body: "For MeetCraft — an intent-based networking platform.",
-    },
-    {
-      icon: "🌏",
-      title: "Shortlisted — CAUSE 2026",
-      body: "For KalaVansh — an artisan marketplace platform.",
     },
   ];
   return (
