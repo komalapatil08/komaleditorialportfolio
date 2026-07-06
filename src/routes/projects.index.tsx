@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import meetcraftImg from "@/assets/meetcraft.png.asset.json";
+import kalavanshImg from "@/assets/kalavansh.jpg";
 
 import tajImg from "@/assets/taj.png.asset.json";
 
@@ -53,6 +54,14 @@ const projects: Project[] = [
     alt: "A Taj host serving tea overlooking the lake at golden hour",
     tag: "Digital Transformation • Guest Experience",
     description: "What does personalized luxury actually look like?",
+  },
+  {
+    title: "KalaVansh",
+    status: "Coming Soon",
+    image: kalavanshImg,
+    alt: "Hands of an Indian artisan painting intricate Meenakari work on a brass vessel",
+    tag: "Craft • Storytelling • Product Thinking",
+    description: "What if the maker mattered more than the object?",
   },
   { title: "Rebuilding Notion's Growth Strategy", status: "Coming Soon" },
   {

@@ -4,6 +4,7 @@ import { Mail, Linkedin } from "lucide-react";
 import { Certifications } from "@/components/Certifications";
 import portrait from "@/assets/komal-portrait.png.asset.json";
 import meetcraftImg from "@/assets/meetcraft.png.asset.json";
+import kalavanshImg from "@/assets/kalavansh.jpg";
 
 import tajImg from "@/assets/taj.png.asset.json";
 
@@ -53,6 +54,13 @@ const featured: FeaturedProject[] = [
     tag: "Digital Transformation • Guest Experience",
     image: tajImg.url,
     alt: "A Taj host serving tea overlooking the lake at golden hour",
+  },
+  {
+    question: "What if the maker mattered more than the object?",
+    title: "KalaVansh",
+    tag: "Craft • Storytelling • Product Thinking",
+    image: kalavanshImg,
+    alt: "Hands of an Indian artisan painting intricate Meenakari work on a brass vessel",
   },
 ];
 
