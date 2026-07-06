@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 
-import meenakariImg from "@/assets/kv-product-meenakari.jpg.asset.json";
-import painterImg from "@/assets/kv-artisan-painter.jpg.asset.json";
+import meenakariImg from "@/assets/kv-opening-vase.jpg.asset.json";
+import painterImg from "@/assets/kv-opening-artisan.jpg.asset.json";
 
 export const Route = createFileRoute("/projects/kalavansh")({
   component: KalaVanshPage,
@@ -39,8 +39,12 @@ function KalaVanshPage() {
       const scrollable = rect.height - viewportH;
       const scrolled = -rect.top;
       const p = scrollable <= 0 ? 0 : Math.max(0, Math.min(1, scrolled / scrollable));
-      const artisanOpacity = Math.min(1, p / 0.55);
-      const textOpacity = p > 0.55 ? Math.min(1, (p - 0.55) / 0.45) : 0;
+
+      // Vase rises throughout the section.
+      // Artisan fades in over the first 70% of the scroll.
+      // Copy fades in only once the artisan is fully visible.
+      const artisanOpacity = Math.min(1, p / 0.7);
+      const textOpacity = p > 0.7 ? Math.min(1, (p - 0.7) / 0.3) : 0;
 
       section.style.setProperty("--kv-progress", p.toFixed(4));
       section.style.setProperty("--kv-artisan-opacity", artisanOpacity.toFixed(4));
@@ -74,13 +78,13 @@ function KalaVanshPage() {
         className="relative min-h-[175vh]"
         aria-label="KalaVansh opening"
       >
-        {/* Soft museum spotlight */}
+        {/* Subtle warmth and depth, no decorative shapes */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(60% 50% at 50% 35%, rgba(255,247,232,0.65) 0%, rgba(248,245,239,0) 60%), radial-gradient(80% 40% at 50% 100%, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0) 65%)",
+              "radial-gradient(55% 45% at 50% 40%, rgba(255,248,236,0.7) 0%, rgba(248,245,239,0) 65%), radial-gradient(85% 35% at 50% 100%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0) 60%)",
           }}
         />
 
@@ -96,14 +100,14 @@ function KalaVanshPage() {
             >
               <div
                 className="relative"
-                style={{ width: "min(240px, 52vw)", height: "min(320px, 44vh)" }}
+                style={{ width: "min(260px, 52vw)", height: "min(360px, 48vh)" }}
               >
                 <img
                   src={meenakariImg.url}
                   alt="Hand-painted Meenakari vase on a museum pedestal"
                   className="h-full w-full object-contain"
                   style={{
-                    filter: "drop-shadow(0 24px 18px rgba(31,31,31,0.18))",
+                    filter: "drop-shadow(0 22px 16px rgba(31,31,31,0.16))",
                   }}
                   width={1024}
                   height={1024}
@@ -112,10 +116,10 @@ function KalaVanshPage() {
 
               {/* Simple museum pedestal */}
               <div
-                className="-mt-2"
+                className="-mt-1"
                 style={{
-                  width: "min(200px, 44vw)",
-                  height: "min(80px, 11vh)",
+                  width: "min(210px, 44vw)",
+                  height: "min(84px, 11vh)",
                   background:
                     "linear-gradient(180deg, #F1ECE1 0%, #E8E2D5 55%, #DDD5C4 100%)",
                   boxShadow:
@@ -138,24 +142,24 @@ function KalaVanshPage() {
               <div
                 className="overflow-hidden"
                 style={{
-                  width: "min(260px, 56vw)",
-                  height: "min(300px, 36vh)",
+                  width: "min(280px, 58vw)",
+                  height: "min(280px, 34vh)",
                   borderRadius: "2px",
-                  boxShadow: "0 30px 60px -40px rgba(31,31,31,0.35)",
+                  boxShadow: "0 28px 56px -38px rgba(31,31,31,0.35)",
                 }}
               >
                 <img
                   src={painterImg.url}
                   alt="A Meenakari artisan painting a vase by hand"
                   className="h-full w-full object-cover"
-                  style={{ filter: "saturate(0.92) contrast(0.98)" }}
+                  style={{ filter: "saturate(0.94) contrast(0.98)" }}
                   width={1024}
                   height={1024}
                 />
               </div>
 
               <div
-                className="text-center"
+                className="max-w-[34ch] text-center"
                 style={{
                   opacity: "var(--kv-text-opacity, 0)",
                   transform:
