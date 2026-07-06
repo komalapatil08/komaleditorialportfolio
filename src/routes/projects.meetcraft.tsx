@@ -818,7 +818,7 @@ function MeetCraftPage() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Open MeetCraft Live Prototype in a new tab"
-              className="mt-8 inline-flex items-center gap-1.5 text-[14px] font-medium text-[var(--gold)] transition-all duration-200 hover:underline hover:-translate-y-0.5"
+              className="mt-8 inline-flex items-center gap-1.5 text-[16px] font-medium text-[var(--gold)] transition-all duration-200 hover:underline hover:-translate-y-0.5"
             >
               🔗 Try the Live Prototype <span aria-hidden className="text-[12px]">↗</span>
             </a>
@@ -1217,6 +1217,15 @@ function MeetCraftPage() {
               <p className="mx-auto mt-4 max-w-[540px] text-[0.95rem] leading-[1.65] text-foreground/75 md:text-[1rem]">
                 MeetCraft helps attendees discover relevant people before and during professional events based on their networking intent.
               </p>
+              <a
+                href="https://meet-craft.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open MeetCraft Live Prototype in a new tab"
+                className="mt-5 inline-flex items-center gap-1.5 text-[14px] font-medium text-[var(--gold)] transition-all duration-200 hover:underline hover:-translate-y-0.5"
+              >
+                🔗 Try the Live Prototype <span aria-hidden className="text-[12px]">↗</span>
+              </a>
             </div>
           </div>
 
