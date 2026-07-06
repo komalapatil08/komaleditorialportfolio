@@ -813,6 +813,15 @@ function MeetCraftPage() {
             <p className="mt-6 text-[13px] tracking-wide text-foreground/50">
               Product Strategy · 12 Weeks · Four PMs
             </p>
+            <a
+              href="https://meet-craft.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open MeetCraft Live Prototype in a new tab"
+              className="mt-8 inline-flex items-center gap-1.5 text-[14px] font-medium text-[var(--gold)] transition-all duration-200 hover:underline hover:-translate-y-0.5"
+            >
+              🔗 Try the Live Prototype <span aria-hidden className="text-[12px]">↗</span>
+            </a>
           </div>
 
           {/* Cover hero image */}
