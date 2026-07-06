@@ -32,6 +32,7 @@ type Project = {
   alt?: string;
   tag?: string;
   description?: string;
+  prototypeUrl?: string;
 };
 
 const projects: Project[] = [
@@ -43,6 +44,7 @@ const projects: Project[] = [
     alt: "Two women in conversation at a MeetCraft event",
     tag: "Intent-based Networking • Product Strategy",
     description: "What if networking was intentional?",
+    prototypeUrl: "https://meet-craft.vercel.app/",
   },
   {
     title: "KalaVansh",
@@ -94,6 +96,80 @@ function Card({ p }: { p: Project }) {
   const hasImage = Boolean(p.image);
 
   if (hasImage) {
+    const hasPrototype = Boolean(p.prototypeUrl);
+
+    if (clickable && hasPrototype) {
+      return (
+        <article
+          data-reveal
+          className="project-card reveal group relative flex h-full flex-col border border-border/70 bg-background p-7 transition-all duration-[400ms] ease-in-out hover:-translate-y-1.5 hover:border-foreground/40 hover:shadow-[0_50px_90px_-40px_rgba(31,31,31,0.45)] md:p-9"
+        >
+          <div className="overflow-hidden rounded-[2px] bg-muted">
+            <Link to={p.href} className="block">
+              <div className="aspect-[4/5] w-full overflow-hidden">
+                <img
+                  src={p.image}
+                  alt={p.alt || p.title}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-[500ms] ease-in-out group-hover:scale-[1.025]"
+                />
+              </div>
+            </Link>
+          </div>
+
+          <div className="mt-7 md:mt-8">
+            <div className="flex items-center gap-1.5">
+              {isLive ? (
+                <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.2em] text-[var(--gold)]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)]" />
+                  Live Case Study
+                </span>
+              ) : (
+                <span className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                  Coming Soon
+                </span>
+              )}
+            </div>
+
+            <h3 className="mt-4 font-serif text-[1.1rem] leading-[1.25] tracking-tight text-foreground/90 md:text-[1.2rem]">
+              <Link to={p.href}>{p.title}</Link>
+            </h3>
+
+            {p.description && (
+              <p className="mt-2 font-serif text-[1rem] leading-[1.3] tracking-tight text-foreground/60 italic">
+                {p.description}
+              </p>
+            )}
+
+            {p.tag && (
+              <p className="card-tag mt-3 text-[10.5px] uppercase tracking-[0.24em] text-muted-foreground transition-colors duration-[400ms] group-hover:text-[color:var(--gold,#C9A227)]">
+                {p.tag}
+              </p>
+            )}
+
+            {isLive && (
+              <div className="mt-5 flex flex-col gap-1.5">
+                <Link
+                  to={p.href}
+                  className="reveal-hover inline-block text-[11.5px] uppercase tracking-[0.22em] text-foreground/80"
+                >
+                  Read Case Study →
+                </Link>
+                <a
+                  href={p.prototypeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[11.5px] font-medium text-[var(--gold)] transition-all duration-200 hover:underline hover:-translate-y-0.5"
+                >
+                  🔗 Try the Live Prototype <span aria-hidden className="text-[10px]">↗</span>
+                </a>
+              </div>
+            )}
+          </div>
+        </article>
+      );
+    }
+
     const card = (
       <article
         data-reveal

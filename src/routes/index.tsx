@@ -33,6 +33,8 @@ type FeaturedProject = {
   tag: string;
   image: string;
   alt: string;
+  href?: string;
+  prototypeUrl?: string;
 };
 
 const featured: FeaturedProject[] = [
@@ -42,6 +44,8 @@ const featured: FeaturedProject[] = [
     tag: "Intent-based Networking • Product Strategy",
     image: meetcraftImg.url,
     alt: "Two women in conversation at a MeetCraft event",
+    href: "/projects/meetcraft",
+    prototypeUrl: "https://meet-craft.vercel.app/",
   },
   {
     question: "What if every handmade product told a story?",
@@ -282,6 +286,9 @@ function HeroStory() {
 }
 
 function FeaturedCard({ p }: { p: FeaturedProject }) {
+  const hasCaseStudy = Boolean(p.href);
+  const hasPrototype = Boolean(p.prototypeUrl);
+
   return (
     <article
       data-reveal
@@ -294,27 +301,57 @@ function FeaturedCard({ p }: { p: FeaturedProject }) {
 
       {/* 2. Editorial photograph */}
       <div className="mt-7 overflow-hidden rounded-[2px] bg-muted md:mt-9">
-        <div className="aspect-[4/5] w-full overflow-hidden">
-          <img
-            src={p.image}
-            alt={p.alt}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-[500ms] ease-in-out group-hover:scale-[1.025]"
-          />
-        </div>
+        {hasCaseStudy ? (
+          <Link to={p.href} className="block">
+            <div className="aspect-[4/5] w-full overflow-hidden">
+              <img
+                src={p.image}
+                alt={p.alt}
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-[500ms] ease-in-out group-hover:scale-[1.025]"
+              />
+            </div>
+          </Link>
+        ) : (
+          <div className="aspect-[4/5] w-full overflow-hidden">
+            <img
+              src={p.image}
+              alt={p.alt}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-[500ms] ease-in-out group-hover:scale-[1.025]"
+            />
+          </div>
+        )}
       </div>
 
       {/* 3. Project name + 4. Editorial tag */}
       <div className="mt-7 md:mt-8">
         <h3 className="font-serif text-[1.1rem] leading-[1.25] tracking-tight text-foreground/90 md:text-[1.2rem]">
-          {p.title}
+          {hasCaseStudy ? <Link to={p.href}>{p.title}</Link> : p.title}
         </h3>
         <p className="card-tag mt-3 text-[10.5px] uppercase tracking-[0.24em] text-muted-foreground transition-colors duration-[400ms] group-hover:text-[color:var(--gold,#C9A227)]">
           {p.tag}
         </p>
-        <p className="reveal-hover mt-5 text-[11.5px] uppercase tracking-[0.22em] text-foreground/80">
-          Read Case Study →
-        </p>
+        {hasCaseStudy && (
+          <div className="mt-5 flex flex-col gap-1.5">
+            <Link
+              to={p.href}
+              className="reveal-hover inline-block text-[11.5px] uppercase tracking-[0.22em] text-foreground/80"
+            >
+              Read Case Study →
+            </Link>
+            {hasPrototype && (
+              <a
+                href={p.prototypeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-[11.5px] font-medium text-[var(--gold)] transition-all duration-200 hover:underline hover:-translate-y-0.5"
+              >
+                🔗 Try the Live Prototype <span aria-hidden className="text-[10px]">↗</span>
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </article>
   );
@@ -337,15 +374,9 @@ function FeaturedProjects() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {featured.map((p) =>
-            p.title === "MeetCraft" ? (
-              <Link key={p.title} to="/projects/meetcraft" className="block h-full">
-                <FeaturedCard p={p} />
-              </Link>
-            ) : (
-              <FeaturedCard key={p.title} p={p} />
-            ),
-          )}
+          {featured.map((p) => (
+            <FeaturedCard key={p.title} p={p} />
+          ))}
         </div>
       </div>
     </section>
