@@ -11,6 +11,7 @@ import ch7Judges from "@/assets/mc-ch7-judges.jpeg.asset.json";
 import ch7Award from "@/assets/mc-ch7-award.jpeg.asset.json";
 import ch7Certificate from "@/assets/mc-ch7-certificate.png.asset.json";
 import meetcraftCoverHero from "@/assets/meetcraft-cover-hero.png.asset.json";
+import meetcraftDemo from "@/assets/meetcraft-demo.mp4.asset.json";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 
@@ -1182,12 +1183,16 @@ function MeetCraftPage() {
               <div className="animate-float-gentle">
                 <div className="relative mx-auto w-[200px] rounded-[30px] border border-border/60 bg-charcoal p-1.5 shadow-[0_24px_64px_-20px_rgba(31,31,31,0.3)] md:w-[240px]">
                   <div className="absolute left-1/2 top-1.5 h-[18px] w-[70px] -translate-x-1/2 rounded-full bg-charcoal" />
-                  <div className="aspect-[9/19] w-full overflow-hidden rounded-[22px] bg-[oklch(0.955_0.012_82)]">
-                    <div className="flex h-full w-full items-center justify-center">
-                      <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                        Product Demo
-                      </span>
-                    </div>
+                  <div className="aspect-[9/19] w-full overflow-hidden rounded-[22px] bg-charcoal">
+                    <video
+                      src={meetcraftDemo.url}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="auto"
+                      className="h-full w-full object-cover"
+                    />
                   </div>
                 </div>
               </div>
