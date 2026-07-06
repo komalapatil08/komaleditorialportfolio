@@ -1221,82 +1221,206 @@ function MeetCraftPage() {
           </div>
 
           {/* Block 3 — How MeetCraft Works */}
-          <div className="pt-8 md:pt-10">
+          <div className="mx-auto w-full max-w-[1080px] pt-3 md:pt-5">
             <div data-reveal className="reveal text-center">
-              <h3 className="font-serif text-2xl leading-[1.1] tracking-tight md:text-[1.75rem]">
+              <h3 className="font-serif text-[1.85rem] leading-[1.1] tracking-tight md:text-[2.15rem]">
                 How MeetCraft Works
               </h3>
             </div>
 
-            <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-4 md:gap-4">
-              {[
-                {
-                  icon: (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
-                      <circle cx="12" cy="12" r="10" />
-                      <circle cx="12" cy="12" r="4" />
-                      <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
-                    </svg>
-                  ),
-                  title: "Define Intent",
-                },
-                {
-                  icon: (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
-                      <circle cx="11" cy="11" r="8" />
-                      <path d="m21 21-4.5-4.5" />
-                    </svg>
-                  ),
-                  title: "Discover Relevant People",
-                },
-                {
-                  icon: (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                      <circle cx="9" cy="7" r="4" />
-                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                    </svg>
-                  ),
-                  title: "Connect at the Event",
-                },
-                {
-                  icon: (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                    </svg>
-                  ),
-                  title: "Build Meaningful Relationships",
-                },
-              ].map((step, i) => (
-                <div key={step.title} data-reveal className="reveal relative flex flex-col items-center text-center" style={{ transitionDelay: `${i * 60}ms` }}>
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-background text-foreground/70">
-                    {step.icon}
+            <div className="mt-7 md:mt-9">
+              {/* Desktop — horizontal workflow */}
+              <div className="hidden md:flex items-start justify-between">
+                {/* Step 1 — Define Intent */}
+                <div data-reveal className="reveal group flex shrink-0 flex-col items-center text-center" style={{ transitionDelay: "0ms" }}>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute -inset-5 rounded-full blur-2xl opacity-30 transition-opacity duration-200 group-hover:opacity-50" style={{ background: "radial-gradient(circle, rgba(200,154,75,0.16), transparent 70%)" }} aria-hidden />
+                    <div className="relative flex h-[88px] w-[88px] items-center justify-center rounded-full border border-[#D8D3CA] transition-all duration-200 group-hover:-translate-y-[2px] group-hover:border-[#A9A39A] group-hover:shadow-[0_8px_24px_-8px_rgba(31,31,31,0.12)]" style={{ background: "rgba(200,154,75,0.13)" }}>
+                      <div className="transition-[filter] duration-200 group-hover:brightness-110" style={{ color: "#C89A4B" }}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-9 w-9">
+                          <circle cx="12" cy="12" r="10" />
+                          <circle cx="12" cy="12" r="4" />
+                          <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
-                  <p className="mt-3 text-[14px] leading-[1.35] text-foreground md:text-[15px]">
-                    {step.title}
+                  <p className="mt-5 max-w-[14ch] text-[1.05rem] font-medium leading-[1.35] text-foreground">
+                    Define Intent
                   </p>
-                  {i < 3 && (
-                    <div className="mt-3 text-muted-foreground md:hidden">
-                      <svg width="14" height="20" viewBox="0 0 16 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path d="M8 4v16M4 16l4 4 4-4" />
-                      </svg>
-                    </div>
-                  )}
-                  {i < 3 && (
-                    <div className="absolute right-[-8px] top-5 hidden text-muted-foreground md:block">
-                      <svg width="16" height="10" viewBox="0 0 20 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path d="M2 6h16M14 2l4 4-4 4" />
-                      </svg>
-                    </div>
-                  )}
                 </div>
-              ))}
+
+                {/* Arrow 1 */}
+                <div data-reveal className="reveal flex flex-1 items-start justify-center pt-[34px]" style={{ transitionDelay: "180ms" }}>
+                  <svg width="44" height="20" viewBox="0 0 44 20" fill="none" className="text-[#7A756C]">
+                    <path d="M0 10H38M34 4L40 10L34 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+
+                {/* Step 2 — Discover Relevant People */}
+                <div data-reveal className="reveal group flex shrink-0 flex-col items-center text-center" style={{ transitionDelay: "360ms" }}>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute -inset-5 rounded-full blur-2xl opacity-30 transition-opacity duration-200 group-hover:opacity-50" style={{ background: "radial-gradient(circle, rgba(127,175,139,0.16), transparent 70%)" }} aria-hidden />
+                    <div className="relative flex h-[88px] w-[88px] items-center justify-center rounded-full border border-[#D8D3CA] transition-all duration-200 group-hover:-translate-y-[2px] group-hover:border-[#A9A39A] group-hover:shadow-[0_8px_24px_-8px_rgba(31,31,31,0.12)]" style={{ background: "rgba(127,175,139,0.13)" }}>
+                      <div className="transition-[filter] duration-200 group-hover:brightness-110" style={{ color: "#7FAF8B" }}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-9 w-9">
+                          <circle cx="11" cy="11" r="8" />
+                          <path d="m21 21-4.5-4.5" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-5 max-w-[18ch] text-[1.05rem] font-medium leading-[1.35] text-foreground">
+                    Discover Relevant People
+                  </p>
+                </div>
+
+                {/* Arrow 2 */}
+                <div data-reveal className="reveal flex flex-1 items-start justify-center pt-[34px]" style={{ transitionDelay: "540ms" }}>
+                  <svg width="44" height="20" viewBox="0 0 44 20" fill="none" className="text-[#7A756C]">
+                    <path d="M0 10H38M34 4L40 10L34 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+
+                {/* Step 3 — Connect at the Event */}
+                <div data-reveal className="reveal group flex shrink-0 flex-col items-center text-center" style={{ transitionDelay: "720ms" }}>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute -inset-5 rounded-full blur-2xl opacity-30 transition-opacity duration-200 group-hover:opacity-50" style={{ background: "radial-gradient(circle, rgba(126,152,200,0.16), transparent 70%)" }} aria-hidden />
+                    <div className="relative flex h-[88px] w-[88px] items-center justify-center rounded-full border border-[#D8D3CA] transition-all duration-200 group-hover:-translate-y-[2px] group-hover:border-[#A9A39A] group-hover:shadow-[0_8px_24px_-8px_rgba(31,31,31,0.12)]" style={{ background: "rgba(126,152,200,0.13)" }}>
+                      <div className="transition-[filter] duration-200 group-hover:brightness-110" style={{ color: "#7E98C8" }}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-9 w-9">
+                          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                          <circle cx="9" cy="7" r="4" />
+                          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-5 max-w-[16ch] text-[1.05rem] font-medium leading-[1.35] text-foreground">
+                    Connect at the Event
+                  </p>
+                </div>
+
+                {/* Arrow 3 */}
+                <div data-reveal className="reveal flex flex-1 items-start justify-center pt-[34px]" style={{ transitionDelay: "900ms" }}>
+                  <svg width="44" height="20" viewBox="0 0 44 20" fill="none" className="text-[#7A756C]">
+                    <path d="M0 10H38M34 4L40 10L34 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+
+                {/* Step 4 — Build Meaningful Relationships */}
+                <div data-reveal className="reveal group flex shrink-0 flex-col items-center text-center" style={{ transitionDelay: "1080ms" }}>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute -inset-5 rounded-full blur-2xl opacity-30 transition-opacity duration-200 group-hover:opacity-50" style={{ background: "radial-gradient(circle, rgba(201,138,115,0.16), transparent 70%)" }} aria-hidden />
+                    <div className="relative flex h-[88px] w-[88px] items-center justify-center rounded-full border border-[#D8D3CA] transition-all duration-200 group-hover:-translate-y-[2px] group-hover:border-[#A9A39A] group-hover:shadow-[0_8px_24px_-8px_rgba(31,31,31,0.12)]" style={{ background: "rgba(201,138,115,0.13)" }}>
+                      <div className="transition-[filter] duration-200 group-hover:brightness-110" style={{ color: "#C98A73" }}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-9 w-9">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-5 max-w-[20ch] text-[1.05rem] font-medium leading-[1.35] text-foreground">
+                    Build Meaningful Relationships
+                  </p>
+                </div>
+              </div>
+
+              {/* Mobile — vertical workflow */}
+              <div className="flex md:hidden flex-col items-center gap-2">
+                {/* Step 1 */}
+                <div data-reveal className="reveal group flex flex-col items-center text-center" style={{ transitionDelay: "0ms" }}>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute -inset-5 rounded-full blur-2xl opacity-30 transition-opacity duration-200 group-hover:opacity-50" style={{ background: "radial-gradient(circle, rgba(200,154,75,0.16), transparent 70%)" }} aria-hidden />
+                    <div className="relative flex h-[88px] w-[88px] items-center justify-center rounded-full border border-[#D8D3CA] transition-all duration-200 group-hover:-translate-y-[2px] group-hover:border-[#A9A39A] group-hover:shadow-[0_8px_24px_-8px_rgba(31,31,31,0.12)]" style={{ background: "rgba(200,154,75,0.13)" }}>
+                      <div className="transition-[filter] duration-200 group-hover:brightness-110" style={{ color: "#C89A4B" }}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-9 w-9">
+                          <circle cx="12" cy="12" r="10" />
+                          <circle cx="12" cy="12" r="4" />
+                          <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-5 text-[1.05rem] font-medium leading-[1.35] text-foreground">Define Intent</p>
+                </div>
+
+                {/* Arrow 1 */}
+                <div data-reveal className="reveal flex justify-center py-3" style={{ transitionDelay: "180ms" }}>
+                  <svg width="20" height="32" viewBox="0 0 20 32" fill="none" className="text-[#7A756C]">
+                    <path d="M10 4V26M4 20L10 26L16 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+
+                {/* Step 2 */}
+                <div data-reveal className="reveal group flex flex-col items-center text-center" style={{ transitionDelay: "360ms" }}>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute -inset-5 rounded-full blur-2xl opacity-30 transition-opacity duration-200 group-hover:opacity-50" style={{ background: "radial-gradient(circle, rgba(127,175,139,0.16), transparent 70%)" }} aria-hidden />
+                    <div className="relative flex h-[88px] w-[88px] items-center justify-center rounded-full border border-[#D8D3CA] transition-all duration-200 group-hover:-translate-y-[2px] group-hover:border-[#A9A39A] group-hover:shadow-[0_8px_24px_-8px_rgba(31,31,31,0.12)]" style={{ background: "rgba(127,175,139,0.13)" }}>
+                      <div className="transition-[filter] duration-200 group-hover:brightness-110" style={{ color: "#7FAF8B" }}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-9 w-9">
+                          <circle cx="11" cy="11" r="8" />
+                          <path d="m21 21-4.5-4.5" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-5 text-[1.05rem] font-medium leading-[1.35] text-foreground">Discover Relevant People</p>
+                </div>
+
+                {/* Arrow 2 */}
+                <div data-reveal className="reveal flex justify-center py-3" style={{ transitionDelay: "540ms" }}>
+                  <svg width="20" height="32" viewBox="0 0 20 32" fill="none" className="text-[#7A756C]">
+                    <path d="M10 4V26M4 20L10 26L16 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+
+                {/* Step 3 */}
+                <div data-reveal className="reveal group flex flex-col items-center text-center" style={{ transitionDelay: "720ms" }}>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute -inset-5 rounded-full blur-2xl opacity-30 transition-opacity duration-200 group-hover:opacity-50" style={{ background: "radial-gradient(circle, rgba(126,152,200,0.16), transparent 70%)" }} aria-hidden />
+                    <div className="relative flex h-[88px] w-[88px] items-center justify-center rounded-full border border-[#D8D3CA] transition-all duration-200 group-hover:-translate-y-[2px] group-hover:border-[#A9A39A] group-hover:shadow-[0_8px_24px_-8px_rgba(31,31,31,0.12)]" style={{ background: "rgba(126,152,200,0.13)" }}>
+                      <div className="transition-[filter] duration-200 group-hover:brightness-110" style={{ color: "#7E98C8" }}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-9 w-9">
+                          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                          <circle cx="9" cy="7" r="4" />
+                          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-5 text-[1.05rem] font-medium leading-[1.35] text-foreground">Connect at the Event</p>
+                </div>
+
+                {/* Arrow 3 */}
+                <div data-reveal className="reveal flex justify-center py-3" style={{ transitionDelay: "900ms" }}>
+                  <svg width="20" height="32" viewBox="0 0 20 32" fill="none" className="text-[#7A756C]">
+                    <path d="M10 4V26M4 20L10 26L16 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+
+                {/* Step 4 */}
+                <div data-reveal className="reveal group flex flex-col items-center text-center" style={{ transitionDelay: "1080ms" }}>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute -inset-5 rounded-full blur-2xl opacity-30 transition-opacity duration-200 group-hover:opacity-50" style={{ background: "radial-gradient(circle, rgba(201,138,115,0.16), transparent 70%)" }} aria-hidden />
+                    <div className="relative flex h-[88px] w-[88px] items-center justify-center rounded-full border border-[#D8D3CA] transition-all duration-200 group-hover:-translate-y-[2px] group-hover:border-[#A9A39A] group-hover:shadow-[0_8px_24px_-8px_rgba(31,31,31,0.12)]" style={{ background: "rgba(201,138,115,0.13)" }}>
+                      <div className="transition-[filter] duration-200 group-hover:brightness-110" style={{ color: "#C98A73" }}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-9 w-9">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-5 text-[1.05rem] font-medium leading-[1.35] text-foreground">Build Meaningful Relationships</p>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Transition */}
-          <div className="pb-12 pt-10 text-center md:pb-16 md:pt-12">
+          <div className="pb-8 pt-6 text-center md:pb-10 md:pt-8">
             <div data-reveal className="reveal">
               <div className="flex justify-center">
                 <svg
