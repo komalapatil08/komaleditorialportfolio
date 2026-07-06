@@ -13,6 +13,7 @@ type Certification = {
   organization: string;
   year: string;
   category: string;
+  emoji: string;
   file: string;
   type: "pdf" | "image";
 };
@@ -23,6 +24,7 @@ const certifications: Certification[] = [
     organization: "Institute of Product Leadership",
     year: "2025",
     category: "Product Management",
+    emoji: "🚀",
     file: certPM.url,
     type: "pdf",
   },
@@ -31,6 +33,7 @@ const certifications: Certification[] = [
     organization: "Institute of Product Leadership",
     year: "2025",
     category: "Product Marketing",
+    emoji: "📣",
     file: certPMkt.url,
     type: "pdf",
   },
@@ -39,6 +42,7 @@ const certifications: Certification[] = [
     organization: "Institute of Product Leadership",
     year: "2025",
     category: "Strategy",
+    emoji: "🎯",
     file: certVPD.url,
     type: "pdf",
   },
@@ -47,6 +51,7 @@ const certifications: Certification[] = [
     organization: "Institute of Product Leadership",
     year: "2025",
     category: "Innovation",
+    emoji: "💡",
     file: certInnov.url,
     type: "pdf",
   },
@@ -55,6 +60,7 @@ const certifications: Certification[] = [
     organization: "Institute of Product Leadership",
     year: "2025",
     category: "Design Thinking",
+    emoji: "🎨",
     file: certCC.url,
     type: "pdf",
   },
@@ -63,6 +69,7 @@ const certifications: Certification[] = [
     organization: "Institute of Product Leadership",
     year: "2025",
     category: "Presentation",
+    emoji: "📖",
     file: certStory.url,
     type: "pdf",
   },
