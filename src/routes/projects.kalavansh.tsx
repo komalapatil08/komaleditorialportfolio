@@ -2,11 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, useCallback } from "react";
 
 import meenakariImg from "@/assets/kv-product-meenakari.jpg.asset.json";
-import sareeImg from "@/assets/kv-product-saree.jpg.asset.json";
-import chikankariImg from "@/assets/kv-product-chikankari.jpg.asset.json";
 import painterImg from "@/assets/kv-artisan-painter.jpg.asset.json";
-import weaverImg from "@/assets/kv-artisan-weaver.jpg.asset.json";
-import embroideryImg from "@/assets/kv-artisan-embroidery.jpg.asset.json";
 
 export const Route = createFileRoute("/projects/kalavansh")({
   component: KalaVanshPage,
@@ -30,35 +26,10 @@ export const Route = createFileRoute("/projects/kalavansh")({
   }),
 });
 
-const PRODUCTS = [
-  {
-    product: meenakariImg.url,
-    productAlt: "A hand-painted Meenakari glass vessel on a museum pedestal",
-    artisan: painterImg.url,
-    artisanAlt: "A Meenakari glass painter at work",
-    label: "Meenakari",
-  },
-  {
-    product: sareeImg.url,
-    productAlt: "A folded silk Banarasi saree on a museum pedestal",
-    artisan: weaverImg.url,
-    artisanAlt: "A weaver at a traditional handloom",
-    label: "Banarasi Silk",
-  },
-  {
-    product: chikankariImg.url,
-    productAlt: "A white Chikankari kurti on a wooden hanger",
-    artisan: embroideryImg.url,
-    artisanAlt: "A Chikankari embroidery artisan at work",
-    label: "Chikankari",
-  },
-];
-
 function KalaVanshPage() {
-  // 0 = curtain fully closed, 1 = fully open (from center outward)
+  // 0 = muslin fully covering, 1 = fully drawn aside (to the right)
   const [openness, setOpenness] = useState(0);
   const [dragging, setDragging] = useState(false);
-  const [tooltipVisible, setTooltipVisible] = useState(false);
   const [breezePlayed, setBreezePlayed] = useState(false);
   const [revealed, setRevealed] = useState(false);
   const [showHeadline, setShowHeadline] = useState(false);
@@ -66,47 +37,45 @@ function KalaVanshPage() {
   const [showScroll, setShowScroll] = useState(false);
 
   const stageRef = useRef<HTMLDivElement>(null);
-  const dragStart = useRef<{ x: number; openness: number } | null>(null);
+  const dragStart = useRef<{ x: number; openness: number; velocity: number; time: number } | null>(null);
+  const lastMove = useRef<{ x: number; time: number } | null>(null);
   const breezeOffset = useRef(0);
-  const [breezeTick, setBreezeTick] = useState(0);
+  const inertia = useRef<number | null>(null);
+  const [, forceTick] = useState(0);
 
-  // Breeze after ~2s of inactivity
+  // Gentle one-time breeze after ~2s
   useEffect(() => {
-    if (breezePlayed || openness > 0.02) return;
+    if (breezePlayed) return;
     const t = setTimeout(() => {
       setBreezePlayed(true);
-      // animate a small breeze: brief open to 0.08 then settle
       const start = performance.now();
-      const duration = 2600;
-      const peak = 0.09;
+      const duration = 1100;
+      const peak = 0.11;
       let raf = 0;
       const step = (now: number) => {
-        const t = Math.min(1, (now - start) / duration);
-        // ease: rise then fall
-        const wave = Math.sin(t * Math.PI);
+        const p = Math.min(1, (now - start) / duration);
+        const wave = Math.sin(p * Math.PI); // 0 → 1 → 0
         breezeOffset.current = wave * peak;
-        setBreezeTick((n) => n + 1);
-        if (t < 1) {
-          raf = requestAnimationFrame(step);
-        } else {
+        forceTick((n) => n + 1);
+        if (p < 1) raf = requestAnimationFrame(step);
+        else {
           breezeOffset.current = 0;
-          setBreezeTick((n) => n + 1);
-          setTooltipVisible(true);
+          forceTick((n) => n + 1);
         }
       };
       raf = requestAnimationFrame(step);
       return () => cancelAnimationFrame(raf);
     }, 2000);
     return () => clearTimeout(t);
-  }, [breezePlayed, openness]);
+  }, [breezePlayed]);
 
-  // Once revealed >= 0.92, run the final choreography
+  // Final choreography when fully open
   useEffect(() => {
-    if (revealed || openness < 0.92) return;
+    if (revealed || openness < 0.94) return;
     setRevealed(true);
-    const t1 = setTimeout(() => setShowHeadline(true), 900);
-    const t2 = setTimeout(() => setShowSub(true), 2200);
-    const t3 = setTimeout(() => setShowScroll(true), 3300);
+    const t1 = setTimeout(() => setShowHeadline(true), 1000);
+    const t2 = setTimeout(() => setShowSub(true), 2400);
+    const t3 = setTimeout(() => setShowScroll(true), 3600);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -116,12 +85,15 @@ function KalaVanshPage() {
 
   const onPointerDown = useCallback(
     (e: React.PointerEvent) => {
-      setTooltipVisible(false);
+      if (revealed) return;
+      if (inertia.current) cancelAnimationFrame(inertia.current);
       setDragging(true);
-      dragStart.current = { x: e.clientX, openness };
+      const now = performance.now();
+      dragStart.current = { x: e.clientX, openness, velocity: 0, time: now };
+      lastMove.current = { x: e.clientX, time: now };
       (e.target as Element).setPointerCapture?.(e.pointerId);
     },
-    [openness],
+    [openness, revealed],
   );
 
   const onPointerMove = useCallback(
@@ -129,144 +101,267 @@ function KalaVanshPage() {
       if (!dragging || !dragStart.current || !stageRef.current) return;
       const width = stageRef.current.clientWidth;
       const dx = e.clientX - dragStart.current.x;
-      // Full open at ~40% of stage width dragged from center
-      const delta = (Math.abs(dx) / (width * 0.4));
+      // Only rightward drag reveals; allow either direction, use magnitude
+      const delta = Math.abs(dx) / (width * 0.5);
       const next = Math.max(0, Math.min(1, dragStart.current.openness + delta));
+      const now = performance.now();
+      if (lastMove.current) {
+        const dt = Math.max(1, now - lastMove.current.time);
+        dragStart.current.velocity = (e.clientX - lastMove.current.x) / dt; // px/ms
+      }
+      lastMove.current = { x: e.clientX, time: now };
       setOpenness(next);
     },
     [dragging],
   );
 
   const onPointerUp = useCallback(() => {
+    if (!dragging) return;
     setDragging(false);
+    const v = dragStart.current?.velocity ?? 0;
     dragStart.current = null;
-    // Snap open if past threshold, snap closed if very early
-    setOpenness((v) => {
-      if (v > 0.55) return 1;
-      if (v < 0.06) return 0;
-      return v;
-    });
-  }, []);
+    lastMove.current = null;
+
+    // Natural inertia — no bounce, no snap back once past threshold
+    const width = stageRef.current?.clientWidth ?? 1000;
+    let velocity = Math.abs(v) / (width * 0.5) * 16; // per frame at 60fps
+    const friction = 0.94;
+    const tick = () => {
+      velocity *= friction;
+      setOpenness((cur) => {
+        const next = Math.min(1, cur + velocity);
+        if (next >= 1) {
+          inertia.current = null;
+          return 1;
+        }
+        if (velocity < 0.0008) {
+          // If we're already past commit point, glide to fully open
+          if (cur > 0.42) {
+            inertia.current = requestAnimationFrame(() => {
+              setOpenness((c) => Math.min(1, c + 0.012));
+              if (openness < 1) inertia.current = requestAnimationFrame(tick);
+            });
+          }
+          inertia.current = null;
+          return next;
+        }
+        inertia.current = requestAnimationFrame(tick);
+        return next;
+      });
+    };
+    inertia.current = requestAnimationFrame(tick);
+  }, [dragging, openness]);
 
   const effectiveOpen = Math.max(0, Math.min(1, openness + breezeOffset.current));
-  // Each panel translates outward by (effectiveOpen * 55%)
-  const panelShift = effectiveOpen * 55;
-  const transition = dragging ? "none" : "transform 1600ms cubic-bezier(0.22, 1, 0.36, 1)";
+  // Muslin slides to the right; slight rise + skew for cloth feel
+  const muslinShift = effectiveOpen * 108; // % of muslin width
+  const muslinSkew = (1 - Math.min(1, effectiveOpen * 2)) * -1.5; // subtle
+  const muslinLift = effectiveOpen * -6; // small vertical rise (px)
 
   return (
     <main
       className="relative w-full overflow-hidden"
       style={{ backgroundColor: "#F8F5EF", color: "var(--charcoal)" }}
     >
-      {/* Opening viewport */}
       <section
         className="relative w-full"
-        style={{ height: "100vh", minHeight: "640px" }}
+        style={{ height: "100vh", minHeight: "680px" }}
         aria-label="KalaVansh opening exhibition"
       >
-        {/* Ambient museum vignette */}
+        {/* Ambient museum lighting */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(120% 80% at 50% 40%, rgba(255,247,232,0.55) 0%, rgba(248,245,239,0) 55%), radial-gradient(80% 60% at 50% 100%, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 60%)",
+              "radial-gradient(70% 55% at 50% 38%, rgba(255,247,232,0.75) 0%, rgba(248,245,239,0) 60%), radial-gradient(90% 40% at 50% 100%, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 65%)",
           }}
         />
 
-        {/* Stage */}
         <div
           ref={stageRef}
-          className="relative mx-auto flex h-full w-full max-w-[1400px] items-center justify-center px-6"
+          className="relative mx-auto flex h-full w-full max-w-[1200px] flex-col items-center justify-center px-6"
         >
-          {/* Pedestals + Products + Artisans behind */}
-          <div className="relative z-10 flex w-full items-end justify-center gap-6 sm:gap-10 md:gap-16 lg:gap-24">
-            {PRODUCTS.map((p, i) => (
-              <Pedestal
-                key={i}
-                product={p.product}
-                productAlt={p.productAlt}
-                artisan={p.artisan}
-                artisanAlt={p.artisanAlt}
-                label={p.label}
-                revealed={effectiveOpen}
-              />
-            ))}
-          </div>
-
-          {/* Curtain — sits above products, split from center */}
+          {/* Installation */}
           <div
-            aria-hidden={revealed}
-            className="absolute inset-0 z-20 select-none"
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerUp}
-            onPointerCancel={onPointerUp}
-            style={{
-              cursor: dragging ? "grabbing" : effectiveOpen < 0.98 ? "grab" : "default",
-              touchAction: "none",
-            }}
+            className="relative flex items-end justify-center"
+            style={{ width: "min(560px, 78vw)", height: "min(560px, 62vh)" }}
           >
-            <CurtainPanel side="left" shift={panelShift} transition={transition} />
-            <CurtainPanel side="right" shift={panelShift} transition={transition} />
-
-            {/* Tooltip */}
+            {/* Artisan (behind, hidden by muslin) */}
             <div
-              className="pointer-events-none absolute left-1/2 top-[58%] -translate-x-1/2 text-center"
+              className="absolute left-1/2 top-0 -translate-x-1/2 overflow-hidden"
               style={{
-                opacity: tooltipVisible && effectiveOpen < 0.15 ? 1 : 0,
-                transition: "opacity 900ms ease",
+                width: "min(440px, 68vw)",
+                height: "min(500px, 58vh)",
+                borderRadius: "2px",
+                filter: "saturate(0.92) contrast(0.98)",
+                boxShadow: "0 30px 60px -40px rgba(31,31,31,0.35)",
+                opacity: Math.min(1, Math.max(0, (effectiveOpen - 0.08) / 0.65)),
+                transition: "opacity 700ms ease",
               }}
             >
-              <p
-                className="font-serif text-[15px] tracking-wide"
-                style={{ color: "rgba(31,31,31,0.55)", fontStyle: "italic" }}
+              <img
+                src={painterImg.url}
+                alt="A Meenakari artisan painting a vase by hand"
+                className="h-full w-full object-cover"
+                width={1024}
+                height={1024}
+              />
+            </div>
+
+            {/* Muslin — single hanging panel */}
+            <div
+              className="absolute left-1/2 top-0 z-10 -translate-x-1/2 select-none"
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={onPointerUp}
+              onPointerCancel={onPointerUp}
+              style={{
+                width: "min(520px, 76vw)",
+                height: "min(560px, 62vh)",
+                cursor: revealed ? "default" : dragging ? "grabbing" : "grab",
+                touchAction: "none",
+                transform: `translate(calc(-50% + ${muslinShift}%), ${muslinLift}px) skewX(${muslinSkew}deg)`,
+                transformOrigin: "top left",
+                transition: dragging
+                  ? "none"
+                  : "transform 1400ms cubic-bezier(0.22, 1, 0.36, 1)",
+                willChange: "transform",
+                pointerEvents: revealed ? "none" : "auto",
+              }}
+              aria-label="Handwoven muslin covering the artisan. Drag to reveal."
+              role="button"
+              tabIndex={0}
+            >
+              <Muslin />
+            </div>
+
+            {/* Pedestal */}
+            <div
+              className="relative z-20 flex flex-col items-center"
+              style={{ marginBottom: "0" }}
+            >
+              {/* Vase */}
+              <div
+                className="relative flex items-end justify-center"
+                style={{
+                  width: "min(220px, 34vw)",
+                  height: "min(300px, 40vh)",
+                }}
               >
-                Pull gently&nbsp;→
-              </p>
+                <img
+                  src={meenakariImg.url}
+                  alt="Hand-painted Meenakari vase on a museum pedestal"
+                  className="max-h-full max-w-full object-contain"
+                  style={{
+                    filter: "drop-shadow(0 28px 22px rgba(31,31,31,0.22))",
+                  }}
+                  width={1024}
+                  height={1024}
+                />
+              </div>
+              {/* Pedestal block */}
+              <div
+                style={{
+                  width: "min(240px, 38vw)",
+                  height: "min(84px, 11vh)",
+                  background:
+                    "linear-gradient(180deg, #F1ECE1 0%, #E6DFD0 60%, #DAD0BC 100%)",
+                  boxShadow:
+                    "inset 0 1px 0 rgba(255,255,255,0.7), 0 22px 34px -22px rgba(31,31,31,0.35)",
+                }}
+              />
+              {/* Museum floor shadow */}
+              <div
+                aria-hidden
+                className="mt-1"
+                style={{
+                  width: "min(300px, 46vw)",
+                  height: "18px",
+                  background:
+                    "radial-gradient(50% 100% at 50% 0%, rgba(31,31,31,0.18) 0%, rgba(31,31,31,0) 70%)",
+                }}
+              />
             </div>
           </div>
 
-          {/* Final headline */}
-          <div className="pointer-events-none absolute inset-0 z-30 flex flex-col items-center justify-center px-6 text-center">
-            <h1
-              className="font-editorial text-[clamp(2.4rem,6vw,5.25rem)] leading-[1.02] tracking-[-0.01em]"
+          {/* Museum guidance */}
+          <div
+            className="pointer-events-none mt-10 flex flex-col items-center text-center"
+            style={{
+              opacity: revealed ? 0 : 1,
+              transition: "opacity 900ms ease",
+            }}
+          >
+            <p
+              className="font-editorial"
               style={{
+                fontSize: "clamp(1.75rem, 2.8vw, 2.5rem)",
+                lineHeight: 1.1,
+                letterSpacing: "-0.01em",
+                color: "var(--charcoal)",
+              }}
+            >
+              Discover the maker
+            </p>
+            <p
+              className="mt-3 font-serif"
+              style={{
+                fontSize: "clamp(0.9rem, 1.05vw, 1rem)",
+                color: "rgba(31,31,31,0.5)",
+                fontStyle: "italic",
+                letterSpacing: "0.02em",
+              }}
+            >
+              Drag the fabric to reveal the story
+            </p>
+          </div>
+
+          {/* Final editorial reveal */}
+          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+            <h1
+              className="font-editorial"
+              style={{
+                fontSize: "clamp(2.25rem, 5.5vw, 4.75rem)",
+                lineHeight: 1.04,
+                letterSpacing: "-0.012em",
                 opacity: showHeadline ? 1 : 0,
                 transform: showHeadline ? "translateY(0)" : "translateY(14px)",
                 transition:
-                  "opacity 1400ms cubic-bezier(0.22,1,0.36,1), transform 1400ms cubic-bezier(0.22,1,0.36,1)",
+                  "opacity 1500ms cubic-bezier(0.22,1,0.36,1), transform 1500ms cubic-bezier(0.22,1,0.36,1)",
                 color: "var(--charcoal)",
-                textShadow: "0 1px 0 rgba(255,255,255,0.6)",
+                textShadow: "0 1px 0 rgba(255,255,255,0.55)",
+                maxWidth: "18ch",
               }}
             >
               Every masterpiece has a maker.
             </h1>
             <p
-              className="mt-6 font-serif text-[clamp(1.05rem,1.6vw,1.375rem)]"
+              className="mt-6 font-serif"
               style={{
+                fontSize: "clamp(1rem, 1.5vw, 1.3rem)",
                 opacity: showSub ? 1 : 0,
                 transform: showSub ? "translateY(0)" : "translateY(10px)",
                 transition:
-                  "opacity 1200ms cubic-bezier(0.22,1,0.36,1) 120ms, transform 1200ms cubic-bezier(0.22,1,0.36,1) 120ms",
-                color: "rgba(31,31,31,0.62)",
+                  "opacity 1200ms cubic-bezier(0.22,1,0.36,1) 140ms, transform 1200ms cubic-bezier(0.22,1,0.36,1) 140ms",
+                color: "rgba(31,31,31,0.6)",
                 fontStyle: "italic",
               }}
             >
-              Yet we rarely meet them.
+              Yet most of us only meet the masterpiece.
             </p>
           </div>
 
           {/* Scroll indicator */}
           <div
-            className="pointer-events-none absolute bottom-8 left-1/2 z-30 -translate-x-1/2 flex flex-col items-center gap-2"
+            className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
             style={{
               opacity: showScroll ? 1 : 0,
               transition: "opacity 1200ms ease",
             }}
           >
             <span
-              className="font-serif text-[11px] uppercase tracking-[0.28em]"
+              className="font-serif text-[11px] uppercase tracking-[0.3em]"
               style={{ color: "rgba(31,31,31,0.4)" }}
             >
               Scroll
@@ -279,164 +374,69 @@ function KalaVanshPage() {
           </div>
         </div>
       </section>
-      {/* Rest of the case study will be built in following prompts. */}
-      {/* referenced to avoid unused warning */}
-      <span hidden aria-hidden>{breezeTick}</span>
     </main>
   );
 }
 
-function Pedestal({
-  product,
-  productAlt,
-  artisan,
-  artisanAlt,
-  label,
-  revealed,
-}: {
-  product: string;
-  productAlt: string;
-  artisan: string;
-  artisanAlt: string;
-  label: string;
-  revealed: number;
-}) {
-  // Artisan opacity ramps in as the curtain opens past ~15%
-  const artisanOpacity = Math.max(0, Math.min(1, (revealed - 0.12) / 0.7));
+function Muslin() {
   return (
-    <div className="relative flex flex-col items-center" style={{ width: "min(28vw, 320px)" }}>
-      {/* Artisan (behind) */}
+    <div className="relative h-full w-full">
+      {/* Base fabric — soft off-white, semi-transparent */}
       <div
-        className="absolute left-1/2 top-0 -translate-x-1/2 overflow-hidden"
-        style={{
-          width: "min(24vw, 280px)",
-          height: "min(34vw, 380px)",
-          opacity: artisanOpacity * 0.9,
-          transition: "opacity 900ms ease",
-          filter: "saturate(0.9) contrast(0.98)",
-          borderRadius: "2px",
-          boxShadow: "0 20px 40px -30px rgba(0,0,0,0.35)",
-        }}
-      >
-        <img
-          src={artisan}
-          alt={artisanAlt}
-          className="h-full w-full object-cover"
-          loading="lazy"
-          width={1024}
-          height={1024}
-        />
-      </div>
-
-      {/* Product */}
-      <div
-        className="relative z-10 flex items-end justify-center"
-        style={{
-          width: "min(22vw, 240px)",
-          height: "min(30vw, 320px)",
-          marginTop: "min(4vw, 40px)",
-        }}
-      >
-        <img
-          src={product}
-          alt={productAlt}
-          className="max-h-full max-w-full object-contain"
-          style={{
-            filter: "drop-shadow(0 30px 22px rgba(31,31,31,0.18))",
-          }}
-          loading="eager"
-          width={1024}
-          height={1024}
-        />
-      </div>
-
-      {/* Pedestal */}
-      <div className="relative z-10 mt-2 flex flex-col items-center" style={{ width: "100%" }}>
-        <div
-          style={{
-            width: "min(18vw, 200px)",
-            height: "min(9vw, 90px)",
-            background:
-              "linear-gradient(180deg, #EFEAE0 0%, #E4DDD0 60%, #D9D0BE 100%)",
-            boxShadow:
-              "inset 0 1px 0 rgba(255,255,255,0.7), 0 18px 30px -22px rgba(31,31,31,0.35)",
-          }}
-        />
-        <div
-          className="mt-3 font-serif text-[11px] uppercase tracking-[0.32em]"
-          style={{ color: "rgba(31,31,31,0.45)" }}
-        >
-          {label}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CurtainPanel({
-  side,
-  shift,
-  transition,
-}: {
-  side: "left" | "right";
-  shift: number; // percentage
-  transition: string;
-}) {
-  const isLeft = side === "left";
-  return (
-    <div
-      className="absolute top-0 h-full"
-      style={{
-        left: isLeft ? 0 : "50%",
-        width: "50%",
-        transform: `translateX(${isLeft ? -shift : shift}%)`,
-        transition,
-        willChange: "transform",
-      }}
-    >
-      {/* Linen fabric with vertical folds */}
-      <div
-        className="relative h-full w-full"
+        className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, #E9DFC9 0%, #E2D6BC 50%, #D8C9AA 100%)",
-          boxShadow: isLeft
-            ? "inset -30px 0 40px -20px rgba(31,31,31,0.18)"
-            : "inset 30px 0 40px -20px rgba(31,31,31,0.18)",
+            "linear-gradient(180deg, rgba(250,246,236,0.94) 0%, rgba(244,238,224,0.92) 55%, rgba(236,228,210,0.9) 100%)",
+          boxShadow:
+            "inset 0 -30px 60px -30px rgba(31,31,31,0.18), inset 0 4px 0 rgba(255,255,255,0.6)",
         }}
-      >
-        {/* Vertical folds */}
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(90deg, rgba(31,31,31,0.06) 0px, rgba(31,31,31,0.06) 1px, rgba(255,255,255,0.03) 1px, rgba(255,255,255,0.03) 46px, rgba(31,31,31,0.10) 47px, rgba(31,31,31,0.10) 48px, rgba(255,255,255,0.02) 48px, rgba(255,255,255,0.02) 92px)",
-            mixBlendMode: "multiply",
-          }}
-        />
-        {/* Linen weave noise */}
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.35]"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(0deg, rgba(31,31,31,0.05) 0px, rgba(31,31,31,0.05) 1px, transparent 1px, transparent 3px), repeating-linear-gradient(90deg, rgba(31,31,31,0.04) 0px, rgba(31,31,31,0.04) 1px, transparent 1px, transparent 3px)",
-          }}
-        />
-        {/* Inner edge accent */}
-        <div
-          aria-hidden
-          className="absolute top-0 h-full"
-          style={{
-            [isLeft ? "right" : "left"]: 0,
-            width: "12px",
-            background: isLeft
-              ? "linear-gradient(90deg, rgba(31,31,31,0) 0%, rgba(31,31,31,0.22) 100%)"
-              : "linear-gradient(270deg, rgba(31,31,31,0) 0%, rgba(31,31,31,0.22) 100%)",
-          } as React.CSSProperties}
-        />
-      </div>
+      />
+      {/* Natural folds */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(92deg, rgba(31,31,31,0.055) 0px, rgba(31,31,31,0.055) 1px, rgba(255,255,255,0.02) 1px, rgba(255,255,255,0.02) 34px, rgba(31,31,31,0.09) 35px, rgba(31,31,31,0.09) 36px, rgba(255,255,255,0.015) 36px, rgba(255,255,255,0.015) 72px)",
+          mixBlendMode: "multiply",
+          opacity: 0.8,
+        }}
+      />
+      {/* Fine linen weave */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-40"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, rgba(31,31,31,0.04) 0px, rgba(31,31,31,0.04) 1px, transparent 1px, transparent 3px), repeating-linear-gradient(90deg, rgba(31,31,31,0.035) 0px, rgba(31,31,31,0.035) 1px, transparent 1px, transparent 3px)",
+        }}
+      />
+      {/* Top hem / hanging line */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-[3px]"
+        style={{ background: "rgba(31,31,31,0.22)" }}
+      />
+      {/* Natural bottom edge (irregular) */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-3"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(31,31,31,0) 0%, rgba(31,31,31,0.12) 100%)",
+          maskImage:
+            "radial-gradient(6px 6px at 8% 0, transparent 99%, black 100%), radial-gradient(6px 6px at 22% 0, transparent 99%, black 100%), linear-gradient(black,black)",
+        }}
+      />
+      {/* Right edge shadow for depth when drawn aside */}
+      <div
+        aria-hidden
+        className="absolute right-0 top-0 h-full w-3"
+        style={{
+          background:
+            "linear-gradient(270deg, rgba(31,31,31,0.25) 0%, rgba(31,31,31,0) 100%)",
+        }}
+      />
     </div>
   );
 }
