@@ -11,6 +11,7 @@ import ch7Judges from "@/assets/mc-ch7-judges.jpeg.asset.json";
 import ch7Award from "@/assets/mc-ch7-award.jpeg.asset.json";
 import ch7Certificate from "@/assets/mc-ch7-certificate.png.asset.json";
 import meetcraftCoverHero from "@/assets/meetcraft-cover-hero.png.asset.json";
+import meetcraftDemo from "@/assets/meetcraft-demo.mp4.asset.json";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 
