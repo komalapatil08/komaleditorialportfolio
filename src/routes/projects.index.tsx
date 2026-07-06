@@ -55,6 +55,14 @@ const projects: Project[] = [
     tag: "Digital Transformation • Guest Experience",
     description: "What does personalized luxury actually look like?",
   },
+  {
+    title: "KalaVansh",
+    status: "Coming Soon",
+    image: kalavanshImg,
+    alt: "Hands of an Indian artisan painting intricate Meenakari work on a brass vessel",
+    tag: "Craft • Storytelling • Product Thinking",
+    description: "What if the maker mattered more than the object?",
+  },
   { title: "Rebuilding Notion's Growth Strategy", status: "Coming Soon" },
   {
     title: "Customer Segmentation using K-Means Clustering",
