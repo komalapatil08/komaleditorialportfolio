@@ -18,8 +18,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Komal Patil — Portfolio" },
       {
         property: "og:description",
-        content:
-          "An editorial portfolio. A few questions worth building, and the work that came from them.",
+        content: "An editorial portfolio. A few questions worth building, and the work that came from them.",
       },
       { property: "og:type", content: "website" },
     ],
@@ -99,22 +98,13 @@ function Nav() {
           Komal Patil
         </a>
         <nav className="flex items-center gap-7 md:gap-10">
-          <Link
-            to="/projects"
-            className="story-link text-[13px] tracking-wide text-foreground/80"
-          >
+          <Link to="/projects" className="story-link text-[13px] tracking-wide text-foreground/80">
             All Projects
           </Link>
-          <a
-            href="#achievements"
-            className="story-link text-[13px] tracking-wide text-foreground/80"
-          >
+          <a href="#achievements" className="story-link text-[13px] tracking-wide text-foreground/80">
             Achievements
           </a>
-          <a
-            href="#connect"
-            className="story-link text-[13px] tracking-wide text-foreground/80"
-          >
+          <a href="#connect" className="story-link text-[13px] tracking-wide text-foreground/80">
             Let’s Connect
           </a>
           <a
@@ -141,9 +131,7 @@ function HeroStory() {
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const paragraphs = Array.from(
-      document.querySelectorAll<HTMLElement>("[data-story]"),
-    );
+    const paragraphs = Array.from(document.querySelectorAll<HTMLElement>("[data-story]"));
 
     const onScroll = () => {
       const section = sectionRef.current;
@@ -228,7 +216,9 @@ function HeroStory() {
               className="story-step font-serif text-6xl font-medium leading-[1] tracking-[-0.02em] md:text-[7.5rem]"
             >
               <span style={{ color: "var(--gold)" }}>
-                I’m<span style={{ display: "inline-block", width: "0.1em" }} />Komal.
+                I’m
+                <span style={{ display: "inline-block", width: "0.1em" }} />
+                Komal.
               </span>
             </h1>
             <p data-story className={`story-step mt-8 ${editorial}`}>
@@ -259,7 +249,10 @@ function HeroStory() {
 
           {/* Five words — stacked vertically */}
           <div className="flex min-h-[42vh] flex-col justify-center">
-            <div data-story className="story-step font-editorial text-[2rem] md:text-[2.75rem] leading-[1.3] tracking-tight text-charcoal font-medium italic">
+            <div
+              data-story
+              className="story-step font-editorial text-[2rem] md:text-[2.75rem] leading-[1.3] tracking-tight text-charcoal font-medium italic"
+            >
               <span className="block">People.</span>
               <span className="block">Communities.</span>
               <span className="block">Culture.</span>
@@ -279,11 +272,7 @@ function HeroStory() {
           </div>
 
           <div className="flex min-h-[18vh] items-center pb-2">
-            <div
-              data-reveal
-              className="reveal h-px w-24 bg-[var(--gold)]"
-              aria-hidden
-            />
+            <div data-reveal className="reveal h-px w-24 bg-[var(--gold)]" aria-hidden />
           </div>
         </div>
       </div>
@@ -334,22 +323,14 @@ function FeaturedProjects() {
   return (
     <section id="work" className="relative pt-12 md:pt-16">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-        <div
-          data-reveal
-          className="reveal mb-10 flex items-end justify-between gap-6 md:mb-14"
-        >
+        <div data-reveal className="reveal mb-10 flex items-end justify-between gap-6 md:mb-14">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-              Featured Projects
-            </p>
+            <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">Featured Projects</p>
             <h2 className="mt-4 font-serif text-5xl leading-[1.05] tracking-tight md:text-7xl">
               Questions I’ve Explored
             </h2>
           </div>
-          <Link
-            to="/projects"
-            className="story-link shrink-0 text-sm tracking-wide text-foreground md:text-base"
-          >
+          <Link to="/projects" className="story-link shrink-0 text-sm tracking-wide text-foreground md:text-base">
             View All Projects →
           </Link>
         </div>
@@ -365,7 +346,6 @@ function FeaturedProjects() {
             ),
           )}
         </div>
-
       </div>
     </section>
   );
@@ -382,12 +362,8 @@ type EditorialCard = {
 function SectionHeader({ label, heading }: { label: string; heading: string }) {
   return (
     <div data-reveal className="reveal mb-10 md:mb-14">
-      <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-        {label}
-      </p>
-      <h2 className="mt-4 font-serif text-5xl leading-[1.05] tracking-tight md:text-7xl">
-        {heading}
-      </h2>
+      <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">{label}</p>
+      <h2 className="mt-4 font-serif text-5xl leading-[1.05] tracking-tight md:text-7xl">{heading}</h2>
     </div>
   );
 }
@@ -399,24 +375,16 @@ function EditorialEntry({ c }: { c: EditorialCard }) {
       className="reveal border border-border bg-background p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_18px_36px_-28px_rgba(31,31,31,0.28)] md:p-10"
     >
       <p className="font-serif text-3xl leading-[1.2] text-foreground md:text-[2rem]">
-        {c.icon && <span aria-hidden className="mr-2">{c.icon}</span>}
+        {c.icon && (
+          <span aria-hidden className="mr-2">
+            {c.icon}
+          </span>
+        )}
         {c.title}
       </p>
-      {c.meta && (
-        <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-          {c.meta}
-        </p>
-      )}
-      {c.body && (
-        <p className="mt-4 text-base leading-[1.6] text-foreground/75 md:text-[1.05rem]">
-          {c.body}
-        </p>
-      )}
-      {c.tag && (
-        <p className="mt-4 text-[10.5px] uppercase tracking-[0.22em] text-muted-foreground">
-          {c.tag}
-        </p>
-      )}
+      {c.meta && <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">{c.meta}</p>}
+      {c.body && <p className="mt-4 text-base leading-[1.6] text-foreground/75 md:text-[1.05rem]">{c.body}</p>}
+      {c.tag && <p className="mt-4 text-[10.5px] uppercase tracking-[0.22em] text-muted-foreground">{c.tag}</p>}
     </article>
   );
 }
@@ -509,26 +477,19 @@ function Connect() {
     <section id="connect" className="relative pt-24 md:pt-32">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <div data-reveal className="reveal">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-            Let’s Connect
-          </p>
-          <h2 className="mt-4 font-serif text-5xl leading-[1.05] tracking-tight md:text-7xl">
-            Let’s Connect
-          </h2>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">Let’s Connect</p>
+          <h2 className="mt-4 font-serif text-5xl leading-[1.05] tracking-tight md:text-7xl">Let’s Connect</h2>
           <p className="mt-6 max-w-2xl font-editorial text-xl leading-[1.5] text-foreground/80 md:text-2xl">
             If something here sparked your curiosity, let’s connect.
           </p>
           <div className="mt-10 flex flex-col gap-4 text-lg md:text-xl">
-            <a
-              className="story-link inline-flex w-fit items-center gap-3"
-              href="mailto:komalapatil08@gmail.com"
-            >
+            <a className="story-link inline-flex w-fit items-center gap-3" href="mailto:komalapatil08@gmail.com">
               <Mail size={20} aria-hidden className="text-[var(--gold)]" />
               komalapatil08@gmail.com
             </a>
             <a
               className="story-link inline-flex w-fit items-center gap-3"
-              href="https://www.linkedin.com/in/komalpatil"
+              href="https://www.linkedin.com/in/komal-patil-a6a43a239/"
               target="_blank"
               rel="noreferrer"
             >
