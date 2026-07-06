@@ -159,7 +159,7 @@ function KalaVanshPage() {
               </div>
 
               <div
-                className="max-w-[34ch] text-center"
+                className="max-w-[40ch] text-center"
                 style={{
                   opacity: "var(--kv-text-opacity, 0)",
                   transform:
