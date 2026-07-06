@@ -130,7 +130,6 @@ function KalaVanshPage() {
 
             {/* Revealed below the vase: artisan, then copy */}
             <div
-              data-reveal="artisan"
               className="absolute left-1/2 top-full flex flex-col items-center gap-10 pt-10"
               style={{
                 opacity: "var(--kv-artisan-opacity, 0)",
