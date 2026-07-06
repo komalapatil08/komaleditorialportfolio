@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { Mail, Linkedin } from "lucide-react";
+import { Certifications } from "@/components/Certifications";
 import portrait from "@/assets/komal-portrait.png.asset.json";
 import meetcraftImg from "@/assets/meetcraft.png.asset.json";
 import kalavanshImg from "@/assets/kalavansh.png.asset.json";
