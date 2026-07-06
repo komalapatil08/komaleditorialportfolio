@@ -55,6 +55,13 @@ const featured: FeaturedProject[] = [
     image: tajImg.url,
     alt: "A Taj host serving tea overlooking the lake at golden hour",
   },
+  {
+    question: "What if the maker mattered more than the object?",
+    title: "KalaVansh",
+    tag: "Craft • Storytelling • Product Thinking",
+    image: kalavanshImg,
+    alt: "Hands of an Indian artisan painting intricate Meenakari work on a brass vessel",
+  },
 ];
 
 function useReveal() {
