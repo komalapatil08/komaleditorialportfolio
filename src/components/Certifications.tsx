@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { X, ChevronLeft, ChevronRight, BadgeCheck } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import certPM from "@/assets/cert-product-management.pdf.asset.json";
 import certPMkt from "@/assets/cert-product-marketing.pdf.asset.json";
 import certVPD from "@/assets/cert-value-proposition.pdf.asset.json";
 import certInnov from "@/assets/cert-innovation-frameworks.pdf.asset.json";
 import certCC from "@/assets/cert-creative-confidence.pdf.asset.json";
 import certStory from "@/assets/cert-storytelling.pdf.asset.json";
+import iplLogo from "@/assets/ipl-logo.png";
 
 type Certification = {
   title: string;
