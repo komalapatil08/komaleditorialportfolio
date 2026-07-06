@@ -523,6 +523,7 @@ function Index() {
       <HeroStory />
       <FeaturedProjects />
       <Achievements />
+      <Certifications />
       <Education />
       <Experience />
       <Connect />
