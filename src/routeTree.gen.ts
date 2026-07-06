@@ -13,6 +13,7 @@ import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
 import { Route as ProjectsMeetcraftRouteImport } from './routes/projects.meetcraft'
+import { Route as ProjectsKalavanshRouteImport } from './routes/projects.kalavansh'
 
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
@@ -34,15 +35,22 @@ const ProjectsMeetcraftRoute = ProjectsMeetcraftRouteImport.update({
   path: '/meetcraft',
   getParentRoute: () => ProjectsRoute,
 } as any)
+const ProjectsKalavanshRoute = ProjectsKalavanshRouteImport.update({
+  id: '/kalavansh',
+  path: '/kalavansh',
+  getParentRoute: () => ProjectsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/projects': typeof ProjectsRouteWithChildren
+  '/projects/kalavansh': typeof ProjectsKalavanshRoute
   '/projects/meetcraft': typeof ProjectsMeetcraftRoute
   '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/projects/kalavansh': typeof ProjectsKalavanshRoute
   '/projects/meetcraft': typeof ProjectsMeetcraftRoute
   '/projects': typeof ProjectsIndexRoute
 }
@@ -50,15 +58,27 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/projects': typeof ProjectsRouteWithChildren
+  '/projects/kalavansh': typeof ProjectsKalavanshRoute
   '/projects/meetcraft': typeof ProjectsMeetcraftRoute
   '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/projects' | '/projects/meetcraft' | '/projects/'
+  fullPaths:
+    | '/'
+    | '/projects'
+    | '/projects/kalavansh'
+    | '/projects/meetcraft'
+    | '/projects/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/projects/meetcraft' | '/projects'
-  id: '__root__' | '/' | '/projects' | '/projects/meetcraft' | '/projects/'
+  to: '/' | '/projects/kalavansh' | '/projects/meetcraft' | '/projects'
+  id:
+    | '__root__'
+    | '/'
+    | '/projects'
+    | '/projects/kalavansh'
+    | '/projects/meetcraft'
+    | '/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -96,15 +116,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsMeetcraftRouteImport
       parentRoute: typeof ProjectsRoute
     }
+    '/projects/kalavansh': {
+      id: '/projects/kalavansh'
+      path: '/kalavansh'
+      fullPath: '/projects/kalavansh'
+      preLoaderRoute: typeof ProjectsKalavanshRouteImport
+      parentRoute: typeof ProjectsRoute
+    }
   }
 }
 
 interface ProjectsRouteChildren {
+  ProjectsKalavanshRoute: typeof ProjectsKalavanshRoute
   ProjectsMeetcraftRoute: typeof ProjectsMeetcraftRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
 
 const ProjectsRouteChildren: ProjectsRouteChildren = {
+  ProjectsKalavanshRoute: ProjectsKalavanshRoute,
   ProjectsMeetcraftRoute: ProjectsMeetcraftRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
 }
@@ -120,13 +149,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

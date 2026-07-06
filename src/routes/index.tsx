@@ -53,6 +53,7 @@ const featured: FeaturedProject[] = [
     tag: "Marketplace Design • Artisan Ecosystem",
     image: kalavanshImg.url,
     alt: "An artisan embroidering a floral motif by hand",
+    href: "/projects/kalavansh",
   },
   {
     question: "What does personalized luxury actually look like?",
