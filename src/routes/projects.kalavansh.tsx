@@ -58,9 +58,8 @@ function KalaVanshPage() {
     };
   }, []);
 
-  // Ease progress into three phases: image crossfade first half, text crossfade second half
+  // Scroll progress drives the image and editorial text crossfades in unison.
   const imageP = Math.min(1, progress / 0.6);
-  const textP = Math.max(0, (progress - 0.4) / 0.5);
   const cueOpacity = Math.max(0, 1 - progress * 2);
 
   return (
