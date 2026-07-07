@@ -16,6 +16,10 @@ import ch4Fold1 from "@/assets/kv-ch4-fold-1.png";
 import ch4Fold2 from "@/assets/kv-ch4-fold-2.png";
 import ch4Fold3 from "@/assets/kv-ch4-fold-3.png";
 import kvLogo from "@/assets/kv-logo.png.asset.json";
+import ch6MeenakariQR from "@/assets/kv-ch6-meenakari-qr.jpeg.asset.json";
+import ch6Pottery from "@/assets/kv-ch6-pottery.png.asset.json";
+import ch6Custom from "@/assets/kv-ch6-custom.png.asset.json";
+import ch6SiteQR from "@/assets/kv-ch6-site-qr.jpeg.asset.json";
 
 
 export const Route = createFileRoute("/projects/kalavansh")({
