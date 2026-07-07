@@ -34,6 +34,7 @@ type Project = {
   tag?: string;
   description?: string;
   prototypeUrl?: string;
+  websiteUrl?: string;
 };
 
 const projects: Project[] = [
@@ -49,12 +50,13 @@ const projects: Project[] = [
   },
   {
     title: "KalaVansh",
-    status: "Coming Soon",
+    status: "Live Case Study",
     href: "/projects/kalavansh",
     image: kalavanshImg.url,
     alt: "An Indian artisan hand-embroidering intricate Chikankari florals on ivory fabric",
     tag: "Craft • Storytelling • Product Thinking",
     description: "What if the maker mattered more than the object?",
+    websiteUrl: "https://kalavansh.vercel.app/",
   },
   {
     title: "Taj Hotels Digital Transformation",
@@ -65,14 +67,8 @@ const projects: Project[] = [
     tag: "Digital Transformation • Guest Experience",
     description: "What does personalized luxury actually look like?",
   },
-  { title: "Rebuilding Notion's Growth Strategy", status: "Coming Soon" },
-  {
-    title: "Customer Segmentation using K-Means Clustering",
-    status: "Coming Soon",
-  },
-  { title: "Agile Project", status: "Coming Soon" },
-  { title: "Consulting Case Study", status: "Coming Soon" },
 ];
+
 
 function useReveal() {
   useEffect(() => {
