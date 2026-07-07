@@ -7,6 +7,7 @@ import meetcraftImg from "@/assets/meetcraft.png.asset.json";
 import kalavanshImg from "@/assets/kalavansh-artisan.png.asset.json";
 
 import tajImg from "@/assets/taj.png.asset.json";
+import resumeAsset from "@/assets/resume.pdf.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
