@@ -715,7 +715,7 @@ function Chapter4() {
       style={{ opacity, transition: "opacity 400ms ease-out", pointerEvents: opacity > 0 ? "auto" : "none" }}
     >
       <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
-        {`Fold ${["identity","dignity","recognition","selfworth","legacy"].indexOf(label.toLowerCase()) + 1 || ""}`}
+        {`Fold ${["IDENTITY","DIGNITY","RECOGNITION","SELF-WORTH","LEGACY"].indexOf(label) + 1}`}
       </p>
       <h3 className="mt-6 font-[family-name:var(--font-editorial)] text-6xl font-medium leading-[0.95] tracking-tight text-[color:var(--charcoal)] md:text-[128px]">
         {label}
