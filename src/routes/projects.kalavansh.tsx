@@ -155,6 +155,7 @@ function KalaVanshPage() {
       <Chapter3 />
       <Chapter4 />
       <Chapter5 />
+      <JourneySection />
 
 
     </main>
