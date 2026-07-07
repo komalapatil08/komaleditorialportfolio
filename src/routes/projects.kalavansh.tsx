@@ -671,12 +671,12 @@ function Chapter4() {
     return Math.max(0, Math.min(1, t));
   };
 
-  // Bell curve for keyword visibility: fade in first 30%, hold, fade out last 30%
+  // Bell curve for keyword visibility: fade in 15%, hold 70%, fade out 15%
   const keywordOpacity = (key: string) => {
     const t = phaseP(key);
     if (t <= 0 || t >= 1) return 0;
-    if (t < 0.25) return t / 0.25;
-    if (t > 0.75) return (1 - t) / 0.25;
+    if (t < 0.15) return t / 0.15;
+    if (t > 0.85) return (1 - t) / 0.15;
     return 1;
   };
 
