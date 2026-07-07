@@ -23,7 +23,7 @@ import ch6SiteQR from "@/assets/kv-ch6-site-qr.jpeg.asset.json";
 import ch6PhoneResult from "@/assets/kv-ch6-phone-result.jpeg.asset.json";
 import ch7Stall from "@/assets/kv-ch7-stall.jpeg.asset.json";
 import ch7Poster from "@/assets/kv-ch7-poster.jpeg.asset.json";
-import ch7Group from "@/assets/kv-ch7-group.png.asset.json";
+
 import ch7Cups from "@/assets/kv-ch7-cups.jpeg.asset.json";
 import ch7Saree from "@/assets/kv-ch7-saree.jpeg.asset.json";
 import promiseArtisan from "@/assets/kv-promise-artisan.png.asset.json";
@@ -1649,13 +1649,6 @@ const JOURNEY_PHOTOS: JourneyPhoto[] = [
     caption: "Presenting",
     className: "aspect-[4/5]",
     objectPosition: "50% 40%",
-  },
-  {
-    src: ch7Group.url,
-    alt: "The KalaVansh team with their mentor beside the stall banner",
-    caption: "Together",
-    className: "md:col-span-2 aspect-[16/10]",
-    objectPosition: "50% 35%",
   },
   {
     src: ch7Cups.url,
