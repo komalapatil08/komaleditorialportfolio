@@ -1310,58 +1310,114 @@ function ChapterEcosystem() {
 
 function ChapterTrust() {
   const pillars = [
-    {
-      t: "Compliance",
-      k: "100%",
-      d: "DPDP compliance target. Zero-trust security. Compliant from Day 1, not Day 365.",
-    },
-    {
-      t: "Data Governance",
-      k: "Role-based",
-      d: "Access modelled to hospitality roles — from GM to housekeeping. Purpose-limited, auditable.",
-    },
-    {
-      t: "Responsible AI",
-      k: "Consent-led",
-      d: "Personalization only where the guest has said yes. Explainable, reversible, respectful.",
-    },
+    { k: "100%", t: "DPDP Compliance Target", sub: "Compliance" },
+    { k: "Role-based", t: "Data Governance", sub: "Access" },
+    { k: "Consent-led", t: "Personalization", sub: "Responsible AI" },
+  ];
+  const principles = [
+    { icon: ShieldCheck, t: "Protect guest data", d: "always" },
+    { icon: Handshake, t: "Earn trust", d: "everyday" },
+    { icon: Lock, t: "Respect privacy", d: "always" },
   ];
   return (
     <section className="bg-[#0F0B08] py-28 text-[#F5EDE1] md:py-40">
       <Container>
-        <div data-reveal className="reveal mb-14 md:mb-20">
+        <div data-reveal className="reveal mb-16 text-center md:mb-24">
           <p className="text-[11px] uppercase tracking-[0.3em] text-[#D4B678]">
             Chapter 11 · Trust
           </p>
           <h2 className="mt-5 font-serif text-4xl leading-[1.05] tracking-tight md:text-6xl">
-            Luxury requires trust.
+            Data Privacy &amp; Trust
           </h2>
-          <div className="mt-8 h-px w-16 bg-[#D4B678]" />
-          <p className="mt-8 max-w-[62ch] font-editorial text-[1.15rem] leading-[1.7] text-[#F5EDE1]/80 md:text-[1.25rem]">
-            Personalization at this scale only works if the guest trusts the system to hold their
-            data with the same care as their room key.
+          <p className="mt-6 text-[12px] uppercase tracking-[0.4em] text-[#F5EDE1]/60">
+            Luxury requires trust
+          </p>
+          <div className="mx-auto mt-8 h-px w-16 bg-[#D4B678]" />
+        </div>
+
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_1.1fr_1fr] lg:gap-10">
+          {/* Left — Shield medallion + connectors */}
+          <div data-reveal className="reveal relative flex justify-center lg:justify-end">
+            <div className="relative flex h-56 w-56 items-center justify-center rounded-full bg-gradient-to-br from-[#3A2A1A] to-[#1A130E] shadow-[0_0_60px_-15px_rgba(212,182,120,0.5)] md:h-72 md:w-72">
+              <div className="absolute inset-3 rounded-full border border-[#D4B678]/30" />
+              <ShieldCheck
+                className="relative h-28 w-28 text-[#E7C787] md:h-36 md:w-36"
+                strokeWidth={1.1}
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Lock className="h-10 w-10 text-[#0F0B08] md:h-12 md:w-12" strokeWidth={2.2} style={{ transform: "translateY(6px)" }} />
+              </div>
+            </div>
+            {/* Dashed connectors — desktop only */}
+            <svg
+              className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[380px] w-[220px] -translate-y-1/2 lg:block"
+              viewBox="0 0 220 380"
+              fill="none"
+              aria-hidden
+            >
+              {[70, 190, 310].map((y, i) => (
+                <g key={i}>
+                  <path
+                    d={`M 10 190 C 90 190, 90 ${y}, 210 ${y}`}
+                    stroke="#D4B678"
+                    strokeWidth="1"
+                    strokeDasharray="3 5"
+                    opacity="0.55"
+                  />
+                  <circle cx="210" cy={y} r="3.5" fill="#D4B678" />
+                  <circle cx="10" cy="190" r="3.5" fill="#D4B678" />
+                </g>
+              ))}
+            </svg>
+          </div>
+
+          {/* Middle — Three pillar chips */}
+          <div className="flex flex-col gap-5">
+            {pillars.map((p, i) => (
+              <div
+                key={p.t}
+                data-reveal
+                className="reveal rounded-2xl border border-[#D4B678]/40 bg-[#1A130E]/60 px-8 py-6 text-center"
+                style={{ transitionDelay: `${i * 90}ms` }}
+              >
+                <p className="font-serif text-3xl leading-none tracking-tight text-[#E7C787] md:text-4xl">
+                  {p.k}
+                </p>
+                <p className="mt-3 text-[11px] uppercase tracking-[0.28em] text-[#F5EDE1]/75">
+                  {p.t}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Right — Principles panel */}
+          <div
+            data-reveal
+            className="reveal rounded-2xl border border-[#D4B678]/40 bg-[#1A130E]/40 p-8 md:p-10"
+          >
+            <ul className="space-y-8">
+              {principles.map((pr) => (
+                <li key={pr.t} className="flex items-center gap-5">
+                  <pr.icon className="h-10 w-10 shrink-0 text-[#E7C787]" strokeWidth={1.3} />
+                  <div>
+                    <p className="text-[13px] uppercase tracking-[0.24em] text-[#F5EDE1]">
+                      {pr.t}
+                    </p>
+                    <p className="mt-1 text-[13px] uppercase tracking-[0.24em] text-[#F5EDE1]/60">
+                      {pr.d}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div data-reveal className="reveal mt-20 border-t border-[#D4B678]/30 pt-8 text-center">
+          <p className="text-[12px] uppercase tracking-[0.4em] text-[#D4B678]">
+            Trust is the foundation of luxury personalization
           </p>
         </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {pillars.map((p, i) => (
-            <div
-              key={p.t}
-              data-reveal
-              className="reveal border border-[#D4B678]/25 bg-[#1A130E]/70 p-8"
-              style={{ transitionDelay: `${i * 90}ms` }}
-            >
-              <span className="text-[10.5px] uppercase tracking-[0.3em] text-[#D4B678]">
-                Pillar 0{i + 1}
-              </span>
-              <p className="mt-5 font-serif text-4xl tracking-tight text-[#E7C787]">{p.k}</p>
-              <h3 className="mt-4 font-serif text-2xl leading-tight tracking-tight">{p.t}</h3>
-              <p className="mt-4 text-[14px] leading-[1.6] text-[#F5EDE1]/75">{p.d}</p>
-            </div>
-          ))}
-        </div>
-
-        <PullQuote>Trust is the foundation of luxury personalization.</PullQuote>
       </Container>
     </section>
   );
