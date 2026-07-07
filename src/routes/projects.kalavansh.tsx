@@ -23,6 +23,7 @@ import ch6SiteQR from "@/assets/kv-ch6-site-qr.jpeg.asset.json";
 import ch6PhoneResult from "@/assets/kv-ch6-phone-result.jpeg.asset.json";
 import ch7Stall from "@/assets/kv-ch7-stall.jpeg.asset.json";
 import ch7Poster from "@/assets/kv-ch7-poster.jpeg.asset.json";
+import ch7PosterWhatsapp from "@/assets/kv-ch7-poster-whatsapp.jpeg.asset.json";
 
 import ch7Cups from "@/assets/kv-ch7-cups.jpeg.asset.json";
 import ch7Saree from "@/assets/kv-ch7-saree.jpeg.asset.json";
@@ -1642,6 +1643,13 @@ const JOURNEY_PHOTOS: JourneyPhoto[] = [
     caption: "Poster",
     className: "md:col-span-2 aspect-[4/3] bg-[color:var(--ivory)]",
     fit: "contain",
+  },
+  {
+    src: ch7PosterWhatsapp.url,
+    alt: "KalaVansh campaign poster — Behind every piece, a hundred stories.",
+    caption: "Campaign poster",
+    className: "aspect-[4/5]",
+    objectPosition: "50% 50%",
   },
   {
     src: ch7Stall.url,
