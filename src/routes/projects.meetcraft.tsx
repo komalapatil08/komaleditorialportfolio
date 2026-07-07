@@ -1619,31 +1619,43 @@ function MeetCraftPage() {
           </div>
         </Container>
 
-        <Container className="pt-40 md:pt-56">
-          <div data-reveal className="reveal border-t border-border pt-12 md:pt-16">
-            <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+        <Container className="pt-32 md:pt-48">
+          <div
+            data-reveal
+            className="reveal relative overflow-hidden border-t-2 border-b-2 border-foreground/90 bg-background py-16 md:py-24"
+          >
+            <p className="text-[11px] uppercase tracking-[0.4em] text-[var(--gold)]">
               Next Project
             </p>
             <Link
               to="/projects/kalavansh"
-              className="group mt-6 block"
+              className="group mt-4 block"
             >
-              <h3 className="font-serif text-4xl leading-[1.05] tracking-tight text-foreground transition-colors duration-300 group-hover:text-[var(--gold)] md:text-6xl">
-                KalaVansh
+              <h3 className="font-serif text-6xl leading-[0.95] tracking-tight text-foreground transition-colors duration-300 group-hover:text-[var(--gold)] md:text-[8rem]">
+                KalaVansh <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-3">→</span>
               </h3>
-              <p className="mt-3 font-editorial text-lg leading-[1.5] text-foreground/70 md:text-xl">
+              <p className="mt-4 font-editorial text-xl italic text-foreground/70 md:text-2xl">
                 What if the maker mattered more than the object?
               </p>
-              <p className="mt-2 text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-                Craft • Storytelling • Product Thinking
-              </p>
-              <span className="mt-8 inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.22em] text-foreground/80 transition-all duration-300 group-hover:gap-3 group-hover:text-[var(--gold)]">
-                Read next case study <span aria-hidden>→</span>
-              </span>
             </Link>
+            <div className="mt-10 flex flex-wrap items-center gap-4 md:mt-14">
+              <Link
+                to="/projects/kalavansh"
+                className="inline-flex items-center gap-2 bg-foreground px-8 py-4 text-[13px] font-bold uppercase tracking-[0.24em] text-background transition-all duration-300 hover:bg-[var(--gold)] hover:text-foreground"
+              >
+                Read Next Case Study <span aria-hidden>→</span>
+              </Link>
+              <Link
+                to="/"
+                className="inline-flex items-center gap-2 border-2 border-foreground px-8 py-4 text-[13px] font-bold uppercase tracking-[0.24em] text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
+              >
+                ← Back to Home
+              </Link>
+            </div>
           </div>
         </Container>
       </section>
+
 
       <Footer />
     </main>
