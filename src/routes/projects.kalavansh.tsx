@@ -24,6 +24,9 @@ import ch6PhoneResult from "@/assets/kv-ch6-phone-result.jpeg.asset.json";
 import ch7Team from "@/assets/kv-ch7-team.jpeg.asset.json";
 import ch7Stall from "@/assets/kv-ch7-stall.jpeg.asset.json";
 import ch7Poster from "@/assets/kv-ch7-poster.jpeg.asset.json";
+import ch7Group from "@/assets/kv-ch7-group.png.asset.json";
+import ch7Cups from "@/assets/kv-ch7-cups.jpeg.asset.json";
+import ch7Saree from "@/assets/kv-ch7-saree.jpeg.asset.json";
 import promiseArtisan from "@/assets/kv-promise-artisan.png.asset.json";
 import promiseCustomer from "@/assets/kv-promise-customer.png.asset.json";
 
@@ -1630,29 +1633,51 @@ type JourneyPhoto = {
   caption: string;
   className: string;
   objectPosition?: string;
+  fit?: "cover" | "contain";
 };
 
 const JOURNEY_PHOTOS: JourneyPhoto[] = [
   {
+    src: ch7Poster.url,
+    alt: "KalaVansh campaign poster — You admire the product, but never meet the hands behind it.",
+    caption: "Poster",
+    className: "md:col-span-2 aspect-[4/3] bg-[color:var(--ivory)]",
+    fit: "contain",
+  },
+  {
     src: ch7Team.url,
     alt: "KalaVansh team with mentor at the Cause 2026 stall",
     caption: "Team",
-    className: "md:col-span-2 aspect-[16/10]",
-    objectPosition: "50% 40%",
-  },
-  {
-    src: ch7Poster.url,
-    alt: "KalaVansh poster and prototype laptop at the stall",
-    caption: "Presenting",
     className: "aspect-[4/5]",
-    objectPosition: "50% 35%",
+    objectPosition: "50% 40%",
   },
   {
     src: ch7Stall.url,
     alt: "Team members presenting the KalaVansh prototype to visitors",
-    caption: "Impact",
+    caption: "Presenting",
     className: "aspect-[4/5]",
     objectPosition: "50% 40%",
+  },
+  {
+    src: ch7Group.url,
+    alt: "The KalaVansh team with their mentor beside the stall banner",
+    caption: "Together",
+    className: "md:col-span-2 aspect-[16/10]",
+    objectPosition: "50% 35%",
+  },
+  {
+    src: ch7Cups.url,
+    alt: "Handcrafted meenakari brass tumblers displayed at the stall",
+    caption: "Craft",
+    className: "aspect-[4/5]",
+    objectPosition: "50% 55%",
+  },
+  {
+    src: ch7Saree.url,
+    alt: "A Banarasi silk saree draped beside heritage jewellery boxes",
+    caption: "Heritage",
+    className: "aspect-[4/5]",
+    objectPosition: "50% 50%",
   },
 ];
 
@@ -1677,6 +1702,8 @@ function JourneyPhotoTile({ photo, delay }: { photo: JourneyPhoto; delay: number
     return () => io.disconnect();
   }, [delay]);
 
+  const fitClass = photo.fit === "contain" ? "object-contain" : "object-cover";
+
   return (
     <figure
       ref={ref}
@@ -1692,7 +1719,7 @@ function JourneyPhotoTile({ photo, delay }: { photo: JourneyPhoto; delay: number
         alt={photo.alt}
         draggable={false}
         loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+        className={`absolute inset-0 h-full w-full ${fitClass} transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]`}
         style={{ objectPosition: photo.objectPosition ?? "50% 50%" }}
       />
       <div
