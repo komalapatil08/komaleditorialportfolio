@@ -96,8 +96,9 @@ function Card({ p }: { p: Project }) {
 
   if (hasImage) {
     const hasPrototype = Boolean(p.prototypeUrl);
+    const hasWebsite = Boolean(p.websiteUrl);
 
-    if (p.href && hasPrototype) {
+    if (p.href && (hasPrototype || hasWebsite)) {
       return (
         <article
           data-reveal
@@ -130,7 +131,7 @@ function Card({ p }: { p: Project }) {
               )}
             </div>
 
-            <h3 className="mt-4 font-serif text-[1.1rem] leading-[1.25] tracking-tight text-foreground/90 md:text-[1.2rem]">
+            <h3 className="mt-4 font-serif text-2xl leading-[1.15] tracking-tight text-foreground/90 md:text-3xl">
               <Link to={p.href}>{p.title}</Link>
             </h3>
 
@@ -154,20 +155,33 @@ function Card({ p }: { p: Project }) {
                 >
                   Read Case Study →
                 </Link>
-                <a
-                  href={p.prototypeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[11.5px] font-medium text-[var(--gold)] transition-all duration-200 hover:underline hover:-translate-y-0.5"
-                >
-                  🔗 Try the Live Prototype <span aria-hidden className="text-[10px]">↗</span>
-                </a>
+                {hasPrototype && (
+                  <a
+                    href={p.prototypeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11.5px] font-medium text-[var(--gold)] transition-all duration-200 hover:underline hover:-translate-y-0.5"
+                  >
+                    🔗 Try the Live Prototype <span aria-hidden className="text-[10px]">↗</span>
+                  </a>
+                )}
+                {hasWebsite && (
+                  <a
+                    href={p.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11.5px] font-medium text-[var(--gold)] transition-all duration-200 hover:underline hover:-translate-y-0.5"
+                  >
+                    🌐 Visit Website <span aria-hidden className="text-[10px]">↗</span>
+                  </a>
+                )}
               </div>
             )}
           </div>
         </article>
       );
     }
+
 
     const card = (
       <article
