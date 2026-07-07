@@ -192,7 +192,7 @@ function Chapter1() {
                 The first thing I noticed was the craftsmanship.
               </p>
               <p style={fadeUp(320)}>
-                Every piece reflected years of skill, patience, and traditions passed down through generations.
+                Each piece carried generations of craftsmanship, shaped by countless hours of patience and skill.
               </p>
               <p style={fadeUp(400)}>I found myself admiring the products.</p>
               <p style={fadeUp(480)}>Then I realized something unexpected.</p>
@@ -201,18 +201,18 @@ function Chapter1() {
                 className="pt-2 text-2xl font-medium leading-[1.4] text-[color:var(--charcoal)] md:text-[28px]"
                 style={fadeUp(640)}
               >
-                But I couldn't tell you who created them.
+                Yet the people behind them remained invisible.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Right — 60% editorial composition */}
+        {/* Right — curated product composition */}
         <div className="relative md:col-span-3">
-          <div className="relative mx-auto min-h-[720px] w-full max-w-2xl md:min-h-[880px]">
-            {/* Meenakari — hero, top-right, largest */}
-            <figure
-              className="ml-auto w-[78%] md:w-[82%]"
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-2xl md:aspect-[5/6]">
+            {/* Meenakari — largest, top-left anchor */}
+            <div
+              className="absolute left-[2%] top-[2%] z-10 w-[66%] md:left-[4%] md:top-[4%] md:w-[62%]"
               style={fadeUp(200)}
             >
               <img
@@ -220,14 +220,11 @@ function Chapter1() {
                 alt="Meenakari enamelled brass glasses with peacock motifs"
                 className="block h-auto w-full object-cover"
               />
-              <figcaption className="mt-3 font-[family-name:var(--font-editorial)] italic text-sm text-[color:var(--warm-gray)]">
-                Meenakari Glass
-              </figcaption>
-            </figure>
+            </div>
 
-            {/* Saree — mid-left, offset up */}
-            <figure
-              className="mt-16 w-[52%] md:-mt-24 md:w-[46%]"
+            {/* Saree — mid-right, overlapping the glasses */}
+            <div
+              className="absolute right-0 top-[26%] z-20 w-[50%] md:top-[28%] md:w-[46%]"
               style={fadeUp(360)}
             >
               <img
@@ -235,14 +232,11 @@ function Chapter1() {
                 alt="Handwoven Banarasi silk saree draped over antique boxes"
                 className="block h-auto w-full object-cover"
               />
-              <figcaption className="mt-3 font-[family-name:var(--font-editorial)] italic text-sm text-[color:var(--warm-gray)]">
-                Silk Saree
-              </figcaption>
-            </figure>
+            </div>
 
-            {/* Kurti — bottom-right */}
-            <figure
-              className="ml-auto mt-12 w-[48%] md:-mt-40 md:mr-4 md:w-[42%]"
+            {/* Kurti — bottom-center, overlapping into the composition */}
+            <div
+              className="absolute bottom-[2%] left-[18%] z-30 w-[42%] md:bottom-[4%] md:left-[22%] md:w-[38%]"
               style={fadeUp(520)}
             >
               <img
@@ -250,10 +244,7 @@ function Chapter1() {
                 alt="White Chikankari hand-embroidered kurti"
                 className="block h-auto w-full object-cover"
               />
-              <figcaption className="mt-3 font-[family-name:var(--font-editorial)] italic text-sm text-[color:var(--warm-gray)]">
-                Chikankari Kurti
-              </figcaption>
-            </figure>
+            </div>
           </div>
         </div>
       </div>
