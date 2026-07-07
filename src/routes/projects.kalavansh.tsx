@@ -1645,7 +1645,7 @@ function PromiseSection() {
                 width: 120,
               }}
             >
-              <PromiseWord text="Human Connection" revealed={r(7)} align="right" />
+              <PromiseWord text="Human Connection" revealed={r(7)} align="right" wrap />
             </div>
           </div>
         </div>
