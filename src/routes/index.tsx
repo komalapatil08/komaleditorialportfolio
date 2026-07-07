@@ -431,6 +431,11 @@ function Achievements() {
       title: "Skillathon Winner",
       body: "For MeetCraft — an intent-based networking platform.",
     },
+    {
+      icon: "✦",
+      title: "Shortlisted in Cause 2026",
+      body: "For KalaVansh — celebrating craft, community and the maker’s story.",
+    },
   ];
   return (
     <section id="achievements" className="relative pt-24 md:pt-32">
