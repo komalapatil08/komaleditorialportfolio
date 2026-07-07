@@ -200,42 +200,11 @@ function ChapterHero() {
 
       <div className="relative mx-auto w-full max-w-[1400px] px-6 pb-24 pt-40 md:px-12 md:pb-32 md:pt-56">
         <div data-reveal-hero className="reveal-hero">
-          <p className="text-[11px] uppercase tracking-[0.35em] text-[#D4B678]">
-            Case Study · Digital Transformation
-          </p>
-          <h1 className="mt-6 font-serif text-[3.4rem] leading-[0.98] tracking-tight md:text-[6.5rem]">
+          <h1 className="font-serif text-[3.4rem] leading-[0.98] tracking-tight md:text-[6.5rem]">
             Reimagining <span className="italic text-[#E7C787]">Tajness</span>
             <br />
             for the Digital Era.
           </h1>
-          <p className="mt-10 max-w-[58ch] font-editorial text-[1.15rem] leading-[1.6] text-[#F5EDE1]/85 md:text-[1.35rem]">
-            A 120-year-old brand of hospitality meets Customer 360, Gen AI concierge and predictive
-            luxury — without losing a single moment of human warmth.
-          </p>
-
-          <div className="mt-14 grid grid-cols-2 gap-8 text-[#F5EDE1]/80 md:grid-cols-4 md:gap-12">
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.28em] text-[#D4B678]">Team</p>
-              <p className="mt-2 text-sm">Shipra · Komal · Prashant · Shristy</p>
-            </div>
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.28em] text-[#D4B678]">Role</p>
-              <p className="mt-2 text-sm">Product Strategy · Digital Architecture</p>
-            </div>
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.28em] text-[#D4B678]">Scope</p>
-              <p className="mt-2 text-sm">565+ properties · 3-year horizon</p>
-            </div>
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.28em] text-[#D4B678]">Outcome</p>
-              <p className="mt-2 text-sm">₹500+ Cr / year · 78+ NPS · 45% direct booking</p>
-            </div>
-          </div>
-
-          <div className="mt-16 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-[#D4B678]">
-            <span className="h-px w-10 bg-[#D4B678]" />
-            Scroll to begin
-          </div>
         </div>
       </div>
     </section>
