@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import tajImg from "@/assets/taj.png.asset.json";
 import asIsJourneyImg from "@/assets/taj-asis-journey.png.asset.json";
+import ch4Img from "@/assets/taj-ch4-data.png.asset.json";
+import ch5Img from "@/assets/taj-ch5-engine.png.asset.json";
 
 export const Route = createFileRoute("/projects/taj")({
   head: () => ({
@@ -398,61 +400,19 @@ function ChapterAsIsJourney() {
 }
 
 /* ————————————————————————————————————————————————————————
-   Chapter 4 — Key Insight: Data exists, it's fragmented
+   Chapter 4 — Taj already has the data (image)
    ———————————————————————————————————————————————————————— */
-
-const DATA_SOURCES = [
-  "Booking data",
-  "Dining preferences",
-  "Spa & wellness behaviour",
-  "App activity",
-  "Room preferences",
-  "Air India travel context",
-  "Operational data",
-  "NuePass loyalty data",
-];
 
 function ChapterKeyInsight() {
   return (
     <section className="bg-background py-28 md:py-40">
       <Container>
-        <ChapterHeader
-          number="04"
-          eyebrow="Key Insight"
-          title="Taj already has the data. It's just fragmented."
-          intro="Intelligence exists inside the walls of every property — trapped in PMS, POS, spa systems, mobile apps and loyalty databases that don't speak to each other."
-        />
-
-        <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-[1.1fr,1fr] md:gap-24">
-          <div className="grid grid-cols-2 gap-4 md:gap-5">
-            {DATA_SOURCES.map((d, i) => (
-              <div
-                key={d}
-                data-reveal
-                className="reveal border border-border/70 bg-[#FBF6EC]/40 p-5 text-[13.5px] leading-tight text-foreground/80"
-                style={{ transitionDelay: `${i * 40}ms` }}
-              >
-                {d}
-              </div>
-            ))}
-          </div>
-
-          <div data-reveal className="reveal relative">
-            <div className="mx-auto flex aspect-square max-w-[380px] items-center justify-center rounded-full border border-[var(--gold)]/40 bg-[#FBF6EC]">
-              <div className="text-center">
-                <p className="text-[10.5px] uppercase tracking-[0.28em] text-muted-foreground">
-                  Result today
-                </p>
-                <p className="mt-4 font-serif text-2xl leading-tight tracking-tight text-foreground md:text-3xl">
-                  Incomplete
-                  <br />
-                  view of the
-                  <br />
-                  <span className="italic text-[var(--gold)]">guest.</span>
-                </p>
-              </div>
-            </div>
-          </div>
+        <div data-reveal className="reveal">
+          <img
+            src={ch4Img.url}
+            alt="Taj already has the data — intelligence exists, it is just fragmented"
+            className="mx-auto block w-full max-w-[1200px]"
+          />
         </div>
       </Container>
     </section>
@@ -460,94 +420,19 @@ function ChapterKeyInsight() {
 }
 
 /* ————————————————————————————————————————————————————————
-   Chapter 5 — Transformation Engine (Strategy)
+   Chapter 5 — Transformation Engine (image)
    ———————————————————————————————————————————————————————— */
 
 function ChapterTransformationEngine() {
-  const layers = [
-    {
-      label: "Data Sources",
-      items: ["Booking", "Loyalty", "On-property", "Digital behaviour", "Travel & context", "Operational"],
-    },
-    {
-      label: "Customer 360",
-      items: ["Unified guest profile across every touchpoint"],
-    },
-    {
-      label: "AI Engine",
-      items: ["Real-time personalization", "Predictive intelligence models", "Continuous learning"],
-    },
-    {
-      label: "Intelligence in Action",
-      items: [
-        "Personalized experiences",
-        "Predictive hospitality",
-        "Intelligent pricing",
-        "Smart operations",
-        "Seamless loyalty",
-      ],
-    },
-  ];
-
   return (
-    <section className="bg-[#0F0B08] py-28 text-[#F5EDE1] md:py-40">
+    <section className="bg-background py-28 md:py-40">
       <Container>
-        <div data-reveal className="reveal mb-14 md:mb-20">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-[#D4B678]">
-            Chapter 05 · Strategy
-          </p>
-          <h2 className="mt-5 font-serif text-4xl leading-[1.05] tracking-tight md:text-6xl">
-            The Transformation Engine —
-            <br />
-            <span className="italic text-[#E7C787]">turning data into predictive luxury.</span>
-          </h2>
-          <div className="mt-8 h-px w-16 bg-[#D4B678]" />
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
-          {layers.map((l, i) => (
-            <div
-              key={l.label}
-              data-reveal
-              className="reveal relative border border-[#D4B678]/25 bg-[#1A130E]/70 p-7 backdrop-blur-sm"
-              style={{ transitionDelay: `${i * 80}ms` }}
-            >
-              <span className="text-[10.5px] uppercase tracking-[0.3em] text-[#D4B678]">
-                Layer 0{i + 1}
-              </span>
-              <h3 className="mt-4 font-serif text-2xl leading-tight tracking-tight md:text-[1.6rem]">
-                {l.label}
-              </h3>
-              <ul className="mt-6 space-y-2 text-[13.5px] leading-[1.55] text-[#F5EDE1]/75">
-                {l.items.map((it) => (
-                  <li key={it} className="flex gap-2">
-                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#D4B678]" />
-                    <span>{it}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-20 border-t border-[#D4B678]/25 pt-14">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-[#D4B678]">
-            Transformation Impact
-          </p>
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {[
-              { v: "+20%", l: "Loyalty-driven direct bookings" },
-              { v: "75%", l: "Guest profile completeness target" },
-              { v: "8+", l: "AI models in production" },
-            ].map((s) => (
-              <div key={s.l} data-reveal className="reveal border border-[#D4B678]/25 bg-[#1A130E]/70 p-8">
-                <span className="font-serif text-5xl tracking-tight text-[#E7C787]">{s.v}</span>
-                <p className="mt-4 text-[12.5px] uppercase tracking-[0.24em] text-[#F5EDE1]/70">
-                  {s.l}
-                </p>
-              </div>
-            ))}
-          </div>
+        <div data-reveal className="reveal">
+          <img
+            src={ch5Img.url}
+            alt="Transformation Engine — turning data into predictive luxury"
+            className="mx-auto block w-full max-w-[1200px]"
+          />
         </div>
       </Container>
     </section>
@@ -1372,7 +1257,6 @@ function TajPage() {
       <Divider />
       <ChapterKeyInsight />
       <ChapterTransformationEngine />
-      <ChapterCustomer360 />
       <ChapterArchitecture />
       <Divider />
       <ChapterToBeJourney />
