@@ -599,3 +599,277 @@ function StoryPanel({
   );
 }
 
+
+function Chapter4() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [progress, setProgress] = useState(0);
+  const [introVisible, setIntroVisible] = useState(false);
+
+  useEffect(() => {
+    let raf = 0;
+    const tick = () => {
+      raf = 0;
+      const el = sectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const total = el.offsetHeight - window.innerHeight;
+      const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
+      setProgress(Math.min(1, scrolled / Math.max(total, 1)));
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    tick();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setIntroVisible(true);
+            io.disconnect();
+          }
+        });
+      },
+      { threshold: 0.05 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const p = progress;
+
+  // Smooth easing
+  const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+
+  // Phase ranges
+  const phases = [
+    { start: 0.00, end: 0.12, key: "intro" },
+    { start: 0.12, end: 0.28, key: "identity" },
+    { start: 0.28, end: 0.44, key: "dignity" },
+    { start: 0.44, end: 0.60, key: "recognition" },
+    { start: 0.60, end: 0.76, key: "selfworth" },
+    { start: 0.76, end: 0.90, key: "legacy" },
+    { start: 0.90, end: 1.00, key: "final" },
+  ];
+
+  const phaseP = (key: string) => {
+    const ph = phases.find((x) => x.key === key)!;
+    const t = (p - ph.start) / (ph.end - ph.start);
+    return Math.max(0, Math.min(1, t));
+  };
+
+  // Bell curve for keyword visibility: fade in first 30%, hold, fade out last 30%
+  const keywordOpacity = (key: string) => {
+    const t = phaseP(key);
+    if (t <= 0 || t >= 1) return 0;
+    if (t < 0.25) return t / 0.25;
+    if (t > 0.75) return (1 - t) / 0.25;
+    return 1;
+  };
+
+  // Unfold progression: 0 (folded) -> 1 (fully unfolded)
+  // Advances step-wise through phases identity → legacy
+  const unfoldStages = ["identity", "dignity", "recognition", "selfworth", "legacy"];
+  let unfold = 0;
+  for (let i = 0; i < unfoldStages.length; i++) {
+    const stageP = phaseP(unfoldStages[i]);
+    unfold = Math.max(unfold, (i + ease(stageP)) / unfoldStages.length);
+  }
+  unfold = Math.min(1, unfold);
+
+  // Clip-path inset: starts at 42% each side (narrow center strip), ends at 0
+  const inset = (0.42 - 0.42 * unfold) * 100;
+  // Scale grows from 0.78 to 1.0 as it unfolds
+  const sareeScale = 0.78 + 0.22 * unfold;
+
+  // Saree opacity — fades out in final phase
+  const finalP = phaseP("final");
+  const sareeOpacity = 1 - ease(Math.min(1, finalP * 1.3));
+
+  // Legacy pause: hold legacy word slightly longer before fading
+  const legacyOp = keywordOpacity("legacy");
+  const finalQuoteOp = ease(Math.min(1, finalP * 1.4));
+
+  const introFade = (delay = 0) => ({
+    opacity: introVisible ? 1 : 0,
+    transform: introVisible ? "translateY(0)" : "translateY(20px)",
+    transition: `opacity 900ms cubic-bezier(0.22,1,0.36,1) ${delay}ms, transform 900ms cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+  });
+
+  const introOp = 1 - ease(Math.min(1, phaseP("intro") * 1.2));
+
+  const Word = ({ label, body, opacity }: { label: string; body: React.ReactNode; opacity: number }) => (
+    <div
+      className="absolute inset-0 flex flex-col items-start justify-center"
+      style={{ opacity, transition: "opacity 400ms ease-out", pointerEvents: opacity > 0 ? "auto" : "none" }}
+    >
+      <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+        {`Fold ${["identity","dignity","recognition","selfworth","legacy"].indexOf(label.toLowerCase()) + 1 || ""}`}
+      </p>
+      <h3 className="mt-6 font-[family-name:var(--font-editorial)] text-6xl font-medium leading-[0.95] tracking-tight text-[color:var(--charcoal)] md:text-[128px]">
+        {label}
+      </h3>
+      <div className="mt-8 max-w-md font-[family-name:var(--font-editorial)] text-xl leading-[1.55] text-[color:var(--charcoal)] md:text-[22px]">
+        {body}
+      </div>
+    </div>
+  );
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative bg-[color:var(--ivory)]"
+      style={{ height: "700vh" }}
+      aria-labelledby="kv-chapter-4"
+    >
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* Intro overlay */}
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 z-30 px-6 pt-16 md:px-20 md:pt-24"
+          style={{ opacity: introOp, transition: "opacity 500ms ease-out" }}
+        >
+          <div className="mx-auto max-w-6xl">
+            <p
+              className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]"
+              style={introFade(0)}
+            >
+              Chapter 4
+            </p>
+            <h2
+              id="kv-chapter-4"
+              className="mt-6 font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-6xl"
+              style={introFade(120)}
+            >
+              What Was Really Lost?
+            </h2>
+            <p
+              className="mt-8 max-w-xl font-[family-name:var(--font-editorial)] text-lg leading-[1.55] text-[color:var(--charcoal)] md:text-xl"
+              style={introFade(260)}
+            >
+              The more I understood the artisans, the more I realized they
+              hadn&rsquo;t just lost income.
+            </p>
+            <p
+              className="mt-3 max-w-xl font-[family-name:var(--font-editorial)] text-lg leading-[1.55] text-[color:var(--warm-gray)] md:text-xl"
+              style={introFade(360)}
+            >
+              They had lost something far more fundamental.
+            </p>
+          </div>
+        </div>
+
+        {/* Main stage */}
+        <div className="grid h-full grid-cols-1 items-center gap-8 px-6 md:grid-cols-12 md:gap-10 md:px-20">
+          {/* Saree */}
+          <div className="relative flex h-full items-center justify-center md:col-span-6">
+            <div
+              className="relative aspect-[3/4] w-full max-w-md md:max-w-lg"
+              style={{
+                opacity: sareeOpacity,
+                transform: `scale(${sareeScale})`,
+                transition: "transform 200ms linear, opacity 400ms ease-out",
+                willChange: "transform, clip-path",
+              }}
+            >
+              <img
+                src={ch4Saree.url}
+                alt="A handwoven silk saree depicting the Ramayana, gradually unfolding"
+                className="absolute inset-0 h-full w-full object-cover"
+                style={{
+                  clipPath: `inset(0 ${inset}% 0 ${inset}%)`,
+                  transition: "clip-path 300ms cubic-bezier(0.22,1,0.36,1)",
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Keywords */}
+          <div className="relative h-[70vh] md:col-span-6 md:h-full">
+            <Word
+              label="IDENTITY"
+              opacity={keywordOpacity("identity")}
+              body={
+                <>
+                  <p>Their craft travelled.</p>
+                  <p className="text-[color:var(--warm-gray)]">Their identity didn&rsquo;t.</p>
+                </>
+              }
+            />
+            <Word
+              label="DIGNITY"
+              opacity={keywordOpacity("dignity")}
+              body={
+                <>
+                  <p>Their work was admired.</p>
+                  <p className="text-[color:var(--warm-gray)]">They rarely were.</p>
+                </>
+              }
+            />
+            <Word
+              label="RECOGNITION"
+              opacity={keywordOpacity("recognition")}
+              body={
+                <>
+                  <p>Customers remembered the product,</p>
+                  <p className="text-[color:var(--warm-gray)]">but forgot the person behind it.</p>
+                </>
+              }
+            />
+            <Word
+              label="SELF-WORTH"
+              opacity={keywordOpacity("selfworth")}
+              body={
+                <>
+                  <p>When someone else decides the value of your work,</p>
+                  <p className="text-[color:var(--warm-gray)]">it&rsquo;s difficult to feel valued yourself.</p>
+                </>
+              }
+            />
+            <Word
+              label="LEGACY"
+              opacity={legacyOp}
+              body={
+                <>
+                  <p>
+                    Many artisans no longer want their children to continue the
+                    craft.
+                  </p>
+                  <p className="text-[color:var(--warm-gray)]">
+                    If the next generation walks away, centuries of heritage
+                    disappear with them.
+                  </p>
+                </>
+              }
+            />
+          </div>
+        </div>
+
+        {/* Final centered quote */}
+        <div
+          className="pointer-events-none absolute inset-0 z-40 flex items-center justify-center px-8"
+          style={{ opacity: finalQuoteOp, transition: "opacity 500ms ease-out" }}
+        >
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="font-[family-name:var(--font-editorial)] text-4xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-6xl">
+              I realized I wasn&rsquo;t solving an income problem.
+            </p>
+            <p className="mt-8 font-[family-name:var(--font-editorial)] text-4xl leading-[1.15] tracking-tight text-[color:var(--warm-gray)] md:text-6xl">
+              I was trying to restore identity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
