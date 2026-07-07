@@ -991,7 +991,7 @@ function Chapter5() {
             <img
               src={kvLogo.url}
               alt="KalaVansh — Making the Invisible Visible"
-              className="h-auto w-[clamp(9rem,32vw,22rem)] select-none"
+              className="h-auto w-[clamp(14rem,52vw,36rem)] select-none"
               style={{
                 transform: `scale(${logoScale})`,
                 transformOrigin: "center",
@@ -1000,19 +1000,6 @@ function Chapter5() {
               }}
               draggable={false}
             />
-            <p
-              className="mt-10 font-[family-name:var(--font-editorial)] text-2xl italic tracking-tight text-[color:var(--charcoal)] md:text-[40px] hidden"
-              style={{ opacity: nameOp, transition: "opacity 500ms ease-out" }}
-            >
-              KalaVansh
-            </p>
-
-            <p
-              className="mt-3 text-[11px] uppercase tracking-[0.5em] text-[color:var(--warm-gray)] md:text-xs"
-              style={{ opacity: taglineOp, transition: "opacity 500ms ease-out" }}
-            >
-              Making the Invisible Visible
-            </p>
           </div>
         </div>
       </section>
