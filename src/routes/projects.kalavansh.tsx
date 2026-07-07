@@ -12,9 +12,9 @@ import ch3Hand from "@/assets/kv-ch3-hand.jpeg.asset.json";
 import ch3Chikan from "@/assets/kv-ch3-chikankari.jpeg.asset.json";
 import ch3Man from "@/assets/kv-ch3-man.jpeg.asset.json";
 import ch3Elderly from "@/assets/kv-ch3-elderly.png.asset.json";
-import ch4Fold1 from "@/assets/kv-ch4-fold-1.png.asset.json";
-import ch4Fold2 from "@/assets/kv-ch4-fold-2.png.asset.json";
-import ch4Fold3 from "@/assets/kv-ch4-fold-3.png.asset.json";
+import ch4Fold1 from "@/assets/kv-ch4-fold-1.png";
+import ch4Fold2 from "@/assets/kv-ch4-fold-2.png";
+import ch4Fold3 from "@/assets/kv-ch4-fold-3.png";
 
 
 export const Route = createFileRoute("/projects/kalavansh")({
