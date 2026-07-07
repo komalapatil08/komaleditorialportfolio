@@ -58,9 +58,10 @@ const projects: Project[] = [
   },
   {
     title: "Taj Hotels Digital Transformation",
-    status: "Coming Soon",
+    status: "Live Case Study",
+    href: "/projects/taj",
     image: tajImg.url,
-    alt: "A Taj host serving tea overlooking the lake at golden hour",
+    alt: "The Taj Mahal Palace at golden hour",
     tag: "Digital Transformation • Guest Experience",
     description: "What does personalized luxury actually look like?",
   },
