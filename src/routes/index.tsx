@@ -123,7 +123,7 @@ function Nav() {
             Let’s Connect
           </a>
           <a
-            href="/resume.pdf"
+            href={resumeAsset.url}
             target="_blank"
             rel="noreferrer"
             className="resume-cta inline-flex items-center gap-1.5 border border-[var(--gold)] px-4 py-2 text-[13px] font-bold uppercase tracking-[0.14em] text-foreground transition-colors duration-300"
