@@ -139,7 +139,7 @@ function BrandMark() {
       <img
         src={titleAsset.url}
         alt="KalaVansh"
-        className="block h-8 w-auto md:h-10"
+        className="block h-10 w-auto md:h-12"
       />
     </h1>
   );
