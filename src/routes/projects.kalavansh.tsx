@@ -21,7 +21,6 @@ import ch6Pottery from "@/assets/kv-ch6-pottery.png.asset.json";
 import ch6Custom from "@/assets/kv-ch6-custom.png.asset.json";
 import ch6SiteQR from "@/assets/kv-ch6-site-qr.jpeg.asset.json";
 import ch6PhoneResult from "@/assets/kv-ch6-phone-result.jpeg.asset.json";
-import ch7Team from "@/assets/kv-ch7-team.jpeg.asset.json";
 import ch7Stall from "@/assets/kv-ch7-stall.jpeg.asset.json";
 import ch7Poster from "@/assets/kv-ch7-poster.jpeg.asset.json";
 import ch7Group from "@/assets/kv-ch7-group.png.asset.json";
