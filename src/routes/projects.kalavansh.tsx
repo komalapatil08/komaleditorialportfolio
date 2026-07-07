@@ -699,7 +699,7 @@ function Chapter4() {
     transition: `opacity 900ms cubic-bezier(0.22,1,0.36,1) ${delay}ms, transform 900ms cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
   });
 
-  const introOp = 1 - ease(Math.min(1, phaseP("intro") * 1.2));
+  const introOp = 1 - ease(Math.min(1, phaseP("intro")));
 
   const Word = ({ label, body, opacity }: { label: string; body: React.ReactNode; opacity: number }) => (
     <div
