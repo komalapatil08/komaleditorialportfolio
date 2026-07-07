@@ -20,6 +20,7 @@ import ch6MeenakariQR from "@/assets/kv-ch6-meenakari-qr.jpeg.asset.json";
 import ch6Pottery from "@/assets/kv-ch6-pottery.png.asset.json";
 import ch6Custom from "@/assets/kv-ch6-custom.png.asset.json";
 import ch6SiteQR from "@/assets/kv-ch6-site-qr.jpeg.asset.json";
+import ch6PhoneResult from "@/assets/kv-ch6-phone-result.jpeg.asset.json";
 import promiseArtisan from "@/assets/kv-promise-artisan.png.asset.json";
 import promiseCustomer from "@/assets/kv-promise-customer.png.asset.json";
 
