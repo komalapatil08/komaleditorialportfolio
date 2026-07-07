@@ -138,6 +138,8 @@ function KalaVanshPage() {
       </section>
 
       <Chapter1 />
+      <Chapter3 />
+
     </main>
   );
 }
