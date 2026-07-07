@@ -724,7 +724,7 @@ function Chapter4() {
     <section
       ref={sectionRef}
       className="relative bg-[color:var(--ivory)]"
-      style={{ height: "600vh" }}
+      style={{ height: "180vh" }}
       aria-labelledby="kv-chapter-4"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
