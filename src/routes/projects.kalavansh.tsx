@@ -21,7 +21,6 @@ import ch6Pottery from "@/assets/kv-ch6-pottery.png.asset.json";
 import ch6Custom from "@/assets/kv-ch6-custom.png.asset.json";
 import ch6SiteQR from "@/assets/kv-ch6-site-qr.jpeg.asset.json";
 import ch6PhoneResult from "@/assets/kv-ch6-phone-result.jpeg.asset.json";
-import ch7Team from "@/assets/kv-ch7-team.jpeg.asset.json";
 import ch7Stall from "@/assets/kv-ch7-stall.jpeg.asset.json";
 import ch7Poster from "@/assets/kv-ch7-poster.jpeg.asset.json";
 import ch7Group from "@/assets/kv-ch7-group.png.asset.json";
@@ -1643,13 +1642,6 @@ const JOURNEY_PHOTOS: JourneyPhoto[] = [
     caption: "Poster",
     className: "md:col-span-2 aspect-[4/3] bg-[color:var(--ivory)]",
     fit: "contain",
-  },
-  {
-    src: ch7Team.url,
-    alt: "KalaVansh team with mentor at the Cause 2026 stall",
-    caption: "Team",
-    className: "aspect-[4/5]",
-    objectPosition: "50% 40%",
   },
   {
     src: ch7Stall.url,
