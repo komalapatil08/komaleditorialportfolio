@@ -1487,9 +1487,9 @@ function PromiseSection() {
               />
               {/* Experience → Customer bottom-left edge */}
               <line
-                x1={IMG_W + BRIDGE_GAP * 2 + LOGO_W + 10}
+                x1={IMG_W + BRIDGE_GAP * 2 + LOGO_W}
                 y1={130 + IMG_H}
-                x2={IMG_W + BRIDGE_GAP * 2 + LOGO_W + 10}
+                x2={IMG_W + BRIDGE_GAP * 2 + LOGO_W}
                 y2={130 + IMG_H + 24}
                 stroke={LINE_COLOR}
                 strokeWidth={1}
