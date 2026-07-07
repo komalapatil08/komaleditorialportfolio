@@ -1305,13 +1305,16 @@ function CoreExperienceSection() {
                 </div>
               </div>
 
-              {/* Persistent scan CTA */}
-              <span className="pointer-events-none absolute left-1/2 top-full z-20 mt-5 -translate-x-1/2 whitespace-nowrap text-[11px] uppercase tracking-[0.3em] text-[color:var(--charcoal)]">
-                Scan to discover
+              {/* Tooltip */}
+              <span
+                role="tooltip"
+                className="pointer-events-none absolute left-1/2 top-full z-20 mt-4 -translate-x-1/2 whitespace-nowrap rounded-md bg-[color:var(--charcoal)] px-3 py-1.5 text-[11px] uppercase tracking-[0.25em] text-[color:var(--ivory)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              >
+                Open Artisan Story
               </span>
             </a>
 
-            <h4 className="mt-14 font-[family-name:var(--font-editorial)] text-[32px] leading-[1.1] tracking-tight text-[color:var(--charcoal)]">
+            <h4 className="mt-12 font-[family-name:var(--font-editorial)] text-[32px] leading-[1.1] tracking-tight text-[color:var(--charcoal)]">
               Discover
             </h4>
             <p className="mt-4 max-w-xs text-[18px] leading-[1.5] text-[color:var(--warm-gray)]">
