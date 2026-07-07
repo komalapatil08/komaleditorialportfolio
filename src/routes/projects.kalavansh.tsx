@@ -1261,19 +1261,23 @@ function PromiseWord({
   text,
   revealed,
   align = "left",
+  wrap = false,
 }: {
   text: string;
   revealed: boolean;
   align?: "left" | "center" | "right";
+  wrap?: boolean;
 }) {
   return (
     <span
       className={[
-        "whitespace-nowrap font-[family-name:var(--font-editorial)] leading-[1.05] tracking-tight text-[color:var(--charcoal)]",
+        "font-[family-name:var(--font-editorial)] leading-[1.05] tracking-tight text-[color:var(--charcoal)]",
+        wrap ? "" : "whitespace-nowrap",
         align === "center" ? "text-center" : align === "right" ? "text-right" : "text-left",
       ].join(" ")}
       style={{
         fontSize: "clamp(34px, 2.6vw, 38px)",
+        whiteSpace: wrap ? "normal" : undefined,
         opacity: revealed ? 1 : 0,
         transform: revealed ? "translateY(0)" : "translateY(8px)",
         transition: `opacity 1100ms ${EASE}, transform 1100ms ${EASE}`,
