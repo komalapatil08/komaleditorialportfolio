@@ -112,6 +112,9 @@ function Nav() {
           <a href="#achievements" className="story-link text-[13px] tracking-wide text-foreground/80">
             Achievements
           </a>
+          <a href="#certifications" className="story-link text-[13px] tracking-wide text-foreground/80">
+            Certifications
+          </a>
           <a href="#connect" className="story-link text-[13px] tracking-wide text-foreground/80">
             Let’s Connect
           </a>
