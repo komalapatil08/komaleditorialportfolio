@@ -22,6 +22,7 @@ import ch6Custom from "@/assets/kv-ch6-custom.png.asset.json";
 import ch6SiteQR from "@/assets/kv-ch6-site-qr.jpeg.asset.json";
 import ch6PhoneResult from "@/assets/kv-ch6-phone-result.jpeg.asset.json";
 import ch7Stall from "@/assets/kv-ch7-stall.jpeg.asset.json";
+import ch7StallFull from "@/assets/kv-ch7-stall-full.png.asset.json";
 import ch7Poster from "@/assets/kv-ch7-poster.jpeg.asset.json";
 import ch7PosterWhatsapp from "@/assets/kv-ch7-poster-whatsapp.jpeg.asset.json";
 
