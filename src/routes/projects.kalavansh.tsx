@@ -160,7 +160,28 @@ function KalaVanshPage() {
       <Chapter5 />
       <JourneySection />
 
-
+      {/* Next Project */}
+      <section className="bg-[color:var(--ivory)] px-6 pt-24 pb-32 md:px-20 md:pt-32 md:pb-40">
+        <div className="mx-auto max-w-6xl border-t border-[color:var(--charcoal)]/15 pt-12 md:pt-16">
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+            Next Project
+          </p>
+          <Link to="/projects/taj" className="group mt-6 block">
+            <h3 className="font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] transition-colors duration-300 group-hover:text-[color:var(--gold)] md:text-6xl">
+              Taj Digital Transformation
+            </h3>
+            <p className="mt-3 font-[family-name:var(--font-editorial)] text-lg leading-[1.5] text-[color:var(--warm-gray)] md:text-xl">
+              What does personalized luxury actually look like?
+            </p>
+            <p className="mt-2 text-[11px] uppercase tracking-[0.24em] text-[color:var(--warm-gray)]">
+              Digital Transformation • Guest Experience
+            </p>
+            <span className="mt-8 inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.22em] text-[color:var(--charcoal)] transition-all duration-300 group-hover:gap-3 group-hover:text-[color:var(--gold)]">
+              Read next case study <span aria-hidden>→</span>
+            </span>
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }
