@@ -305,15 +305,26 @@ function Chapter1() {
 function BrandMark() {
   // Large, centered black wordmark matching the uploaded lettering reference.
   return (
-    <h1 className="m-0 inline-block p-0">
-      <img
-        src={titleAsset.url}
-        alt="KalaVansh"
-        className="block h-16 w-auto md:h-24"
-      />
-    </h1>
+    <div className="flex flex-col items-center gap-3">
+      <h1 className="m-0 inline-block p-0">
+        <img
+          src={titleAsset.url}
+          alt="KalaVansh"
+          className="block h-16 w-auto md:h-24"
+        />
+      </h1>
+      <a
+        href="https://kalavansh.vercel.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.28em] text-[color:var(--gold)] transition-all duration-200 hover:-translate-y-0.5 hover:underline md:text-[12px]"
+      >
+        🌐 Visit kalavansh.vercel.app <span aria-hidden>↗</span>
+      </a>
+    </div>
   );
 }
+
 
 function Chapter3() {
   const sectionRef = useRef<HTMLElement | null>(null);
