@@ -1285,9 +1285,10 @@ function CoreExperienceSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Open Artisan Story"
-              className="group relative block"
+              className="group relative flex items-center gap-4"
               style={{ height: 260 }}
             >
+              {/* Phone 1 — QR code */}
               <div
                 className="relative h-[260px] transition-transform duration-300 ease-out group-hover:scale-[1.03]"
                 style={{ aspectRatio: "9 / 19" }}
@@ -1300,6 +1301,43 @@ function CoreExperienceSection() {
                         src={ch6MeenakariQR.url}
                         alt="Scan to meet the Meenakari artisan"
                         className="w-full max-w-[110px]"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Arrow */}
+              <svg
+                width="28"
+                height="12"
+                viewBox="0 0 28 12"
+                fill="none"
+                className="shrink-0 text-[color:var(--charcoal)]/60"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1 6h25M21 1l6 5-6 5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+
+              {/* Phone 2 — Result screen */}
+              <div
+                className="relative h-[260px] transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+                style={{ aspectRatio: "9 / 19" }}
+              >
+                <div className="absolute inset-0 rounded-[28px] border border-[color:var(--charcoal)]/15 bg-[color:var(--charcoal)] p-[6px] shadow-[0_30px_60px_-30px_rgba(31,31,31,0.35)]">
+                  <div className="relative h-full w-full overflow-hidden rounded-[22px] bg-[color:var(--ivory)]">
+                    <div className="absolute left-1/2 top-1.5 z-10 h-3 w-14 -translate-x-1/2 rounded-full bg-[color:var(--charcoal)]" />
+                    <div className="flex h-full w-full items-center justify-center overflow-hidden">
+                      <img
+                        src={ch6PhoneResult.url}
+                        alt="Artisan story video opens after scanning"
+                        className="h-full w-full object-cover"
                       />
                     </div>
                   </div>
