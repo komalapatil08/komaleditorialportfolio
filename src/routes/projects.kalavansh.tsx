@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import vaseAsset from "@/assets/kv-vase.jpg.asset.json";
 import artisanAsset from "@/assets/kv-artisan.jpg.asset.json";
+import titleAsset from "@/assets/kv-title-indigo.png.asset.json";
+
 
 export const Route = createFileRoute("/projects/kalavansh")({
   head: () => ({
@@ -131,16 +133,14 @@ function KalaVanshPage() {
 }
 
 function BrandMark() {
-  // Inspired by the uploaded "india" reference — serif lowercase with a
-  // single horizontal rule and small devanagari-like tick marks above.
+  // Indigo wordmark matching the uploaded lettering reference.
   return (
-    <div className="relative inline-block select-none">
-      <span aria-hidden className="absolute -top-1 left-[18%] h-2 w-px rotate-[-18deg] bg-[color:var(--charcoal)]" />
-      <span aria-hidden className="absolute -top-1 left-[58%] h-2 w-px rotate-[-18deg] bg-[color:var(--charcoal)]" />
-      <h1 className="font-[family-name:var(--font-editorial)] text-2xl font-normal lowercase tracking-tight text-[color:var(--charcoal)] md:text-[28px]">
-        kalavansh
-      </h1>
-      <span aria-hidden className="mt-1 block h-px w-full bg-[color:var(--charcoal)]" />
-    </div>
+    <h1 className="m-0 inline-block p-0">
+      <img
+        src={titleAsset.url}
+        alt="KalaVansh"
+        className="block h-10 w-auto md:h-12"
+      />
+    </h1>
   );
 }
