@@ -21,6 +21,9 @@ import ch6Pottery from "@/assets/kv-ch6-pottery.png.asset.json";
 import ch6Custom from "@/assets/kv-ch6-custom.png.asset.json";
 import ch6SiteQR from "@/assets/kv-ch6-site-qr.jpeg.asset.json";
 import ch6PhoneResult from "@/assets/kv-ch6-phone-result.jpeg.asset.json";
+import ch7Team from "@/assets/kv-ch7-team.jpeg.asset.json";
+import ch7Stall from "@/assets/kv-ch7-stall.jpeg.asset.json";
+import ch7Poster from "@/assets/kv-ch7-poster.jpeg.asset.json";
 import promiseArtisan from "@/assets/kv-promise-artisan.png.asset.json";
 import promiseCustomer from "@/assets/kv-promise-customer.png.asset.json";
 
@@ -152,6 +155,7 @@ function KalaVanshPage() {
       <Chapter3 />
       <Chapter4 />
       <Chapter5 />
+      <JourneySection />
 
 
     </main>
@@ -1752,6 +1756,206 @@ function PromiseSection() {
     </section>
   );
 }
+
+
+/* ================================================================
+ * JourneySection — Chapter 7: "From an idea to a movement."
+ * Editorial documentary photo wall from Cause 2026.
+ * ================================================================ */
+
+type JourneyPhoto = {
+  src: string;
+  alt: string;
+  caption: string;
+  className: string;
+  objectPosition?: string;
+};
+
+const JOURNEY_PHOTOS: JourneyPhoto[] = [
+  {
+    src: ch7Team.url,
+    alt: "KalaVansh team with mentor at the Cause 2026 stall",
+    caption: "Team",
+    className: "md:col-span-2 aspect-[16/10]",
+    objectPosition: "50% 40%",
+  },
+  {
+    src: ch7Poster.url,
+    alt: "KalaVansh poster and prototype laptop at the stall",
+    caption: "Presenting",
+    className: "aspect-[4/5]",
+    objectPosition: "50% 35%",
+  },
+  {
+    src: ch7Stall.url,
+    alt: "Team members presenting the KalaVansh prototype to visitors",
+    caption: "Impact",
+    className: "aspect-[4/5]",
+    objectPosition: "50% 40%",
+  },
+];
+
+function JourneyPhotoTile({ photo, delay }: { photo: JourneyPhoto; delay: number }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            window.setTimeout(() => setShown(true), delay);
+            io.disconnect();
+          }
+        }
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [delay]);
+
+  return (
+    <figure
+      ref={ref}
+      className={`group relative overflow-hidden rounded-xl bg-[color:var(--charcoal)]/5 ${photo.className}`}
+      style={{
+        opacity: shown ? 1 : 0,
+        transform: shown ? "translateY(0)" : "translateY(16px)",
+        transition: `opacity 900ms ${EASE}, transform 900ms ${EASE}`,
+      }}
+    >
+      <img
+        src={photo.src}
+        alt={photo.alt}
+        draggable={false}
+        loading="lazy"
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+        style={{ objectPosition: photo.objectPosition ?? "50% 50%" }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-[color:var(--charcoal)]/0 transition-colors duration-500 group-hover:bg-[color:var(--charcoal)]/10"
+      />
+      <figcaption className="absolute bottom-5 left-5 text-[11px] uppercase tracking-[0.4em] text-white opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+        {photo.caption}
+      </figcaption>
+    </figure>
+  );
+}
+
+function JourneySection() {
+  const headRef = useRef<HTMLDivElement | null>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = headRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            setInView(true);
+            io.disconnect();
+          }
+        }
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const fade = (delay = 0): React.CSSProperties => ({
+    opacity: inView ? 1 : 0,
+    transform: inView ? "translateY(0)" : "translateY(12px)",
+    transition: `opacity 1100ms ${EASE} ${delay}ms, transform 1100ms ${EASE} ${delay}ms`,
+  });
+
+  return (
+    <section
+      aria-labelledby="kv-chapter-7"
+      className="bg-[color:var(--ivory)] px-6 pt-40 pb-40 md:px-20 md:pt-56 md:pb-56"
+    >
+      <div className="mx-auto max-w-6xl">
+        <div ref={headRef} className="mx-auto max-w-3xl text-center">
+          <p
+            className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]"
+            style={fade(0)}
+          >
+            The Journey
+          </p>
+          <h2
+            id="kv-chapter-7"
+            className="mt-8 font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-[68px]"
+            style={fade(120)}
+          >
+            From an idea to a movement.
+          </h2>
+          <p
+            className="mx-auto mt-10 max-w-2xl text-[17px] leading-[1.7] text-[color:var(--warm-gray)] md:text-[19px]"
+            style={fade(240)}
+          >
+            KalaVansh began as a student project for Cause 2026, but quickly
+            became a vision for reconnecting artisans with the people who value
+            their craft. Every interview, prototype, workshop and presentation
+            strengthened one belief:
+          </p>
+          <p
+            className="mx-auto mt-8 max-w-2xl font-[family-name:var(--font-editorial)] text-2xl leading-[1.4] tracking-tight text-[color:var(--charcoal)] md:text-[30px]"
+            style={fade(360)}
+          >
+            Stories deserve to travel with every handcrafted product.
+          </p>
+        </div>
+
+        <div className="mt-24 grid grid-cols-1 gap-5 md:mt-32 md:grid-cols-2 md:gap-6">
+          {JOURNEY_PHOTOS.map((p, i) => (
+            <JourneyPhotoTile key={p.src} photo={p} delay={i * 120} />
+          ))}
+        </div>
+
+        <div
+          className="mx-auto mt-32 flex flex-col items-center text-center md:mt-40"
+          style={fade(0)}
+        >
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--charcoal)]">
+            Cause 2026
+          </p>
+          <p className="mt-4 text-[13px] tracking-[0.15em] text-[color:var(--warm-gray)]">
+            CMR University Lakeside Campus
+          </p>
+          <p className="mt-1 text-[13px] tracking-[0.15em] text-[color:var(--warm-gray)]">
+            Institute of Product Leadership
+          </p>
+
+          <span className="mt-20 block h-16 w-px bg-[color:var(--charcoal)]/25" />
+
+          <p className="mt-20 font-[family-name:var(--font-editorial)] text-2xl leading-[1.5] tracking-tight text-[color:var(--charcoal)] md:text-[32px]">
+            Built with empathy.
+            <br />
+            Designed for impact.
+            <br />
+            Made to preserve India&rsquo;s living heritage.
+          </p>
+
+          <div className="mt-32 flex flex-col items-center md:mt-44">
+            <img
+              src={kvLogo.url}
+              alt="KalaVansh"
+              draggable={false}
+              className="h-24 w-auto opacity-90 md:h-32"
+            />
+            <p className="mt-8 font-serif text-base italic tracking-wide text-[color:var(--warm-gray)] md:text-lg">
+              Making the Invisible Visible.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
 
 
