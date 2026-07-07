@@ -133,13 +133,13 @@ function KalaVanshPage() {
 }
 
 function BrandMark() {
-  // Indigo wordmark matching the uploaded lettering reference.
+  // Large, centered black wordmark matching the uploaded lettering reference.
   return (
     <h1 className="m-0 inline-block p-0">
       <img
         src={titleAsset.url}
         alt="KalaVansh"
-        className="block h-10 w-auto md:h-12"
+        className="block h-16 w-auto md:h-24"
       />
     </h1>
   );
