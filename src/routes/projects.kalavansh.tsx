@@ -79,13 +79,13 @@ function KalaVanshPage() {
                 src={artisanAsset.url}
                 alt="An Indian artisan hand-painting a Meenakari vase in his workshop"
                 className="absolute inset-0 h-full w-full object-cover"
-                style={{ opacity: 1 - imageP, transition: "opacity 120ms linear" }}
+                style={{ opacity: 1 - imageP, transition: "opacity 200ms linear" }}
               />
               <img
                 src={vaseAsset.url}
                 alt="The finished Meenakari vase, richly enamelled in cobalt and gold"
                 className="absolute inset-0 h-full w-full object-cover"
-                style={{ opacity: imageP, transition: "opacity 120ms linear" }}
+                style={{ opacity: imageP, transition: "opacity 200ms linear" }}
               />
             </div>
 
