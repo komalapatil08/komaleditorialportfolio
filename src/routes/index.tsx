@@ -49,18 +49,19 @@ const featured: FeaturedProject[] = [
     prototypeUrl: "https://meet-craft.vercel.app/",
   },
   {
+    question: "What if the maker mattered more than the object?",
+    title: "KalaVansh",
+    tag: "Craft • Storytelling • Product Thinking",
+    image: kalavanshImg.url,
+    alt: "An Indian artisan hand-embroidering intricate Chikankari florals on ivory fabric",
+    href: "/projects/kalavansh",
+  },
+  {
     question: "What does personalized luxury actually look like?",
     title: "Taj Digital Transformation",
     tag: "Digital Transformation • Guest Experience",
     image: tajImg.url,
     alt: "A Taj host serving tea overlooking the lake at golden hour",
-  },
-  {
-    question: "What if the maker mattered more than the object?",
-    title: "KalaVansh",
-    tag: "Craft • Storytelling • Product Thinking",
-    image: kalavanshImg,
-    alt: "Hands of an Indian artisan painting intricate Meenakari work on a brass vessel",
   },
 ];
 
