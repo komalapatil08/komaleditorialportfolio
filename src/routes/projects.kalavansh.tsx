@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import vaseAsset from "@/assets/kv-vase.jpg.asset.json";
 import artisanAsset from "@/assets/kv-artisan.jpg.asset.json";
