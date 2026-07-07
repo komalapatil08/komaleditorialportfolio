@@ -24,6 +24,9 @@ import ch6PhoneResult from "@/assets/kv-ch6-phone-result.jpeg.asset.json";
 import ch7Team from "@/assets/kv-ch7-team.jpeg.asset.json";
 import ch7Stall from "@/assets/kv-ch7-stall.jpeg.asset.json";
 import ch7Poster from "@/assets/kv-ch7-poster.jpeg.asset.json";
+import ch7Group from "@/assets/kv-ch7-group.png.asset.json";
+import ch7Cups from "@/assets/kv-ch7-cups.jpeg.asset.json";
+import ch7Saree from "@/assets/kv-ch7-saree.jpeg.asset.json";
 import promiseArtisan from "@/assets/kv-promise-artisan.png.asset.json";
 import promiseCustomer from "@/assets/kv-promise-customer.png.asset.json";
 
