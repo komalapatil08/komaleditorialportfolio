@@ -20,6 +20,7 @@ import ch6MeenakariQR from "@/assets/kv-ch6-meenakari-qr.jpeg.asset.json";
 import ch6Pottery from "@/assets/kv-ch6-pottery.png.asset.json";
 import ch6Custom from "@/assets/kv-ch6-custom.png.asset.json";
 import ch6SiteQR from "@/assets/kv-ch6-site-qr.jpeg.asset.json";
+import ch6PhoneResult from "@/assets/kv-ch6-phone-result.jpeg.asset.json";
 import promiseArtisan from "@/assets/kv-promise-artisan.png.asset.json";
 import promiseCustomer from "@/assets/kv-promise-customer.png.asset.json";
 
@@ -1284,9 +1285,10 @@ function CoreExperienceSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Open Artisan Story"
-              className="group relative block"
+              className="group relative flex items-center gap-4"
               style={{ height: 260 }}
             >
+              {/* Phone 1 — QR code */}
               <div
                 className="relative h-[260px] transition-transform duration-300 ease-out group-hover:scale-[1.03]"
                 style={{ aspectRatio: "9 / 19" }}
@@ -1305,16 +1307,50 @@ function CoreExperienceSection() {
                 </div>
               </div>
 
-              {/* Tooltip */}
-              <span
-                role="tooltip"
-                className="pointer-events-none absolute left-1/2 top-full z-20 mt-4 -translate-x-1/2 whitespace-nowrap rounded-md bg-[color:var(--charcoal)] px-3 py-1.5 text-[11px] uppercase tracking-[0.25em] text-[color:var(--ivory)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              {/* Arrow */}
+              <svg
+                width="28"
+                height="12"
+                viewBox="0 0 28 12"
+                fill="none"
+                className="shrink-0 text-[color:var(--charcoal)]/60"
+                aria-hidden="true"
               >
-                Open Artisan Story
+                <path
+                  d="M1 6h25M21 1l6 5-6 5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+
+              {/* Phone 2 — Result screen */}
+              <div
+                className="relative h-[260px] transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+                style={{ aspectRatio: "9 / 19" }}
+              >
+                <div className="absolute inset-0 rounded-[28px] border border-[color:var(--charcoal)]/15 bg-[color:var(--charcoal)] p-[6px] shadow-[0_30px_60px_-30px_rgba(31,31,31,0.35)]">
+                  <div className="relative h-full w-full overflow-hidden rounded-[22px] bg-[color:var(--ivory)]">
+                    <div className="absolute left-1/2 top-1.5 z-10 h-3 w-14 -translate-x-1/2 rounded-full bg-[color:var(--charcoal)]" />
+                    <div className="flex h-full w-full items-center justify-center overflow-hidden">
+                      <img
+                        src={ch6PhoneResult.url}
+                        alt="Artisan story video opens after scanning"
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Persistent scan CTA */}
+              <span className="pointer-events-none absolute left-1/2 top-full z-20 mt-5 -translate-x-1/2 whitespace-nowrap text-[11px] uppercase tracking-[0.3em] text-[color:var(--charcoal)]">
+                Scan to discover
               </span>
             </a>
 
-            <h4 className="mt-12 font-[family-name:var(--font-editorial)] text-[32px] leading-[1.1] tracking-tight text-[color:var(--charcoal)]">
+            <h4 className="mt-14 font-[family-name:var(--font-editorial)] text-[32px] leading-[1.1] tracking-tight text-[color:var(--charcoal)]">
               Discover
             </h4>
             <p className="mt-4 max-w-xs text-[18px] leading-[1.5] text-[color:var(--warm-gray)]">
