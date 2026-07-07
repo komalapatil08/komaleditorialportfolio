@@ -258,7 +258,6 @@ function Chapter1() {
         </div>
       </div>
     </section>
-    </main>
   );
 }
 
