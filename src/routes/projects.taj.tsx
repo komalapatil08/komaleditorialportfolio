@@ -22,8 +22,17 @@ import {
   LogOut,
   Repeat,
   Unlink,
+  Tag,
+  UserCheck,
+  CreditCard,
+  Gift,
+  Smile,
+  Users,
+  Bookmark,
+  Star,
 } from "lucide-react";
 import tajImg from "@/assets/taj.png.asset.json";
+
 
 
 export const Route = createFileRoute("/projects/taj")({
