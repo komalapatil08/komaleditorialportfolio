@@ -65,15 +65,15 @@ function KalaVanshPage() {
     <main className="bg-[color:var(--ivory)] text-[color:var(--charcoal)]">
       {/* Opening section — sticky visual, scroll drives crossfade */}
       <section ref={sectionRef} className="relative" style={{ height: "220vh" }}>
-        <div className="sticky top-0 h-screen w-full overflow-hidden">
+        <div className="sticky top-0 flex h-screen w-full flex-col overflow-hidden px-6 py-6 md:px-12 md:py-8">
           {/* Brand mark */}
-          <div className="absolute left-6 top-6 z-20 md:left-12 md:top-10">
+          <div className="relative z-20 mb-4 self-start">
             <BrandMark />
           </div>
 
-          <div className="grid h-full w-full grid-cols-1 md:grid-cols-2">
+          <div className="grid flex-1 grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
             {/* Left — image stack */}
-            <div className="relative h-[55vh] w-full md:h-full">
+            <div className="relative mx-auto aspect-[4/5] h-[45vh] w-full max-w-md md:aspect-auto md:h-[65vh] md:max-w-lg">
               <img
                 src={artisanAsset.url}
                 alt="An Indian artisan hand-painting a Meenakari vase in his workshop"
@@ -89,10 +89,10 @@ function KalaVanshPage() {
             </div>
 
             {/* Right — editorial copy */}
-            <div className="relative flex items-center justify-start px-8 py-16 md:px-20 md:py-0">
+            <div className="relative flex items-center justify-start px-0 md:px-12">
               <div className="relative max-w-md">
                 <p
-                  className="font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-5xl"
+                  className="font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-[42px]"
                   style={{ opacity: 1 - textP, transition: "opacity 200ms linear" }}
                 >
                   This is what usually happens.
@@ -101,10 +101,10 @@ function KalaVanshPage() {
                   className="absolute inset-0"
                   style={{ opacity: textP, transition: "opacity 200ms linear" }}
                 >
-                  <p className="font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-5xl">
+                  <p className="font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-[42px]">
                     The product is remembered.
                   </p>
-                  <p className="mt-3 font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--warm-gray)] md:text-5xl">
+                  <p className="mt-3 font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--warm-gray)] md:text-[42px]">
                     The maker is forgotten.
                   </p>
                 </div>
@@ -114,7 +114,7 @@ function KalaVanshPage() {
 
           {/* Scroll cue */}
           <div
-            className="pointer-events-none absolute bottom-8 left-1/2 z-20 -translate-x-1/2"
+            className="pointer-events-none relative z-20 mx-auto mt-4"
             style={{ opacity: cueOpacity, transition: "opacity 200ms linear" }}
           >
             <div className="flex flex-col items-center gap-3">
