@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import vaseAsset from "@/assets/kv-vase.jpg.asset.json";
 import artisanAsset from "@/assets/kv-artisan.jpg.asset.json";
-import titleAsset from "@/assets/kv-title-indigo.png.asset.json";
+import titleAsset from "@/assets/kv-title-black.png.asset.json";
 
 
 export const Route = createFileRoute("/projects/kalavansh")({
@@ -69,7 +69,7 @@ function KalaVanshPage() {
       <section ref={sectionRef} className="relative" style={{ height: "220vh" }}>
         <div className="sticky top-0 flex h-screen w-full flex-col overflow-hidden px-6 py-6 md:px-12 md:py-8">
           {/* Brand mark */}
-          <div className="relative z-20 mb-4 self-start">
+          <div className="relative z-20 mb-6 self-center">
             <BrandMark />
           </div>
 
@@ -133,13 +133,13 @@ function KalaVanshPage() {
 }
 
 function BrandMark() {
-  // Indigo wordmark matching the uploaded lettering reference.
+  // Large, centered black wordmark matching the uploaded lettering reference.
   return (
     <h1 className="m-0 inline-block p-0">
       <img
         src={titleAsset.url}
         alt="KalaVansh"
-        className="block h-10 w-auto md:h-12"
+        className="block h-16 w-auto md:h-24"
       />
     </h1>
   );
