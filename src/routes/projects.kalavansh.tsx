@@ -100,7 +100,7 @@ function KalaVanshPage() {
                 </p>
                 <div
                   className="absolute inset-0"
-                  style={{ opacity: textP, transition: "opacity 200ms linear" }}
+                  style={{ opacity: imageP, transition: "opacity 200ms linear" }}
                 >
                   <p className="font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-[42px]">
                     The product is remembered.
