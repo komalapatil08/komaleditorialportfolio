@@ -1369,9 +1369,6 @@ function CoreExperienceSection() {
             <br />
             to creating something uniquely yours.
           </p>
-          <p className="mt-16 font-[family-name:var(--font-editorial)] italic text-2xl leading-[1.2] tracking-tight text-[color:var(--charcoal)] md:text-[36px]">
-            Making the Invisible Visible.
-          </p>
         </div>
       </div>
     </section>
