@@ -1358,7 +1358,7 @@ function PromiseSection() {
   return (
     <section
       ref={ref}
-      className="relative bg-[color:var(--ivory)] px-6 pt-28 pb-36 md:px-12 md:pt-36 md:pb-48"
+      className="relative bg-[color:var(--ivory)] px-6 pt-20 pb-36 md:px-12 md:pt-28 md:pb-48"
       aria-labelledby="kv-promise"
     >
       <div className="mx-auto max-w-[1400px]">
