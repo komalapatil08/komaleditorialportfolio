@@ -689,10 +689,8 @@ function Chapter4() {
   const finalP = phaseP("final");
   const sareeOpacity = 1 - ease(Math.min(1, finalP * 1.3));
 
-  // Legacy word: only becomes bold/dark once saree begins fading (final phase)
-  const legacyBoldOp = ease(Math.min(1, finalP * 1.2));
-  const legacyPreOp = keywordOpacity("legacy") * (1 - legacyBoldOp);
-  const finalQuoteOp = ease(Math.max(0, Math.min(1, (finalP - 0.35) / 0.5)));
+  // Legacy word fades out as the saree fades in the final phase
+  const legacyPreOp = keywordOpacity("legacy");
 
 
   const introFade = (delay = 0) => ({
@@ -866,26 +864,6 @@ function Chapter4() {
           </div>
         </div>
 
-        {/* Final Legacy overlay — appears as saree fades */}
-        <div
-          className="pointer-events-none absolute inset-0 z-40 flex flex-col items-center justify-center px-8 text-center"
-          style={{ opacity: legacyBoldOp, transition: "opacity 600ms ease-out" }}
-        >
-          <h3 className="font-[family-name:var(--font-editorial)] text-6xl font-bold leading-[0.95] tracking-tight text-[color:var(--charcoal)] md:text-[180px]">
-            Legacy
-          </h3>
-          <div
-            className="mt-10 max-w-3xl"
-            style={{ opacity: finalQuoteOp, transition: "opacity 600ms ease-out" }}
-          >
-            <p className="font-[family-name:var(--font-editorial)] text-2xl leading-[1.35] tracking-tight text-[color:var(--charcoal)] md:text-4xl">
-              I realized I wasn&rsquo;t solving an income problem.
-            </p>
-            <p className="mt-6 font-[family-name:var(--font-editorial)] text-2xl leading-[1.35] tracking-tight text-[color:var(--warm-gray)] md:text-4xl">
-              I was trying to restore identity.
-            </p>
-          </div>
-        </div>
 
       </div>
     </section>
