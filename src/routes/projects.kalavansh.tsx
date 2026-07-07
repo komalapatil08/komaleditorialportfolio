@@ -766,77 +766,49 @@ function Chapter4() {
 
         {/* Main stage */}
         <div className="grid h-full grid-cols-1 items-center gap-8 px-6 md:grid-cols-12 md:gap-10 md:px-20">
-          {/* Saree — folded, unfolding strip by strip */}
+          {/* Saree — three real photographs cross-fading: folded → partial → open */}
           <div className="relative flex h-full items-center justify-center md:col-span-6">
-            <div
-              className="relative aspect-[3/4] w-full max-w-md md:max-w-lg"
-              style={{
-                opacity: sareeOpacity,
-                transition: "opacity 700ms ease-out",
-                perspective: "1400px",
-                willChange: "opacity",
-              }}
-            >
-              {/* Base fully unfolded saree */}
-              <img
-                src={ch4Saree.url}
-                alt="A handwoven silk saree depicting the Ramayana, gradually unfolding"
-                className="absolute inset-0 h-full w-full object-cover shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)]"
-              />
-              {/* 5 fold flaps — each covers a horizontal strip and peels open in turn */}
-              {foldOpen.map((open, i) => {
-                const stripTop = (i / 5) * 100;
-                const bgPosY = (i / 4) * 100; // aligns each flap's texture to its own strip
-                const rot = -170 * open; // flap rotates up/back
-                const flapOpacity = 1 - open;
-                const shadow = 0.35 * (1 - open);
-                return (
-                  <div
-                    key={i}
-                    className="absolute left-0 w-full overflow-hidden"
-                    style={{
-                      top: `${stripTop}%`,
-                      height: "20%",
-                      transformOrigin: "top center",
-                      transform: `rotateX(${rot}deg)`,
-                      opacity: flapOpacity,
-                      transition:
-                        "transform 700ms cubic-bezier(0.22,1,0.36,1), opacity 700ms cubic-bezier(0.22,1,0.36,1)",
-                      backfaceVisibility: "hidden",
-                      willChange: "transform, opacity",
-                      boxShadow: `0 8px 24px -8px rgba(0,0,0,${shadow})`,
-                    }}
-                  >
-                    <div
-                      className="absolute inset-0"
+            {(() => {
+              const unfold = foldOpen.reduce((a, b) => a + b, 0) / foldOpen.length;
+              // Piecewise cross-fade across three photos
+              const op1 = unfold <= 0.5 ? 1 - unfold * 2 : 0;
+              const op2 =
+                unfold <= 0.5 ? unfold * 2 : Math.max(0, 1 - (unfold - 0.5) * 2);
+              const op3 = unfold > 0.5 ? (unfold - 0.5) * 2 : 0;
+              const scale = 0.94 + 0.06 * unfold;
+              return (
+                <div
+                  className="relative aspect-[16/9] w-full max-w-2xl"
+                  style={{
+                    opacity: sareeOpacity,
+                    transform: `scale(${scale})`,
+                    transition:
+                      "opacity 700ms ease-out, transform 800ms cubic-bezier(0.22,1,0.36,1)",
+                    willChange: "opacity, transform",
+                  }}
+                >
+                  {[
+                    { src: ch4Fold1.url, op: op1, alt: "A silk saree neatly folded on a temple floor" },
+                    { src: ch4Fold2.url, op: op2, alt: "The saree partially unfolded, revealing narrative panels" },
+                    { src: ch4Fold3.url, op: op3, alt: "The saree fully unfolded in the courtyard" },
+                  ].map((img, i) => (
+                    <img
+                      key={i}
+                      src={img.src}
+                      alt={img.alt}
+                      className="absolute inset-0 h-full w-full object-cover"
                       style={{
-                        backgroundImage: `url(${ch4Saree.url})`,
-                        backgroundSize: "100% 500%",
-                        backgroundPosition: `50% ${bgPosY}%`,
-                        backgroundRepeat: "no-repeat",
+                        opacity: img.op,
+                        transition: "opacity 900ms cubic-bezier(0.22,1,0.36,1)",
                       }}
                     />
-                    {/* subtle fold crease at bottom of the flap */}
-                    <div
-                      className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px]"
-                      style={{
-                        background:
-                          "linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0))",
-                      }}
-                    />
-                    {/* soft top highlight for fabric feel */}
-                    <div
-                      className="pointer-events-none absolute inset-x-0 top-0 h-1/2"
-                      style={{
-                        background:
-                          "linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(0,0,0,0.06))",
-                      }}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+                  ))}
+                </div>
+              );
+            })()}
           </div>
+
+
 
           {/* Keywords */}
           <div className="relative h-[70vh] md:col-span-6 md:h-full">
