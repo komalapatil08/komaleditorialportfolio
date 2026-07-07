@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import vaseAsset from "@/assets/kv-vase.jpg.asset.json";
 import artisanAsset from "@/assets/kv-artisan.jpg.asset.json";
 import titleAsset from "@/assets/kv-title-hires.png.asset.json";
+import meenakariAsset from "@/assets/kv-meenakari.jpeg.asset.json";
+import sareeAsset from "@/assets/kv-saree.jpeg.asset.json";
+import kurtiAsset from "@/assets/kv-kurti.png.asset.json";
 
 
 export const Route = createFileRoute("/projects/kalavansh")({
