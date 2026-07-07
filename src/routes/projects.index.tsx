@@ -28,7 +28,7 @@ export const Route = createFileRoute("/projects/")({
 type Project = {
   title: string;
   status: "Live Case Study" | "Coming Soon";
-  href?: "/projects/meetcraft" | "/projects/kalavansh";
+  href?: "/projects/meetcraft" | "/projects/kalavansh" | "/projects/taj";
   image?: string;
   alt?: string;
   tag?: string;
