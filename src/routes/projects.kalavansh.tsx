@@ -58,9 +58,8 @@ function KalaVanshPage() {
     };
   }, []);
 
-  // Ease progress into three phases: image crossfade first half, text crossfade second half
+  // Scroll progress drives the image and editorial text crossfades in unison.
   const imageP = Math.min(1, progress / 0.6);
-  const textP = Math.max(0, (progress - 0.4) / 0.5);
   const cueOpacity = Math.max(0, 1 - progress * 2);
 
   return (
@@ -80,13 +79,13 @@ function KalaVanshPage() {
                 src={artisanAsset.url}
                 alt="An Indian artisan hand-painting a Meenakari vase in his workshop"
                 className="absolute inset-0 h-full w-full object-cover"
-                style={{ opacity: 1 - imageP, transition: "opacity 120ms linear" }}
+                style={{ opacity: 1 - imageP, transition: "opacity 200ms linear" }}
               />
               <img
                 src={vaseAsset.url}
                 alt="The finished Meenakari vase, richly enamelled in cobalt and gold"
                 className="absolute inset-0 h-full w-full object-cover"
-                style={{ opacity: imageP, transition: "opacity 120ms linear" }}
+                style={{ opacity: imageP, transition: "opacity 200ms linear" }}
               />
             </div>
 
@@ -95,13 +94,13 @@ function KalaVanshPage() {
               <div className="relative max-w-md">
                 <p
                   className="font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-[42px]"
-                  style={{ opacity: 1 - textP, transition: "opacity 200ms linear" }}
+                  style={{ opacity: 1 - imageP, transition: "opacity 200ms linear" }}
                 >
                   This is what usually happens.
                 </p>
                 <div
                   className="absolute inset-0"
-                  style={{ opacity: textP, transition: "opacity 200ms linear" }}
+                  style={{ opacity: imageP, transition: "opacity 200ms linear" }}
                 >
                   <p className="font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-[42px]">
                     The product is remembered.
