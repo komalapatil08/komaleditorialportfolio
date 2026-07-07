@@ -1361,7 +1361,7 @@ function PromiseSection() {
       className="relative bg-[color:var(--ivory)] px-6 pt-8 pb-36 md:px-12 md:pt-10 md:pb-48"
       aria-labelledby="kv-promise"
     >
-      <div className="mx-auto max-w-[1400px]">
+      <div className="mx-auto flex max-w-[1400px] flex-col items-center">
         {/* Header */}
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
