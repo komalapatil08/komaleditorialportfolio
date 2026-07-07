@@ -702,7 +702,7 @@ function Chapter4() {
 
   const introOp = 1 - ease(Math.min(1, phaseP("intro")));
 
-  const Word = ({ label, body, opacity }: { label: string; body: React.ReactNode; opacity: number }) => (
+  const Word = ({ label, body, opacity, compact = false }: { label: string; body: React.ReactNode; opacity: number; compact?: boolean }) => (
     <div
       className="absolute inset-0 flex flex-col items-start justify-center"
       style={{ opacity, transition: "opacity 400ms ease-out", pointerEvents: opacity > 0 ? "auto" : "none" }}
@@ -711,7 +711,7 @@ function Chapter4() {
         What was lost
       </p>
 
-      <h3 className="mt-6 max-w-[10ch] font-[family-name:var(--font-editorial)] text-[clamp(3.8rem,7vw,7rem)] font-medium leading-[0.92] tracking-tight text-[color:var(--charcoal)] md:max-w-none md:text-[clamp(5.25rem,8vw,7.8rem)]">
+      <h3 className={`mt-6 max-w-[10ch] font-[family-name:var(--font-editorial)] ${compact ? "text-[clamp(3.35rem,5.6vw,5.8rem)] md:text-[clamp(4.25rem,5.8vw,6rem)]" : "text-[clamp(3.8rem,7vw,7rem)] md:text-[clamp(5.25rem,8vw,7.8rem)]"} font-medium leading-[0.92] tracking-tight text-[color:var(--charcoal)] md:max-w-none`}>
         {label}
       </h3>
       <div className="mt-8 max-w-md font-[family-name:var(--font-editorial)] text-xl leading-[1.55] text-[color:var(--charcoal)] md:text-[22px]">
@@ -828,6 +828,7 @@ function Chapter4() {
             />
             <Word
               label="RECOGNITION"
+              compact
               opacity={keywordOpacity("recognition")}
               body={
                 <>
