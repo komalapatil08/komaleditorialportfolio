@@ -1088,6 +1088,188 @@ function Chapter5() {
           <span className="mt-16 block h-16 w-px bg-[color:var(--charcoal)]/30" />
         </div>
       </section>
+
+      {/* ============================================================ */}
+      {/* CHAPTER 6 — How KalaVansh Works                              */}
+      {/* Structure only. Animations will be added in a later pass.    */}
+      {/* ============================================================ */}
+
+      {/* Chapter header */}
+      <section
+        aria-labelledby="kv-chapter-6"
+        className="bg-[color:var(--ivory)] px-6 pt-40 pb-24 md:px-20 md:pt-56 md:pb-32"
+      >
+        <div className="mx-auto max-w-5xl text-center">
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+            Chapter 6
+          </p>
+          <h2
+            id="kv-chapter-6"
+            className="mt-8 font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-[80px]"
+          >
+            How KalaVansh Works
+          </h2>
+          <p className="mx-auto mt-12 max-w-3xl font-[family-name:var(--font-editorial)] text-xl leading-[1.4] tracking-tight text-[color:var(--warm-gray)] md:text-[28px]">
+            KalaVansh transforms every handcrafted product into the beginning of a
+            story—not the end of one.
+          </p>
+        </div>
+      </section>
+
+      {/* Main experience — three sections in the DOM, only DISCOVER visible */}
+      <section
+        aria-label="How KalaVansh works — Discover, Experience, Create"
+        className="relative bg-[color:var(--ivory)] px-6 py-24 md:px-20 md:py-32"
+      >
+        <div className="relative mx-auto min-h-screen max-w-6xl">
+          {/* DISCOVER — visible */}
+          <div
+            id="kv-ch6-discover"
+            className="flex min-h-screen flex-col items-center justify-center text-center"
+          >
+            {/* Premium phone mockup */}
+            <div
+              className="relative"
+              style={{
+                width: "clamp(240px, 26vw, 320px)",
+                aspectRatio: "9 / 19",
+              }}
+            >
+              <div
+                className="absolute inset-0 rounded-[44px] border border-[color:var(--charcoal)]/15 bg-[color:var(--charcoal)] p-[10px] shadow-[0_40px_80px_-30px_rgba(31,31,31,0.35)]"
+              >
+                <div className="relative h-full w-full overflow-hidden rounded-[36px] bg-[color:var(--ivory)]">
+                  {/* Notch */}
+                  <div className="absolute left-1/2 top-2 z-10 h-5 w-24 -translate-x-1/2 rounded-full bg-[color:var(--charcoal)]" />
+                  {/* QR */}
+                  <div className="flex h-full w-full items-center justify-center px-6">
+                    <img
+                      src={ch6MeenakariQR.url}
+                      alt="Scan to meet the artisan — Meenakari craft"
+                      className="w-full max-w-[220px]"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p className="mt-14 text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+              Discover
+            </p>
+            <p className="mx-auto mt-6 max-w-2xl font-[family-name:var(--font-editorial)] text-xl leading-[1.4] tracking-tight text-[color:var(--charcoal)] md:text-[26px]">
+              Every handcrafted product carries a unique QR code. Scan it to meet
+              the artisan and discover the story behind the craft.
+            </p>
+            <p className="mt-8 font-serif text-base italic text-[color:var(--warm-gray)] md:text-lg">
+              Scan to Meet the Artisan
+            </p>
+          </div>
+
+          {/* EXPERIENCE — in DOM, hidden for now */}
+          <div
+            id="kv-ch6-experience"
+            aria-hidden="true"
+            className="invisible opacity-0 mt-40 flex flex-col items-center text-center"
+          >
+            <div className="w-full max-w-4xl overflow-hidden">
+              <img
+                src={ch6Pottery.url}
+                alt="A young visitor learns pottery from a master artisan in a village courtyard"
+                className="h-auto w-full"
+              />
+            </div>
+            <p className="mt-14 text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+              Experience
+            </p>
+            <p className="mx-auto mt-6 max-w-2xl font-[family-name:var(--font-editorial)] text-xl leading-[1.4] tracking-tight text-[color:var(--charcoal)] md:text-[26px]">
+              Move beyond buying handcrafted products. Visit artisan clusters,
+              participate in workshops, and learn directly from artisans
+              preserving generations of craftsmanship.
+            </p>
+          </div>
+
+          {/* CREATE — in DOM, hidden for now */}
+          <div
+            id="kv-ch6-create"
+            aria-hidden="true"
+            className="invisible opacity-0 mt-40 flex flex-col items-center text-center"
+          >
+            <div className="w-full max-w-4xl overflow-hidden">
+              <img
+                src={ch6Custom.url}
+                alt="An artisan hand-painting a personalized Meenakari jewellery box"
+                className="h-auto w-full"
+              />
+            </div>
+            <p className="mt-14 text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+              Create
+            </p>
+            <p className="mx-auto mt-6 max-w-2xl font-[family-name:var(--font-editorial)] text-xl leading-[1.4] tracking-tight text-[color:var(--charcoal)] md:text-[26px]">
+              Collaborate directly with artisans to commission personalized
+              handcrafted pieces while celebrating traditional craftsmanship.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Final triangle placeholder — reserved space, no content yet */}
+      <section
+        aria-label="Triangle layout placeholder"
+        className="bg-[color:var(--ivory)] px-6 py-24 md:px-20 md:py-32"
+      >
+        <div
+          id="kv-ch6-triangle"
+          className="relative mx-auto w-full max-w-5xl"
+          style={{ minHeight: "clamp(520px, 80vh, 900px)" }}
+        >
+          {/* Reserved slots — Create (top center), Discover (bottom left), Experience (bottom right) */}
+          <div className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2" data-slot="create" />
+          <div className="pointer-events-none absolute bottom-0 left-0" data-slot="discover" />
+          <div className="pointer-events-none absolute bottom-0 right-0" data-slot="experience" />
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section
+        aria-labelledby="kv-ch6-cta"
+        className="bg-[color:var(--ivory)] px-6 py-40 md:px-20 md:py-56"
+      >
+        <div className="mx-auto flex min-h-[80vh] max-w-4xl flex-col items-center justify-center text-center">
+          <h2
+            id="kv-ch6-cta"
+            className="font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-[72px]"
+          >
+            Experience KalaVansh Yourself
+          </h2>
+          <p className="mt-10 font-[family-name:var(--font-editorial)] text-xl leading-[1.4] tracking-tight text-[color:var(--warm-gray)] md:text-[26px]">
+            Don&rsquo;t just read about the journey.
+          </p>
+          <p className="mt-2 font-[family-name:var(--font-editorial)] text-xl leading-[1.4] tracking-tight text-[color:var(--warm-gray)] md:text-[26px]">
+            Explore the complete KalaVansh platform.
+          </p>
+
+          <div className="mt-20 w-full max-w-[320px]">
+            <img
+              src={ch6SiteQR.url}
+              alt="Scan to open the KalaVansh website"
+              className="h-auto w-full"
+            />
+          </div>
+
+          <p className="mt-10 font-serif text-base italic text-[color:var(--warm-gray)] md:text-lg">
+            Scan with your phone or click below to explore KalaVansh.
+          </p>
+
+          <a
+            href="https://kalavansh.lovable.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-10 inline-block border border-[color:var(--charcoal)] px-10 py-4 text-[11px] uppercase tracking-[0.4em] text-[color:var(--charcoal)]"
+          >
+            Open Live Website
+          </a>
+        </div>
+      </section>
     </>
   );
 }
