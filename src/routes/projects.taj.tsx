@@ -16,9 +16,15 @@ import {
   TrendingUp,
   Wand2,
   UserRound,
+  Search,
+  KeyRound,
+  DoorOpen,
+  LogOut,
+  Repeat,
+  Unlink,
 } from "lucide-react";
 import tajImg from "@/assets/taj.png.asset.json";
-import asIsJourneyImg from "@/assets/taj-asis-journey.png.asset.json";
+
 
 export const Route = createFileRoute("/projects/taj")({
   head: () => ({
@@ -374,13 +380,19 @@ function ChapterWhyNow() {
    Chapter 3 — As-Is Customer Journey
    ———————————————————————————————————————————————————————— */
 
-const AS_IS_STAGES = [
-  { n: "01", stage: "Discover", pain: "Generic discovery", note: "Undifferentiated content across OTAs and search." },
-  { n: "02", stage: "Book", pain: "OTA dependency", note: "65–70% of bookings routed through third parties." },
-  { n: "03", stage: "Arrival", pain: "Disconnected recognition", note: "Repeat guests still greeted as strangers." },
-  { n: "04", stage: "Stay", pain: "Reactive personalization", note: "Preferences noted, rarely acted on across visits." },
-  { n: "05", stage: "Checkout", pain: "Operational friction", note: "Bills, keys and follow-ups spread across channels." },
-  { n: "06", stage: "Return", pain: "Transactional loyalty", note: "Points, not moments. NuePass engagement ~18% / month." },
+const AS_IS_STAGES: {
+  n: string;
+  stage: string;
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  pain: string;
+  note: string;
+}[] = [
+  { n: "01", stage: "Discover", icon: Search, pain: "Generic discovery", note: "Undifferentiated content across OTAs and search." },
+  { n: "02", stage: "Book", icon: CalendarDays, pain: "OTA dependency", note: "65–70% of bookings routed through third parties." },
+  { n: "03", stage: "Arrival", icon: DoorOpen, pain: "Disconnected recognition", note: "Repeat guests greeted as strangers." },
+  { n: "04", stage: "Stay", icon: BedDouble, pain: "Reactive personalization", note: "Preferences noted, rarely acted on across visits." },
+  { n: "05", stage: "Checkout", icon: LogOut, pain: "Operational friction", note: "Bills, keys, follow-ups spread across channels." },
+  { n: "06", stage: "Return", icon: Repeat, pain: "Transactional loyalty", note: "Points, not moments. NuePass engagement ~18%/mo." },
 ];
 
 function ChapterAsIsJourney() {
@@ -394,12 +406,84 @@ function ChapterAsIsJourney() {
           intro="Six stages. Six chances to feel known. Today, each is a silo — data collected, rarely connected."
         />
 
+        {/* Horizontal broken journey */}
         <div data-reveal className="reveal mx-auto max-w-[1200px]">
-          <img
-            src={asIsJourneyImg.url}
-            alt="As-is customer journey: Discover, Book, Arrival, Stay, Checkout, Return — each stage marked with a broken link and its pain point."
-            className="w-full h-auto"
-          />
+          {/* Desktop */}
+          <div className="hidden md:block">
+            <div className="relative grid grid-cols-6 gap-4">
+              {AS_IS_STAGES.map((s, i) => {
+                const Icon = s.icon;
+                return (
+                  <div key={s.n} className="relative flex flex-col items-center text-center">
+                    {/* broken connector to the next node */}
+                    {i < AS_IS_STAGES.length - 1 && (
+                      <div className="pointer-events-none absolute left-[calc(50%+40px)] right-[calc(-50%+40px)] top-[40px] flex items-center justify-center">
+                        <svg viewBox="0 0 120 24" className="h-6 w-full" preserveAspectRatio="none">
+                          <line x1="0" y1="12" x2="46" y2="12" stroke="#3D2817" strokeWidth="1.25" strokeDasharray="2 4" opacity="0.55" />
+                          <line x1="74" y1="12" x2="120" y2="12" stroke="#3D2817" strokeWidth="1.25" strokeDasharray="2 4" opacity="0.55" />
+                        </svg>
+                        <Unlink className="absolute h-4 w-4 text-[#B94A2E]" strokeWidth={1.5} />
+                      </div>
+                    )}
+
+                    {/* Node */}
+                    <div className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full border border-[#3D2817]/25 bg-[#FAF6EE] shadow-[0_1px_0_rgba(61,40,23,0.06)]">
+                      <Icon className="h-7 w-7 text-[#3D2817]" strokeWidth={1.25} />
+                    </div>
+
+                    <div className="mt-5 font-editorial text-[11px] tracking-[0.28em] text-[#3D2817]/50">
+                      {s.n}
+                    </div>
+                    <div className="mt-1 font-editorial text-xl text-[#3D2817]">
+                      {s.stage}
+                    </div>
+
+                    {/* Pain badge */}
+                    <div className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-[#B94A2E]/35 bg-[#B94A2E]/8 px-3 py-1">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#B94A2E]" />
+                      <span className="text-[10.5px] font-medium uppercase tracking-[0.14em] text-[#8A2E17]">
+                        {s.pain}
+                      </span>
+                    </div>
+
+                    <p className="mt-3 max-w-[170px] text-[12.5px] leading-relaxed text-[#3D2817]/65">
+                      {s.note}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Baseline caption */}
+            <div className="mt-14 flex items-center justify-center gap-3 text-[11px] uppercase tracking-[0.32em] text-[#3D2817]/45">
+              <span className="h-px w-16 bg-[#3D2817]/25" />
+              <span>Data collected · rarely connected</span>
+              <span className="h-px w-16 bg-[#3D2817]/25" />
+            </div>
+          </div>
+
+          {/* Mobile — vertical list */}
+          <div className="md:hidden space-y-6">
+            {AS_IS_STAGES.map((s) => {
+              const Icon = s.icon;
+              return (
+                <div key={s.n} className="flex gap-4">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[#3D2817]/25 bg-[#FAF6EE]">
+                    <Icon className="h-5 w-5 text-[#3D2817]" strokeWidth={1.25} />
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-editorial text-[10px] tracking-[0.28em] text-[#3D2817]/50">{s.n}</div>
+                    <div className="font-editorial text-lg text-[#3D2817]">{s.stage}</div>
+                    <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-[#B94A2E]/35 bg-[#B94A2E]/8 px-2.5 py-0.5">
+                      <span className="h-1 w-1 rounded-full bg-[#B94A2E]" />
+                      <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-[#8A2E17]">{s.pain}</span>
+                    </div>
+                    <p className="mt-2 text-[12.5px] leading-relaxed text-[#3D2817]/65">{s.note}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         {/* Current state at a glance */}
@@ -413,6 +497,7 @@ function ChapterAsIsJourney() {
     </section>
   );
 }
+
 
 /* ————————————————————————————————————————————————————————
    Chapter 4 — Fragmented data (visual-first)
