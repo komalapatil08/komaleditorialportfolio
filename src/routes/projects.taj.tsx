@@ -30,6 +30,9 @@ import {
   Users,
   Bookmark,
   Star,
+  ShieldCheck,
+  Handshake,
+  Lock,
 } from "lucide-react";
 import tajImg from "@/assets/taj.png.asset.json";
 
