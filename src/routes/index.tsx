@@ -297,6 +297,7 @@ function HeroStory() {
 function FeaturedCard({ p }: { p: FeaturedProject }) {
   const hasCaseStudy = Boolean(p.href);
   const hasPrototype = Boolean(p.prototypeUrl);
+  const hasWebsite = Boolean(p.websiteUrl);
 
   return (
     <article
@@ -335,7 +336,7 @@ function FeaturedCard({ p }: { p: FeaturedProject }) {
 
       {/* 3. Project name + 4. Editorial tag */}
       <div className="mt-7 md:mt-8">
-        <h3 className="font-serif text-[1.1rem] leading-[1.25] tracking-tight text-foreground/90 md:text-[1.2rem]">
+        <h3 className="font-serif text-2xl leading-[1.15] tracking-tight text-foreground/90 md:text-3xl">
           {hasCaseStudy ? <Link to={p.href}>{p.title}</Link> : p.title}
         </h3>
         <p className="card-tag mt-3 text-[10.5px] uppercase tracking-[0.24em] text-muted-foreground transition-colors duration-[400ms] group-hover:text-[color:var(--gold,#C9A227)]">
@@ -359,12 +360,23 @@ function FeaturedCard({ p }: { p: FeaturedProject }) {
                 🔗 Try the Live Prototype <span aria-hidden className="text-[10px]">↗</span>
               </a>
             )}
+            {hasWebsite && (
+              <a
+                href={p.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-[11.5px] font-medium text-[var(--gold)] transition-all duration-200 hover:underline hover:-translate-y-0.5"
+              >
+                🌐 Visit Website <span aria-hidden className="text-[10px]">↗</span>
+              </a>
+            )}
           </div>
         )}
       </div>
     </article>
   );
 }
+
 
 function FeaturedProjects() {
   return (
