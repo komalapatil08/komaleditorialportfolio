@@ -463,8 +463,8 @@ function Chapter3() {
                 style={fadeIn(panelActive(4), 100)}
               >
                 <img
-                  src={ch3Man.url}
-                  alt="An artisan at his loom"
+                  src={ch3Elderly.url}
+                  alt="An elderly woman artisan at her loom"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
               </div>
@@ -508,9 +508,9 @@ function Chapter3() {
 
           {/* Panel 5 */}
           <StoryPanel
-            image={ch3Elderly.url}
-            alt="An elderly woman artisan speaking about her craft"
-            headline="Will the craft end with her?"
+            image={ch3Man.url}
+            alt="An artisan speaking about his craft"
+            headline="Will the craft end with him?"
             body="Many artisans don't want their children to continue the craft. They dream of becoming doctors, engineers, or teachers instead. If the next generation walks away, centuries of heritage disappear with them."
             active={panelActive(5)}
           />
