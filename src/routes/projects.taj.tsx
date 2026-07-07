@@ -1010,48 +1010,127 @@ const TO_BE_STAGES = [
   { n: "06", stage: "Return", promise: "Stay connected", value: "Higher CLV & repeat stays" },
 ];
 
+const TO_BE_STAGES: {
+  n: string;
+  stage: string;
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  promise: string;
+  value: string;
+}[] = [
+  { n: "1", stage: "Discover", icon: Sparkles, promise: "AI-curated experiences", value: "Real-time contextual recommendations" },
+  { n: "2", stage: "Book", icon: Tag, promise: "Best rates, exclusive offers", value: "Personalized offers" },
+  { n: "3", stage: "Arrive", icon: UserCheck, promise: "Seamless arrival & recognition", value: "<20 min service resolution" },
+  { n: "4", stage: "Stay", icon: UtensilsCrossed, promise: "Predictive service & experiences", value: "Real-time contextual recommendations" },
+  { n: "5", stage: "Checkout", icon: CreditCard, promise: "Effortless checkout & digital billing", value: "One-click experience" },
+  { n: "6", stage: "Return", icon: Gift, promise: "Stay connected, exclusive benefits", value: "Higher CLV & repeat stays" },
+];
+
+const JOURNEY_IMPACT = [
+  { icon: Smile, label: "NPS" },
+  { icon: Users, label: "Loyalty Engagement" },
+  { icon: Bookmark, label: "Direct Booking" },
+  { icon: TrendingUp, label: "Guest Lifetime Value" },
+];
+
 function ChapterToBeJourney() {
   return (
-    <section className="bg-background py-28 md:py-40">
+    <section className="bg-[#F7F2EA] py-28 md:py-40">
       <Container>
         <ChapterHeader
           number="08"
-          eyebrow="Future Customer Journey"
+          eyebrow="To-Be Customer Journey"
           title="One guest. One view. One seamless experience."
           intro="The same six stages — reimagined as continuous moments of recognition, powered by the Customer 360 profile and the AI concierge layer."
         />
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {TO_BE_STAGES.map((s, i) => (
-            <div
-              key={s.stage}
-              data-reveal
-              className="reveal flex flex-col border border-border/70 bg-[#FBF6EC]/40 p-7 md:p-8"
-              style={{ transitionDelay: `${i * 60}ms` }}
-            >
-              <span className="text-[10.5px] uppercase tracking-[0.28em] text-[var(--gold)]">
-                {s.n} · {s.stage}
-              </span>
-              <h3 className="mt-5 font-serif text-2xl leading-tight tracking-tight md:text-[1.6rem]">
-                {s.promise}
-              </h3>
-              <p className="mt-4 font-editorial text-[1.02rem] leading-[1.6] text-foreground/70">
-                {s.value}
-              </p>
-            </div>
-          ))}
+        {/* Stage cards */}
+        <div data-reveal className="reveal grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6 lg:gap-4">
+          {TO_BE_STAGES.map((s, i) => {
+            const Icon = s.icon;
+            return (
+              <div
+                key={s.stage}
+                className="relative flex flex-col rounded-2xl border border-[#D4A574]/40 bg-gradient-to-b from-[#FBF6EC] to-[#F3EADA] p-6 shadow-[0_1px_0_rgba(61,40,23,0.04)]"
+                style={{ transitionDelay: `${i * 60}ms` }}
+              >
+                {/* Number chip */}
+                <div className="absolute -top-3 left-6 flex h-7 w-7 items-center justify-center rounded-full bg-[#C9A227] font-editorial text-sm text-[#0E2A24] shadow-sm">
+                  {s.n}
+                </div>
+
+                <div className="mt-3 text-[10.5px] font-semibold uppercase tracking-[0.24em] text-[#0E2A24]">
+                  {s.stage}
+                </div>
+
+                {/* Icon medallion */}
+                <div className="mt-5 flex justify-center">
+                  <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-[#0E2A24] ring-1 ring-[#C9A227]/60 ring-offset-2 ring-offset-[#F3EADA]">
+                    <Icon className="h-8 w-8 text-[#C9A227]" strokeWidth={1.4} />
+                  </div>
+                </div>
+
+                <p className="mt-6 text-center text-[13px] font-medium leading-snug text-[#1F1F1F]">
+                  {s.promise}
+                </p>
+
+                <div className="mx-auto mt-4 h-px w-10 bg-[#C9A227]/60" />
+
+                <p className="mt-4 text-center text-[12px] leading-relaxed text-[#3D2817]/70">
+                  {s.value}
+                </p>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Journey impact */}
-        <div className="mt-24">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-            Journey Impact
-          </p>
-          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-            <StatCard value="78+" label="NPS Target" />
-            <StatCard value="↑↑" label="Loyalty Engagement" />
-            <StatCard value="45%+" label="Direct Booking Share" />
-            <StatCard value="↑" label="Guest Lifetime Value" />
+        {/* Journey Impact bar */}
+        <div data-reveal className="reveal mt-20">
+          <div className="mb-5 flex items-center justify-center gap-4">
+            <span className="h-px w-16 bg-[#3D2817]/25" />
+            <span className="font-editorial text-lg italic text-[#3D2817]/80">Journey Impact</span>
+            <span className="h-px w-16 bg-[#3D2817]/25" />
+          </div>
+
+          <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-[auto_1fr]">
+            {/* NPS medallion */}
+            <div className="flex items-center justify-center">
+              <div className="flex h-32 w-32 flex-col items-center justify-center rounded-full bg-[#0E2A24] ring-1 ring-[#C9A227]/70 ring-offset-4 ring-offset-[#F7F2EA]">
+                <div className="font-editorial text-4xl text-[#C9A227] leading-none">78+</div>
+                <div className="mt-1.5 text-[9px] font-semibold uppercase tracking-[0.24em] text-[#C9A227]/90">
+                  NPS Target
+                </div>
+                <Star className="mt-1.5 h-3 w-3 fill-[#C9A227] text-[#C9A227]" />
+              </div>
+            </div>
+
+            {/* KPI strip */}
+            <div className="rounded-2xl bg-[#0E2A24] px-6 py-6 md:px-10">
+              <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+                {JOURNEY_IMPACT.map((k) => {
+                  const Icon = k.icon;
+                  return (
+                    <div key={k.label} className="flex items-center gap-3">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#C9A227]/50">
+                        <Icon className="h-5 w-5 text-[#C9A227]" strokeWidth={1.4} />
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-[11px] font-semibold uppercase leading-tight tracking-[0.14em] text-[#EFE2C9]">
+                          {k.label}
+                        </span>
+                        <TrendingUp className="h-3.5 w-3.5 text-[#C9A227]" strokeWidth={2} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Footer promise */}
+          <div className="mt-10 flex items-center justify-center gap-3 text-[11px] uppercase tracking-[0.32em] text-[#3D2817]/55">
+            <span className="h-px w-16 bg-[#3D2817]/25" />
+            <span>One guest · One view · One seamless experience</span>
+            <span className="h-px w-16 bg-[#3D2817]/25" />
           </div>
         </div>
       </Container>
@@ -1059,9 +1138,6 @@ function ChapterToBeJourney() {
   );
 }
 
-/* ————————————————————————————————————————————————————————
-   Chapter 9 — Smart Hotel Operations
-   ———————————————————————————————————————————————————————— */
 
 function ChapterSmartOps() {
   return (
