@@ -36,6 +36,7 @@ type FeaturedProject = {
   alt: string;
   href?: string;
   prototypeUrl?: string;
+  websiteUrl?: string;
 };
 
 const featured: FeaturedProject[] = [
@@ -55,6 +56,7 @@ const featured: FeaturedProject[] = [
     image: kalavanshImg.url,
     alt: "An Indian artisan hand-embroidering intricate Chikankari florals on ivory fabric",
     href: "/projects/kalavansh",
+    websiteUrl: "https://kalavansh.vercel.app/",
   },
   {
     question: "What does personalized luxury actually look like?",
@@ -65,6 +67,7 @@ const featured: FeaturedProject[] = [
     href: "/projects/taj",
   },
 ];
+
 
 function useReveal() {
   useEffect(() => {
