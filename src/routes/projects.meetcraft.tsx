@@ -1620,26 +1620,27 @@ function MeetCraftPage() {
         </Container>
 
         <Container className="pt-40 md:pt-56">
-          <div
-            data-reveal
-            className="reveal flex flex-col items-start justify-between gap-8 border-t border-border pt-12 md:flex-row md:items-end"
-          >
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-                Next
+          <div data-reveal className="reveal border-t border-border pt-12 md:pt-16">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
+              Next Project
+            </p>
+            <Link
+              to="/projects/kalavansh"
+              className="group mt-6 block"
+            >
+              <h3 className="font-serif text-4xl leading-[1.05] tracking-tight text-foreground transition-colors duration-300 group-hover:text-[var(--gold)] md:text-6xl">
+                KalaVansh
+              </h3>
+              <p className="mt-3 font-editorial text-lg leading-[1.5] text-foreground/70 md:text-xl">
+                What if the maker mattered more than the object?
               </p>
-              <p className="mt-4 font-serif text-3xl leading-[1.1] text-foreground md:text-5xl">
-                Return to the index of questions.
+              <p className="mt-2 text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+                Craft • Storytelling • Product Thinking
               </p>
-            </div>
-            <div className="flex gap-8">
-              <Link to="/projects" className="story-link text-sm tracking-wide">
-                All Projects →
-              </Link>
-              <Link to="/" className="story-link text-sm tracking-wide">
-                Home →
-              </Link>
-            </div>
+              <span className="mt-8 inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.22em] text-foreground/80 transition-all duration-300 group-hover:gap-3 group-hover:text-[var(--gold)]">
+                Read next case study <span aria-hidden>→</span>
+              </span>
+            </Link>
           </div>
         </Container>
       </section>
