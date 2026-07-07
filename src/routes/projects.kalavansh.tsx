@@ -15,6 +15,7 @@ import ch3Elderly from "@/assets/kv-ch3-elderly.png.asset.json";
 import ch4Fold1 from "@/assets/kv-ch4-fold-1.png";
 import ch4Fold2 from "@/assets/kv-ch4-fold-2.png";
 import ch4Fold3 from "@/assets/kv-ch4-fold-3.png";
+import kvLogo from "@/assets/kv-logo.png.asset.json";
 
 
 export const Route = createFileRoute("/projects/kalavansh")({
@@ -143,6 +144,7 @@ function KalaVanshPage() {
       <Chapter1 />
       <Chapter3 />
       <Chapter4 />
+      <Chapter5 />
 
 
     </main>
@@ -869,5 +871,250 @@ function Chapter4() {
 
       </div>
     </section>
+  );
+}
+
+function Chapter5() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    let raf = 0;
+    const tick = () => {
+      raf = 0;
+      const el = sectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const total = el.offsetHeight - window.innerHeight;
+      const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
+      setProgress(Math.min(1, scrolled / Math.max(total, 1)));
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    tick();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+  const p = progress;
+
+  // Phase ranges within the sticky stage
+  // 0.00-0.18 statement A visible
+  // 0.18-0.30 fade A out, fade B in
+  // 0.30-0.48 statement B visible
+  // 0.48-0.75 logo scale reveal + name + tagline
+  // 0.75-1.00 hold
+  const phaseP = (start: number, end: number) => {
+    const t = (p - start) / (end - start);
+    return Math.max(0, Math.min(1, t));
+  };
+
+  const aOp = 1 - ease(phaseP(0.14, 0.24));
+  const bIn = ease(phaseP(0.22, 0.34));
+  const bOut = ease(phaseP(0.44, 0.52));
+  const bOp = bIn * (1 - bOut);
+
+  const logoIn = ease(phaseP(0.5, 0.85));
+  const logoScale = 0.35 + 0.65 * logoIn;
+  const logoOp = ease(phaseP(0.5, 0.62));
+  const nameOp = ease(phaseP(0.72, 0.82));
+  const taglineOp = ease(phaseP(0.82, 0.92));
+
+  return (
+    <>
+      {/* Sticky reveal stage */}
+      <section
+        ref={sectionRef}
+        className="relative bg-[color:var(--ivory)]"
+        style={{ height: "320vh" }}
+        aria-labelledby="kv-chapter-5"
+      >
+        <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden px-6 md:px-20">
+          {/* Chapter marker */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-30 px-6 pt-12 md:px-20 md:pt-16">
+            <div className="mx-auto max-w-6xl">
+              <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+                Chapter 5
+              </p>
+              <p
+                id="kv-chapter-5"
+                className="mt-3 font-[family-name:var(--font-editorial)] text-lg italic text-[color:var(--warm-gray)] md:text-[22px]"
+              >
+                Reframing the Problem
+              </p>
+            </div>
+          </div>
+
+          {/* Statement A */}
+          <div
+            className="absolute inset-0 flex items-center justify-center px-6 md:px-20"
+            style={{ opacity: aOp, transition: "opacity 300ms ease-out", pointerEvents: aOp > 0.05 ? "auto" : "none" }}
+          >
+            <div className="mx-auto max-w-4xl text-center">
+              <p className="font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-[56px]">
+                I wasn&rsquo;t trying to build another marketplace.
+              </p>
+              <p className="mt-6 font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--warm-gray)] md:text-[56px]">
+                I was trying to restore what had been lost.
+              </p>
+            </div>
+          </div>
+
+          {/* Statement B */}
+          <div
+            className="absolute inset-0 flex items-center justify-center px-6 md:px-20"
+            style={{ opacity: bOp, transition: "opacity 300ms ease-out", pointerEvents: bOp > 0.05 ? "auto" : "none" }}
+          >
+            <div className="mx-auto max-w-4xl text-center">
+              <p className="font-[family-name:var(--font-editorial)] text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+                How might we
+              </p>
+              <p className="mt-6 font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-[60px]">
+                reconnect every handcrafted product with the person who created it?
+              </p>
+            </div>
+          </div>
+
+          {/* Logo reveal */}
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-center"
+            style={{ opacity: logoOp, transition: "opacity 400ms ease-out", pointerEvents: logoOp > 0.05 ? "auto" : "none" }}
+          >
+            <img
+              src={kvLogo.url}
+              alt="KalaVansh — Making the Invisible Visible"
+              className="h-auto w-[clamp(9rem,32vw,22rem)] select-none"
+              style={{
+                transform: `scale(${logoScale})`,
+                transformOrigin: "center",
+                transition: "transform 600ms cubic-bezier(0.22,1,0.36,1)",
+                willChange: "transform",
+              }}
+              draggable={false}
+            />
+            <p
+              className="mt-10 font-[family-name:var(--font-editorial)] text-2xl italic tracking-tight text-[color:var(--charcoal)] md:text-[40px]"
+              style={{ opacity: nameOp, transition: "opacity 500ms ease-out" }}
+            >
+              KalaVansh
+            </p>
+            <p
+              className="mt-3 text-[11px] uppercase tracking-[0.5em] text-[color:var(--warm-gray)] md:text-xs"
+              style={{ opacity: taglineOp, transition: "opacity 500ms ease-out" }}
+            >
+              Making the Invisible Visible
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Value Proposition — two column editorial */}
+      <section className="bg-[color:var(--ivory)] px-6 py-32 md:px-20 md:py-48">
+        <div className="mx-auto max-w-6xl">
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+            The Promise
+          </p>
+          <h3 className="mt-5 font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-[64px]">
+            What KalaVansh gives back.
+          </h3>
+
+          <div className="mt-20 grid grid-cols-1 gap-16 md:mt-28 md:grid-cols-2 md:gap-24">
+            <ValueColumn
+              eyebrow="For Artisans"
+              items={[
+                "Identity restored",
+                "Recognition",
+                "Digital presence",
+                "Story travels with every product",
+                "Greater perceived value",
+                "Legacy preserved",
+              ]}
+            />
+            <ValueColumn
+              eyebrow="For Customers"
+              items={[
+                "Meet the artisan",
+                "Discover the making process",
+                "Understand the cultural significance",
+                "Emotional connection",
+                "Purchase with purpose",
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Core Experience flow */}
+      <section className="bg-[color:var(--ivory)] px-6 py-32 md:px-20 md:py-48">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+            The Core Experience
+          </p>
+          <h3 className="mt-5 font-[family-name:var(--font-editorial)] text-3xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:text-[52px]">
+            A single thread, from hand to heart.
+          </h3>
+
+          <ol className="mt-20 flex flex-col items-center gap-0">
+            {[
+              "Handcrafted Product",
+              "QR Code",
+              "Meet the Artisan",
+              "Watch their Story",
+              "Understand the Craft",
+              "Purchase with Purpose",
+            ].map((step, i, arr) => (
+              <li key={step} className="flex flex-col items-center">
+                <span className="font-[family-name:var(--font-editorial)] text-xl tracking-tight text-[color:var(--charcoal)] md:text-[26px]">
+                  {step}
+                </span>
+                {i < arr.length - 1 && (
+                  <span className="my-6 block h-16 w-px bg-[color:var(--charcoal)]/25 md:my-8 md:h-20" />
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Closing statement */}
+      <section className="bg-[color:var(--ivory)] px-6 py-40 md:px-20 md:py-56">
+        <div className="mx-auto flex min-h-[60vh] max-w-4xl flex-col items-center justify-center text-center">
+          <p className="font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-[56px]">
+            Technology wasn&rsquo;t replacing the artisan.
+          </p>
+          <p className="mt-6 font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--warm-gray)] md:text-[56px]">
+            It was giving them back their identity.
+          </p>
+          <span className="mt-16 block h-16 w-px bg-[color:var(--charcoal)]/30" />
+        </div>
+      </section>
+    </>
+  );
+}
+
+function ValueColumn({ eyebrow, items }: { eyebrow: string; items: string[] }) {
+  return (
+    <div>
+      <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+        {eyebrow}
+      </p>
+      <ul className="mt-8 flex flex-col">
+        {items.map((it, i) => (
+          <li
+            key={it}
+            className={`py-5 font-[family-name:var(--font-editorial)] text-2xl leading-[1.25] tracking-tight text-[color:var(--charcoal)] md:text-[30px] ${i === 0 ? "" : "border-t border-[color:var(--hairline)]"}`}
+          >
+            {it}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
