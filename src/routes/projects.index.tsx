@@ -34,6 +34,7 @@ type Project = {
   tag?: string;
   description?: string;
   prototypeUrl?: string;
+  websiteUrl?: string;
 };
 
 const projects: Project[] = [
@@ -49,12 +50,13 @@ const projects: Project[] = [
   },
   {
     title: "KalaVansh",
-    status: "Coming Soon",
+    status: "Live Case Study",
     href: "/projects/kalavansh",
     image: kalavanshImg.url,
     alt: "An Indian artisan hand-embroidering intricate Chikankari florals on ivory fabric",
     tag: "Craft • Storytelling • Product Thinking",
     description: "What if the maker mattered more than the object?",
+    websiteUrl: "https://kalavansh.vercel.app/",
   },
   {
     title: "Taj Hotels Digital Transformation",
@@ -65,14 +67,8 @@ const projects: Project[] = [
     tag: "Digital Transformation • Guest Experience",
     description: "What does personalized luxury actually look like?",
   },
-  { title: "Rebuilding Notion's Growth Strategy", status: "Coming Soon" },
-  {
-    title: "Customer Segmentation using K-Means Clustering",
-    status: "Coming Soon",
-  },
-  { title: "Agile Project", status: "Coming Soon" },
-  { title: "Consulting Case Study", status: "Coming Soon" },
 ];
+
 
 function useReveal() {
   useEffect(() => {
@@ -100,8 +96,9 @@ function Card({ p }: { p: Project }) {
 
   if (hasImage) {
     const hasPrototype = Boolean(p.prototypeUrl);
+    const hasWebsite = Boolean(p.websiteUrl);
 
-    if (p.href && hasPrototype) {
+    if (p.href && (hasPrototype || hasWebsite)) {
       return (
         <article
           data-reveal
@@ -134,7 +131,7 @@ function Card({ p }: { p: Project }) {
               )}
             </div>
 
-            <h3 className="mt-4 font-serif text-[1.1rem] leading-[1.25] tracking-tight text-foreground/90 md:text-[1.2rem]">
+            <h3 className="mt-4 font-serif text-2xl leading-[1.15] tracking-tight text-foreground/90 md:text-3xl">
               <Link to={p.href}>{p.title}</Link>
             </h3>
 
@@ -158,20 +155,33 @@ function Card({ p }: { p: Project }) {
                 >
                   Read Case Study →
                 </Link>
-                <a
-                  href={p.prototypeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[11.5px] font-medium text-[var(--gold)] transition-all duration-200 hover:underline hover:-translate-y-0.5"
-                >
-                  🔗 Try the Live Prototype <span aria-hidden className="text-[10px]">↗</span>
-                </a>
+                {hasPrototype && (
+                  <a
+                    href={p.prototypeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11.5px] font-medium text-[var(--gold)] transition-all duration-200 hover:underline hover:-translate-y-0.5"
+                  >
+                    🔗 Try the Live Prototype <span aria-hidden className="text-[10px]">↗</span>
+                  </a>
+                )}
+                {hasWebsite && (
+                  <a
+                    href={p.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11.5px] font-medium text-[var(--gold)] transition-all duration-200 hover:underline hover:-translate-y-0.5"
+                  >
+                    🌐 Visit Website <span aria-hidden className="text-[10px]">↗</span>
+                  </a>
+                )}
               </div>
             )}
           </div>
         </article>
       );
     }
+
 
     const card = (
       <article
@@ -203,9 +213,10 @@ function Card({ p }: { p: Project }) {
             )}
           </div>
 
-          <h3 className="mt-4 font-serif text-[1.1rem] leading-[1.25] tracking-tight text-foreground/90 md:text-[1.2rem]">
+          <h3 className="mt-4 font-serif text-2xl leading-[1.15] tracking-tight text-foreground/90 md:text-3xl">
             {p.title}
           </h3>
+
 
           {p.description && (
             <p className="mt-2 font-serif text-[1rem] leading-[1.3] tracking-tight text-foreground/60 italic">
