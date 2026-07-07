@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import meetcraftImg from "@/assets/meetcraft.png.asset.json";
-import kalavanshImg from "@/assets/kalavansh.jpg";
+import kalavanshImg from "@/assets/kalavansh-artisan.png.asset.json";
 
 import tajImg from "@/assets/taj.png.asset.json";
 
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/projects/")({
 type Project = {
   title: string;
   status: "Live Case Study" | "Coming Soon";
-  href?: "/projects/meetcraft";
+  href?: "/projects/meetcraft" | "/projects/kalavansh";
   image?: string;
   alt?: string;
   tag?: string;
