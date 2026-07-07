@@ -763,26 +763,75 @@ function Chapter4() {
 
         {/* Main stage */}
         <div className="grid h-full grid-cols-1 items-center gap-8 px-6 md:grid-cols-12 md:gap-10 md:px-20">
-          {/* Saree */}
+          {/* Saree — folded, unfolding strip by strip */}
           <div className="relative flex h-full items-center justify-center md:col-span-6">
             <div
               className="relative aspect-[3/4] w-full max-w-md md:max-w-lg"
               style={{
                 opacity: sareeOpacity,
-                transform: `scale(${sareeScale})`,
-                transition: "transform 200ms linear, opacity 400ms ease-out",
-                willChange: "transform, clip-path",
+                transition: "opacity 700ms ease-out",
+                perspective: "1400px",
+                willChange: "opacity",
               }}
             >
+              {/* Base fully unfolded saree */}
               <img
                 src={ch4Saree.url}
                 alt="A handwoven silk saree depicting the Ramayana, gradually unfolding"
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{
-                  clipPath: `inset(0 ${inset}% 0 ${inset}%)`,
-                  transition: "clip-path 300ms cubic-bezier(0.22,1,0.36,1)",
-                }}
+                className="absolute inset-0 h-full w-full object-cover shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)]"
               />
+              {/* 5 fold flaps — each covers a horizontal strip and peels open in turn */}
+              {foldOpen.map((open, i) => {
+                const stripTop = (i / 5) * 100;
+                const bgPosY = (i / 4) * 100; // aligns each flap's texture to its own strip
+                const rot = -170 * open; // flap rotates up/back
+                const flapOpacity = 1 - open;
+                const shadow = 0.35 * (1 - open);
+                return (
+                  <div
+                    key={i}
+                    className="absolute left-0 w-full overflow-hidden"
+                    style={{
+                      top: `${stripTop}%`,
+                      height: "20%",
+                      transformOrigin: "top center",
+                      transform: `rotateX(${rot}deg)`,
+                      opacity: flapOpacity,
+                      transition:
+                        "transform 700ms cubic-bezier(0.22,1,0.36,1), opacity 700ms cubic-bezier(0.22,1,0.36,1)",
+                      backfaceVisibility: "hidden",
+                      willChange: "transform, opacity",
+                      boxShadow: `0 8px 24px -8px rgba(0,0,0,${shadow})`,
+                    }}
+                  >
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        backgroundImage: `url(${ch4Saree.url})`,
+                        backgroundSize: "100% 500%",
+                        backgroundPosition: `50% ${bgPosY}%`,
+                        backgroundRepeat: "no-repeat",
+                      }}
+                    />
+                    {/* subtle fold crease at bottom of the flap */}
+                    <div
+                      className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px]"
+                      style={{
+                        background:
+                          "linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0))",
+                      }}
+                    />
+                    {/* soft top highlight for fabric feel */}
+                    <div
+                      className="pointer-events-none absolute inset-x-0 top-0 h-1/2"
+                      style={{
+                        background:
+                          "linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(0,0,0,0.06))",
+                      }}
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -830,7 +879,7 @@ function Chapter4() {
             />
             <Word
               label="LEGACY"
-              opacity={legacyOp}
+              opacity={legacyPreOp}
               body={
                 <>
                   <p>
@@ -847,20 +896,27 @@ function Chapter4() {
           </div>
         </div>
 
-        {/* Final centered quote */}
+        {/* Final Legacy overlay — appears as saree fades */}
         <div
-          className="pointer-events-none absolute inset-0 z-40 flex items-center justify-center px-8"
-          style={{ opacity: finalQuoteOp, transition: "opacity 500ms ease-out" }}
+          className="pointer-events-none absolute inset-0 z-40 flex flex-col items-center justify-center px-8 text-center"
+          style={{ opacity: legacyBoldOp, transition: "opacity 600ms ease-out" }}
         >
-          <div className="mx-auto max-w-4xl text-center">
-            <p className="font-[family-name:var(--font-editorial)] text-4xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-6xl">
+          <h3 className="font-[family-name:var(--font-editorial)] text-6xl font-bold leading-[0.95] tracking-tight text-[color:var(--charcoal)] md:text-[180px]">
+            Legacy
+          </h3>
+          <div
+            className="mt-10 max-w-3xl"
+            style={{ opacity: finalQuoteOp, transition: "opacity 600ms ease-out" }}
+          >
+            <p className="font-[family-name:var(--font-editorial)] text-2xl leading-[1.35] tracking-tight text-[color:var(--charcoal)] md:text-4xl">
               I realized I wasn&rsquo;t solving an income problem.
             </p>
-            <p className="mt-8 font-[family-name:var(--font-editorial)] text-4xl leading-[1.15] tracking-tight text-[color:var(--warm-gray)] md:text-6xl">
+            <p className="mt-6 font-[family-name:var(--font-editorial)] text-2xl leading-[1.35] tracking-tight text-[color:var(--warm-gray)] md:text-4xl">
               I was trying to restore identity.
             </p>
           </div>
         </div>
+
       </div>
     </section>
   );
