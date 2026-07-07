@@ -1640,9 +1640,9 @@ function PromiseSection() {
             <div
               className="absolute flex flex-col items-end"
               style={{
-                left: COMPOSITION_W - 120,
+                left: COMPOSITION_W - 180,
                 top: 130 + IMG_H + 40,
-                width: 120,
+                width: 180,
               }}
             >
               <PromiseWord text="Human Connection" revealed={r(7)} align="right" wrap />
