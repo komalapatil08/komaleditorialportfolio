@@ -973,12 +973,13 @@ function Chapter5() {
             style={{ opacity: bOp, transition: "opacity 300ms ease-out", pointerEvents: bOp > 0.05 ? "auto" : "none" }}
           >
             <div className="mx-auto max-w-4xl text-center">
-              <p className="font-[family-name:var(--font-editorial)] text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+              <p className="font-[family-name:var(--font-editorial)] text-sm uppercase tracking-[0.4em] text-[color:var(--warm-gray)] md:text-lg">
                 How might we
               </p>
-              <p className="mt-6 font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-[60px]">
+              <p className="mt-6 font-[family-name:var(--font-editorial)] text-xl leading-[1.25] tracking-tight text-[color:var(--charcoal)] md:text-[36px]">
                 reconnect every handcrafted product with the person who created it?
               </p>
+
             </div>
           </div>
 
@@ -1000,11 +1001,12 @@ function Chapter5() {
               draggable={false}
             />
             <p
-              className="mt-10 font-[family-name:var(--font-editorial)] text-2xl italic tracking-tight text-[color:var(--charcoal)] md:text-[40px]"
+              className="mt-10 font-[family-name:var(--font-editorial)] text-2xl italic tracking-tight text-[color:var(--charcoal)] md:text-[40px] hidden"
               style={{ opacity: nameOp, transition: "opacity 500ms ease-out" }}
             >
               KalaVansh
             </p>
+
             <p
               className="mt-3 text-[11px] uppercase tracking-[0.5em] text-[color:var(--warm-gray)] md:text-xs"
               style={{ opacity: taglineOp, transition: "opacity 500ms ease-out" }}
