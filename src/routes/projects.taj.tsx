@@ -415,257 +415,314 @@ function ChapterAsIsJourney() {
 }
 
 /* ————————————————————————————————————————————————————————
-   Chapter 4 — Taj already has the data (recreated)
+   Chapter 4 — Fragmented data (visual-first)
    ———————————————————————————————————————————————————————— */
 
-const FRAGMENTED_SOURCES: { label: string; filled: boolean }[] = [
-  { label: "Booking\nData", filled: false },
-  { label: "Dining\nPreferences", filled: true },
-  { label: "Spa & Wellness\nBehaviour", filled: false },
-  { label: "App\nActivity", filled: true },
-  { label: "Room\nPreferences", filled: false },
-  { label: "Air India\nTravel Context", filled: true },
-  { label: "Operational\nData", filled: false },
-  { label: "Nuepass\nLoyalty data", filled: true },
+const FRAG_ICONS = [
+  { Icon: CalendarDays, label: "Booking" },
+  { Icon: UtensilsCrossed, label: "Dining" },
+  { Icon: Flower2, label: "Spa" },
+  { Icon: Smartphone, label: "App" },
+  { Icon: BedDouble, label: "Room" },
+  { Icon: Plane, label: "Travel" },
+  { Icon: Cog, label: "Ops" },
+  { Icon: Heart, label: "Loyalty" },
 ];
 
 function ChapterKeyInsight() {
   return (
     <section className="bg-[#F7EFE1] py-28 text-[#3D2817] md:py-40">
       <Container>
-        <div data-reveal className="reveal mx-auto max-w-[900px] text-center">
+        <div data-reveal className="reveal mx-auto max-w-[820px] text-center">
           <p className="text-[11px] uppercase tracking-[0.3em] text-[#8B6B3D]">
-            Chapter 04 · Key Insight
+            Chapter 04
           </p>
           <h2 className="mt-6 font-serif text-4xl uppercase leading-[1.05] tracking-tight text-[#B8894C] md:text-6xl">
-            Taj already has the data
+            The data exists.
+            <br />
+            <span className="italic text-[#3D2817]">It just doesn&apos;t talk.</span>
           </h2>
-          <p className="mt-5 font-editorial text-lg italic text-[#3D2817]/75 md:text-xl">
-            Intelligence exists, it is just fragmented.
-          </p>
-          <div className="mx-auto mt-8 h-px w-16 bg-[#B8894C]" />
         </div>
 
         <div
           data-reveal
-          className="reveal relative mx-auto mt-20 aspect-square w-full max-w-[720px]"
+          className="reveal relative mx-auto mt-24 aspect-square w-full max-w-[720px]"
         >
-          {/* Dotted connectors */}
+          {/* Broken connectors — jagged, incomplete */}
           <svg
             className="pointer-events-none absolute inset-0 h-full w-full"
             viewBox="-100 -100 200 200"
             aria-hidden
           >
-            {FRAGMENTED_SOURCES.map((_, i) => {
-              const angle = (i / FRAGMENTED_SOURCES.length) * 2 * Math.PI - Math.PI / 2;
-              const x = Math.cos(angle) * 78;
-              const y = Math.sin(angle) * 78;
+            {FRAG_ICONS.map((_, i) => {
+              const angle = (i / FRAG_ICONS.length) * 2 * Math.PI - Math.PI / 2;
+              // Two disjoint segments — visual "broken" wire
+              const x1 = Math.cos(angle) * 30;
+              const y1 = Math.sin(angle) * 30;
+              const xMid1 = Math.cos(angle) * 48;
+              const yMid1 = Math.sin(angle) * 48;
+              const xMid2 = Math.cos(angle) * 60;
+              const yMid2 = Math.sin(angle) * 60;
+              const x2 = Math.cos(angle) * 74;
+              const y2 = Math.sin(angle) * 74;
               return (
-                <line
-                  key={i}
-                  x1={Math.cos(angle) * 28}
-                  y1={Math.sin(angle) * 28}
-                  x2={x}
-                  y2={y}
-                  stroke="#8B6B3D"
-                  strokeOpacity="0.55"
-                  strokeWidth="0.6"
-                  strokeDasharray="1.6 2"
-                />
+                <g key={i} opacity="0.6">
+                  <line
+                    x1={x1}
+                    y1={y1}
+                    x2={xMid1}
+                    y2={yMid1}
+                    stroke="#8B6B3D"
+                    strokeWidth="0.5"
+                    strokeDasharray="1.4 1.6"
+                  />
+                  <line
+                    x1={xMid2}
+                    y1={yMid2}
+                    x2={x2}
+                    y2={y2}
+                    stroke="#8B6B3D"
+                    strokeWidth="0.5"
+                    strokeDasharray="1.4 1.6"
+                  />
+                </g>
               );
             })}
           </svg>
 
-          {/* Center node */}
-          <div className="absolute left-1/2 top-1/2 flex h-[26%] w-[26%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#EFE2C9] text-center shadow-[0_10px_30px_-15px_rgba(61,40,23,0.4)]">
-            <p className="px-2 font-serif text-[13px] font-semibold uppercase leading-tight tracking-wide text-[#3D2817] md:text-base">
-              Incomplete
-              <br />
-              view of
-              <br />
-              guest
-            </p>
+          {/* Center — cracked / incomplete silhouette */}
+          <div className="absolute left-1/2 top-1/2 flex h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#EFE2C9]">
+            <div className="absolute inset-0 rounded-full border border-dashed border-[#8B6B3D]/50" />
+            {/* Silhouette with a diagonal "crack" cut */}
+            <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full">
+              <UserRound
+                className="h-[55%] w-[55%] text-[#3D2817]"
+                strokeWidth={1.2}
+                aria-label="Incomplete guest profile"
+              />
+              <div
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(115deg, transparent 46%, #F7EFE1 46%, #F7EFE1 54%, transparent 54%)",
+                }}
+              />
+            </div>
           </div>
 
-          {/* Orbit nodes */}
-          {FRAGMENTED_SOURCES.map((node, i) => {
-            const angle = (i / FRAGMENTED_SOURCES.length) * 2 * Math.PI - Math.PI / 2;
-            const x = 50 + Math.cos(angle) * 39;
-            const y = 50 + Math.sin(angle) * 39;
-            const filled = node.filled;
+          {/* Orbit icon nodes */}
+          {FRAG_ICONS.map(({ Icon, label }, i) => {
+            const angle = (i / FRAG_ICONS.length) * 2 * Math.PI - Math.PI / 2;
+            const x = 50 + Math.cos(angle) * 40;
+            const y = 50 + Math.sin(angle) * 40;
+            const dark = i % 2 === 0;
             return (
               <div
-                key={node.label}
+                key={label}
                 data-reveal
-                className="reveal absolute flex h-[19%] w-[19%] items-center justify-center rounded-full text-center shadow-[0_8px_20px_-12px_rgba(61,40,23,0.5)]"
+                className="reveal absolute flex flex-col items-center gap-2"
                 style={{
                   left: `${x}%`,
                   top: `${y}%`,
                   transform: "translate(-50%, -50%)",
                   transitionDelay: `${i * 70}ms`,
-                  background: filled ? "#3D2817" : "#EFE2C9",
-                  color: filled ? "#F5EDE1" : "#3D2817",
                 }}
               >
-                <p className="whitespace-pre-line px-2 text-[10.5px] font-medium leading-tight tracking-wide md:text-[12px]">
-                  {node.label}
-                </p>
+                <div
+                  className="flex h-14 w-14 items-center justify-center rounded-full shadow-[0_8px_20px_-12px_rgba(61,40,23,0.5)] md:h-16 md:w-16"
+                  style={{
+                    background: dark ? "#3D2817" : "#EFE2C9",
+                    color: dark ? "#F5EDE1" : "#3D2817",
+                  }}
+                  aria-label={label}
+                >
+                  <Icon strokeWidth={1.5} className="h-6 w-6 md:h-7 md:w-7" />
+                </div>
               </div>
             );
           })}
         </div>
+
+        {/* Single quiet caption — the whole chart already told the story */}
+        <p
+          data-reveal
+          className="reveal mx-auto mt-16 max-w-[36ch] text-center font-editorial text-lg italic leading-snug text-[#3D2817]/70 md:text-xl"
+        >
+          Eight signals. One guest. Zero conversation between them.
+        </p>
       </Container>
     </section>
   );
 }
 
 /* ————————————————————————————————————————————————————————
-   Chapter 5 — Transformation Engine (recreated)
+   Chapter 5 — Transformation Engine (visual pipeline)
    ———————————————————————————————————————————————————————— */
 
-const DATA_SOURCES_5 = [
-  "Booking Data",
-  "Loyalty Data",
-  "On-Property Data",
-  "Digital Behaviour",
-  "Travel & Context",
-  "Operational Data",
+const SOURCE_ICONS = [
+  { Icon: CalendarDays, label: "Booking" },
+  { Icon: Heart, label: "Loyalty" },
+  { Icon: UtensilsCrossed, label: "On-Property" },
+  { Icon: Smartphone, label: "Digital" },
+  { Icon: Plane, label: "Travel" },
+  { Icon: Cog, label: "Ops" },
 ];
 
-const INTELLIGENCE_OUT = [
-  "Personalized Experiences",
-  "Predictive Hospitality",
-  "Intelligent Pricing",
-  "Smart Operations",
-  "Seamless Loyalty",
+const ACTION_ICONS = [
+  { Icon: Sparkles, label: "Personalized" },
+  { Icon: Wand2, label: "Predictive" },
+  { Icon: TrendingUp, label: "Pricing" },
+  { Icon: Gauge, label: "Smart Ops" },
+  { Icon: Heart, label: "Loyalty" },
 ];
 
 function ChapterTransformationEngine() {
   return (
-    <section className="bg-[#F7EFE1] py-28 text-[#3D2817] md:py-40">
+    <section className="bg-[#0F0B08] py-28 text-[#F5EDE1] md:py-40">
       <Container>
-        <div data-reveal className="reveal text-center">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-[#8B6B3D]">
-            Chapter 05 · Strategy
+        <div data-reveal className="reveal mx-auto max-w-[820px] text-center">
+          <p className="text-[11px] uppercase tracking-[0.3em] text-[#D4A574]">
+            Chapter 05
           </p>
-          <h2 className="mt-6 font-serif text-4xl uppercase leading-[1.05] tracking-tight text-[#B8894C] md:text-6xl">
-            Transformation Engine
+          <h2 className="mt-6 font-serif text-4xl uppercase leading-[1.05] tracking-tight text-[#E7C787] md:text-6xl">
+            Data in.
+            <br />
+            <span className="italic text-[#F5EDE1]">Luxury out.</span>
           </h2>
-          <p className="mt-5 font-editorial text-lg italic text-[#3D2817]/75 md:text-xl">
-            Turning data into predictive luxury.
-          </p>
-          <div className="mx-auto mt-8 h-px w-16 bg-[#B8894C]" />
         </div>
 
-        <div className="mt-20 grid grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)_minmax(0,1fr)] md:gap-6">
-          {/* Data Sources */}
-          <div className="relative">
-            <p className="mb-6 rotate-0 text-center text-[11px] font-semibold uppercase tracking-[0.28em] text-[#3D2817]/70 md:absolute md:-left-6 md:top-1/2 md:mb-0 md:-translate-y-1/2 md:-rotate-90 md:text-left">
-              Data Sources
-            </p>
-            <ul className="space-y-4 md:pl-6">
-              {DATA_SOURCES_5.map((s, i) => (
-                <li
-                  key={s}
-                  data-reveal
-                  className="reveal flex items-center gap-3"
-                  style={{ transitionDelay: `${i * 50}ms` }}
-                >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#3D2817] text-[9px] font-bold text-[#F5EDE1]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-[13.5px] font-medium tracking-wide">{s}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Pipeline */}
+        <div className="relative mt-24">
+          {/* Flowing horizontal line */}
+          <svg
+            className="pointer-events-none absolute left-0 right-0 top-1/2 hidden h-16 -translate-y-1/2 md:block"
+            viewBox="0 0 1000 60"
+            preserveAspectRatio="none"
+            aria-hidden
+          >
+            <path
+              d="M0 30 L1000 30"
+              stroke="#D4A574"
+              strokeOpacity="0.4"
+              strokeWidth="0.5"
+              strokeDasharray="6 6"
+            />
+          </svg>
 
-          {/* Middle: Customer 360 → AI Engine */}
-          <div className="relative flex flex-col items-center gap-6 md:flex-row md:gap-3">
+          <div className="relative grid grid-cols-1 items-center gap-14 md:grid-cols-[minmax(0,1fr)_auto_auto_auto_minmax(0,1fr)] md:gap-6">
+            {/* SOURCES — vertical stack of icon dots feeding right */}
+            <div>
+              <p className="mb-6 text-center text-[10px] uppercase tracking-[0.3em] text-[#D4A574] md:text-left">
+                Sources
+              </p>
+              <div className="grid grid-cols-3 gap-3 md:grid-cols-2">
+                {SOURCE_ICONS.map(({ Icon, label }, i) => (
+                  <div
+                    key={label}
+                    data-reveal
+                    className="reveal flex items-center gap-2 rounded-full border border-[#D4A574]/25 bg-[#1A130E]/60 px-3 py-2"
+                    style={{ transitionDelay: `${i * 60}ms` }}
+                    aria-label={label}
+                  >
+                    <Icon strokeWidth={1.5} className="h-4 w-4 text-[#D4A574]" />
+                    <span className="text-[11px] tracking-wide text-[#F5EDE1]/70">
+                      {label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* CUSTOMER 360 — a unified orb */}
             <div
               data-reveal
-              className="reveal relative flex aspect-square w-[220px] shrink-0 items-center justify-center rounded-full border-2 border-dashed border-[#B8894C] bg-[#F7EFE1] text-center"
+              className="reveal relative mx-auto flex aspect-square w-[180px] items-center justify-center rounded-full"
             >
-              <div className="absolute inset-2 rounded-full border border-[#B8894C]/50" />
-              <div className="relative px-4">
-                <p className="font-serif text-2xl italic text-[#3D2817]">Customer 360</p>
-                <p className="mt-2 text-[10.5px] leading-snug text-[#3D2817]/70">
-                  Unified guest profile across every touchpoint
+              <div className="absolute inset-0 animate-pulse rounded-full bg-[#D4A574]/10" />
+              <div className="absolute inset-3 rounded-full border border-[#D4A574]/50" />
+              <div className="absolute inset-6 rounded-full border border-[#D4A574]/30" />
+              <div className="relative flex flex-col items-center gap-2 text-center">
+                <UserRound
+                  className="h-10 w-10 text-[#E7C787]"
+                  strokeWidth={1.4}
+                />
+                <p className="font-serif text-sm italic text-[#E7C787]">
+                  Customer 360
                 </p>
               </div>
             </div>
 
-            <div className="hidden text-2xl text-[#B8894C] md:block">→</div>
+            {/* Connector arrow */}
+            <div
+              className="hidden text-2xl text-[#D4A574] md:block"
+              aria-hidden
+            >
+              →
+            </div>
 
+            {/* AI ENGINE — brain */}
             <div
               data-reveal
-              className="reveal w-full max-w-[280px] rounded-2xl bg-[#3D2817] p-6 text-[#F5EDE1] shadow-[0_20px_40px_-20px_rgba(61,40,23,0.55)]"
+              className="reveal mx-auto flex aspect-square w-[180px] items-center justify-center rounded-2xl bg-[#1A130E] shadow-[0_20px_50px_-20px_rgba(212,165,116,0.35)]"
             >
-              <p className="mb-5 font-serif text-xl">AI Engine</p>
-              <ul className="space-y-4">
-                {[
-                  "Real Time Personalisation",
-                  "Predictive Intelligence Models",
-                  "Continuous Learning",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-[12.5px] leading-snug">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#D4A574]" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="absolute" />
+              <div className="flex flex-col items-center gap-2 text-center">
+                <BrainCircuit
+                  className="h-12 w-12 text-[#E7C787]"
+                  strokeWidth={1.3}
+                />
+                <p className="font-serif text-sm italic text-[#E7C787]">
+                  AI Engine
+                </p>
+              </div>
             </div>
-          </div>
 
-          {/* Intelligence in Action */}
-          <div className="relative">
-            <p className="mb-6 text-center text-[11px] font-semibold uppercase tracking-[0.28em] text-[#3D2817]/70 md:absolute md:-right-6 md:top-1/2 md:mb-0 md:-translate-y-1/2 md:rotate-90 md:text-left">
-              Intelligence in Action
-            </p>
-            <ul className="space-y-4 md:pr-6">
-              {INTELLIGENCE_OUT.map((s, i) => (
-                <li
-                  key={s}
-                  data-reveal
-                  className="reveal flex items-center gap-3"
-                  style={{ transitionDelay: `${i * 50}ms` }}
-                >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#3D2817] text-[9px] font-bold text-[#3D2817]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-[13.5px] font-medium tracking-wide">{s}</span>
-                </li>
-              ))}
-            </ul>
+            {/* ACTIONS — output icons radiating out */}
+            <div>
+              <p className="mb-6 text-center text-[10px] uppercase tracking-[0.3em] text-[#D4A574] md:text-right">
+                In Action
+              </p>
+              <div className="grid grid-cols-3 gap-3 md:grid-cols-2">
+                {ACTION_ICONS.map(({ Icon, label }, i) => (
+                  <div
+                    key={label + i}
+                    data-reveal
+                    className="reveal flex items-center gap-2 rounded-full bg-[#D4A574] px-3 py-2 text-[#0F0B08]"
+                    style={{ transitionDelay: `${i * 60}ms` }}
+                    aria-label={label}
+                  >
+                    <Icon strokeWidth={1.8} className="h-4 w-4" />
+                    <span className="text-[11px] font-medium tracking-wide">
+                      {label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Transformation Impact */}
-        <div
-          data-reveal
-          className="reveal mt-24 rounded-2xl border border-[#B8894C]/50 bg-[#F7EFE1] p-8 md:p-10"
-        >
-          <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-4">
-            <div>
-              <p className="font-serif text-xl leading-tight text-[#3D2817] md:text-2xl">
-                Transformation
-                <br />
-                Impact
+        {/* IMPACT — three enormous numbers, almost no words */}
+        <div className="mt-28 grid grid-cols-1 gap-10 border-t border-[#D4A574]/25 pt-14 md:grid-cols-3 md:gap-6">
+          {[
+            { v: "+20%", l: "direct bookings" },
+            { v: "75%", l: "profile completeness" },
+            { v: "8+", l: "AI models live" },
+          ].map((s, i) => (
+            <div
+              key={s.l}
+              data-reveal
+              className="reveal text-center"
+              style={{ transitionDelay: `${i * 80}ms` }}
+            >
+              <span className="font-serif text-6xl leading-none tracking-tight text-[#E7C787] md:text-7xl">
+                {s.v}
+              </span>
+              <p className="mt-4 text-[11px] uppercase tracking-[0.28em] text-[#F5EDE1]/60">
+                {s.l}
               </p>
             </div>
-            {[
-              { v: "+20%", l: "Loyalty Driven Direct Booking" },
-              { v: "75%", l: "Guest Profile Completeness Target" },
-              { v: "8+", l: "AI Models in Production" },
-            ].map((s) => (
-              <div key={s.l} className="flex items-baseline gap-4 md:block">
-                <span className="font-serif text-4xl tracking-tight text-[#B8894C] md:text-5xl">
-                  {s.v}
-                </span>
-                <p className="mt-1 text-[12.5px] leading-snug text-[#3D2817]/80 md:mt-3">{s.l}</p>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
       </Container>
     </section>
