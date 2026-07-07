@@ -222,9 +222,9 @@ function Chapter1() {
               />
             </div>
 
-            {/* Saree — mid-right, overlapping the glasses */}
+            {/* Saree — bottom-right of the Meenakari glasses */}
             <div
-              className="absolute right-0 top-[26%] z-20 w-[50%] md:top-[28%] md:w-[46%]"
+              className="absolute right-0 top-[40%] z-20 w-[46%] md:top-[42%] md:right-[2%] md:w-[42%]"
               style={fadeUp(360)}
             >
               <img
