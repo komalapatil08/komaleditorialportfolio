@@ -1001,14 +1001,6 @@ function ChapterArchitecture() {
    Chapter 8 — Future Customer Journey
    ———————————————————————————————————————————————————————— */
 
-const TO_BE_STAGES = [
-  { n: "01", stage: "Discover", promise: "AI-curated experiences", value: "Real-time contextual recommendations" },
-  { n: "02", stage: "Book", promise: "Best rates, exclusive offers", value: "Personalized, direct-first bookings" },
-  { n: "03", stage: "Arrive", promise: "Seamless arrival & recognition", value: "< 20 min service resolution" },
-  { n: "04", stage: "Stay", promise: "Predictive service", value: "Preferences anticipated, not asked" },
-  { n: "05", stage: "Checkout", promise: "Effortless digital billing", value: "One-click, no queue" },
-  { n: "06", stage: "Return", promise: "Stay connected", value: "Higher CLV & repeat stays" },
-];
 
 const TO_BE_STAGES: {
   n: string;
