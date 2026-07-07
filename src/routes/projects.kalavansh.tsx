@@ -20,6 +20,8 @@ import ch6MeenakariQR from "@/assets/kv-ch6-meenakari-qr.jpeg.asset.json";
 import ch6Pottery from "@/assets/kv-ch6-pottery.png.asset.json";
 import ch6Custom from "@/assets/kv-ch6-custom.png.asset.json";
 import ch6SiteQR from "@/assets/kv-ch6-site-qr.jpeg.asset.json";
+import promiseArtisan from "@/assets/kv-promise-artisan.png.asset.json";
+import promiseCustomer from "@/assets/kv-promise-customer.png.asset.json";
 
 
 export const Route = createFileRoute("/projects/kalavansh")({
@@ -1008,41 +1010,8 @@ function Chapter5() {
         </div>
       </section>
 
-      {/* Value Proposition — two column editorial */}
-      <section className="bg-[color:var(--ivory)] px-6 py-32 md:px-20 md:py-48">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
-            The Promise
-          </p>
-          <h3 className="mt-5 font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-[64px]">
-            What KalaVansh gives back.
-          </h3>
+      <PromiseSection />
 
-          <div className="mt-20 grid grid-cols-1 gap-16 md:mt-28 md:grid-cols-2 md:gap-24">
-            <ValueColumn
-              eyebrow="For Artisans"
-              items={[
-                "Identity restored",
-                "Recognition",
-                "Digital presence",
-                "Story travels with every product",
-                "Greater perceived value",
-                "Legacy preserved",
-              ]}
-            />
-            <ValueColumn
-              eyebrow="For Customers"
-              items={[
-                "Meet the artisan",
-                "Discover the making process",
-                "Understand the cultural significance",
-                "Emotional connection",
-                "Purchase with purpose",
-              ]}
-            />
-          </div>
-        </div>
-      </section>
 
       {/* Core Experience flow */}
       <section className="bg-[color:var(--ivory)] px-6 py-32 md:px-20 md:py-48">
@@ -1274,22 +1243,335 @@ function Chapter5() {
   );
 }
 
-function ValueColumn({ eyebrow, items }: { eyebrow: string; items: string[] }) {
+/* ================================================================
+ * PromiseSection — editorial split-screen "What KalaVansh gives back"
+ * ================================================================ */
+
+type PromiseWord = {
+  text: string;
+  kind: "primary" | "secondary";
+  /** Position in percent within the side's frame. */
+  x: number;
+  y: number;
+  /** Text alignment relative to its anchor point. */
+  align: "left" | "right" | "center";
+  /** Reveal order index within the section. */
+  order: number;
+};
+
+const ARTISAN_WORDS: PromiseWord[] = [
+  { text: "Identity",        kind: "primary",   x: 6,  y: 10, align: "left",  order: 1 },
+  { text: "Recognition",     kind: "primary",   x: 94, y: 14, align: "right", order: 2 },
+  { text: "Fair Value",      kind: "secondary", x: 4,  y: 48, align: "left",  order: 3 },
+  { text: "Digital Presence",kind: "secondary", x: 96, y: 62, align: "right", order: 4 },
+  { text: "Legacy",          kind: "primary",   x: 10, y: 92, align: "left",  order: 5 },
+];
+
+const CUSTOMER_WORDS: PromiseWord[] = [
+  { text: "Meet the Artisan",   kind: "secondary", x: 6,  y: 10, align: "left",  order: 1 },
+  { text: "Discover the Story", kind: "secondary", x: 94, y: 14, align: "right", order: 2 },
+  { text: "Human Connection",   kind: "primary",   x: 96, y: 48, align: "right", order: 3 },
+  { text: "Understand the Craft", kind: "secondary", x: 4, y: 78, align: "left", order: 4 },
+  { text: "Purpose",            kind: "primary",   x: 92, y: 92, align: "right", order: 5 },
+];
+
+function PromiseSide({
+  image,
+  alt,
+  words,
+  step,
+  baseDelay,
+}: {
+  image: string;
+  alt: string;
+  words: PromiseWord[];
+  step: number;
+  baseDelay: number;
+}) {
   return (
-    <div>
-      <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
-        {eyebrow}
-      </p>
-      <ul className="mt-8 flex flex-col">
-        {items.map((it, i) => (
-          <li
-            key={it}
-            className={`py-5 font-[family-name:var(--font-editorial)] text-2xl leading-[1.25] tracking-tight text-[color:var(--charcoal)] md:text-[30px] ${i === 0 ? "" : "border-t border-[color:var(--hairline)]"}`}
+    <div className="relative mx-auto aspect-[3/4] w-full max-w-[520px]">
+      {/* Connecting lines — very thin, fade in with words */}
+      <svg
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        aria-hidden="true"
+      >
+        {words.map((w) => {
+          const revealed = step >= baseDelay + w.order;
+          return (
+            <line
+              key={w.text}
+              x1={w.x}
+              y1={w.y}
+              x2={50}
+              y2={50}
+              stroke="currentColor"
+              strokeWidth={0.15}
+              className="text-[color:var(--charcoal)]/25"
+              style={{
+                opacity: revealed ? 1 : 0,
+                transition: "opacity 1200ms cubic-bezier(0.22,1,0.36,1)",
+                transitionDelay: revealed ? "200ms" : "0ms",
+              }}
+              vectorEffect="non-scaling-stroke"
+            />
+          );
+        })}
+      </svg>
+
+      {/* Photograph — centered */}
+      <div
+        className="absolute left-1/2 top-1/2 w-[62%] -translate-x-1/2 -translate-y-1/2 overflow-hidden"
+        style={{
+          opacity: step >= baseDelay ? 1 : 0,
+          transform: `translate(-50%, -50%) scale(${step >= baseDelay ? 1 : 1.02})`,
+          transition:
+            "opacity 1400ms cubic-bezier(0.22,1,0.36,1), transform 1400ms cubic-bezier(0.22,1,0.36,1)",
+        }}
+      >
+        <img
+          src={image}
+          alt={alt}
+          className="h-full w-full object-cover"
+          draggable={false}
+        />
+      </div>
+
+      {/* Words positioned around the photograph */}
+      {words.map((w) => {
+        const revealed = step >= baseDelay + w.order;
+        const translate =
+          w.align === "left"
+            ? "translate(0, -50%)"
+            : w.align === "right"
+              ? "translate(-100%, -50%)"
+              : "translate(-50%, -50%)";
+        return (
+          <div
+            key={w.text}
+            className="absolute"
+            style={{
+              left: `${w.x}%`,
+              top: `${w.y}%`,
+              transform: translate,
+              opacity: revealed ? 1 : 0,
+              transition:
+                "opacity 1100ms cubic-bezier(0.22,1,0.36,1), transform 1100ms cubic-bezier(0.22,1,0.36,1)",
+              transitionDelay: revealed ? "100ms" : "0ms",
+              textAlign: w.align === "right" ? "right" : w.align === "center" ? "center" : "left",
+              maxWidth: "42%",
+            }}
           >
-            {it}
-          </li>
-        ))}
-      </ul>
+            {w.kind === "primary" ? (
+              <span className="font-[family-name:var(--font-editorial)] text-2xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:text-[34px]">
+                {w.text}
+              </span>
+            ) : (
+              <span className="text-[10px] uppercase tracking-[0.32em] text-[color:var(--warm-gray)] md:text-[11px]">
+                {w.text}
+              </span>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
+
+function PromiseSection() {
+  const ref = useRef<HTMLElement | null>(null);
+  const [step, setStep] = useState(0);
+  // Timing: 0 idle → 1 artisan image → 2-6 artisan words → 7 customer image
+  // → 8-12 customer words → 13 logo+lines → 14 closing → 15 final line
+  const TOTAL = 15;
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            io.disconnect();
+            let s = 0;
+            const timers: number[] = [];
+            const advance = (delay: number) => {
+              const id = window.setTimeout(() => {
+                s += 1;
+                setStep(s);
+              }, delay);
+              timers.push(id);
+            };
+            // Cadence tuned for slow editorial pacing
+            const cadence = [
+              200,  // 1: artisan image
+              600,  // 2: Identity
+              500,  // 3: Recognition
+              500,  // 4: Fair Value
+              500,  // 5: Digital Presence
+              500,  // 6: Legacy
+              900,  // 7: customer image
+              600,  // 8: Meet the Artisan
+              500,  // 9: Discover the Story
+              500,  // 10: Human Connection
+              500,  // 11: Understand the Craft
+              500,  // 12: Purpose
+              900,  // 13: logo + connecting lines
+              900,  // 14: closing paragraph
+              1200, // 15: final line
+            ];
+            let cumulative = 0;
+            for (const d of cadence) {
+              cumulative += d;
+              advance(cumulative);
+            }
+            return () => timers.forEach((t) => clearTimeout(t));
+          }
+        }
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const showLogo = step >= 13;
+  const showClosing = step >= 14;
+  const showFinal = step >= TOTAL;
+
+  return (
+    <section
+      ref={ref}
+      className="relative bg-[color:var(--ivory)] px-6 py-32 md:px-16 md:py-48"
+      aria-labelledby="kv-promise"
+    >
+      <div className="mx-auto max-w-7xl">
+        {/* Header */}
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+            The Promise
+          </p>
+          <h3
+            id="kv-promise"
+            className="mt-6 font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-[72px]"
+          >
+            What KalaVansh Gives Back.
+          </h3>
+        </div>
+
+        {/* Split-screen composition */}
+        <div className="relative mt-28 md:mt-40">
+          <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-[1fr_auto_1fr] md:gap-10 lg:gap-16">
+            {/* LEFT — Artisan */}
+            <PromiseSide
+              image={promiseArtisan.url}
+              alt="A master artisan hand-painting intricate Meenakari florals on a copper vase"
+              words={ARTISAN_WORDS}
+              step={step}
+              baseDelay={0}
+            />
+
+            {/* CENTER — Logo bridge */}
+            <div className="relative hidden md:flex md:h-[520px] md:w-[180px] md:items-center md:justify-center">
+              {/* Bridging lines from logo to each side */}
+              <svg
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+                className="pointer-events-none absolute inset-0 h-full w-full"
+                aria-hidden="true"
+              >
+                <line
+                  x1={50} y1={50} x2={0} y2={50}
+                  stroke="currentColor" strokeWidth={0.2}
+                  className="text-[color:var(--charcoal)]/25"
+                  vectorEffect="non-scaling-stroke"
+                  style={{
+                    opacity: showLogo ? 1 : 0,
+                    transition: "opacity 1400ms cubic-bezier(0.22,1,0.36,1) 300ms",
+                  }}
+                />
+                <line
+                  x1={50} y1={50} x2={100} y2={50}
+                  stroke="currentColor" strokeWidth={0.2}
+                  className="text-[color:var(--charcoal)]/25"
+                  vectorEffect="non-scaling-stroke"
+                  style={{
+                    opacity: showLogo ? 1 : 0,
+                    transition: "opacity 1400ms cubic-bezier(0.22,1,0.36,1) 500ms",
+                  }}
+                />
+              </svg>
+              <img
+                src={kvLogo.url}
+                alt="KalaVansh"
+                className="relative w-[140px]"
+                draggable={false}
+                style={{
+                  opacity: showLogo ? 1 : 0,
+                  transform: showLogo ? "scale(1)" : "scale(0.94)",
+                  transition:
+                    "opacity 1400ms cubic-bezier(0.22,1,0.36,1), transform 1400ms cubic-bezier(0.22,1,0.36,1)",
+                }}
+              />
+            </div>
+
+            {/* RIGHT — Customer */}
+            <PromiseSide
+              image={promiseCustomer.url}
+              alt="A young customer receiving a hand-painted Meenakari vase directly from the artisan who made it"
+              words={CUSTOMER_WORDS}
+              step={step}
+              baseDelay={6}
+            />
+          </div>
+
+          {/* Logo on mobile — beneath the two frames */}
+          <div className="mt-16 flex justify-center md:hidden">
+            <img
+              src={kvLogo.url}
+              alt="KalaVansh"
+              className="w-[140px]"
+              draggable={false}
+              style={{
+                opacity: showLogo ? 1 : 0,
+                transition: "opacity 1400ms cubic-bezier(0.22,1,0.36,1)",
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Closing statement */}
+        <div className="mx-auto mt-32 max-w-3xl text-center md:mt-48">
+          <p
+            className="font-[family-name:var(--font-editorial)] text-xl leading-[1.5] tracking-tight text-[color:var(--warm-gray)] md:text-[26px]"
+            style={{
+              opacity: showClosing ? 1 : 0,
+              transform: showClosing ? "translateY(0)" : "translateY(8px)",
+              transition:
+                "opacity 1400ms cubic-bezier(0.22,1,0.36,1), transform 1400ms cubic-bezier(0.22,1,0.36,1)",
+            }}
+          >
+            KalaVansh doesn&rsquo;t just create better transactions.
+            <br className="hidden md:block" />
+            It restores identity for artisans and creates meaningful
+            relationships with customers.
+          </p>
+
+          <p
+            className="mt-16 font-[family-name:var(--font-editorial)] text-3xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:mt-24 md:text-[56px]"
+            style={{
+              opacity: showFinal ? 1 : 0,
+              transform: showFinal ? "translateY(0)" : "translateY(10px)",
+              transition:
+                "opacity 1600ms cubic-bezier(0.22,1,0.36,1), transform 1600ms cubic-bezier(0.22,1,0.36,1)",
+            }}
+          >
+            Making the Invisible Visible.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
