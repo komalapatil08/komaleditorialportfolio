@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import tajImg from "@/assets/taj.png.asset.json";
+import asIsJourneyImg from "@/assets/taj-asis-journey.png.asset.json";
 
 export const Route = createFileRoute("/projects/taj")({
   head: () => ({
