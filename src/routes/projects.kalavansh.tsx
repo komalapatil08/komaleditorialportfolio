@@ -1624,7 +1624,7 @@ function PromiseSection() {
             <div
               className="absolute flex flex-col items-start"
               style={{
-                left: IMG_W + BRIDGE_GAP * 2 + LOGO_W - 20,
+                left: IMG_W + BRIDGE_GAP * 2 + LOGO_W - 50,
                 top: 130 + IMG_H + 40,
                 width: 120,
               }}
