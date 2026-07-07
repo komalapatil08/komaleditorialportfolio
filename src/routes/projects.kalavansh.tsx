@@ -1504,9 +1504,9 @@ function PromiseSection() {
               />
               {/* Human Connection → Customer bottom-right edge */}
               <line
-                x1={COMPOSITION_W - 10}
+                x1={COMPOSITION_W - 2}
                 y1={130 + IMG_H}
-                x2={COMPOSITION_W - 10}
+                x2={COMPOSITION_W - 2}
                 y2={130 + IMG_H + 24}
                 stroke={LINE_COLOR}
                 strokeWidth={1}
