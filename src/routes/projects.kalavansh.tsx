@@ -192,7 +192,7 @@ function Chapter1() {
                 The first thing I noticed was the craftsmanship.
               </p>
               <p style={fadeUp(320)}>
-                Every brushstroke, every color, every intricate detail reflected years of skill and patience.
+                Every piece reflected years of skill, patience, and traditions passed down through generations.
               </p>
               <p style={fadeUp(400)}>I found myself admiring the products.</p>
               <p style={fadeUp(480)}>Then I realized something unexpected.</p>
