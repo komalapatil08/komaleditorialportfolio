@@ -689,10 +689,8 @@ function Chapter4() {
   const finalP = phaseP("final");
   const sareeOpacity = 1 - ease(Math.min(1, finalP * 1.3));
 
-  // Legacy word: only becomes bold/dark once saree begins fading (final phase)
-  const legacyBoldOp = ease(Math.min(1, finalP * 1.2));
-  const legacyPreOp = keywordOpacity("legacy") * (1 - legacyBoldOp);
-  const finalQuoteOp = ease(Math.max(0, Math.min(1, (finalP - 0.35) / 0.5)));
+  // Legacy word fades out as the saree fades in the final phase
+  const legacyPreOp = keywordOpacity("legacy");
 
 
   const introFade = (delay = 0) => ({
