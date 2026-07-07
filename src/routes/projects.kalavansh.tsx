@@ -1401,8 +1401,7 @@ function PromiseSection() {
             io.disconnect();
             // 1: images + words + logo together
             // 2: closing paragraph
-            // 3: final line
-            const cadence = [200, 1400, 1400];
+            const cadence = [200, 1400];
             let cum = 0;
             let s = 0;
             for (const d of cadence) {
@@ -1428,7 +1427,6 @@ function PromiseSection() {
 
   const showComposition = step >= 1;
   const showClosing = step >= 2;
-  const showFinal = step >= 3;
 
   const IMG_W = 300;
   const IMG_H = 380;
@@ -1715,17 +1713,6 @@ function PromiseSection() {
             <br className="hidden md:block" />
             It restores identity for artisans and creates meaningful
             relationships with customers.
-          </p>
-
-          <p
-            className="mt-16 font-[family-name:var(--font-editorial)] text-3xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:mt-24 md:text-[56px]"
-            style={{
-              opacity: showFinal ? 1 : 0,
-              transform: showFinal ? "translateY(0)" : "translateY(10px)",
-              transition: `opacity 1600ms ${EASE}, transform 1600ms ${EASE}`,
-            }}
-          >
-            Making the Invisible Visible.
           </p>
         </div>
       </div>
