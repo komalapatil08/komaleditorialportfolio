@@ -4,7 +4,7 @@ import { Mail, Linkedin } from "lucide-react";
 import { Certifications } from "@/components/Certifications";
 import portrait from "@/assets/komal-portrait.png.asset.json";
 import meetcraftImg from "@/assets/meetcraft.png.asset.json";
-import kalavanshImg from "@/assets/kalavansh.jpg";
+import kalavanshImg from "@/assets/kalavansh-artisan.png.asset.json";
 
 import tajImg from "@/assets/taj.png.asset.json";
 
