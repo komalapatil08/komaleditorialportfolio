@@ -213,9 +213,10 @@ function Card({ p }: { p: Project }) {
             )}
           </div>
 
-          <h3 className="mt-4 font-serif text-[1.1rem] leading-[1.25] tracking-tight text-foreground/90 md:text-[1.2rem]">
+          <h3 className="mt-4 font-serif text-2xl leading-[1.15] tracking-tight text-foreground/90 md:text-3xl">
             {p.title}
           </h3>
+
 
           {p.description && (
             <p className="mt-2 font-serif text-[1rem] leading-[1.3] tracking-tight text-foreground/60 italic">
