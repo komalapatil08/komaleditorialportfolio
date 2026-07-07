@@ -1760,29 +1760,38 @@ function NextProject() {
   return (
     <section className="bg-[#0F0B08] px-6 py-24 md:px-12 md:py-32">
       <Container>
-        <div data-reveal className="reveal border-t border-[#F5EDE1]/15 pt-12 md:pt-16">
-          <p className="text-[11px] uppercase tracking-[0.35em] text-[#D4B678]">
+        <div data-reveal className="reveal border-t-2 border-b-2 border-[#F5EDE1]/40 py-16 md:py-24">
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[#E7C787]">
             Next Project
           </p>
-          <Link to="/projects/meetcraft" className="group mt-6 block">
-            <h3 className="font-serif text-4xl leading-[1.05] tracking-tight text-[#F5EDE1] transition-colors duration-300 group-hover:text-[#E7C787] md:text-6xl">
-              MeetCraft
+          <Link to="/projects/meetcraft" className="group mt-4 block">
+            <h3 className="font-serif text-6xl leading-[0.95] tracking-tight text-[#F5EDE1] transition-colors duration-300 group-hover:text-[#E7C787] md:text-[8rem]">
+              MeetCraft <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-3">→</span>
             </h3>
-            <p className="mt-3 font-editorial text-lg leading-[1.5] text-[#F5EDE1]/70 md:text-xl">
+            <p className="mt-4 font-editorial text-xl italic text-[#F5EDE1]/70 md:text-2xl">
               What if networking was intentional?
             </p>
-            <p className="mt-2 text-[11px] uppercase tracking-[0.24em] text-[#D4B678]">
-              Intent-based Networking • Product Strategy
-            </p>
-            <span className="mt-8 inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.22em] text-[#F5EDE1]/80 transition-all duration-300 group-hover:gap-3 group-hover:text-[#E7C787]">
-              Read next case study <span aria-hidden>→</span>
-            </span>
           </Link>
+          <div className="mt-10 flex flex-wrap items-center gap-4 md:mt-14">
+            <Link
+              to="/projects/meetcraft"
+              className="inline-flex items-center gap-2 bg-[#E7C787] px-8 py-4 text-[13px] font-bold uppercase tracking-[0.24em] text-[#0F0B08] transition-all duration-300 hover:bg-[#F5EDE1]"
+            >
+              Read Next Case Study <span aria-hidden>→</span>
+            </Link>
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 border-2 border-[#F5EDE1] px-8 py-4 text-[13px] font-bold uppercase tracking-[0.24em] text-[#F5EDE1] transition-all duration-300 hover:bg-[#F5EDE1] hover:text-[#0F0B08]"
+            >
+              ← Back to Home
+            </Link>
+          </div>
         </div>
       </Container>
     </section>
   );
 }
+
 
 function TajPage() {
   useReveal();
