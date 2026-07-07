@@ -1013,37 +1013,9 @@ function Chapter5() {
       <PromiseSection />
 
 
-      {/* Core Experience flow */}
-      <section className="bg-[color:var(--ivory)] px-6 py-32 md:px-20 md:py-48">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
-            The Core Experience
-          </p>
-          <h3 className="mt-5 font-[family-name:var(--font-editorial)] text-3xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:text-[52px]">
-            A single thread, from hand to heart.
-          </h3>
+      {/* Core Experience — three-column feature comparison */}
+      <CoreExperienceSection />
 
-          <ol className="mt-20 flex flex-col items-center gap-0">
-            {[
-              "Handcrafted Product",
-              "QR Code",
-              "Meet the Artisan",
-              "Watch their Story",
-              "Understand the Craft",
-              "Purchase with Purpose",
-            ].map((step, i, arr) => (
-              <li key={step} className="flex flex-col items-center">
-                <span className="font-[family-name:var(--font-editorial)] text-xl tracking-tight text-[color:var(--charcoal)] md:text-[26px]">
-                  {step}
-                </span>
-                {i < arr.length - 1 && (
-                  <span className="my-6 block h-16 w-px bg-[color:var(--charcoal)]/25 md:my-8 md:h-20" />
-                )}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
 
       {/* Closing statement */}
       <section className="bg-[color:var(--ivory)] px-6 py-40 md:px-20 md:py-56">
