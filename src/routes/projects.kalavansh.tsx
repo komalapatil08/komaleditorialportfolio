@@ -1257,20 +1257,25 @@ const EASE = "cubic-bezier(0.22,1,0.36,1)";
 // 9 logo + connector lines → 10 closing paragraph → 11 final line
 const TOTAL_STEPS = 11;
 
-function PrimaryWord({
+function PromiseWord({
   text,
   revealed,
+  align = "left",
 }: {
   text: string;
   revealed: boolean;
+  align?: "left" | "center" | "right";
 }) {
   return (
     <span
-      className="whitespace-nowrap font-[family-name:var(--font-editorial)] leading-[1] tracking-tight text-[color:var(--charcoal)]"
+      className={[
+        "whitespace-nowrap font-[family-name:var(--font-editorial)] leading-[1.05] tracking-tight text-[color:var(--charcoal)]",
+        align === "center" ? "text-center" : align === "right" ? "text-right" : "text-left",
+      ].join(" ")}
       style={{
-        fontSize: "clamp(34px, 4.2vw, 52px)",
+        fontSize: "clamp(34px, 2.6vw, 38px)",
         opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(6px)",
+        transform: revealed ? "translateY(0)" : "translateY(8px)",
         transition: `opacity 1100ms ${EASE}, transform 1100ms ${EASE}`,
       }}
     >
@@ -1279,44 +1284,24 @@ function PrimaryWord({
   );
 }
 
-function SecondaryWord({
-  text,
+function ConnectorLine({
   revealed,
-}: {
-  text: string;
-  revealed: boolean;
-}) {
-  return (
-    <span
-      className="whitespace-nowrap uppercase text-[color:var(--warm-gray)]"
-      style={{
-        fontSize: "18px",
-        letterSpacing: "0.25em",
-        opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(6px)",
-        transition: `opacity 1100ms ${EASE}, transform 1100ms ${EASE}`,
-      }}
-    >
-      {text}
-    </span>
-  );
-}
-
-function VLine({
-  revealed,
-  height = 22,
-  delay = 200,
+  vertical = true,
+  length = 28,
+  delay = 0,
 }: {
   revealed: boolean;
-  height?: number;
+  vertical?: boolean;
+  length?: number;
   delay?: number;
 }) {
   return (
     <span
-      className="block"
+      aria-hidden
+      className="block shrink-0"
       style={{
-        width: 1,
-        height,
+        width: vertical ? 1 : length,
+        height: vertical ? length : 1,
         backgroundColor: LINE_COLOR,
         opacity: revealed ? 1 : 0,
         transition: `opacity 1000ms ${EASE} ${delay}ms`,
@@ -1365,7 +1350,7 @@ function PromiseSection() {
           }
         }
       },
-      { threshold: 0.2 },
+      { threshold: 0.15 },
     );
     io.observe(el);
     return () => {
@@ -1379,21 +1364,21 @@ function PromiseSection() {
   const showClosing = r(10);
   const showFinal = r(TOTAL_STEPS);
 
-  // Exact dimensions per spec.
-  const LEFT_W = 360;
-  const RIGHT_W = 420;
-  const IMG_H = 460;
-  const LOGO_W = 70;
-  const COL_GAP = 56; // whitespace between each image and the logo
+  // Reduced, equal image sizes; larger logo; generous gaps.
+  const IMG_W = 300;
+  const IMG_H = 380;
+  const LOGO_W = 112;
+  const BRIDGE_GAP = 90;
+  const COMPOSITION_W = IMG_W * 2 + LOGO_W + BRIDGE_GAP * 2;
 
   return (
     <section
       ref={ref}
-      className="relative bg-[color:var(--ivory)] px-6 pt-24 pb-32 md:px-12 md:pt-28 md:pb-40"
+      className="relative bg-[color:var(--ivory)] px-6 pt-28 pb-36 md:px-12 md:pt-36 md:pb-48"
       aria-labelledby="kv-promise"
     >
       <div className="mx-auto max-w-[1240px]">
-        {/* Header — reduced empty space below */}
+        {/* Header */}
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
             The Promise
@@ -1407,40 +1392,139 @@ function PromiseSection() {
         </div>
 
         {/* ── Desktop editorial spread ─────────────────────────────── */}
-        <div className="mt-10 hidden justify-center md:mt-14 md:flex">
+        <div className="mt-8 hidden justify-center md:mt-10 md:flex">
           <div
-            className="grid"
+            className="relative"
             style={{
-              gridTemplateColumns: `${LEFT_W}px ${LOGO_W}px ${RIGHT_W}px`,
-              gridTemplateRows: "auto auto auto",
-              columnGap: `${COL_GAP}px`,
-              rowGap: "18px",
-              alignItems: "start",
+              width: COMPOSITION_W,
+              height: IMG_H + 260,
             }}
           >
-            {/* ── LEFT (Artisan) ─────────────────────────────────── */}
-            {/* Row 1 — Identity (top-left of image) */}
-            <div
-              style={{ gridColumn: 1, gridRow: 1 }}
-              className="flex flex-col items-start pl-[6%]"
+            {/* Connector lines (SVG) */}
+            <svg
+              className="pointer-events-none absolute inset-0"
+              width={COMPOSITION_W}
+              height={IMG_H + 260}
+              aria-hidden
             >
-              <PrimaryWord text="Identity" revealed={r(2)} />
-              <span className="h-4" />
-              <VLine revealed={r(2)} height={22} />
-            </div>
+              {/* Logo → Artisan */}
+              <line
+                x1={IMG_W + BRIDGE_GAP}
+                y1={130 + IMG_H / 2}
+                x2={IMG_W}
+                y2={130 + IMG_H / 2}
+                stroke={LINE_COLOR}
+                strokeWidth={1}
+                style={{
+                  opacity: showLogo ? 1 : 0,
+                  transition: `opacity 1400ms ${EASE} 300ms`,
+                }}
+              />
+              {/* Logo → Customer */}
+              <line
+                x1={IMG_W + BRIDGE_GAP + LOGO_W}
+                y1={130 + IMG_H / 2}
+                x2={IMG_W + BRIDGE_GAP * 2 + LOGO_W}
+                y2={130 + IMG_H / 2}
+                stroke={LINE_COLOR}
+                strokeWidth={1}
+                style={{
+                  opacity: showLogo ? 1 : 0,
+                  transition: `opacity 1400ms ${EASE} 500ms`,
+                }}
+              />
+              {/* Identity → Artisan top edge */}
+              <line
+                x1={50}
+                y1={115}
+                x2={50}
+                y2={130}
+                stroke={LINE_COLOR}
+                strokeWidth={1}
+                style={{
+                  opacity: r(2) ? 1 : 0,
+                  transition: `opacity 1000ms ${EASE}`,
+                }}
+              />
+              {/* Pride → Artisan bottom-left edge */}
+              <line
+                x1={10}
+                y1={130 + IMG_H}
+                x2={10}
+                y2={130 + IMG_H + 24}
+                stroke={LINE_COLOR}
+                strokeWidth={1}
+                style={{
+                  opacity: r(4) ? 1 : 0,
+                  transition: `opacity 1000ms ${EASE}`,
+                }}
+              />
+              {/* Fair Value → Artisan bottom-center edge */}
+              <line
+                x1={IMG_W / 2}
+                y1={130 + IMG_H}
+                x2={IMG_W / 2}
+                y2={130 + IMG_H + 24}
+                stroke={LINE_COLOR}
+                strokeWidth={1}
+                style={{
+                  opacity: r(3) ? 1 : 0,
+                  transition: `opacity 1000ms ${EASE}`,
+                }}
+              />
+              {/* Authenticity → Customer top edge */}
+              <line
+                x1={COMPOSITION_W - 50}
+                y1={115}
+                x2={COMPOSITION_W - 50}
+                y2={130}
+                stroke={LINE_COLOR}
+                strokeWidth={1}
+                style={{
+                  opacity: r(6) ? 1 : 0,
+                  transition: `opacity 1000ms ${EASE}`,
+                }}
+              />
+              {/* Experience → Customer bottom-left edge */}
+              <line
+                x1={IMG_W + BRIDGE_GAP * 2 + LOGO_W + 10}
+                y1={130 + IMG_H}
+                x2={IMG_W + BRIDGE_GAP * 2 + LOGO_W + 10}
+                y2={130 + IMG_H + 24}
+                stroke={LINE_COLOR}
+                strokeWidth={1}
+                style={{
+                  opacity: r(8) ? 1 : 0,
+                  transition: `opacity 1000ms ${EASE}`,
+                }}
+              />
+              {/* Human Connection → Customer bottom-right edge */}
+              <line
+                x1={COMPOSITION_W - 10}
+                y1={130 + IMG_H}
+                x2={COMPOSITION_W - 10}
+                y2={130 + IMG_H + 24}
+                stroke={LINE_COLOR}
+                strokeWidth={1}
+                style={{
+                  opacity: r(7) ? 1 : 0,
+                  transition: `opacity 1000ms ${EASE}`,
+                }}
+              />
+            </svg>
 
-            {/* Row 2 — Artisan image */}
+            {/* Left image — Artisan */}
             <div
+              className="absolute overflow-hidden"
               style={{
-                gridColumn: 1,
-                gridRow: 2,
-                width: LEFT_W,
+                left: 0,
+                top: 130,
+                width: IMG_W,
                 height: IMG_H,
                 opacity: r(1) ? 1 : 0,
                 transform: r(1) ? "scale(1)" : "scale(1.015)",
                 transition: `opacity 1400ms ${EASE}, transform 1400ms ${EASE}`,
               }}
-              className="relative overflow-hidden"
             >
               <img
                 src={promiseArtisan.url}
@@ -1451,111 +1535,19 @@ function PromiseSection() {
               />
             </div>
 
-            {/* Row 3 — Pride (below-left) + Fair Value (below-center) */}
+            {/* Right image — Customer */}
             <div
-              style={{ gridColumn: 1, gridRow: 3 }}
-              className="flex items-start"
-            >
-              {/* Pride — left third */}
-              <div
-                className="flex flex-col items-center"
-                style={{ width: LEFT_W / 3 }}
-              >
-                <VLine revealed={r(4)} height={22} delay={0} />
-                <span className="h-4" />
-                <PrimaryWord text="Pride" revealed={r(4)} />
-              </div>
-              {/* Fair Value — center third */}
-              <div
-                className="flex flex-col items-center"
-                style={{ width: LEFT_W / 3 }}
-              >
-                <VLine revealed={r(3)} height={22} delay={0} />
-                <span className="h-4" />
-                <SecondaryWord text="Fair Value" revealed={r(3)} />
-              </div>
-              <div style={{ width: LEFT_W / 3 }} />
-            </div>
-
-            {/* ── CENTER (Logo bridge) ───────────────────────────── */}
-            <div
+              className="absolute overflow-hidden"
               style={{
-                gridColumn: 2,
-                gridRow: 2,
-                width: LOGO_W,
-                height: IMG_H,
-                position: "relative",
-              }}
-              className="flex items-center justify-center"
-            >
-              {/* Line to left image */}
-              <span
-                aria-hidden
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  right: "100%",
-                  width: COL_GAP,
-                  height: 1,
-                  backgroundColor: LINE_COLOR,
-                  transform: "translateY(-50%)",
-                  opacity: showLogo ? 1 : 0,
-                  transition: `opacity 1400ms ${EASE} 300ms`,
-                }}
-              />
-              {/* Line to right image */}
-              <span
-                aria-hidden
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "100%",
-                  width: COL_GAP,
-                  height: 1,
-                  backgroundColor: LINE_COLOR,
-                  transform: "translateY(-50%)",
-                  opacity: showLogo ? 1 : 0,
-                  transition: `opacity 1400ms ${EASE} 500ms`,
-                }}
-              />
-              <img
-                src={kvLogo.url}
-                alt="KalaVansh"
-                draggable={false}
-                style={{
-                  width: LOGO_W,
-                  opacity: showLogo ? 1 : 0,
-                  transform: showLogo ? "scale(1)" : "scale(0.94)",
-                  transition: `opacity 1400ms ${EASE}, transform 1400ms ${EASE}`,
-                }}
-              />
-            </div>
-
-            {/* ── RIGHT (Customer) ───────────────────────────────── */}
-            {/* Row 1 — Authenticity (top-right of image) */}
-            <div
-              style={{ gridColumn: 3, gridRow: 1 }}
-              className="flex flex-col items-end pr-[6%]"
-            >
-              <SecondaryWord text="Authenticity" revealed={r(6)} />
-              <span className="h-4" />
-              <VLine revealed={r(6)} height={22} />
-            </div>
-
-            {/* Row 2 — Customer image (tightly cropped) */}
-            <div
-              style={{
-                gridColumn: 3,
-                gridRow: 2,
-                width: RIGHT_W,
+                left: IMG_W + BRIDGE_GAP * 2 + LOGO_W,
+                top: 130,
+                width: IMG_W,
                 height: IMG_H,
                 opacity: r(5) ? 1 : 0,
                 transform: r(5) ? "scale(1)" : "scale(1.015)",
                 transition: `opacity 1400ms ${EASE}, transform 1400ms ${EASE}`,
               }}
-              className="relative overflow-hidden"
             >
-              {/* Zoom-crop to focus on artisan + customer + vase, hide crowd */}
               <img
                 src={promiseCustomer.url}
                 alt="A customer holding a hand-painted Meenakari vase from the artisan who made it"
@@ -1574,68 +1566,118 @@ function PromiseSection() {
               />
             </div>
 
-            {/* Row 3 — Experience (below-left) + Human Connection (below-right) */}
+            {/* Center logo */}
             <div
-              style={{ gridColumn: 3, gridRow: 3 }}
-              className="flex items-start"
+              className="absolute flex items-center justify-center"
+              style={{
+                left: IMG_W + BRIDGE_GAP,
+                top: 130,
+                width: LOGO_W,
+                height: IMG_H,
+                opacity: showLogo ? 1 : 0,
+                transform: showLogo ? "scale(1)" : "scale(0.94)",
+                transition: `opacity 1400ms ${EASE}, transform 1400ms ${EASE}`,
+              }}
             >
-              {/* Experience — left third */}
-              <div
-                className="flex flex-col items-center"
-                style={{ width: RIGHT_W / 3 }}
-              >
-                <VLine revealed={r(8)} height={22} delay={0} />
-                <span className="h-4" />
-                <PrimaryWord text="Experience" revealed={r(8)} />
-              </div>
-              <div style={{ width: RIGHT_W / 3 }} />
-              {/* Human Connection — right third */}
-              <div
-                className="flex flex-col items-center"
-                style={{ width: RIGHT_W / 3 }}
-              >
-                <VLine revealed={r(7)} height={22} delay={0} />
-                <span className="h-4" />
-                <PrimaryWord text="Human Connection" revealed={r(7)} />
-              </div>
+              <img
+                src={kvLogo.url}
+                alt="KalaVansh"
+                draggable={false}
+                style={{ width: LOGO_W }}
+              />
+            </div>
+
+            {/* Words */}
+            {/* Identity — upper left of artisan */}
+            <div
+              className="absolute flex flex-col items-start"
+              style={{ left: 0, top: 0, width: 140 }}
+            >
+              <PromiseWord text="Identity" revealed={r(2)} />
+            </div>
+
+            {/* Pride — bottom left of artisan */}
+            <div
+              className="absolute flex flex-col items-start"
+              style={{ left: -40, top: 130 + IMG_H + 40, width: 100 }}
+            >
+              <PromiseWord text="Pride" revealed={r(4)} />
+            </div>
+
+            {/* Fair Value — bottom center of artisan */}
+            <div
+              className="absolute flex flex-col items-center"
+              style={{ left: 90, top: 130 + IMG_H + 40, width: 120 }}
+            >
+              <PromiseWord text="Fair Value" revealed={r(3)} align="center" />
+            </div>
+
+            {/* Authenticity — upper right of customer */}
+            <div
+              className="absolute flex flex-col items-end"
+              style={{ left: COMPOSITION_W - 140, top: 0, width: 140 }}
+            >
+              <PromiseWord text="Authenticity" revealed={r(6)} align="right" />
+            </div>
+
+            {/* Experience — bottom left of customer */}
+            <div
+              className="absolute flex flex-col items-start"
+              style={{
+                left: IMG_W + BRIDGE_GAP * 2 + LOGO_W - 20,
+                top: 130 + IMG_H + 40,
+                width: 120,
+              }}
+            >
+              <PromiseWord text="Experience" revealed={r(8)} />
+            </div>
+
+            {/* Human Connection — bottom right of customer */}
+            <div
+              className="absolute flex flex-col items-end"
+              style={{
+                left: COMPOSITION_W - 120,
+                top: 130 + IMG_H + 40,
+                width: 120,
+              }}
+            >
+              <PromiseWord text="Human Connection" revealed={r(7)} align="right" />
             </div>
           </div>
         </div>
 
         {/* ── Mobile stack ─────────────────────────────────────────── */}
-        <div className="mt-10 flex flex-col items-center gap-14 md:hidden">
+        <div className="mt-12 flex flex-col items-center gap-16 md:hidden">
           {/* Artisan */}
-          <div className="flex w-full max-w-[340px] flex-col items-stretch gap-4">
-            <div className="flex flex-col items-start pl-[6%]">
-              <PrimaryWord text="Identity" revealed={r(2)} />
+          <div className="flex w-full max-w-[320px] flex-col items-stretch gap-6">
+            <div className="flex flex-col items-start pl-[4%]">
+              <PromiseWord text="Identity" revealed={r(2)} />
               <span className="h-3" />
-              <VLine revealed={r(2)} />
+              <ConnectorLine revealed={r(2)} length={22} />
             </div>
             <div
               className="relative overflow-hidden"
               style={{
-                aspectRatio: "360 / 460",
+                aspectRatio: `${IMG_W} / ${IMG_H}`,
                 opacity: r(1) ? 1 : 0,
                 transition: `opacity 1400ms ${EASE}`,
               }}
             >
               <img
                 src={promiseArtisan.url}
-                alt=""
+                alt="A master artisan hand-painting Meenakari florals on a copper vase"
                 className="h-full w-full object-cover"
                 style={{ objectPosition: "50% 40%" }}
               />
             </div>
             <div className="flex items-start">
-              <div className="flex flex-1 flex-col items-center">
-                <VLine revealed={r(4)} delay={0} />
-                <span className="h-3" />
-                <PrimaryWord text="Pride" revealed={r(4)} />
+              <div className="flex flex-1 flex-col items-center gap-3">
+                <ConnectorLine revealed={r(4)} length={22} />
+                <PromiseWord text="Pride" revealed={r(4)} align="center" />
               </div>
-              <div className="flex flex-1 flex-col items-center">
-                <VLine revealed={r(3)} delay={0} />
-                <span className="h-3" />
-                <SecondaryWord text="Fair Value" revealed={r(3)} />
+              <div className="flex flex-1 flex-col items-center gap-3">
+                <ConnectorLine revealed={r(3)} length={22} />
+                <PromiseWord text="Fair Value" revealed={r(3)} align="center" />
               </div>
               <div className="flex-1" />
             </div>
@@ -1646,30 +1688,31 @@ function PromiseSection() {
             src={kvLogo.url}
             alt="KalaVansh"
             style={{
-              width: 70,
+              width: 90,
               opacity: showLogo ? 1 : 0,
-              transition: `opacity 1400ms ${EASE}`,
+              transform: showLogo ? "scale(1)" : "scale(0.94)",
+              transition: `opacity 1400ms ${EASE}, transform 1400ms ${EASE}`,
             }}
           />
 
           {/* Customer */}
-          <div className="flex w-full max-w-[380px] flex-col items-stretch gap-4">
-            <div className="flex flex-col items-end pr-[6%]">
-              <SecondaryWord text="Authenticity" revealed={r(6)} />
+          <div className="flex w-full max-w-[320px] flex-col items-stretch gap-6">
+            <div className="flex flex-col items-end pr-[4%]">
+              <PromiseWord text="Authenticity" revealed={r(6)} align="right" />
               <span className="h-3" />
-              <VLine revealed={r(6)} />
+              <ConnectorLine revealed={r(6)} length={22} />
             </div>
             <div
               className="relative overflow-hidden"
               style={{
-                aspectRatio: "420 / 460",
+                aspectRatio: `${IMG_W} / ${IMG_H}`,
                 opacity: r(5) ? 1 : 0,
                 transition: `opacity 1400ms ${EASE}`,
               }}
             >
               <img
                 src={promiseCustomer.url}
-                alt=""
+                alt="A customer holding a hand-painted Meenakari vase from the artisan who made it"
                 draggable={false}
                 style={{
                   position: "absolute",
@@ -1684,23 +1727,21 @@ function PromiseSection() {
               />
             </div>
             <div className="flex items-start">
-              <div className="flex flex-1 flex-col items-center">
-                <VLine revealed={r(8)} delay={0} />
-                <span className="h-3" />
-                <PrimaryWord text="Experience" revealed={r(8)} />
+              <div className="flex flex-1 flex-col items-center gap-3">
+                <ConnectorLine revealed={r(8)} length={22} />
+                <PromiseWord text="Experience" revealed={r(8)} align="center" />
               </div>
               <div className="flex-1" />
-              <div className="flex flex-1 flex-col items-center">
-                <VLine revealed={r(7)} delay={0} />
-                <span className="h-3" />
-                <PrimaryWord text="Human Connection" revealed={r(7)} />
+              <div className="flex flex-1 flex-col items-center gap-3">
+                <ConnectorLine revealed={r(7)} length={22} />
+                <PromiseWord text="Human Connection" revealed={r(7)} align="center" />
               </div>
             </div>
           </div>
         </div>
 
         {/* Closing statement */}
-        <div className="mx-auto mt-28 max-w-3xl text-center md:mt-36">
+        <div className="mx-auto mt-32 max-w-3xl text-center md:mt-44">
           <p
             className="font-[family-name:var(--font-editorial)] text-xl leading-[1.5] tracking-tight text-[color:var(--warm-gray)] md:text-[26px]"
             style={{
@@ -1716,7 +1757,7 @@ function PromiseSection() {
           </p>
 
           <p
-            className="mt-14 font-[family-name:var(--font-editorial)] text-3xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:mt-20 md:text-[56px]"
+            className="mt-16 font-[family-name:var(--font-editorial)] text-3xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:mt-24 md:text-[56px]"
             style={{
               opacity: showFinal ? 1 : 0,
               transform: showFinal ? "translateY(0)" : "translateY(10px)",
@@ -1730,6 +1771,7 @@ function PromiseSection() {
     </section>
   );
 }
+
 
 
 
