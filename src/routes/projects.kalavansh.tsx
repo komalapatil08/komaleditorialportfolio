@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import vaseAsset from "@/assets/kv-vase.jpg.asset.json";
 import artisanAsset from "@/assets/kv-artisan.jpg.asset.json";
 import titleAsset from "@/assets/kv-title-hires.png.asset.json";
+import meenakariAsset from "@/assets/kv-meenakari.jpeg.asset.json";
+import sareeAsset from "@/assets/kv-saree.jpeg.asset.json";
+import kurtiAsset from "@/assets/kv-kurti.png.asset.json";
 
 
 export const Route = createFileRoute("/projects/kalavansh")({
@@ -127,7 +130,134 @@ function KalaVanshPage() {
           </div>
         </div>
       </section>
+
+      <Chapter1 />
     </main>
+  );
+}
+
+function Chapter1() {
+  const ref = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setVisible(true);
+            io.disconnect();
+          }
+        });
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const fadeUp = (delay = 0) => ({
+    opacity: visible ? 1 : 0,
+    transform: visible ? "translateY(0)" : "translateY(24px)",
+    transition: `opacity 900ms cubic-bezier(0.22,1,0.36,1) ${delay}ms, transform 900ms cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+  });
+
+  return (
+    <section
+      ref={ref}
+      className="relative px-6 py-24 md:px-12 md:py-32"
+      aria-labelledby="kv-chapter-1"
+    >
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 md:grid-cols-5 md:gap-20">
+        {/* Left — 40% */}
+        <div className="md:col-span-2 md:pr-8">
+          <div className="md:sticky md:top-24">
+            <p
+              className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]"
+              style={fadeUp(0)}
+            >
+              Chapter 1
+            </p>
+            <h2
+              id="kv-chapter-1"
+              className="mt-6 font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-6xl"
+              style={fadeUp(120)}
+            >
+              Beyond the Beauty
+            </h2>
+
+            <div className="mt-10 space-y-5 font-[family-name:var(--font-editorial)] text-xl leading-[1.55] text-[color:var(--charcoal)] md:text-[22px]">
+              <p style={fadeUp(240)}>
+                The first thing I noticed was the craftsmanship.
+              </p>
+              <p style={fadeUp(320)}>
+                Every brushstroke, every color, every intricate detail reflected years of skill and patience.
+              </p>
+              <p style={fadeUp(400)}>I found myself admiring the products.</p>
+              <p style={fadeUp(480)}>Then I realized something unexpected.</p>
+              <p style={fadeUp(560)}>I could describe every detail of each piece.</p>
+              <p
+                className="pt-2 text-2xl font-medium leading-[1.4] text-[color:var(--charcoal)] md:text-[28px]"
+                style={fadeUp(640)}
+              >
+                But I couldn't tell you who created them.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Right — 60% editorial composition */}
+        <div className="relative md:col-span-3">
+          <div className="relative mx-auto min-h-[720px] w-full max-w-2xl md:min-h-[880px]">
+            {/* Meenakari — hero, top-right, largest */}
+            <figure
+              className="ml-auto w-[78%] md:w-[82%]"
+              style={fadeUp(200)}
+            >
+              <img
+                src={meenakariAsset.url}
+                alt="Meenakari enamelled brass glasses with peacock motifs"
+                className="block h-auto w-full object-cover"
+              />
+              <figcaption className="mt-3 font-[family-name:var(--font-editorial)] italic text-sm text-[color:var(--warm-gray)]">
+                Meenakari Glass
+              </figcaption>
+            </figure>
+
+            {/* Saree — mid-left, offset up */}
+            <figure
+              className="mt-16 w-[52%] md:-mt-24 md:w-[46%]"
+              style={fadeUp(360)}
+            >
+              <img
+                src={sareeAsset.url}
+                alt="Handwoven Banarasi silk saree draped over antique boxes"
+                className="block h-auto w-full object-cover"
+              />
+              <figcaption className="mt-3 font-[family-name:var(--font-editorial)] italic text-sm text-[color:var(--warm-gray)]">
+                Silk Saree
+              </figcaption>
+            </figure>
+
+            {/* Kurti — bottom-right */}
+            <figure
+              className="ml-auto mt-12 w-[48%] md:-mt-40 md:mr-4 md:w-[42%]"
+              style={fadeUp(520)}
+            >
+              <img
+                src={kurtiAsset.url}
+                alt="White Chikankari hand-embroidered kurti"
+                className="block h-auto w-full object-cover"
+              />
+              <figcaption className="mt-3 font-[family-name:var(--font-editorial)] italic text-sm text-[color:var(--warm-gray)]">
+                Chikankari Kurti
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
