@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import meetcraftImg from "@/assets/meetcraft.png.asset.json";
-import kalavanshImg from "@/assets/kalavansh.jpg";
+import kalavanshImg from "@/assets/kalavansh-artisan.png.asset.json";
 
 import tajImg from "@/assets/taj.png.asset.json";
 
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/projects/")({
 type Project = {
   title: string;
   status: "Live Case Study" | "Coming Soon";
-  href?: "/projects/meetcraft";
+  href?: "/projects/meetcraft" | "/projects/kalavansh";
   image?: string;
   alt?: string;
   tag?: string;
@@ -48,20 +48,21 @@ const projects: Project[] = [
     prototypeUrl: "https://meet-craft.vercel.app/",
   },
   {
+    title: "KalaVansh",
+    status: "Coming Soon",
+    href: "/projects/kalavansh",
+    image: kalavanshImg.url,
+    alt: "An Indian artisan hand-embroidering intricate Chikankari florals on ivory fabric",
+    tag: "Craft • Storytelling • Product Thinking",
+    description: "What if the maker mattered more than the object?",
+  },
+  {
     title: "Taj Hotels Digital Transformation",
     status: "Coming Soon",
     image: tajImg.url,
     alt: "A Taj host serving tea overlooking the lake at golden hour",
     tag: "Digital Transformation • Guest Experience",
     description: "What does personalized luxury actually look like?",
-  },
-  {
-    title: "KalaVansh",
-    status: "Coming Soon",
-    image: kalavanshImg,
-    alt: "Hands of an Indian artisan painting intricate Meenakari work on a brass vessel",
-    tag: "Craft • Storytelling • Product Thinking",
-    description: "What if the maker mattered more than the object?",
   },
   { title: "Rebuilding Notion's Growth Strategy", status: "Coming Soon" },
   {
