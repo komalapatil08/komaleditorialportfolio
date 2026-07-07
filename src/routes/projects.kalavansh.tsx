@@ -1008,41 +1008,8 @@ function Chapter5() {
         </div>
       </section>
 
-      {/* Value Proposition — two column editorial */}
-      <section className="bg-[color:var(--ivory)] px-6 py-32 md:px-20 md:py-48">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
-            The Promise
-          </p>
-          <h3 className="mt-5 font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-[64px]">
-            What KalaVansh gives back.
-          </h3>
+      <PromiseSection />
 
-          <div className="mt-20 grid grid-cols-1 gap-16 md:mt-28 md:grid-cols-2 md:gap-24">
-            <ValueColumn
-              eyebrow="For Artisans"
-              items={[
-                "Identity restored",
-                "Recognition",
-                "Digital presence",
-                "Story travels with every product",
-                "Greater perceived value",
-                "Legacy preserved",
-              ]}
-            />
-            <ValueColumn
-              eyebrow="For Customers"
-              items={[
-                "Meet the artisan",
-                "Discover the making process",
-                "Understand the cultural significance",
-                "Emotional connection",
-                "Purchase with purpose",
-              ]}
-            />
-          </div>
-        </div>
-      </section>
 
       {/* Core Experience flow */}
       <section className="bg-[color:var(--ivory)] px-6 py-32 md:px-20 md:py-48">
