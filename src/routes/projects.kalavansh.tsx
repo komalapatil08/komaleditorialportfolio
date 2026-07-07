@@ -1244,90 +1244,154 @@ function Chapter5() {
 }
 
 /* ================================================================
- * PromiseSection — editorial split-screen "What KalaVansh gives back"
+ * PromiseSection — editorial split-screen "What KalaVansh Gives Back"
+ * Symmetrical composition. Typography sits OUTSIDE the photographs.
+ * Connectors are short, straight and beige — never crossing.
  * ================================================================ */
 
-type PromiseWord = {
+type PromiseWordSpec = {
   text: string;
   kind: "primary" | "secondary";
-  /** Position in percent within the side's frame. */
-  x: number;
-  y: number;
-  /** Text alignment relative to its anchor point. */
-  align: "left" | "right" | "center";
-  /** Reveal order index within the section. */
   order: number;
 };
 
-const ARTISAN_WORDS: PromiseWord[] = [
-  { text: "Identity",        kind: "primary",   x: 6,  y: 10, align: "left",  order: 1 },
-  { text: "Recognition",     kind: "primary",   x: 94, y: 14, align: "right", order: 2 },
-  { text: "Fair Value",      kind: "secondary", x: 4,  y: 48, align: "left",  order: 3 },
-  { text: "Digital Presence",kind: "secondary", x: 96, y: 62, align: "right", order: 4 },
-  { text: "Legacy",          kind: "primary",   x: 10, y: 92, align: "left",  order: 5 },
-];
+type ColumnSpec = {
+  topCenter: PromiseWordSpec;
+  topOffset: PromiseWordSpec;
+  flankLeft: PromiseWordSpec;
+  flankRight: PromiseWordSpec;
+  bottomCenter: PromiseWordSpec;
+  imageOrder: number;
+  offsetSide: "left" | "right";
+};
 
-const CUSTOMER_WORDS: PromiseWord[] = [
-  { text: "Meet the Artisan",   kind: "secondary", x: 6,  y: 10, align: "left",  order: 1 },
-  { text: "Discover the Story", kind: "secondary", x: 94, y: 14, align: "right", order: 2 },
-  { text: "Human Connection",   kind: "primary",   x: 96, y: 48, align: "right", order: 3 },
-  { text: "Understand the Craft", kind: "secondary", x: 4, y: 78, align: "left", order: 4 },
-  { text: "Purpose",            kind: "primary",   x: 92, y: 92, align: "right", order: 5 },
-];
+const LEFT_COL: ColumnSpec = {
+  imageOrder: 1,
+  topCenter:    { text: "Identity",         kind: "primary",   order: 2 },
+  topOffset:    { text: "Recognition",      kind: "primary",   order: 3 },
+  flankLeft:    { text: "Fair Value",       kind: "secondary", order: 4 },
+  flankRight:   { text: "Digital Presence", kind: "secondary", order: 5 },
+  bottomCenter: { text: "Legacy",           kind: "primary",   order: 6 },
+  offsetSide: "left",
+};
 
-function PromiseSide({
-  image,
-  alt,
-  words,
-  step,
-  baseDelay,
+const RIGHT_COL: ColumnSpec = {
+  imageOrder: 7,
+  topCenter:    { text: "Meet the Artisan",     kind: "secondary", order: 8 },
+  topOffset:    { text: "Discover the Story",   kind: "secondary", order: 9 },
+  flankLeft:    { text: "Understand the Craft", kind: "secondary", order: 10 },
+  flankRight:   { text: "Human Connection",     kind: "primary",   order: 11 },
+  bottomCenter: { text: "Purpose",              kind: "primary",   order: 12 },
+  offsetSide: "right",
+};
+
+const LINE_COLOR = "#D8D0C3";
+const EASE = "cubic-bezier(0.22,1,0.36,1)";
+
+function Word({
+  spec,
+  revealed,
 }: {
-  image: string;
-  alt: string;
-  words: PromiseWord[];
-  step: number;
-  baseDelay: number;
+  spec: PromiseWordSpec;
+  revealed: boolean;
+}) {
+  const style: React.CSSProperties = {
+    opacity: revealed ? 1 : 0,
+    transform: revealed ? "translateY(0)" : "translateY(6px)",
+    transition: `opacity 1100ms ${EASE}, transform 1100ms ${EASE}`,
+  };
+  if (spec.kind === "primary") {
+    return (
+      <span
+        className="whitespace-nowrap font-[family-name:var(--font-editorial)] text-3xl leading-[1] tracking-tight text-[color:var(--charcoal)] md:text-[48px] lg:text-[56px]"
+        style={style}
+      >
+        {spec.text}
+      </span>
+    );
+  }
+  return (
+    <span
+      className="whitespace-nowrap text-[12px] uppercase tracking-[0.32em] text-[color:var(--warm-gray)] md:text-[15px]"
+      style={style}
+    >
+      {spec.text}
+    </span>
+  );
+}
+
+function VConnector({
+  revealed,
+  className = "h-6 md:h-8",
+  delay = 200,
+}: {
+  revealed: boolean;
+  className?: string;
+  delay?: number;
 }) {
   return (
-    <div className="relative mx-auto aspect-[3/4] w-full max-w-[520px]">
-      {/* Connecting lines — very thin, fade in with words */}
-      <svg
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        aria-hidden="true"
-      >
-        {words.map((w) => {
-          const revealed = step >= baseDelay + w.order;
-          return (
-            <line
-              key={w.text}
-              x1={w.x}
-              y1={w.y}
-              x2={50}
-              y2={50}
-              stroke="currentColor"
-              strokeWidth={0.15}
-              className="text-[color:var(--charcoal)]/25"
-              style={{
-                opacity: revealed ? 1 : 0,
-                transition: "opacity 1200ms cubic-bezier(0.22,1,0.36,1)",
-                transitionDelay: revealed ? "200ms" : "0ms",
-              }}
-              vectorEffect="non-scaling-stroke"
-            />
-          );
-        })}
-      </svg>
+    <span
+      className={`block w-px ${className}`}
+      style={{
+        backgroundColor: LINE_COLOR,
+        opacity: revealed ? 1 : 0,
+        transition: `opacity 1000ms ${EASE} ${delay}ms`,
+      }}
+    />
+  );
+}
 
-      {/* Photograph — centered */}
+function PromiseColumn({
+  spec,
+  image,
+  alt,
+  step,
+  columnIndex,
+}: {
+  spec: ColumnSpec;
+  image: string;
+  alt: string;
+  step: number;
+  /** 1 = left grid column, 3 = right grid column. */
+  columnIndex: 1 | 3;
+}) {
+  const r = (o: number) => step >= o;
+  const gc = { gridColumn: columnIndex } as React.CSSProperties;
+
+  return (
+    <>
+      {/* Row 1 — centered word above image */}
       <div
-        className="absolute left-1/2 top-1/2 w-[62%] -translate-x-1/2 -translate-y-1/2 overflow-hidden"
+        className="flex flex-col items-center gap-3 md:gap-4"
+        style={{ ...gc, gridRow: 1 }}
+      >
+        <Word spec={spec.topCenter} revealed={r(spec.topCenter.order)} />
+        <VConnector revealed={r(spec.topCenter.order)} />
+      </div>
+
+      {/* Row 2 — offset word above image */}
+      <div
+        className={`flex flex-col gap-3 md:gap-4 ${
+          spec.offsetSide === "left"
+            ? "items-start pl-[15%]"
+            : "items-end pr-[15%]"
+        }`}
+        style={{ ...gc, gridRow: 2 }}
+      >
+        <Word spec={spec.topOffset} revealed={r(spec.topOffset.order)} />
+        <VConnector revealed={r(spec.topOffset.order)} />
+      </div>
+
+      {/* Row 3 — photograph */}
+      <div
+        className="relative w-full overflow-hidden"
         style={{
-          opacity: step >= baseDelay ? 1 : 0,
-          transform: `translate(-50%, -50%) scale(${step >= baseDelay ? 1 : 1.02})`,
-          transition:
-            "opacity 1400ms cubic-bezier(0.22,1,0.36,1), transform 1400ms cubic-bezier(0.22,1,0.36,1)",
+          ...gc,
+          gridRow: 3,
+          aspectRatio: "1 / 1",
+          opacity: r(spec.imageOrder) ? 1 : 0,
+          transform: r(spec.imageOrder) ? "scale(1)" : "scale(1.015)",
+          transition: `opacity 1400ms ${EASE}, transform 1400ms ${EASE}`,
         }}
       >
         <img
@@ -1338,43 +1402,73 @@ function PromiseSide({
         />
       </div>
 
-      {/* Words positioned around the photograph */}
-      {words.map((w) => {
-        const revealed = step >= baseDelay + w.order;
-        const translate =
-          w.align === "left"
-            ? "translate(0, -50%)"
-            : w.align === "right"
-              ? "translate(-100%, -50%)"
-              : "translate(-50%, -50%)";
-        return (
-          <div
-            key={w.text}
-            className="absolute"
-            style={{
-              left: `${w.x}%`,
-              top: `${w.y}%`,
-              transform: translate,
-              opacity: revealed ? 1 : 0,
-              transition:
-                "opacity 1100ms cubic-bezier(0.22,1,0.36,1), transform 1100ms cubic-bezier(0.22,1,0.36,1)",
-              transitionDelay: revealed ? "100ms" : "0ms",
-              textAlign: w.align === "right" ? "right" : w.align === "center" ? "center" : "left",
-              maxWidth: "42%",
-            }}
-          >
-            {w.kind === "primary" ? (
-              <span className="font-[family-name:var(--font-editorial)] text-2xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:text-[34px]">
-                {w.text}
-              </span>
-            ) : (
-              <span className="text-[10px] uppercase tracking-[0.32em] text-[color:var(--warm-gray)] md:text-[11px]">
-                {w.text}
-              </span>
-            )}
-          </div>
-        );
-      })}
+      {/* Row 4 — flanking labels below image */}
+      <div
+        className="flex items-start justify-between gap-4"
+        style={{ ...gc, gridRow: 4 }}
+      >
+        <div className="flex flex-col items-start gap-3 pl-[8%] md:gap-4">
+          <VConnector revealed={r(spec.flankLeft.order)} delay={0} />
+          <Word spec={spec.flankLeft} revealed={r(spec.flankLeft.order)} />
+        </div>
+        <div className="flex flex-col items-end gap-3 pr-[8%] md:gap-4">
+          <VConnector revealed={r(spec.flankRight.order)} delay={0} />
+          <Word spec={spec.flankRight} revealed={r(spec.flankRight.order)} />
+        </div>
+      </div>
+
+      {/* Row 5 — centered word below image */}
+      <div
+        className="flex flex-col items-center gap-3 md:gap-4"
+        style={{ ...gc, gridRow: 5 }}
+      >
+        <VConnector revealed={r(spec.bottomCenter.order)} delay={0} />
+        <Word
+          spec={spec.bottomCenter}
+          revealed={r(spec.bottomCenter.order)}
+        />
+      </div>
+    </>
+  );
+}
+
+function CenterBridge({ show }: { show: boolean }) {
+  return (
+    <div
+      className="relative flex items-center justify-center"
+      style={{ gridColumn: 2, gridRow: 3, aspectRatio: "1 / 1" }}
+    >
+      {/* Left connector line from logo edge to image edge */}
+      <span
+        className="absolute left-0 top-1/2 h-px -translate-y-1/2"
+        style={{
+          width: "42%",
+          backgroundColor: LINE_COLOR,
+          opacity: show ? 1 : 0,
+          transition: `opacity 1400ms ${EASE} 300ms`,
+        }}
+      />
+      {/* Right connector line */}
+      <span
+        className="absolute right-0 top-1/2 h-px -translate-y-1/2"
+        style={{
+          width: "42%",
+          backgroundColor: LINE_COLOR,
+          opacity: show ? 1 : 0,
+          transition: `opacity 1400ms ${EASE} 500ms`,
+        }}
+      />
+      <img
+        src={kvLogo.url}
+        alt="KalaVansh"
+        draggable={false}
+        className="relative w-[60%] max-w-[110px]"
+        style={{
+          opacity: show ? 1 : 0,
+          transform: show ? "scale(1)" : "scale(0.94)",
+          transition: `opacity 1400ms ${EASE}, transform 1400ms ${EASE}`,
+        }}
+      />
     </div>
   );
 }
@@ -1382,58 +1476,56 @@ function PromiseSide({
 function PromiseSection() {
   const ref = useRef<HTMLElement | null>(null);
   const [step, setStep] = useState(0);
-  // Timing: 0 idle → 1 artisan image → 2-6 artisan words → 7 customer image
-  // → 8-12 customer words → 13 logo+lines → 14 closing → 15 final line
   const TOTAL = 15;
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const timers: number[] = [];
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
           if (e.isIntersecting) {
             io.disconnect();
             let s = 0;
-            const timers: number[] = [];
-            const advance = (delay: number) => {
-              const id = window.setTimeout(() => {
-                s += 1;
-                setStep(s);
-              }, delay);
-              timers.push(id);
-            };
-            // Cadence tuned for slow editorial pacing
+            // Slow editorial cadence
             const cadence = [
-              200,  // 1: artisan image
-              600,  // 2: Identity
-              500,  // 3: Recognition
-              500,  // 4: Fair Value
-              500,  // 5: Digital Presence
-              500,  // 6: Legacy
-              900,  // 7: customer image
-              600,  // 8: Meet the Artisan
-              500,  // 9: Discover the Story
-              500,  // 10: Human Connection
-              500,  // 11: Understand the Craft
-              500,  // 12: Purpose
-              900,  // 13: logo + connecting lines
-              900,  // 14: closing paragraph
-              1200, // 15: final line
+              200,  // 1 artisan image
+              550,  // 2 Identity
+              500,  // 3 Recognition
+              500,  // 4 Fair Value
+              500,  // 5 Digital Presence
+              500,  // 6 Legacy
+              800,  // 7 customer image
+              550,  // 8 Meet the Artisan
+              500,  // 9 Discover the Story
+              500,  // 10 Understand the Craft
+              500,  // 11 Human Connection
+              500,  // 12 Purpose
+              900,  // 13 logo + bridge lines
+              900,  // 14 closing paragraph
+              1100, // 15 final line
             ];
-            let cumulative = 0;
+            let cum = 0;
             for (const d of cadence) {
-              cumulative += d;
-              advance(cumulative);
+              cum += d;
+              timers.push(
+                window.setTimeout(() => {
+                  s += 1;
+                  setStep(s);
+                }, cum),
+              );
             }
-            return () => timers.forEach((t) => clearTimeout(t));
           }
         }
       },
       { threshold: 0.2 },
     );
     io.observe(el);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      timers.forEach((t) => clearTimeout(t));
+    };
   }, []);
 
   const showLogo = step >= 13;
@@ -1443,113 +1535,87 @@ function PromiseSection() {
   return (
     <section
       ref={ref}
-      className="relative bg-[color:var(--ivory)] px-6 py-32 md:px-16 md:py-48"
+      className="relative bg-[color:var(--ivory)] px-6 pt-24 pb-32 md:px-16 md:pt-32 md:pb-40"
       aria-labelledby="kv-promise"
     >
-      <div className="mx-auto max-w-7xl">
-        {/* Header */}
+      <div className="mx-auto max-w-[1240px]">
+        {/* Header — compact spacing so photographs stay the focus */}
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
             The Promise
           </p>
           <h3
             id="kv-promise"
-            className="mt-6 font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-[72px]"
+            className="mt-5 font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-[64px]"
           >
             What KalaVansh Gives Back.
           </h3>
         </div>
 
-        {/* Split-screen composition */}
-        <div className="relative mt-28 md:mt-40">
-          <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-[1fr_auto_1fr] md:gap-10 lg:gap-16">
-            {/* LEFT — Artisan */}
-            <PromiseSide
-              image={promiseArtisan.url}
-              alt="A master artisan hand-painting intricate Meenakari florals on a copper vase"
-              words={ARTISAN_WORDS}
-              step={step}
-              baseDelay={0}
-            />
+        {/* Desktop editorial grid */}
+        <div
+          className="mt-14 hidden md:grid md:mt-20"
+          style={{
+            gridTemplateColumns: "35fr 30fr 35fr",
+            gridTemplateRows: "auto auto auto auto auto",
+            columnGap: "0.5rem",
+            rowGap: "2rem",
+            alignItems: "start",
+          }}
+        >
+          <PromiseColumn
+            spec={LEFT_COL}
+            image={promiseArtisan.url}
+            alt="A master artisan hand-painting Meenakari florals on a copper vase"
+            step={step}
+            columnIndex={1}
+          />
+          <CenterBridge show={showLogo} />
+          <PromiseColumn
+            spec={RIGHT_COL}
+            image={promiseCustomer.url}
+            alt="A young customer receiving a hand-painted Meenakari vase from the artisan who made it"
+            step={step}
+            columnIndex={3}
+          />
+        </div>
 
-            {/* CENTER — Logo bridge */}
-            <div className="relative hidden md:flex md:h-[520px] md:w-[180px] md:items-center md:justify-center">
-              {/* Bridging lines from logo to each side */}
-              <svg
-                viewBox="0 0 100 100"
-                preserveAspectRatio="none"
-                className="pointer-events-none absolute inset-0 h-full w-full"
-                aria-hidden="true"
-              >
-                <line
-                  x1={50} y1={50} x2={0} y2={50}
-                  stroke="currentColor" strokeWidth={0.2}
-                  className="text-[color:var(--charcoal)]/25"
-                  vectorEffect="non-scaling-stroke"
-                  style={{
-                    opacity: showLogo ? 1 : 0,
-                    transition: "opacity 1400ms cubic-bezier(0.22,1,0.36,1) 300ms",
-                  }}
-                />
-                <line
-                  x1={50} y1={50} x2={100} y2={50}
-                  stroke="currentColor" strokeWidth={0.2}
-                  className="text-[color:var(--charcoal)]/25"
-                  vectorEffect="non-scaling-stroke"
-                  style={{
-                    opacity: showLogo ? 1 : 0,
-                    transition: "opacity 1400ms cubic-bezier(0.22,1,0.36,1) 500ms",
-                  }}
-                />
-              </svg>
-              <img
-                src={kvLogo.url}
-                alt="KalaVansh"
-                className="relative w-[140px]"
-                draggable={false}
-                style={{
-                  opacity: showLogo ? 1 : 0,
-                  transform: showLogo ? "scale(1)" : "scale(0.94)",
-                  transition:
-                    "opacity 1400ms cubic-bezier(0.22,1,0.36,1), transform 1400ms cubic-bezier(0.22,1,0.36,1)",
-                }}
-              />
-            </div>
-
-            {/* RIGHT — Customer */}
-            <PromiseSide
-              image={promiseCustomer.url}
-              alt="A young customer receiving a hand-painted Meenakari vase directly from the artisan who made it"
-              words={CUSTOMER_WORDS}
-              step={step}
-              baseDelay={6}
-            />
-          </div>
-
-          {/* Logo on mobile — beneath the two frames */}
-          <div className="mt-16 flex justify-center md:hidden">
+        {/* Mobile stack — same content, simpler flow */}
+        <div className="mt-12 flex flex-col gap-16 md:hidden">
+          <MobileColumn
+            spec={LEFT_COL}
+            image={promiseArtisan.url}
+            alt="A master artisan hand-painting Meenakari florals on a copper vase"
+            step={step}
+          />
+          <div className="flex justify-center">
             <img
               src={kvLogo.url}
               alt="KalaVansh"
-              className="w-[140px]"
               draggable={false}
+              className="w-[110px]"
               style={{
                 opacity: showLogo ? 1 : 0,
-                transition: "opacity 1400ms cubic-bezier(0.22,1,0.36,1)",
+                transition: `opacity 1400ms ${EASE}`,
               }}
             />
           </div>
+          <MobileColumn
+            spec={RIGHT_COL}
+            image={promiseCustomer.url}
+            alt="A young customer receiving a hand-painted Meenakari vase from the artisan who made it"
+            step={step}
+          />
         </div>
 
         {/* Closing statement */}
-        <div className="mx-auto mt-32 max-w-3xl text-center md:mt-48">
+        <div className="mx-auto mt-28 max-w-3xl text-center md:mt-40">
           <p
             className="font-[family-name:var(--font-editorial)] text-xl leading-[1.5] tracking-tight text-[color:var(--warm-gray)] md:text-[26px]"
             style={{
               opacity: showClosing ? 1 : 0,
               transform: showClosing ? "translateY(0)" : "translateY(8px)",
-              transition:
-                "opacity 1400ms cubic-bezier(0.22,1,0.36,1), transform 1400ms cubic-bezier(0.22,1,0.36,1)",
+              transition: `opacity 1400ms ${EASE}, transform 1400ms ${EASE}`,
             }}
           >
             KalaVansh doesn&rsquo;t just create better transactions.
@@ -1559,12 +1625,11 @@ function PromiseSection() {
           </p>
 
           <p
-            className="mt-16 font-[family-name:var(--font-editorial)] text-3xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:mt-24 md:text-[56px]"
+            className="mt-14 font-[family-name:var(--font-editorial)] text-3xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:mt-20 md:text-[56px]"
             style={{
               opacity: showFinal ? 1 : 0,
               transform: showFinal ? "translateY(0)" : "translateY(10px)",
-              transition:
-                "opacity 1600ms cubic-bezier(0.22,1,0.36,1), transform 1600ms cubic-bezier(0.22,1,0.36,1)",
+              transition: `opacity 1600ms ${EASE}, transform 1600ms ${EASE}`,
             }}
           >
             Making the Invisible Visible.
@@ -1574,4 +1639,64 @@ function PromiseSection() {
     </section>
   );
 }
+
+function MobileColumn({
+  spec,
+  image,
+  alt,
+  step,
+}: {
+  spec: ColumnSpec;
+  image: string;
+  alt: string;
+  step: number;
+}) {
+  const r = (o: number) => step >= o;
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col items-center gap-3">
+        <Word spec={spec.topCenter} revealed={r(spec.topCenter.order)} />
+        <VConnector revealed={r(spec.topCenter.order)} />
+      </div>
+      <div
+        className={`flex flex-col gap-3 ${
+          spec.offsetSide === "left" ? "items-start pl-[15%]" : "items-end pr-[15%]"
+        }`}
+      >
+        <Word spec={spec.topOffset} revealed={r(spec.topOffset.order)} />
+        <VConnector revealed={r(spec.topOffset.order)} />
+      </div>
+      <div
+        className="relative w-full overflow-hidden"
+        style={{
+          aspectRatio: "1 / 1",
+          opacity: r(spec.imageOrder) ? 1 : 0,
+          transition: `opacity 1400ms ${EASE}`,
+        }}
+      >
+        <img
+          src={image}
+          alt={alt}
+          className="h-full w-full object-cover"
+          draggable={false}
+        />
+      </div>
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col items-start gap-3 pl-[6%]">
+          <VConnector revealed={r(spec.flankLeft.order)} delay={0} />
+          <Word spec={spec.flankLeft} revealed={r(spec.flankLeft.order)} />
+        </div>
+        <div className="flex flex-col items-end gap-3 pr-[6%]">
+          <VConnector revealed={r(spec.flankRight.order)} delay={0} />
+          <Word spec={spec.flankRight} revealed={r(spec.flankRight.order)} />
+        </div>
+      </div>
+      <div className="flex flex-col items-center gap-3">
+        <VConnector revealed={r(spec.bottomCenter.order)} delay={0} />
+        <Word spec={spec.bottomCenter} revealed={r(spec.bottomCenter.order)} />
+      </div>
+    </div>
+  );
+}
+
 
