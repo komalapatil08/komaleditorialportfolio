@@ -712,7 +712,7 @@ function Chapter4() {
         What was lost
       </p>
 
-      <h3 className="mt-6 font-[family-name:var(--font-editorial)] text-6xl font-medium leading-[0.95] tracking-tight text-[color:var(--charcoal)] md:text-[128px]">
+      <h3 className="mt-6 max-w-[10ch] font-[family-name:var(--font-editorial)] text-[clamp(3.8rem,7vw,7rem)] font-medium leading-[0.92] tracking-tight text-[color:var(--charcoal)] md:max-w-none md:text-[clamp(5.25rem,8vw,7.8rem)]">
         {label}
       </h3>
       <div className="mt-8 max-w-md font-[family-name:var(--font-editorial)] text-xl leading-[1.55] text-[color:var(--charcoal)] md:text-[22px]">
@@ -731,7 +731,7 @@ function Chapter4() {
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* Intro overlay */}
         <div
-          className="pointer-events-none absolute inset-x-0 top-0 z-30 px-6 pt-16 md:px-20 md:pt-24"
+          className="pointer-events-none absolute inset-x-0 top-0 z-30 px-6 pt-12 md:px-20 md:pt-18"
           style={{ opacity: introOp, transition: "opacity 500ms ease-out" }}
         >
           <div className="mx-auto max-w-6xl">
@@ -743,42 +743,36 @@ function Chapter4() {
             </p>
             <h2
               id="kv-chapter-4"
-              className="mt-6 font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-6xl"
+              className="mt-5 max-w-4xl font-[family-name:var(--font-editorial)] text-4xl leading-[1.02] tracking-tight text-[color:var(--charcoal)] md:text-[72px]"
               style={introFade(120)}
             >
               What Was Really Lost?
             </h2>
-            <p
-              className="mt-8 max-w-xl font-[family-name:var(--font-editorial)] text-lg leading-[1.55] text-[color:var(--charcoal)] md:text-xl"
-              style={introFade(260)}
-            >
-              The more I understood the artisans, the more I realized they
-              hadn&rsquo;t just lost income.
-            </p>
-            <p
-              className="mt-3 max-w-xl font-[family-name:var(--font-editorial)] text-lg leading-[1.55] text-[color:var(--warm-gray)] md:text-xl"
-              style={introFade(360)}
-            >
-              They had lost something far more fundamental.
-            </p>
+            <div className="max-w-2xl" style={introFade(260)}>
+              <p className="mt-6 font-[family-name:var(--font-editorial)] text-lg leading-[1.55] text-[color:var(--charcoal)] md:text-[30px]">
+                The more I understood the artisans, the more I realized they
+                hadn&rsquo;t just lost income.
+              </p>
+              <p className="mt-3 font-[family-name:var(--font-editorial)] text-lg leading-[1.55] text-[color:var(--warm-gray)] md:text-[30px]">
+                They had lost something far more fundamental.
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Main stage */}
-        <div className="grid h-full grid-cols-1 items-center gap-8 px-6 md:grid-cols-12 md:gap-10 md:px-20">
-          {/* Saree — three real photographs cross-fading: folded → partial → open */}
-          <div className="relative flex h-full items-center justify-center md:col-span-6">
+        <div className="grid h-full grid-cols-1 items-end gap-10 px-6 pb-10 pt-[24rem] md:grid-cols-12 md:items-center md:gap-12 md:px-20 md:pb-16 md:pt-[20rem]">
+          {/* Saree — transparent cutouts cross-fading cleanly */}
+          <div className="relative flex h-full items-center justify-center md:col-span-6 md:justify-start">
             {(() => {
               const unfold = foldOpen.reduce((a, b) => a + b, 0) / foldOpen.length;
-              // Piecewise cross-fade across three photos
               const op1 = unfold <= 0.5 ? 1 - unfold * 2 : 0;
-              const op2 =
-                unfold <= 0.5 ? unfold * 2 : Math.max(0, 1 - (unfold - 0.5) * 2);
+              const op2 = unfold <= 0.5 ? unfold * 2 : Math.max(0, 1 - (unfold - 0.5) * 2);
               const op3 = unfold > 0.5 ? (unfold - 0.5) * 2 : 0;
-              const scale = 0.94 + 0.06 * unfold;
+              const scale = 0.9 + 0.1 * unfold;
               return (
                 <div
-                  className="relative aspect-[16/9] w-full max-w-2xl"
+                  className="relative w-full max-w-[42rem]"
                   style={{
                     opacity: sareeOpacity,
                     transform: `scale(${scale})`,
@@ -787,31 +781,32 @@ function Chapter4() {
                     willChange: "opacity, transform",
                   }}
                 >
-                  {[
-                    { src: ch4Fold1.url, op: op1, alt: "A silk saree neatly folded on a temple floor" },
-                    { src: ch4Fold2.url, op: op2, alt: "The saree partially unfolded, revealing narrative panels" },
-                    { src: ch4Fold3.url, op: op3, alt: "The saree fully unfolded in the courtyard" },
-                  ].map((img, i) => (
-                    <img
-                      key={i}
-                      src={img.src}
-                      alt={img.alt}
-                      className="absolute inset-0 h-full w-full object-cover"
-                      style={{
-                        opacity: img.op,
-                        transition: "opacity 900ms cubic-bezier(0.22,1,0.36,1)",
-                      }}
-                    />
-                  ))}
+                  <div className="relative aspect-[16/10] w-full">
+                    {[
+                      { src: ch4Fold1, op: op1, alt: "A silk saree neatly folded" },
+                      { src: ch4Fold2, op: op2, alt: "The saree partially unfolded" },
+                      { src: ch4Fold3, op: op3, alt: "The saree fully unfolded" },
+                    ].map((img, i) => (
+                      <img
+                        key={i}
+                        src={img.src}
+                        alt={img.alt}
+                        className="absolute inset-0 h-full w-full object-contain"
+                        style={{
+                          opacity: img.op,
+                          transition: "opacity 900ms cubic-bezier(0.22,1,0.36,1)",
+                          filter: "drop-shadow(0 24px 36px rgba(59, 42, 26, 0.12))",
+                        }}
+                      />
+                    ))}
+                  </div>
                 </div>
               );
             })()}
           </div>
 
-
-
           {/* Keywords */}
-          <div className="relative h-[70vh] md:col-span-6 md:h-full">
+          <div className="relative h-[38vh] min-h-[18rem] md:col-span-6 md:h-[58vh] md:min-h-[30rem]">
             <Word
               label="IDENTITY"
               opacity={keywordOpacity("identity")}
