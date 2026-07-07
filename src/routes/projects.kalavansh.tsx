@@ -144,6 +144,7 @@ function KalaVanshPage() {
       <Chapter1 />
       <Chapter3 />
       <Chapter4 />
+      <Chapter5 />
 
 
     </main>
