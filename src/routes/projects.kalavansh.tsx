@@ -671,12 +671,12 @@ function Chapter4() {
     return Math.max(0, Math.min(1, t));
   };
 
-  // Bell curve for keyword visibility: fade in first 30%, hold, fade out last 30%
+  // Bell curve for keyword visibility: fade in 15%, hold 70%, fade out 15%
   const keywordOpacity = (key: string) => {
     const t = phaseP(key);
     if (t <= 0 || t >= 1) return 0;
-    if (t < 0.25) return t / 0.25;
-    if (t > 0.75) return (1 - t) / 0.25;
+    if (t < 0.15) return t / 0.15;
+    if (t > 0.85) return (1 - t) / 0.15;
     return 1;
   };
 
@@ -699,7 +699,7 @@ function Chapter4() {
     transition: `opacity 900ms cubic-bezier(0.22,1,0.36,1) ${delay}ms, transform 900ms cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
   });
 
-  const introOp = 1 - ease(Math.min(1, phaseP("intro") * 1.2));
+  const introOp = 1 - ease(Math.min(1, phaseP("intro")));
 
   const Word = ({ label, body, opacity }: { label: string; body: React.ReactNode; opacity: number }) => (
     <div
@@ -723,7 +723,7 @@ function Chapter4() {
     <section
       ref={sectionRef}
       className="relative bg-[color:var(--ivory)]"
-      style={{ height: "700vh" }}
+      style={{ height: "200vh" }}
       aria-labelledby="kv-chapter-4"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
