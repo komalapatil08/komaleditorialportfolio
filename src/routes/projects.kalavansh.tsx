@@ -1653,11 +1653,11 @@ const JOURNEY_PHOTOS: JourneyPhoto[] = [
     objectPosition: "50% 50%",
   },
   {
-    src: ch7Stall.url,
-    alt: "Team members presenting the KalaVansh prototype to visitors",
+    src: ch7StallFull.url,
+    alt: "Team members presenting the KalaVansh stall at Cause 2026",
     caption: "Presenting",
-    className: "aspect-[4/5]",
-    objectPosition: "50% 40%",
+    className: "aspect-[3/4]",
+    fit: "contain",
   },
   {
     src: ch7Cups.url,
