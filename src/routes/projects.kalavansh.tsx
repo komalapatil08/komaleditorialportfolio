@@ -1738,7 +1738,7 @@ function PromiseSection() {
               <div className="flex-1" />
               <div className="flex flex-1 flex-col items-center gap-3">
                 <ConnectorLine revealed={r(7)} length={22} />
-                <PromiseWord text="Human Connection" revealed={r(7)} align="center" />
+                <PromiseWord text="Human Connection" revealed={r(7)} align="center" wrap />
               </div>
             </div>
           </div>
