@@ -654,15 +654,15 @@ function Chapter4() {
   // Smooth easing
   const ease = (t: number) => 1 - Math.pow(1 - t, 3);
 
-  // Phase ranges
+  // Phase ranges — tight so a single scroll notch advances the story
   const phases = [
-    { start: 0.00, end: 0.12, key: "intro" },
-    { start: 0.12, end: 0.28, key: "identity" },
-    { start: 0.28, end: 0.44, key: "dignity" },
-    { start: 0.44, end: 0.60, key: "recognition" },
-    { start: 0.60, end: 0.76, key: "selfworth" },
-    { start: 0.76, end: 0.90, key: "legacy" },
-    { start: 0.90, end: 1.00, key: "final" },
+    { start: 0.00, end: 0.06, key: "intro" },
+    { start: 0.06, end: 0.22, key: "identity" },
+    { start: 0.22, end: 0.38, key: "dignity" },
+    { start: 0.38, end: 0.54, key: "recognition" },
+    { start: 0.54, end: 0.70, key: "selfworth" },
+    { start: 0.70, end: 0.88, key: "legacy" },
+    { start: 0.88, end: 1.00, key: "final" },
   ];
 
   const phaseP = (key: string) => {
@@ -671,14 +671,15 @@ function Chapter4() {
     return Math.max(0, Math.min(1, t));
   };
 
-  // Bell curve for keyword visibility: fade in 15%, hold 70%, fade out 15%
+  // Fast fade in, long hold, fast fade out
   const keywordOpacity = (key: string) => {
     const t = phaseP(key);
     if (t <= 0 || t >= 1) return 0;
-    if (t < 0.15) return t / 0.15;
-    if (t > 0.85) return (1 - t) / 0.15;
+    if (t < 0.1) return t / 0.1;
+    if (t > 0.9) return (1 - t) / 0.1;
     return 1;
   };
+
 
   // Unfold progression: 0 (folded) -> 1 (fully unfolded)
   const unfoldStages = ["identity", "dignity", "recognition", "selfworth", "legacy"];
