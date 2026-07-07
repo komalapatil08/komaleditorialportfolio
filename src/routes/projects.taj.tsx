@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import tajImg from "@/assets/taj.png.asset.json";
+import asIsJourneyImg from "@/assets/taj-asis-journey.png.asset.json";
 
 export const Route = createFileRoute("/projects/taj")({
   head: () => ({
@@ -376,25 +377,12 @@ function ChapterAsIsJourney() {
           intro="Six stages. Six chances to feel known. Today, each is a silo — data collected, rarely connected."
         />
 
-        <div className="relative">
-          {/* Horizontal rail */}
-          <div className="hidden md:block absolute left-0 right-0 top-[62px] h-px bg-[var(--gold)]/40" />
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-6 md:gap-4">
-            {AS_IS_STAGES.map((s) => (
-              <div key={s.stage} data-reveal className="reveal relative flex flex-col">
-                <div className="hidden md:flex items-center justify-center">
-                  <span className="relative z-10 h-3 w-3 rounded-full bg-[var(--gold)] shadow-[0_0_0_6px_#F7F2EA]" />
-                </div>
-                <p className="mt-2 md:mt-8 text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
-                  {s.n} · {s.stage}
-                </p>
-                <p className="mt-3 font-serif text-[1.35rem] leading-tight tracking-tight text-foreground md:text-[1.5rem]">
-                  {s.pain}
-                </p>
-                <p className="mt-3 text-[13px] leading-[1.55] text-foreground/65">{s.note}</p>
-              </div>
-            ))}
-          </div>
+        <div data-reveal className="reveal mx-auto max-w-[1200px]">
+          <img
+            src={asIsJourneyImg.url}
+            alt="As-is customer journey: Discover, Book, Arrival, Stay, Checkout, Return — each stage marked with a broken link and its pain point."
+            className="w-full h-auto"
+          />
         </div>
 
         {/* Current state at a glance */}
