@@ -192,7 +192,7 @@ function Chapter1() {
                 The first thing I noticed was the craftsmanship.
               </p>
               <p style={fadeUp(320)}>
-                Every piece reflected years of skill, patience, and traditions passed down through generations.
+                Each piece carried generations of craftsmanship, shaped by countless hours of patience and skill.
               </p>
               <p style={fadeUp(400)}>I found myself admiring the products.</p>
               <p style={fadeUp(480)}>Then I realized something unexpected.</p>
@@ -201,7 +201,7 @@ function Chapter1() {
                 className="pt-2 text-2xl font-medium leading-[1.4] text-[color:var(--charcoal)] md:text-[28px]"
                 style={fadeUp(640)}
               >
-                But I couldn't tell you who created them.
+                Yet the people behind them remained invisible.
               </p>
             </div>
           </div>
