@@ -679,27 +679,19 @@ function Chapter4() {
   };
 
   // Unfold progression: 0 (folded) -> 1 (fully unfolded)
-  // Advances step-wise through phases identity → legacy
   const unfoldStages = ["identity", "dignity", "recognition", "selfworth", "legacy"];
-  let unfold = 0;
-  for (let i = 0; i < unfoldStages.length; i++) {
-    const stageP = phaseP(unfoldStages[i]);
-    unfold = Math.max(unfold, (i + ease(stageP)) / unfoldStages.length);
-  }
-  unfold = Math.min(1, unfold);
-
-  // Clip-path inset: starts at 42% each side (narrow center strip), ends at 0
-  const inset = (0.42 - 0.42 * unfold) * 100;
-  // Scale grows from 0.78 to 1.0 as it unfolds
-  const sareeScale = 0.78 + 0.22 * unfold;
+  // Per-fold openness (0 closed → 1 fully open)
+  const foldOpen = unfoldStages.map((k) => ease(phaseP(k)));
 
   // Saree opacity — fades out in final phase
   const finalP = phaseP("final");
   const sareeOpacity = 1 - ease(Math.min(1, finalP * 1.3));
 
-  // Legacy pause: hold legacy word slightly longer before fading
-  const legacyOp = keywordOpacity("legacy");
-  const finalQuoteOp = ease(Math.min(1, finalP * 1.4));
+  // Legacy word: only becomes bold/dark once saree begins fading (final phase)
+  const legacyBoldOp = ease(Math.min(1, finalP * 1.2));
+  const legacyPreOp = keywordOpacity("legacy") * (1 - legacyBoldOp);
+  const finalQuoteOp = ease(Math.max(0, Math.min(1, (finalP - 0.35) / 0.5)));
+
 
   const introFade = (delay = 0) => ({
     opacity: introVisible ? 1 : 0,
