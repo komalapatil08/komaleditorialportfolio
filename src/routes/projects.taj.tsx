@@ -16,9 +16,15 @@ import {
   TrendingUp,
   Wand2,
   UserRound,
+  Search,
+  KeyRound,
+  DoorOpen,
+  LogOut,
+  Repeat,
+  Unlink,
 } from "lucide-react";
 import tajImg from "@/assets/taj.png.asset.json";
-import asIsJourneyImg from "@/assets/taj-asis-journey.png.asset.json";
+
 
 export const Route = createFileRoute("/projects/taj")({
   head: () => ({
