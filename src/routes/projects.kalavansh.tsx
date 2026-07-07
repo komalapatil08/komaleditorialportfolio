@@ -1013,37 +1013,9 @@ function Chapter5() {
       <PromiseSection />
 
 
-      {/* Core Experience flow */}
-      <section className="bg-[color:var(--ivory)] px-6 py-32 md:px-20 md:py-48">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
-            The Core Experience
-          </p>
-          <h3 className="mt-5 font-[family-name:var(--font-editorial)] text-3xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:text-[52px]">
-            A single thread, from hand to heart.
-          </h3>
+      {/* Core Experience — three-column feature comparison */}
+      <CoreExperienceSection />
 
-          <ol className="mt-20 flex flex-col items-center gap-0">
-            {[
-              "Handcrafted Product",
-              "QR Code",
-              "Meet the Artisan",
-              "Watch their Story",
-              "Understand the Craft",
-              "Purchase with Purpose",
-            ].map((step, i, arr) => (
-              <li key={step} className="flex flex-col items-center">
-                <span className="font-[family-name:var(--font-editorial)] text-xl tracking-tight text-[color:var(--charcoal)] md:text-[26px]">
-                  {step}
-                </span>
-                {i < arr.length - 1 && (
-                  <span className="my-6 block h-16 w-px bg-[color:var(--charcoal)]/25 md:my-8 md:h-20" />
-                )}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
 
       {/* Closing statement */}
       <section className="bg-[color:var(--ivory)] px-6 py-40 md:px-20 md:py-56">
@@ -1244,6 +1216,170 @@ function Chapter5() {
 }
 
 /* ================================================================
+ * CoreExperienceSection — three-column feature comparison
+ * Discover • Experience • Customize
+ * ================================================================ */
+
+const CORE_VIDEO_URL =
+  "https://www.youtube.com/results?search_query=KalaVansh+The+Legacy+of+Art";
+
+function CoreExperienceSection() {
+  const ref = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            setVisible(true);
+            io.disconnect();
+          }
+        }
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const enterStyle = (delay: number) => ({
+    opacity: visible ? 1 : 0,
+    transform: visible ? "translateY(0)" : "translateY(16px)",
+    transition: `opacity 900ms ${EASE} ${delay}ms, transform 900ms ${EASE} ${delay}ms`,
+    willChange: "opacity, transform",
+  });
+
+  return (
+    <section
+      ref={ref}
+      aria-labelledby="kv-core-experience"
+      className="bg-[color:var(--ivory)] px-6 py-32 md:px-20 md:py-48"
+    >
+      <div className="mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="text-center" style={enterStyle(0)}>
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+            The Core Experience
+          </p>
+          <h3
+            id="kv-core-experience"
+            className="mt-6 font-[family-name:var(--font-editorial)] text-3xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:text-[52px]"
+          >
+            A single thread, from hand to heart.
+          </h3>
+        </div>
+
+        {/* Three columns */}
+        <div
+          className="mt-20 grid grid-cols-1 gap-16 md:mt-[80px] md:grid-cols-3 md:gap-14"
+          style={enterStyle(180)}
+        >
+          {/* CARD 1 — Discover */}
+          <div className="flex flex-col items-center text-center">
+            <a
+              href={CORE_VIDEO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Artisan Story"
+              className="group relative block"
+              style={{ height: 260 }}
+            >
+              <div
+                className="relative h-[260px] transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+                style={{ aspectRatio: "9 / 19" }}
+              >
+                <div className="absolute inset-0 rounded-[28px] border border-[color:var(--charcoal)]/15 bg-[color:var(--charcoal)] p-[6px] shadow-[0_30px_60px_-30px_rgba(31,31,31,0.35)]">
+                  <div className="relative h-full w-full overflow-hidden rounded-[22px] bg-[color:var(--ivory)]">
+                    <div className="absolute left-1/2 top-1.5 z-10 h-3 w-14 -translate-x-1/2 rounded-full bg-[color:var(--charcoal)]" />
+                    <div className="flex h-full w-full items-center justify-center px-3">
+                      <img
+                        src={ch6MeenakariQR.url}
+                        alt="Scan to meet the Meenakari artisan"
+                        className="w-full max-w-[110px]"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tooltip */}
+              <span
+                role="tooltip"
+                className="pointer-events-none absolute left-1/2 top-full z-20 mt-4 -translate-x-1/2 whitespace-nowrap rounded-md bg-[color:var(--charcoal)] px-3 py-1.5 text-[11px] uppercase tracking-[0.25em] text-[color:var(--ivory)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              >
+                Open Artisan Story
+              </span>
+            </a>
+
+            <h4 className="mt-12 font-[family-name:var(--font-editorial)] text-[32px] leading-[1.1] tracking-tight text-[color:var(--charcoal)]">
+              Discover
+            </h4>
+            <p className="mt-4 max-w-xs text-[18px] leading-[1.5] text-[color:var(--warm-gray)]">
+              Scan the QR code to meet the artisan behind every handcrafted product.
+            </p>
+          </div>
+
+          {/* CARD 2 — Experience */}
+          <div className="flex flex-col items-center text-center">
+            <div className="group overflow-hidden rounded-[12px]" style={{ width: 320, height: 220, maxWidth: "100%" }}>
+              <img
+                src={ch6Pottery.url}
+                alt="A young visitor learns pottery from a master artisan"
+                className="h-full w-full object-cover transition-all duration-300 ease-out group-hover:scale-[1.04] group-hover:brightness-105"
+              />
+            </div>
+            <h4 className="mt-12 font-[family-name:var(--font-editorial)] text-[32px] leading-[1.1] tracking-tight text-[color:var(--charcoal)]">
+              Experience
+            </h4>
+            <p className="mt-4 max-w-xs text-[18px] leading-[1.5] text-[color:var(--warm-gray)]">
+              Visit artisan workshops and experience traditional craftsmanship firsthand.
+            </p>
+          </div>
+
+          {/* CARD 3 — Customize */}
+          <div className="flex flex-col items-center text-center">
+            <div className="group overflow-hidden rounded-[12px]" style={{ width: 320, height: 220, maxWidth: "100%" }}>
+              <img
+                src={ch6Custom.url}
+                alt="An artisan hand-painting a personalized Meenakari jewellery box"
+                className="h-full w-full object-cover transition-all duration-300 ease-out group-hover:scale-[1.04] group-hover:brightness-105"
+              />
+            </div>
+            <h4 className="mt-12 font-[family-name:var(--font-editorial)] text-[32px] leading-[1.1] tracking-tight text-[color:var(--charcoal)]">
+              Customize
+            </h4>
+            <p className="mt-4 max-w-xs text-[18px] leading-[1.5] text-[color:var(--warm-gray)]">
+              Collaborate directly with artisans to create personalized handcrafted pieces.
+            </p>
+          </div>
+        </div>
+
+        {/* Closing statement */}
+        <div
+          className="mt-32 flex flex-col items-center text-center md:mt-40"
+          style={enterStyle(360)}
+        >
+          <p className="font-[family-name:var(--font-editorial)] text-2xl leading-[1.5] tracking-tight text-[color:var(--warm-gray)] md:text-[28px]">
+            From discovering a story…
+            <br />
+            to experiencing a tradition…
+            <br />
+            to creating something uniquely yours.
+          </p>
+          <p className="mt-16 font-[family-name:var(--font-editorial)] italic text-2xl leading-[1.2] tracking-tight text-[color:var(--charcoal)] md:text-[36px]">
+            Making the Invisible Visible.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ================================================================
+
  * PromiseSection — "What KalaVansh Gives Back"
  * Three-column editorial spread: Artisan • Logo • Customer.
  * ================================================================ */
