@@ -1800,13 +1800,13 @@ function JourneySection() {
           className="mx-auto mt-32 flex flex-col items-center text-center md:mt-40"
           style={fade(0)}
         >
-          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--charcoal)]">
+          <p className="text-[15px] uppercase tracking-[0.4em] text-[color:var(--charcoal)] md:text-[17px]">
             Cause 2026
           </p>
-          <p className="mt-4 text-[13px] tracking-[0.15em] text-[color:var(--warm-gray)]">
+          <p className="mt-5 text-[18px] tracking-[0.15em] text-[color:var(--warm-gray)] md:text-[20px]">
             CMR University Lakeside Campus
           </p>
-          <p className="mt-1 text-[13px] tracking-[0.15em] text-[color:var(--warm-gray)]">
+          <p className="mt-2 text-[18px] tracking-[0.15em] text-[color:var(--warm-gray)] md:text-[20px]">
             Institute of Product Leadership
           </p>
 
