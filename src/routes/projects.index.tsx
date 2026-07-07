@@ -100,7 +100,7 @@ function Card({ p }: { p: Project }) {
   if (hasImage) {
     const hasPrototype = Boolean(p.prototypeUrl);
 
-    if (clickable && hasPrototype) {
+    if (p.href && hasPrototype) {
       return (
         <article
           data-reveal
@@ -227,7 +227,7 @@ function Card({ p }: { p: Project }) {
       </article>
     );
 
-    if (clickable) {
+    if (p.href) {
       return (
         <Link to={p.href} className="block h-full">
           {card}
