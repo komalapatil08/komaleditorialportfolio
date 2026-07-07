@@ -6,6 +6,12 @@ import titleAsset from "@/assets/kv-title-hires.png.asset.json";
 import meenakariAsset from "@/assets/kv-meenakari.jpeg.asset.json";
 import sareeAsset from "@/assets/kv-saree.jpeg.asset.json";
 import kurtiAsset from "@/assets/kv-kurti.png.asset.json";
+import ch3Girl from "@/assets/kv-ch3-girl.jpeg.asset.json";
+import ch3Foot from "@/assets/kv-ch3-foot.jpeg.asset.json";
+import ch3Hand from "@/assets/kv-ch3-hand.jpeg.asset.json";
+import ch3Chikan from "@/assets/kv-ch3-chikankari.jpeg.asset.json";
+import ch3Man from "@/assets/kv-ch3-man.jpeg.asset.json";
+import ch3Elderly from "@/assets/kv-ch3-elderly.png.asset.json";
 
 
 export const Route = createFileRoute("/projects/kalavansh")({
