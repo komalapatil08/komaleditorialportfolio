@@ -1645,6 +1645,13 @@ const JOURNEY_PHOTOS: JourneyPhoto[] = [
     fit: "contain",
   },
   {
+    src: ch7PosterWhatsapp.url,
+    alt: "KalaVansh campaign poster — Behind every piece, a hundred stories.",
+    caption: "Campaign poster",
+    className: "aspect-[4/5]",
+    objectPosition: "50% 50%",
+  },
+  {
     src: ch7Stall.url,
     alt: "Team members presenting the KalaVansh prototype to visitors",
     caption: "Presenting",
