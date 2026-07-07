@@ -162,26 +162,35 @@ function KalaVanshPage() {
 
       {/* Next Project */}
       <section className="bg-[color:var(--ivory)] px-6 pt-24 pb-32 md:px-20 md:pt-32 md:pb-40">
-        <div className="mx-auto max-w-6xl border-t border-[color:var(--charcoal)]/15 pt-12 md:pt-16">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+        <div className="mx-auto max-w-6xl border-t-2 border-b-2 border-[color:var(--charcoal)] py-16 md:py-24">
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--gold)]">
             Next Project
           </p>
-          <Link to="/projects/taj" className="group mt-6 block">
-            <h3 className="font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] transition-colors duration-300 group-hover:text-[color:var(--gold)] md:text-6xl">
-              Taj Digital Transformation
+          <Link to="/projects/taj" className="group mt-4 block">
+            <h3 className="font-[family-name:var(--font-editorial)] text-6xl leading-[0.95] tracking-tight text-[color:var(--charcoal)] transition-colors duration-300 group-hover:text-[color:var(--gold)] md:text-[7rem]">
+              Taj Digital Transformation <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-3">→</span>
             </h3>
-            <p className="mt-3 font-[family-name:var(--font-editorial)] text-lg leading-[1.5] text-[color:var(--warm-gray)] md:text-xl">
+            <p className="mt-4 font-[family-name:var(--font-editorial)] text-xl italic text-[color:var(--warm-gray)] md:text-2xl">
               What does personalized luxury actually look like?
             </p>
-            <p className="mt-2 text-[11px] uppercase tracking-[0.24em] text-[color:var(--warm-gray)]">
-              Digital Transformation • Guest Experience
-            </p>
-            <span className="mt-8 inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.22em] text-[color:var(--charcoal)] transition-all duration-300 group-hover:gap-3 group-hover:text-[color:var(--gold)]">
-              Read next case study <span aria-hidden>→</span>
-            </span>
           </Link>
+          <div className="mt-10 flex flex-wrap items-center gap-4 md:mt-14">
+            <Link
+              to="/projects/taj"
+              className="inline-flex items-center gap-2 bg-[color:var(--charcoal)] px-8 py-4 text-[13px] font-bold uppercase tracking-[0.24em] text-[color:var(--ivory)] transition-all duration-300 hover:bg-[color:var(--gold)] hover:text-[color:var(--charcoal)]"
+            >
+              Read Next Case Study <span aria-hidden>→</span>
+            </Link>
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 border-2 border-[color:var(--charcoal)] px-8 py-4 text-[13px] font-bold uppercase tracking-[0.24em] text-[color:var(--charcoal)] transition-all duration-300 hover:bg-[color:var(--charcoal)] hover:text-[color:var(--ivory)]"
+            >
+              ← Back to Home
+            </Link>
+          </div>
         </div>
       </section>
+
     </main>
   );
 }
