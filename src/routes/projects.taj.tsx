@@ -1756,6 +1756,34 @@ function FinalChapter() {
    Page
    ———————————————————————————————————————————————————————— */
 
+function NextProject() {
+  return (
+    <section className="bg-[#0F0B08] px-6 py-24 md:px-12 md:py-32">
+      <Container>
+        <div data-reveal className="reveal border-t border-[#F5EDE1]/15 pt-12 md:pt-16">
+          <p className="text-[11px] uppercase tracking-[0.35em] text-[#D4B678]">
+            Next Project
+          </p>
+          <Link to="/projects/meetcraft" className="group mt-6 block">
+            <h3 className="font-serif text-4xl leading-[1.05] tracking-tight text-[#F5EDE1] transition-colors duration-300 group-hover:text-[#E7C787] md:text-6xl">
+              MeetCraft
+            </h3>
+            <p className="mt-3 font-editorial text-lg leading-[1.5] text-[#F5EDE1]/70 md:text-xl">
+              What if networking was intentional?
+            </p>
+            <p className="mt-2 text-[11px] uppercase tracking-[0.24em] text-[#D4B678]">
+              Intent-based Networking • Product Strategy
+            </p>
+            <span className="mt-8 inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.22em] text-[#F5EDE1]/80 transition-all duration-300 group-hover:gap-3 group-hover:text-[#E7C787]">
+              Read next case study <span aria-hidden>→</span>
+            </span>
+          </Link>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
 function TajPage() {
   useReveal();
   return (
@@ -1778,6 +1806,7 @@ function TajPage() {
       <ChapterRoadmap />
       <ChapterImpact />
       <FinalChapter />
+      <NextProject />
       <Footer />
     </main>
   );
