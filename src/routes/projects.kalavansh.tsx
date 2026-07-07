@@ -94,7 +94,7 @@ function KalaVanshPage() {
               <div className="relative max-w-md">
                 <p
                   className="font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-[42px]"
-                  style={{ opacity: 1 - textP, transition: "opacity 200ms linear" }}
+                  style={{ opacity: 1 - imageP, transition: "opacity 200ms linear" }}
                 >
                   This is what usually happens.
                 </p>
