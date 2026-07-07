@@ -61,7 +61,8 @@ const featured: FeaturedProject[] = [
     title: "Taj Digital Transformation",
     tag: "Digital Transformation • Guest Experience",
     image: tajImg.url,
-    alt: "A Taj host serving tea overlooking the lake at golden hour",
+    alt: "The Taj Mahal Palace at golden hour",
+    href: "/projects/taj",
   },
 ];
 
