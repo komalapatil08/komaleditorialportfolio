@@ -69,7 +69,7 @@ function KalaVanshPage() {
       <section ref={sectionRef} className="relative" style={{ height: "220vh" }}>
         <div className="sticky top-0 flex h-screen w-full flex-col overflow-hidden px-6 py-6 md:px-12 md:py-8">
           {/* Brand mark */}
-          <div className="relative z-20 mb-4 self-start">
+          <div className="relative z-20 mb-6 self-center">
             <BrandMark />
           </div>
 
