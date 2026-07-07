@@ -1,5 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
+import {
+  CalendarDays,
+  UtensilsCrossed,
+  Flower2,
+  Smartphone,
+  BedDouble,
+  Plane,
+  Cog,
+  Heart,
+  Database,
+  Sparkles,
+  BrainCircuit,
+  Gauge,
+  TrendingUp,
+  Wand2,
+  UserRound,
+} from "lucide-react";
 import tajImg from "@/assets/taj.png.asset.json";
 import asIsJourneyImg from "@/assets/taj-asis-journey.png.asset.json";
 
