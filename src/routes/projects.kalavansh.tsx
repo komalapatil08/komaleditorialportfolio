@@ -6,6 +6,12 @@ import titleAsset from "@/assets/kv-title-hires.png.asset.json";
 import meenakariAsset from "@/assets/kv-meenakari.jpeg.asset.json";
 import sareeAsset from "@/assets/kv-saree.jpeg.asset.json";
 import kurtiAsset from "@/assets/kv-kurti.png.asset.json";
+import ch3Girl from "@/assets/kv-ch3-girl.jpeg.asset.json";
+import ch3Foot from "@/assets/kv-ch3-foot.jpeg.asset.json";
+import ch3Hand from "@/assets/kv-ch3-hand.jpeg.asset.json";
+import ch3Chikan from "@/assets/kv-ch3-chikankari.jpeg.asset.json";
+import ch3Man from "@/assets/kv-ch3-man.jpeg.asset.json";
+import ch3Elderly from "@/assets/kv-ch3-elderly.png.asset.json";
 
 
 export const Route = createFileRoute("/projects/kalavansh")({
@@ -132,6 +138,8 @@ function KalaVanshPage() {
       </section>
 
       <Chapter1 />
+      <Chapter3 />
+
     </main>
   );
 }
@@ -264,3 +272,327 @@ function BrandMark() {
     </h1>
   );
 }
+
+function Chapter3() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [progress, setProgress] = useState(0);
+  const [introVisible, setIntroVisible] = useState(false);
+
+  useEffect(() => {
+    let raf = 0;
+    const tick = () => {
+      raf = 0;
+      const el = sectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const total = el.offsetHeight - window.innerHeight;
+      const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
+      setProgress(Math.min(1, scrolled / Math.max(total, 1)));
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    tick();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setIntroVisible(true);
+            io.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // 7 panels total: 1 intro + 5 story + 1 final. Horizontal scroll across N-1 viewports.
+  const PANELS = 7;
+  // Add a small hold at the start so the intro reads before scrolling sideways.
+  const holdStart = 0.06;
+  const p = Math.max(0, Math.min(1, (progress - holdStart) / (1 - holdStart)));
+  const translate = -p * (100 * (PANELS - 1));
+
+  const panelActive = (i: number) => {
+    const start = i / PANELS;
+    const end = (i + 1) / PANELS;
+    return p >= start - 0.04 && p < end + 0.02;
+  };
+
+  const fadeIn = (active: boolean, delay = 0) => ({
+    opacity: active ? 1 : 0,
+    transform: active ? "translateY(0)" : "translateY(20px)",
+    transition: `opacity 800ms cubic-bezier(0.22,1,0.36,1) ${delay}ms, transform 800ms cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+  });
+
+  const introFade = (delay = 0) => ({
+    opacity: introVisible ? 1 : 0,
+    transform: introVisible ? "translateY(0)" : "translateY(24px)",
+    transition: `opacity 900ms cubic-bezier(0.22,1,0.36,1) ${delay}ms, transform 900ms cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+  });
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative bg-[color:var(--ivory)]"
+      style={{ height: `${PANELS * 100}vh` }}
+      aria-labelledby="kv-chapter-3"
+    >
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        <div
+          className="flex h-full"
+          style={{
+            width: `${PANELS * 100}vw`,
+            transform: `translate3d(${translate}vw, 0, 0)`,
+            transition: "transform 120ms linear",
+            willChange: "transform",
+          }}
+        >
+          {/* Panel 0 — Intro */}
+          <Panel>
+            <div className="mx-auto flex h-full max-w-3xl flex-col justify-center px-8 text-center">
+              <p
+                className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]"
+                style={introFade(0)}
+              >
+                Chapter 3
+              </p>
+              <h2
+                id="kv-chapter-3"
+                className="mt-6 font-[family-name:var(--font-editorial)] text-5xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-7xl"
+                style={introFade(120)}
+              >
+                The Cost of Craftsmanship
+              </h2>
+              <p
+                className="mx-auto mt-10 max-w-xl font-[family-name:var(--font-editorial)] text-xl leading-[1.55] text-[color:var(--charcoal)] md:text-[22px]"
+                style={introFade(280)}
+              >
+                The deeper I looked, the more I realized these weren&rsquo;t
+                isolated stories. They were different faces of the same system.
+              </p>
+              <p
+                className="mt-16 text-[10px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]"
+                style={introFade(440)}
+              >
+                Keep scrolling
+              </p>
+            </div>
+          </Panel>
+
+          {/* Panel 1 */}
+          <StoryPanel
+            image={ch3Girl.url}
+            alt="A young Meenakari artisan girl sorting enamelled boxes in her workshop"
+            headline="She left school."
+            body="So her younger siblings could continue theirs."
+            active={panelActive(1)}
+          />
+
+          {/* Panel 2 — dual image */}
+          <Panel>
+            <div className="grid h-full grid-cols-1 items-center gap-10 px-8 py-16 md:grid-cols-12 md:gap-16 md:px-20">
+              <div className="relative md:col-span-7">
+                <div
+                  className="relative aspect-[4/3] w-full overflow-hidden"
+                  style={fadeIn(panelActive(2), 100)}
+                >
+                  <img
+                    src={ch3Foot.url}
+                    alt="Chemical burn on an artisan's foot"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+                <div
+                  className="absolute -bottom-8 -right-4 aspect-[4/3] w-[58%] overflow-hidden md:-bottom-14 md:-right-10"
+                  style={fadeIn(panelActive(2), 260)}
+                >
+                  <img
+                    src={ch3Hand.url}
+                    alt="An artisan's arm scarred from chemical exposure despite gloves"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              </div>
+              <div className="md:col-span-5">
+                <h3
+                  className="font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-6xl"
+                  style={fadeIn(panelActive(2), 180)}
+                >
+                  These burns never make it onto the price tag.
+                </h3>
+                <p
+                  className="mt-8 max-w-md font-[family-name:var(--font-editorial)] text-xl leading-[1.55] text-[color:var(--charcoal)] md:text-[22px]"
+                  style={fadeIn(panelActive(2), 340)}
+                >
+                  Years of chemical exposure, cuts, burns and repetitive work
+                  become invisible once the product reaches the customer.
+                </p>
+              </div>
+            </div>
+          </Panel>
+
+          {/* Panel 3 */}
+          <StoryPanel
+            image={ch3Chikan.url}
+            alt="A Chikankari artisan being interviewed while embroidering white fabric"
+            headline="Someone else decides what their work is worth."
+            body="The artisans create every stitch by hand, but retailers and intermediaries often decide the final selling price."
+            active={panelActive(3)}
+          />
+
+          {/* Panel 4 — price disparity centerpiece */}
+          <Panel>
+            <div className="grid h-full grid-cols-1 items-center gap-12 px-8 py-16 md:grid-cols-12 md:gap-16 md:px-20">
+              <div
+                className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden md:col-span-5"
+                style={fadeIn(panelActive(4), 100)}
+              >
+                <img
+                  src={ch3Man.url}
+                  alt="An artisan at his loom"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </div>
+              <div className="md:col-span-7">
+                <div
+                  className="flex flex-col items-start gap-3"
+                  style={fadeIn(panelActive(4), 200)}
+                >
+                  <span className="text-[10px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+                    Luxury Silk Saree
+                  </span>
+                  <span className="font-[family-name:var(--font-editorial)] text-6xl leading-none tracking-tight text-[color:var(--charcoal)] md:text-[112px]">
+                    ₹20,000
+                  </span>
+                </div>
+                <div
+                  className="my-6 h-16 w-px bg-[color:var(--charcoal)]/30 md:my-8 md:h-20"
+                  style={fadeIn(panelActive(4), 340)}
+                />
+                <div
+                  className="flex flex-col items-start gap-3"
+                  style={fadeIn(panelActive(4), 420)}
+                >
+                  <span className="text-[10px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
+                    Artisan&rsquo;s Earnings
+                  </span>
+                  <span className="font-[family-name:var(--font-editorial)] text-5xl leading-none tracking-tight text-[color:var(--warm-gray)] md:text-[88px]">
+                    ₹200
+                  </span>
+                </div>
+                <p
+                  className="mt-10 max-w-md font-[family-name:var(--font-editorial)] text-xl leading-[1.55] text-[color:var(--charcoal)] md:text-[22px]"
+                  style={fadeIn(panelActive(4), 560)}
+                >
+                  A handcrafted silk saree may sell for ₹20,000, while the
+                  artisan who spent days creating it earns around ₹200.
+                </p>
+              </div>
+            </div>
+          </Panel>
+
+          {/* Panel 5 */}
+          <StoryPanel
+            image={ch3Elderly.url}
+            alt="An elderly woman artisan speaking about her craft"
+            headline="Will the craft end with her?"
+            body="Many artisans don't want their children to continue the craft. They dream of becoming doctors, engineers, or teachers instead. If the next generation walks away, centuries of heritage disappear with them."
+            active={panelActive(5)}
+          />
+
+          {/* Panel 6 — Final */}
+          <Panel>
+            <div className="mx-auto flex h-full max-w-4xl flex-col items-center justify-center px-8 text-center">
+              <p
+                className="font-[family-name:var(--font-editorial)] text-4xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:text-7xl"
+                style={fadeIn(panelActive(6), 100)}
+              >
+                If the artisans disappear&hellip;
+              </p>
+              <p
+                className="mt-10 font-[family-name:var(--font-editorial)] text-4xl leading-[1.1] tracking-tight text-[color:var(--warm-gray)] md:text-7xl"
+                style={fadeIn(panelActive(6), 400)}
+              >
+                Who preserves the culture?
+              </p>
+            </div>
+          </Panel>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Panel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative h-screen w-screen shrink-0 bg-[color:var(--ivory)]">
+      {children}
+    </div>
+  );
+}
+
+function StoryPanel({
+  image,
+  alt,
+  headline,
+  body,
+  active,
+}: {
+  image: string;
+  alt: string;
+  headline: string;
+  body: string;
+  active: boolean;
+}) {
+  const fade = (delay = 0) => ({
+    opacity: active ? 1 : 0,
+    transform: active ? "translateY(0)" : "translateY(20px)",
+    transition: `opacity 800ms cubic-bezier(0.22,1,0.36,1) ${delay}ms, transform 800ms cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+  });
+  return (
+    <Panel>
+      <div className="grid h-full grid-cols-1 items-center gap-10 px-8 py-16 md:grid-cols-12 md:gap-16 md:px-20">
+        <div
+          className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden md:col-span-6 md:aspect-[4/5] md:max-w-none"
+          style={fade(100)}
+        >
+          <img
+            src={image}
+            alt={alt}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </div>
+        <div className="md:col-span-6">
+          <h3
+            className="font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-6xl"
+            style={fade(220)}
+          >
+            {headline}
+          </h3>
+          <p
+            className="mt-8 max-w-md font-[family-name:var(--font-editorial)] text-xl leading-[1.55] text-[color:var(--charcoal)] md:text-[22px]"
+            style={fade(360)}
+          >
+            {body}
+          </p>
+        </div>
+      </div>
+    </Panel>
+  );
+}
+
