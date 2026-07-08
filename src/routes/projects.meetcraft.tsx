@@ -1,17 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import chapter1Room from "@/assets/meetcraft-chapter1-room.png.asset.json";
-import interviewKomal from "@/assets/mc-interview-komal.png.asset.json";
-import interviewShristy from "@/assets/mc-interview-shristy.png.asset.json";
-import interviewPrashant from "@/assets/mc-interview-prashant.png.asset.json";
-import surveyEvidence from "@/assets/mc-survey.png.asset.json";
-import chapter3Insight from "@/assets/mc-chapter3-insight.png.asset.json";
-import ch7Presentation from "@/assets/mc-ch7-presentation.jpeg.asset.json";
-import ch7Judges from "@/assets/mc-ch7-judges.jpeg.asset.json";
-import ch7Award from "@/assets/mc-ch7-award.jpeg.asset.json";
-import ch7Certificate from "@/assets/mc-ch7-certificate.png.asset.json";
-import meetcraftCoverHero from "@/assets/meetcraft-cover-hero.png.asset.json";
-import meetcraftDemo from "@/assets/meetcraft-demo.mp4.asset.json";
+
+
+
+
+
+
+
+
+
+
+
+
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 
@@ -637,7 +637,7 @@ function ChapterSeven() {
           >
             <div className="w-full overflow-hidden bg-[#F5F3EE]" style={{ aspectRatio: "867 / 567" }}>
               <img
-                src={ch7Presentation.url}
+                src={"/images/projects/meetcraft/mc-ch7-presentation-v4.jpeg"}
                 alt="Komal presenting the MeetCraft value proposition on stage at the VPD Skillathon"
                 className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
                 loading="lazy"
@@ -655,7 +655,7 @@ function ChapterSeven() {
             <div className="aspect-[4/3] w-full overflow-hidden">
 
               <img
-                src={ch7Judges.url}
+                src={"/images/projects/meetcraft/mc-ch7-judges-v2.jpeg"}
                 alt="Defending product decisions during the judge Q&A"
                 className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
 
@@ -674,7 +674,7 @@ function ChapterSeven() {
           >
             <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden">
               <img
-                src={ch7Award.url}
+                src={"/images/projects/meetcraft/mc-ch7-award.jpeg"}
                 alt="Receiving the Skillathon Winner recognition"
                 className="h-full w-full object-contain transition-transform duration-[900ms] ease-out group-hover:scale-[1.02]"
                 loading="lazy"
@@ -709,7 +709,7 @@ function ChapterSeven() {
                     aria-label="View full certificate"
                   >
                     <img
-                      src={ch7Certificate.url}
+                      src={"/images/projects/meetcraft/mc-ch7-certificate.png"}
                       alt="Certificate of Recognition — Skillathon Winner for Value Proposition and Digital Business Models"
                       className="h-full w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.035]"
                       loading="lazy"
@@ -718,7 +718,7 @@ function ChapterSeven() {
                 </DialogTrigger>
                 <DialogContent className="max-w-4xl border-none bg-white p-2 sm:p-4">
                   <img
-                    src={ch7Certificate.url}
+                    src={"/images/projects/meetcraft/mc-ch7-certificate.png"}
                     alt="Certificate of Recognition — Skillathon Winner for Value Proposition and Digital Business Models"
                     className="h-auto w-full rounded-md"
                   />
@@ -828,7 +828,7 @@ function MeetCraftPage() {
           <div data-reveal-hero className="reveal-hero mt-8 md:mt-10">
             <div className="mx-auto max-w-[1200px]">
               <img
-                src={meetcraftCoverHero.url}
+                src={"/images/projects/meetcraft/meetcraft-cover-hero.png"}
                 alt="MeetCraft — a cinematic view of professionals networking through an intelligent connection app"
                 className="w-full h-auto rounded-[22px] shadow-[0_12px_40px_-16px_rgba(0,0,0,0.18)]"
               />
@@ -868,7 +868,7 @@ function MeetCraftPage() {
                 style={{ transitionDelay: "160ms" }}
               >
                 <img
-                  src={chapter1Room.url}
+                  src={"/images/projects/meetcraft/meetcraft-chapter1-room.png"}
                   alt="A room of attendees standing in quiet hesitation at the start of a networking event."
                   className="w-full h-auto"
                   loading="lazy"
@@ -888,7 +888,7 @@ function MeetCraftPage() {
             <div className="md:col-span-5">
               <div data-reveal className="reveal">
                 <img
-                  src={interviewKomal.url}
+                  src={"/images/projects/meetcraft/mc-interview-komal.png"}
                   alt="Komal conducting an in-depth attendee interview"
                   className="w-full aspect-[4/3] rounded-2xl object-cover object-top"
                   loading="lazy"
@@ -897,7 +897,7 @@ function MeetCraftPage() {
               <div className="mt-4 grid grid-cols-2 gap-4">
                 <div data-reveal className="reveal" style={{ transitionDelay: "80ms" }}>
                   <img
-                    src={interviewShristy.url}
+                    src={"/images/projects/meetcraft/mc-interview-shristy.png"}
                     alt="Shristy interviewing an attendee"
                     className="w-full h-auto rounded-2xl object-cover aspect-[4/5]"
                     loading="lazy"
@@ -905,7 +905,7 @@ function MeetCraftPage() {
                 </div>
                 <div data-reveal className="reveal" style={{ transitionDelay: "140ms" }}>
                   <img
-                    src={interviewPrashant.url}
+                    src={"/images/projects/meetcraft/mc-interview-prashant.png"}
                     alt="Prashant interviewing organizers on the floor"
                     className="w-full h-auto rounded-2xl object-cover aspect-[4/5]"
                     loading="lazy"
@@ -919,7 +919,7 @@ function MeetCraftPage() {
                 style={{ transitionDelay: "200ms" }}
               >
                 <img
-                  src={surveyEvidence.url}
+                  src={"/images/projects/meetcraft/mc-survey.png"}
                   alt="Snippet of the raw survey response spreadsheet used to validate interview findings"
                   className="w-full h-auto rounded-lg"
                   loading="lazy"
@@ -1146,7 +1146,7 @@ function MeetCraftPage() {
                 style={{ transitionDelay: "160ms" }}
               >
                 <img
-                  src={chapter3Insight.url}
+                  src={"/images/projects/meetcraft/mc-chapter3-insight.png"}
                   alt="A student with a notebook, pausing at the edge of a networking event, searching for someone to approach while others converse around him."
                   className="w-full h-auto rounded-2xl"
                   loading="lazy"
@@ -1194,7 +1194,7 @@ function MeetCraftPage() {
                   <div className="absolute left-1/2 top-1.5 h-[18px] w-[70px] -translate-x-1/2 rounded-full bg-charcoal" />
                   <div className="aspect-[9/19] w-full overflow-hidden rounded-[22px] bg-charcoal">
                     <video
-                      src={meetcraftDemo.url}
+                      src={"https://komaleditorialportfolio.lovable.app/__l5e/assets-v1/d9f2db0e-ff32-4320-8a04-7ae36c2d6f26/meetcraft-demo.mp4"}
                       autoPlay
                       muted
                       loop
