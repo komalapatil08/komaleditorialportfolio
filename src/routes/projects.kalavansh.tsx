@@ -1,30 +1,34 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-
-
-
-
-
-
-
-
-
-
-
-
+import vaseAsset from "@/assets/kv-vase.jpg.asset.json";
+import artisanAsset from "@/assets/kv-artisan.jpg.asset.json";
+import titleAsset from "@/assets/kv-title-hires.png.asset.json";
+import meenakariAsset from "@/assets/kv-meenakari.jpeg.asset.json";
+import sareeAsset from "@/assets/kv-saree.jpeg.asset.json";
+import kurtiAsset from "@/assets/kv-kurti.png.asset.json";
+import ch3Girl from "@/assets/kv-ch3-girl.jpeg.asset.json";
+import ch3Foot from "@/assets/kv-ch3-foot.jpeg.asset.json";
+import ch3Hand from "@/assets/kv-ch3-hand.jpeg.asset.json";
+import ch3Chikan from "@/assets/kv-ch3-chikankari.jpeg.asset.json";
+import ch3Man from "@/assets/kv-ch3-man.jpeg.asset.json";
+import ch3Elderly from "@/assets/kv-ch3-elderly.png.asset.json";
 import ch4Fold1 from "@/assets/kv-ch4-fold-1.png";
 import ch4Fold2 from "@/assets/kv-ch4-fold-2.png";
 import ch4Fold3 from "@/assets/kv-ch4-fold-3.png";
+import kvLogo from "@/assets/kv-logo.png.asset.json";
+import ch6MeenakariQR from "@/assets/kv-ch6-meenakari-qr.jpeg.asset.json";
+import ch6Pottery from "@/assets/kv-ch6-pottery.png.asset.json";
+import ch6Custom from "@/assets/kv-ch6-custom.png.asset.json";
+import ch6SiteQR from "@/assets/kv-ch6-site-qr.jpeg.asset.json";
+import ch6PhoneResult from "@/assets/kv-ch6-phone-result.jpeg.asset.json";
+import ch7StallFull from "@/assets/kv-ch7-stall-full.png.asset.json";
+import ch7Poster from "@/assets/kv-ch7-poster.jpeg.asset.json";
+import ch7PosterWhatsapp from "@/assets/kv-ch7-poster-whatsapp.jpeg.asset.json";
 
-
-
-
-
-
-
-
-
-
+import ch7Cups from "@/assets/kv-ch7-cups.jpeg.asset.json";
+import ch7Saree from "@/assets/kv-ch7-saree.jpeg.asset.json";
+import promiseArtisan from "@/assets/kv-promise-artisan.png.asset.json";
+import promiseCustomer from "@/assets/kv-promise-customer.png.asset.json";
 
 
 export const Route = createFileRoute("/projects/kalavansh")({
@@ -43,9 +47,9 @@ export const Route = createFileRoute("/projects/kalavansh")({
           "The product is remembered. The maker is forgotten. A project about restoring the maker to the masterpiece.",
       },
       { property: "og:type", content: "article" },
-      { property: "og:image", content: "/images/projects/kalavansh/kv-vase.jpg" },
+      { property: "og:image", content: vaseAsset.url },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "/images/projects/kalavansh/kv-vase.jpg" },
+      { name: "twitter:image", content: vaseAsset.url },
     ],
   }),
   component: KalaVanshPage,
@@ -98,13 +102,13 @@ function KalaVanshPage() {
             {/* Left — image stack */}
             <div className="relative mx-auto aspect-[4/5] h-[45vh] w-full max-w-md md:aspect-auto md:h-[65vh] md:max-w-lg">
               <img
-                src={"/images/projects/kalavansh/kv-artisan.jpg"}
+                src={artisanAsset.url}
                 alt="An Indian artisan hand-painting a Meenakari vase in his workshop"
                 className="absolute inset-0 h-full w-full object-cover"
                 style={{ opacity: 1 - imageP, transition: "opacity 200ms linear" }}
               />
               <img
-                src={"/images/projects/kalavansh/kv-vase.jpg"}
+                src={vaseAsset.url}
                 alt="The finished Meenakari vase, richly enamelled in cobalt and gold"
                 className="absolute inset-0 h-full w-full object-cover"
                 style={{ opacity: imageP, transition: "opacity 200ms linear" }}
@@ -271,7 +275,7 @@ function Chapter1() {
               style={fadeUp(200)}
             >
               <img
-                src={"/images/projects/kalavansh/kv-meenakari.jpeg"}
+                src={meenakariAsset.url}
                 alt="Meenakari enamelled brass glasses with peacock motifs"
                 className="block h-auto w-full object-cover"
               />
@@ -283,7 +287,7 @@ function Chapter1() {
               style={fadeUp(360)}
             >
               <img
-                src={"/images/projects/kalavansh/kv-saree.jpeg"}
+                src={sareeAsset.url}
                 alt="Handwoven Banarasi silk saree draped over antique boxes"
                 className="block h-auto w-full object-cover"
               />
@@ -295,7 +299,7 @@ function Chapter1() {
               style={fadeUp(520)}
             >
               <img
-                src={"/images/projects/kalavansh/kv-kurti.png"}
+                src={kurtiAsset.url}
                 alt="White Chikankari hand-embroidered kurti"
                 className="block h-auto w-full object-cover"
               />
@@ -313,7 +317,7 @@ function BrandMark() {
     <div className="flex flex-col items-center gap-3">
       <h1 className="m-0 inline-block p-0">
         <img
-          src={"/images/projects/kalavansh/kv-title-hires.png"}
+          src={titleAsset.url}
           alt="KalaVansh"
           className="block h-16 w-auto md:h-24"
         />
@@ -454,7 +458,7 @@ function Chapter3() {
 
           {/* Panel 1 */}
           <StoryPanel
-            image={"/images/projects/kalavansh/kv-ch3-girl.jpeg"}
+            image={ch3Girl.url}
             alt="A young Meenakari artisan girl sorting enamelled boxes in her workshop"
             headline="She left school."
             body="So her younger siblings could continue theirs."
@@ -470,7 +474,7 @@ function Chapter3() {
                   style={fadeIn(panelActive(2), 100)}
                 >
                   <img
-                    src={"/images/projects/kalavansh/kv-ch3-foot.jpeg"}
+                    src={ch3Foot.url}
                     alt="Chemical burn on an artisan's foot"
                     className="absolute inset-0 h-full w-full object-cover"
                   />
@@ -480,7 +484,7 @@ function Chapter3() {
                   style={fadeIn(panelActive(2), 260)}
                 >
                   <img
-                    src={"/images/projects/kalavansh/kv-ch3-hand.jpeg"}
+                    src={ch3Hand.url}
                     alt="An artisan's arm scarred from chemical exposure despite gloves"
                     className="h-full w-full object-cover"
                   />
@@ -506,7 +510,7 @@ function Chapter3() {
 
           {/* Panel 3 */}
           <StoryPanel
-            image={"/images/projects/kalavansh/kv-ch3-chikankari.jpeg"}
+            image={ch3Chikan.url}
             alt="A Chikankari artisan being interviewed while embroidering white fabric"
             headline="Someone else decides what their work is worth."
             body="The artisans create every stitch by hand, but retailers and intermediaries often decide the final selling price."
@@ -521,7 +525,7 @@ function Chapter3() {
                 style={fadeIn(panelActive(4), 100)}
               >
                 <img
-                  src={"/images/projects/kalavansh/kv-ch3-elderly.png"}
+                  src={ch3Elderly.url}
                   alt="An elderly woman artisan at her loom"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
@@ -566,7 +570,7 @@ function Chapter3() {
 
           {/* Panel 5 */}
           <StoryPanel
-            image={"/images/projects/kalavansh/kv-ch3-man.jpeg"}
+            image={ch3Man.url}
             alt="An artisan speaking about his craft"
             headline="Will the craft end with him?"
             body="Many artisans don't want their children to continue the craft. They dream of becoming doctors, engineers, or teachers instead. If the next generation walks away, centuries of heritage disappear with them."
@@ -1040,7 +1044,7 @@ function Chapter5() {
             style={{ opacity: logoOp, transition: "opacity 400ms ease-out", pointerEvents: logoOp > 0.05 ? "auto" : "none" }}
           >
             <img
-              src={"/images/projects/kalavansh/kv-logo.png"}
+              src={kvLogo.url}
               alt="KalaVansh — Making the Invisible Visible"
               className="h-auto w-[clamp(14rem,52vw,36rem)] select-none"
               style={{
@@ -1097,7 +1101,7 @@ function Chapter5() {
 
           <div className="mt-20 w-full max-w-[320px]">
             <img
-              src={"/images/projects/kalavansh/kv-ch6-site-qr.jpeg"}
+              src={ch6SiteQR.url}
               alt="Scan to open the KalaVansh website"
               className="h-auto w-full"
             />
@@ -1203,7 +1207,7 @@ function CoreExperienceSection() {
                     <div className="absolute left-1/2 top-1.5 z-10 h-3 w-14 -translate-x-1/2 rounded-full bg-[color:var(--charcoal)]" />
                     <div className="flex h-full w-full items-center justify-center px-3">
                       <img
-                        src={"/images/projects/kalavansh/kv-ch6-meenakari-qr.jpeg"}
+                        src={ch6MeenakariQR.url}
                         alt="Scan to meet the Meenakari artisan"
                         className="w-full max-w-[110px]"
                       />
@@ -1240,7 +1244,7 @@ function CoreExperienceSection() {
                     <div className="absolute left-1/2 top-1.5 z-10 h-3 w-14 -translate-x-1/2 rounded-full bg-[color:var(--charcoal)]" />
                     <div className="flex h-full w-full items-center justify-center overflow-hidden">
                       <img
-                        src={"/images/projects/kalavansh/kv-ch6-phone-result.jpeg"}
+                        src={ch6PhoneResult.url}
                         alt="Artisan story video opens after scanning"
                         className="h-full w-full object-cover"
                       />
@@ -1267,7 +1271,7 @@ function CoreExperienceSection() {
           <div className="flex flex-col items-center text-center">
             <div className="group overflow-hidden rounded-[12px]" style={{ width: 320, height: 220, maxWidth: "100%" }}>
               <img
-                src={"/images/projects/kalavansh/kv-ch6-pottery.png"}
+                src={ch6Pottery.url}
                 alt="A young visitor learns pottery from a master artisan"
                 className="h-full w-full object-cover transition-all duration-300 ease-out group-hover:scale-[1.04] group-hover:brightness-105"
               />
@@ -1284,7 +1288,7 @@ function CoreExperienceSection() {
           <div className="flex flex-col items-center text-center">
             <div className="group overflow-hidden rounded-[12px]" style={{ width: 320, height: 220, maxWidth: "100%" }}>
               <img
-                src={"/images/projects/kalavansh/kv-ch6-custom.png"}
+                src={ch6Custom.url}
                 alt="An artisan hand-painting a personalized Meenakari jewellery box"
                 className="h-full w-full object-cover transition-all duration-300 ease-out group-hover:scale-[1.04] group-hover:brightness-105"
               />
@@ -1424,7 +1428,7 @@ function PromiseSection() {
               style={imgWrapStyle(showComposition)}
             >
               <img
-                src={"/images/projects/kalavansh/kv-promise-artisan.png"}
+                src={promiseArtisan.url}
                 alt="A master artisan hand-painting Meenakari florals on a copper vase"
                 className="h-full w-full object-cover"
                 style={{ objectPosition: "50% 40%" }}
@@ -1485,7 +1489,7 @@ function PromiseSection() {
               }}
             >
               <img
-                src={"/images/projects/kalavansh/kv-logo.png"}
+                src={kvLogo.url}
                 alt="KalaVansh"
                 draggable={false}
                 style={{ width: LOGO_W }}
@@ -1499,7 +1503,7 @@ function PromiseSection() {
             >
               <div className="absolute inset-0 overflow-hidden">
                 <img
-                  src={"/images/projects/kalavansh/kv-promise-customer.png"}
+                  src={promiseCustomer.url}
                   alt="A customer holding a hand-painted Meenakari vase from the artisan who made it"
                   draggable={false}
                   style={{
@@ -1576,7 +1580,7 @@ function PromiseSection() {
               }}
             >
               <img
-                src={"/images/projects/kalavansh/kv-promise-artisan.png"}
+                src={promiseArtisan.url}
                 alt="A master artisan hand-painting Meenakari florals on a copper vase"
                 className="h-full w-full object-cover"
                 style={{ objectPosition: "50% 40%" }}
@@ -1590,7 +1594,7 @@ function PromiseSection() {
 
           {/* Logo */}
           <img
-            src={"/images/projects/kalavansh/kv-logo.png"}
+            src={kvLogo.url}
             alt="KalaVansh"
             style={{
               width: 140,
@@ -1613,7 +1617,7 @@ function PromiseSection() {
               }}
             >
               <img
-                src={"/images/projects/kalavansh/kv-promise-customer.png"}
+                src={promiseCustomer.url}
                 alt="A customer holding a hand-painted Meenakari vase from the artisan who made it"
                 draggable={false}
                 style={{
@@ -1675,35 +1679,35 @@ type JourneyPhoto = {
 
 const JOURNEY_PHOTOS: JourneyPhoto[] = [
   {
-    src: "/images/projects/kalavansh/kv-ch7-poster.jpeg",
+    src: ch7Poster.url,
     alt: "KalaVansh campaign poster — You admire the product, but never meet the hands behind it.",
     caption: "Poster",
     className: "md:col-span-2 aspect-[4/3] bg-[color:var(--ivory)]",
     fit: "contain",
   },
   {
-    src: "/images/projects/kalavansh/kv-ch7-poster-whatsapp.jpeg",
+    src: ch7PosterWhatsapp.url,
     alt: "KalaVansh campaign poster — Behind every piece, a hundred stories.",
     caption: "Campaign poster",
     className: "aspect-[4/5]",
     objectPosition: "50% 50%",
   },
   {
-    src: "/images/projects/kalavansh/kv-ch7-stall-full.png",
+    src: ch7StallFull.url,
     alt: "Team members presenting the KalaVansh stall at Cause 2026",
     caption: "Presenting",
     className: "aspect-[3/4]",
     fit: "contain",
   },
   {
-    src: "/images/projects/kalavansh/kv-ch7-cups.jpeg",
+    src: ch7Cups.url,
     alt: "Handcrafted meenakari brass tumblers displayed at the stall",
     caption: "Craft",
     className: "aspect-[4/5]",
     objectPosition: "50% 55%",
   },
   {
-    src: "/images/projects/kalavansh/kv-ch7-saree.jpeg",
+    src: ch7Saree.url,
     alt: "A Banarasi silk saree draped beside heritage jewellery boxes",
     caption: "Heritage",
     className: "aspect-[4/5]",
@@ -1859,7 +1863,7 @@ function JourneySection() {
 
           <div className="mt-32 flex flex-col items-center md:mt-44">
             <img
-              src={"/images/projects/kalavansh/kv-logo.png"}
+              src={kvLogo.url}
               alt="KalaVansh"
               draggable={false}
               className="h-24 w-auto opacity-90 md:h-32"

@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-
-
-
-
-
-
+import certPM from "@/assets/cert-product-management.pdf.asset.json";
+import certPMkt from "@/assets/cert-product-marketing.pdf.asset.json";
+import certVPD from "@/assets/cert-value-proposition.pdf.asset.json";
+import certInnov from "@/assets/cert-innovation-frameworks.pdf.asset.json";
+import certCC from "@/assets/cert-creative-confidence.pdf.asset.json";
+import certStory from "@/assets/cert-storytelling.pdf.asset.json";
 import iplLogo from "@/assets/ipl-logo.png";
 
 type Certification = {
@@ -25,7 +25,7 @@ const certifications: Certification[] = [
     year: "2025",
     category: "Product Management",
     emoji: "🚀",
-    file: "/images/other/product-management-fundamentals.pdf",
+    file: certPM.url,
     type: "pdf",
   },
   {
@@ -34,7 +34,7 @@ const certifications: Certification[] = [
     year: "2025",
     category: "Product Marketing",
     emoji: "📣",
-    file: "/images/other/product-marketing-fundamentals.pdf",
+    file: certPMkt.url,
     type: "pdf",
   },
   {
@@ -43,7 +43,7 @@ const certifications: Certification[] = [
     year: "2025",
     category: "Strategy",
     emoji: "🎯",
-    file: "/images/other/value-proposition-design.pdf",
+    file: certVPD.url,
     type: "pdf",
   },
   {
@@ -52,7 +52,7 @@ const certifications: Certification[] = [
     year: "2025",
     category: "Innovation",
     emoji: "💡",
-    file: "/images/other/innovation-frameworks.pdf",
+    file: certInnov.url,
     type: "pdf",
   },
   {
@@ -61,7 +61,7 @@ const certifications: Certification[] = [
     year: "2025",
     category: "Design Thinking",
     emoji: "🎨",
-    file: "/images/other/building-creative-confidence.pdf",
+    file: certCC.url,
     type: "pdf",
   },
   {
@@ -70,7 +70,7 @@ const certifications: Certification[] = [
     year: "2025",
     category: "Presentation",
     emoji: "📖",
-    file: "/images/other/art-of-storytelling.pdf",
+    file: certStory.url,
     type: "pdf",
   },
 ];

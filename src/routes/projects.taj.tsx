@@ -34,6 +34,9 @@ import {
   Handshake,
   Lock,
 } from "lucide-react";
+import tajImg from "@/assets/taj.png.asset.json";
+
+
 
 export const Route = createFileRoute("/projects/taj")({
   head: () => ({
@@ -51,9 +54,9 @@ export const Route = createFileRoute("/projects/taj")({
           "How 120 years of heritage meets Customer 360, Gen AI concierge and predictive luxury — a case study by Komal Patil.",
       },
       { property: "og:type", content: "article" },
-      { property: "og:image", content: "/images/projects/taj/taj.png" },
+      { property: "og:image", content: tajImg.url },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "/images/projects/taj/taj.png" },
+      { name: "twitter:image", content: tajImg.url },
     ],
   }),
   component: TajPage,
@@ -219,7 +222,7 @@ function ChapterHero() {
   return (
     <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-[#0F0B08] text-[#F5EDE1]">
       <img
-        src={"/images/projects/taj/taj.png"}
+        src={tajImg.url}
         alt="The Taj Mahal Palace hotel in Mumbai at sunset"
         className="absolute inset-0 h-full w-full object-cover opacity-[0.85]"
       />
@@ -1677,7 +1680,7 @@ function FinalChapter() {
   return (
     <section className="relative isolate overflow-hidden bg-[#0F0B08] py-32 text-[#F5EDE1] md:py-48">
       <img
-        src={"/images/projects/taj/taj.png"}
+        src={tajImg.url}
         alt=""
         className="absolute inset-0 h-full w-full object-cover opacity-40"
         aria-hidden

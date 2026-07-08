@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
+import meetcraftImg from "@/assets/meetcraft.png.asset.json";
+import kalavanshImg from "@/assets/kalavansh-artisan.png.asset.json";
 
+import tajImg from "@/assets/taj.png.asset.json";
 
 export const Route = createFileRoute("/projects/")({
   head: () => ({
@@ -39,7 +42,7 @@ const projects: Project[] = [
     title: "MeetCraft",
     status: "Live Case Study",
     href: "/projects/meetcraft",
-    image: "/images/other/meetcraft.png",
+    image: meetcraftImg.url,
     alt: "Two women in conversation at a MeetCraft event",
     tag: "Intent-based Networking • Product Strategy",
     description: "What if networking was intentional?",
@@ -49,7 +52,7 @@ const projects: Project[] = [
     title: "KalaVansh",
     status: "Live Case Study",
     href: "/projects/kalavansh",
-    image: "/images/other/kalavansh-artisan.png",
+    image: kalavanshImg.url,
     alt: "An Indian artisan hand-embroidering intricate Chikankari florals on ivory fabric",
     tag: "Craft • Storytelling • Product Thinking",
     description: "What if the maker mattered more than the object?",
@@ -59,7 +62,7 @@ const projects: Project[] = [
     title: "Taj Hotels Digital Transformation",
     status: "Live Case Study",
     href: "/projects/taj",
-    image: "/images/projects/taj/taj.png",
+    image: tajImg.url,
     alt: "The Taj Mahal Palace at golden hour",
     tag: "Digital Transformation • Guest Experience",
     description: "What does personalized luxury actually look like?",

@@ -2,9 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { Mail, Linkedin } from "lucide-react";
 import { Certifications } from "@/components/Certifications";
+import portrait from "@/assets/komal-portrait.png.asset.json";
+import meetcraftImg from "@/assets/meetcraft.png.asset.json";
+import kalavanshImg from "@/assets/kalavansh-artisan.png.asset.json";
 
-
-
+import tajImg from "@/assets/taj.png.asset.json";
+import resumeAsset from "@/assets/resume.pdf.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,7 +45,7 @@ const featured: FeaturedProject[] = [
     question: "What if networking was intentional?",
     title: "MeetCraft",
     tag: "Intent-based Networking • Product Strategy",
-    image: "/images/other/meetcraft.png",
+    image: meetcraftImg.url,
     alt: "Two women in conversation at a MeetCraft event",
     href: "/projects/meetcraft",
     prototypeUrl: "https://meet-craft.vercel.app/",
@@ -51,7 +54,7 @@ const featured: FeaturedProject[] = [
     question: "What if the maker mattered more than the object?",
     title: "KalaVansh",
     tag: "Craft • Storytelling • Product Thinking",
-    image: "/images/other/kalavansh-artisan.png",
+    image: kalavanshImg.url,
     alt: "An Indian artisan hand-embroidering intricate Chikankari florals on ivory fabric",
     href: "/projects/kalavansh",
     websiteUrl: "https://kalavansh.vercel.app/",
@@ -60,7 +63,7 @@ const featured: FeaturedProject[] = [
     question: "What does personalized luxury actually look like?",
     title: "Taj Digital Transformation",
     tag: "Digital Transformation • Guest Experience",
-    image: "/images/projects/taj/taj.png",
+    image: tajImg.url,
     alt: "The Taj Mahal Palace at golden hour",
     href: "/projects/taj",
   },
@@ -120,7 +123,7 @@ function Nav() {
             Let’s Connect
           </a>
           <a
-            href={"/documents/resume.pdf"}
+            href={resumeAsset.url}
             target="_blank"
             rel="noreferrer"
             className="resume-cta inline-flex items-center gap-1.5 border border-[var(--gold)] px-4 py-2 text-[13px] font-bold uppercase tracking-[0.14em] text-foreground transition-colors duration-300"
@@ -204,7 +207,7 @@ function HeroStory() {
         <div className="md:sticky md:top-24 md:h-[calc(100vh-7rem)]">
           <div ref={portraitRef} className="will-change-[opacity]" style={{ transition: "opacity 200ms linear" }}>
             <img
-              src={"/images/profile/komal-portrait.png"}
+              src={portrait.url}
               alt="Portrait of Komal Patil"
               width={1086}
               height={1448}
