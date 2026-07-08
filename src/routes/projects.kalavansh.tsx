@@ -30,15 +30,13 @@ import ch7Saree from "@/assets/kv-ch7-saree.jpeg.asset.json";
 import promiseArtisan from "@/assets/kv-promise-artisan.png.asset.json";
 import promiseCustomer from "@/assets/kv-promise-customer.png.asset.json";
 
-
 export const Route = createFileRoute("/projects/kalavansh")({
   head: () => ({
     meta: [
       { title: "KalaVansh — Every Masterpiece Has a Maker · Komal Patil" },
       {
         name: "description",
-        content:
-          "An editorial case study on Indian craft — remembering the artisans behind the objects we cherish.",
+        content: "An editorial case study on Indian craft — remembering the artisans behind the objects we cherish.",
       },
       { property: "og:title", content: "KalaVansh — Every Masterpiece Has a Maker" },
       {
@@ -124,10 +122,7 @@ function KalaVanshPage() {
                 >
                   This is what usually happens.
                 </p>
-                <div
-                  className="absolute inset-0"
-                  style={{ opacity: imageP, transition: "opacity 200ms linear" }}
-                >
+                <div className="absolute inset-0" style={{ opacity: imageP, transition: "opacity 200ms linear" }}>
                   <p className="font-[family-name:var(--font-editorial)] text-3xl leading-[1.15] tracking-tight text-[color:var(--charcoal)] md:text-[42px]">
                     The product is remembered.
                   </p>
@@ -145,9 +140,7 @@ function KalaVanshPage() {
             style={{ opacity: cueOpacity, transition: "opacity 200ms linear" }}
           >
             <div className="flex flex-col items-center gap-3">
-              <span className="text-[10px] uppercase tracking-[0.35em] text-[color:var(--warm-gray)]">
-                Scroll
-              </span>
+              <span className="text-[10px] uppercase tracking-[0.35em] text-[color:var(--warm-gray)]">Scroll</span>
               <span className="block h-10 w-px bg-[color:var(--charcoal)]/40" />
             </div>
           </div>
@@ -163,12 +156,13 @@ function KalaVanshPage() {
       {/* Next Project */}
       <section className="bg-[color:var(--ivory)] px-6 pt-24 pb-32 md:px-20 md:pt-32 md:pb-40">
         <div className="mx-auto max-w-6xl border-t-2 border-b-2 border-[color:var(--charcoal)] py-16 md:py-24">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--gold)]">
-            Next Project
-          </p>
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--gold)]">Next Project</p>
           <Link to="/projects/taj" className="group mt-4 block">
             <h3 className="font-[family-name:var(--font-editorial)] text-6xl leading-[0.95] tracking-tight text-[color:var(--charcoal)] transition-colors duration-300 group-hover:text-[color:var(--gold)] md:text-[7rem]">
-              Taj Digital Transformation <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-3">→</span>
+              Taj Digital Transformation{" "}
+              <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-3">
+                →
+              </span>
             </h3>
             <p className="mt-4 font-[family-name:var(--font-editorial)] text-xl italic text-[color:var(--warm-gray)] md:text-2xl">
               What does personalized luxury actually look like?
@@ -190,7 +184,6 @@ function KalaVanshPage() {
           </div>
         </div>
       </section>
-
     </main>
   );
 }
@@ -223,19 +216,12 @@ function Chapter1() {
   });
 
   return (
-    <section
-      ref={ref}
-      className="relative px-6 py-24 md:px-12 md:py-32"
-      aria-labelledby="kv-chapter-1"
-    >
+    <section ref={ref} className="relative px-6 py-24 md:px-12 md:py-32" aria-labelledby="kv-chapter-1">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 md:grid-cols-5 md:gap-20">
         {/* Left — 40% */}
         <div className="md:col-span-2 md:pr-8">
           <div className="md:sticky md:top-24">
-            <p
-              className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]"
-              style={fadeUp(0)}
-            >
+            <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]" style={fadeUp(0)}>
               Chapter 1
             </p>
             <h2
@@ -247,9 +233,7 @@ function Chapter1() {
             </h2>
 
             <div className="mt-10 space-y-5 font-[family-name:var(--font-editorial)] text-xl leading-[1.55] text-[color:var(--charcoal)] md:text-[22px]">
-              <p style={fadeUp(240)}>
-                The first thing I noticed was the craftsmanship.
-              </p>
+              <p style={fadeUp(240)}>The first thing I noticed was the craftsmanship.</p>
               <p style={fadeUp(320)}>
                 Each piece carried generations of craftsmanship, shaped by countless hours of patience and skill.
               </p>
@@ -316,11 +300,7 @@ function BrandMark() {
   return (
     <div className="flex flex-col items-center gap-3">
       <h1 className="m-0 inline-block p-0">
-        <img
-          src={titleAsset.url}
-          alt="KalaVansh"
-          className="block h-16 w-auto md:h-24"
-        />
+        <img src={titleAsset.url} alt="KalaVansh" className="block h-16 w-auto md:h-24" />
       </h1>
       <a
         href="https://kalavansh.vercel.app/"
@@ -333,7 +313,6 @@ function BrandMark() {
     </div>
   );
 }
-
 
 function Chapter3() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -427,10 +406,7 @@ function Chapter3() {
           {/* Panel 0 — Intro */}
           <Panel>
             <div className="mx-auto flex h-full max-w-3xl flex-col justify-center px-8 text-center">
-              <p
-                className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]"
-                style={introFade(0)}
-              >
+              <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]" style={introFade(0)}>
                 Chapter 3
               </p>
               <h2
@@ -444,8 +420,8 @@ function Chapter3() {
                 className="mx-auto mt-10 max-w-xl font-[family-name:var(--font-editorial)] text-xl leading-[1.55] text-[color:var(--charcoal)] md:text-[22px]"
                 style={introFade(280)}
               >
-                The deeper I looked, the more I realized these weren&rsquo;t
-                isolated stories. They were different faces of the same system.
+                The deeper I looked, the more I realized these weren&rsquo;t isolated stories. They were different faces
+                of the same system.
               </p>
               <p
                 className="mt-16 text-[10px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]"
@@ -469,10 +445,7 @@ function Chapter3() {
           <Panel>
             <div className="grid h-full grid-cols-1 items-center gap-10 px-8 py-16 md:grid-cols-12 md:gap-16 md:px-20">
               <div className="relative md:col-span-7">
-                <div
-                  className="relative aspect-[4/3] w-full overflow-hidden"
-                  style={fadeIn(panelActive(2), 100)}
-                >
+                <div className="relative aspect-[4/3] w-full overflow-hidden" style={fadeIn(panelActive(2), 100)}>
                   <img
                     src={ch3Foot.url}
                     alt="Chemical burn on an artisan's foot"
@@ -501,8 +474,8 @@ function Chapter3() {
                   className="mt-8 max-w-md font-[family-name:var(--font-editorial)] text-xl leading-[1.55] text-[color:var(--charcoal)] md:text-[22px]"
                   style={fadeIn(panelActive(2), 340)}
                 >
-                  Years of chemical exposure, cuts, burns and repetitive work
-                  become invisible once the product reaches the customer.
+                  Years of chemical exposure, cuts, burns and repetitive work become invisible once the product reaches
+                  the customer.
                 </p>
               </div>
             </div>
@@ -531,10 +504,7 @@ function Chapter3() {
                 />
               </div>
               <div className="md:col-span-7">
-                <div
-                  className="flex flex-col items-start gap-3"
-                  style={fadeIn(panelActive(4), 200)}
-                >
+                <div className="flex flex-col items-start gap-3" style={fadeIn(panelActive(4), 200)}>
                   <span className="text-[10px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
                     Luxury Silk Saree
                   </span>
@@ -546,10 +516,7 @@ function Chapter3() {
                   className="my-6 h-16 w-px bg-[color:var(--charcoal)]/30 md:my-8 md:h-20"
                   style={fadeIn(panelActive(4), 340)}
                 />
-                <div
-                  className="flex flex-col items-start gap-3"
-                  style={fadeIn(panelActive(4), 420)}
-                >
+                <div className="flex flex-col items-start gap-3" style={fadeIn(panelActive(4), 420)}>
                   <span className="text-[10px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
                     Artisan&rsquo;s Earnings
                   </span>
@@ -561,8 +528,8 @@ function Chapter3() {
                   className="mt-10 max-w-md font-[family-name:var(--font-editorial)] text-xl leading-[1.55] text-[color:var(--charcoal)] md:text-[22px]"
                   style={fadeIn(panelActive(4), 560)}
                 >
-                  A handcrafted silk saree may sell for ₹20,000, while the
-                  artisan who spent days creating it earns around ₹200.
+                  A handcrafted silk saree may sell for ₹20,000, while the artisan who spent days creating it earns
+                  around ₹200.
                 </p>
               </div>
             </div>
@@ -601,11 +568,7 @@ function Chapter3() {
 }
 
 function Panel({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="relative h-screen w-screen shrink-0 bg-[color:var(--ivory)]">
-      {children}
-    </div>
-  );
+  return <div className="relative h-screen w-screen shrink-0 bg-[color:var(--ivory)]">{children}</div>;
 }
 
 function StoryPanel({
@@ -633,11 +596,7 @@ function StoryPanel({
           className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden md:col-span-6 md:aspect-[4/5] md:max-w-none"
           style={fade(100)}
         >
-          <img
-            src={image}
-            alt={alt}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
+          <img src={image} alt={alt} className="absolute inset-0 h-full w-full object-cover" />
         </div>
         <div className="md:col-span-6">
           <h3
@@ -657,7 +616,6 @@ function StoryPanel({
     </Panel>
   );
 }
-
 
 function Chapter4() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -713,13 +671,13 @@ function Chapter4() {
 
   // Phase ranges — tight so a single scroll notch advances the story
   const phases = [
-    { start: 0.00, end: 0.06, key: "intro" },
+    { start: 0.0, end: 0.06, key: "intro" },
     { start: 0.06, end: 0.22, key: "identity" },
     { start: 0.22, end: 0.38, key: "dignity" },
     { start: 0.38, end: 0.54, key: "recognition" },
-    { start: 0.54, end: 0.70, key: "selfworth" },
-    { start: 0.70, end: 0.88, key: "legacy" },
-    { start: 0.88, end: 1.00, key: "final" },
+    { start: 0.54, end: 0.7, key: "selfworth" },
+    { start: 0.7, end: 0.88, key: "legacy" },
+    { start: 0.88, end: 1.0, key: "final" },
   ];
 
   const phaseP = (key: string) => {
@@ -737,7 +695,6 @@ function Chapter4() {
     return 1;
   };
 
-
   // Unfold progression: 0 (folded) -> 1 (fully unfolded)
   const unfoldStages = ["identity", "dignity", "recognition", "selfworth", "legacy"];
   // Per-fold openness (0 closed → 1 fully open)
@@ -750,7 +707,6 @@ function Chapter4() {
   // Legacy word fades out as the saree fades in the final phase
   const legacyPreOp = keywordOpacity("legacy");
 
-
   const introFade = (delay = 0) => ({
     opacity: introVisible ? 1 : 0,
     transform: introVisible ? "translateY(0)" : "translateY(20px)",
@@ -759,16 +715,26 @@ function Chapter4() {
 
   const introOp = 1 - ease(Math.min(1, phaseP("intro")));
 
-  const Word = ({ label, body, opacity, compact = false }: { label: string; body: React.ReactNode; opacity: number; compact?: boolean }) => (
+  const Word = ({
+    label,
+    body,
+    opacity,
+    compact = false,
+  }: {
+    label: string;
+    body: React.ReactNode;
+    opacity: number;
+    compact?: boolean;
+  }) => (
     <div
       className="absolute inset-0 flex flex-col items-start justify-center"
       style={{ opacity, transition: "opacity 400ms ease-out", pointerEvents: opacity > 0 ? "auto" : "none" }}
     >
-      <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
-        What was lost
-      </p>
+      <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">What was lost</p>
 
-      <h3 className={`mt-6 max-w-[10ch] font-[family-name:var(--font-editorial)] ${compact ? "text-[clamp(3.35rem,5.6vw,5.8rem)] md:text-[clamp(4.25rem,5.8vw,6rem)]" : "text-[clamp(3.8rem,7vw,7rem)] md:text-[clamp(5.25rem,8vw,7.8rem)]"} font-medium leading-[0.92] tracking-tight text-[color:var(--charcoal)] md:max-w-none`}>
+      <h3
+        className={`mt-6 max-w-[10ch] font-[family-name:var(--font-editorial)] ${compact ? "text-[clamp(3.35rem,5.6vw,5.8rem)] md:text-[clamp(4.25rem,5.8vw,6rem)]" : "text-[clamp(3.8rem,7vw,7rem)] md:text-[clamp(5.25rem,8vw,7.8rem)]"} font-medium leading-[0.92] tracking-tight text-[color:var(--charcoal)] md:max-w-none`}
+      >
         {label}
       </h3>
       <div className="mt-8 max-w-md font-[family-name:var(--font-editorial)] text-xl leading-[1.55] text-[color:var(--charcoal)] md:text-[22px]">
@@ -791,10 +757,7 @@ function Chapter4() {
           style={{ opacity: introOp, transition: "opacity 500ms ease-out" }}
         >
           <div className="mx-auto max-w-6xl">
-            <p
-              className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]"
-              style={introFade(0)}
-            >
+            <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]" style={introFade(0)}>
               Chapter 4
             </p>
             <h2
@@ -806,8 +769,7 @@ function Chapter4() {
             </h2>
             <div className="max-w-2xl" style={introFade(260)}>
               <p className="mt-6 font-[family-name:var(--font-editorial)] text-lg leading-[1.55] text-[color:var(--charcoal)] md:text-[30px]">
-                The more I understood the artisans, the more I realized they
-                hadn&rsquo;t just lost income.
+                The more I understood the artisans, the more I realized they hadn&rsquo;t just lost income.
               </p>
               <p className="mt-3 font-[family-name:var(--font-editorial)] text-lg leading-[1.55] text-[color:var(--warm-gray)] md:text-[30px]">
                 They had lost something far more fundamental.
@@ -832,8 +794,7 @@ function Chapter4() {
                   style={{
                     opacity: sareeOpacity,
                     transform: `scale(${scale})`,
-                    transition:
-                      "opacity 700ms ease-out, transform 800ms cubic-bezier(0.22,1,0.36,1)",
+                    transition: "opacity 700ms ease-out, transform 800ms cubic-bezier(0.22,1,0.36,1)",
                     willChange: "opacity, transform",
                   }}
                 >
@@ -909,21 +870,15 @@ function Chapter4() {
               opacity={legacyPreOp}
               body={
                 <>
-                  <p>
-                    Many artisans no longer want their children to continue the
-                    craft.
-                  </p>
+                  <p>Many artisans no longer want their children to continue the craft.</p>
                   <p className="text-[color:var(--warm-gray)]">
-                    If the next generation walks away, centuries of heritage
-                    disappear with them.
+                    If the next generation walks away, centuries of heritage disappear with them.
                   </p>
                 </>
               }
             />
           </div>
         </div>
-
-
       </div>
     </section>
   );
@@ -995,9 +950,7 @@ function Chapter5() {
           {/* Chapter marker */}
           <div className="pointer-events-none absolute inset-x-0 top-0 z-30 px-6 pt-12 md:px-20 md:pt-16">
             <div className="mx-auto max-w-6xl">
-              <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
-                Chapter 5
-              </p>
+              <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">Chapter 5</p>
               <p
                 id="kv-chapter-5"
                 className="mt-3 font-[family-name:var(--font-editorial)] text-lg italic text-[color:var(--warm-gray)] md:text-[22px]"
@@ -1034,14 +987,17 @@ function Chapter5() {
               <p className="mt-6 font-[family-name:var(--font-editorial)] text-xl leading-[1.25] tracking-tight text-[color:var(--charcoal)] md:text-[36px]">
                 reconnect every handcrafted product with the person who created it?
               </p>
-
             </div>
           </div>
 
           {/* Logo reveal */}
           <div
             className="absolute inset-0 flex flex-col items-center justify-center"
-            style={{ opacity: logoOp, transition: "opacity 400ms ease-out", pointerEvents: logoOp > 0.05 ? "auto" : "none" }}
+            style={{
+              opacity: logoOp,
+              transition: "opacity 400ms ease-out",
+              pointerEvents: logoOp > 0.05 ? "auto" : "none",
+            }}
           >
             <img
               src={kvLogo.url}
@@ -1061,10 +1017,8 @@ function Chapter5() {
 
       <PromiseSection />
 
-
       {/* Core Experience — three-column feature comparison */}
       <CoreExperienceSection />
-
 
       {/* Closing statement */}
       <section className="bg-[color:var(--ivory)] px-6 py-40 md:px-20 md:py-56">
@@ -1079,12 +1033,8 @@ function Chapter5() {
         </div>
       </section>
 
-
       {/* Final CTA */}
-      <section
-        aria-labelledby="kv-ch6-cta"
-        className="bg-[color:var(--ivory)] px-6 py-40 md:px-20 md:py-56"
-      >
+      <section aria-labelledby="kv-ch6-cta" className="bg-[color:var(--ivory)] px-6 py-40 md:px-20 md:py-56">
         <div className="mx-auto flex min-h-[80vh] max-w-4xl flex-col items-center justify-center text-center">
           <h2
             id="kv-ch6-cta"
@@ -1100,11 +1050,7 @@ function Chapter5() {
           </p>
 
           <div className="mt-20 w-full max-w-[320px]">
-            <img
-              src={ch6SiteQR.url}
-              alt="Scan to open the KalaVansh website"
-              className="h-auto w-full"
-            />
+            <img src={ch6SiteQR.url} alt="Scan to open the KalaVansh website" className="h-auto w-full" />
           </div>
 
           <p className="mt-10 font-serif text-base italic text-[color:var(--warm-gray)] md:text-lg">
@@ -1130,8 +1076,7 @@ function Chapter5() {
  * Discover • Experience • Customize
  * ================================================================ */
 
-const CORE_VIDEO_URL =
-  "https://www.youtube.com/results?search_query=KalaVansh+The+Legacy+of+Art";
+const CORE_VIDEO_URL = "https://www.youtube.com/results?search_query=KalaVansh+The+Legacy+of+Art";
 
 function CoreExperienceSection() {
   const ref = useRef<HTMLElement | null>(null);
@@ -1171,9 +1116,7 @@ function CoreExperienceSection() {
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center" style={enterStyle(0)}>
-          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
-            The Core Experience
-          </p>
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">The Core Experience</p>
           <h3
             id="kv-core-experience"
             className="mt-6 font-[family-name:var(--font-editorial)] text-3xl leading-[1.1] tracking-tight text-[color:var(--charcoal)] md:text-[52px]"
@@ -1183,10 +1126,7 @@ function CoreExperienceSection() {
         </div>
 
         {/* Three columns */}
-        <div
-          className="mt-20 grid grid-cols-1 gap-16 md:mt-[80px] md:grid-cols-3 md:gap-14"
-          style={enterStyle(180)}
-        >
+        <div className="mt-20 grid grid-cols-1 gap-16 md:mt-[80px] md:grid-cols-3 md:gap-14" style={enterStyle(180)}>
           {/* CARD 1 — Discover */}
           <div className="flex flex-col items-center text-center">
             <a
@@ -1303,10 +1243,7 @@ function CoreExperienceSection() {
         </div>
 
         {/* Closing statement */}
-        <div
-          className="mt-32 flex flex-col items-center text-center md:mt-40"
-          style={enterStyle(360)}
-        >
+        <div className="mt-32 flex flex-col items-center text-center md:mt-40" style={enterStyle(360)}>
           <p className="font-[family-name:var(--font-editorial)] text-2xl leading-[1.5] tracking-tight text-[color:var(--warm-gray)] md:text-[28px]">
             From discovering a story…
             <br />
@@ -1405,9 +1342,7 @@ function PromiseSection() {
       <div className="mx-auto flex max-w-[1400px] flex-col items-center">
         {/* Header */}
         <div className="mx-auto max-w-4xl text-center">
-          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">
-            The Promise
-          </p>
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]">The Promise</p>
           <h3
             id="kv-promise"
             className="mt-5 font-[family-name:var(--font-editorial)] text-4xl leading-[1.05] tracking-tight text-[color:var(--charcoal)] md:text-[64px]"
@@ -1418,15 +1353,9 @@ function PromiseSection() {
 
         {/* ── Desktop three-column composition ─────────────────────── */}
         <div className="mt-10 hidden items-center justify-center md:mt-14 md:flex">
-          <div
-            className="flex items-center justify-center"
-            style={{ gap: SIDE_GAP }}
-          >
+          <div className="flex items-center justify-center" style={{ gap: SIDE_GAP }}>
             {/* ARTISAN */}
-            <div
-              className="font-[family-name:var(--font-editorial)]"
-              style={imgWrapStyle(showComposition)}
-            >
+            <div className="font-[family-name:var(--font-editorial)]" style={imgWrapStyle(showComposition)}>
               <img
                 src={promiseArtisan.url}
                 alt="A master artisan hand-painting Meenakari florals on a copper vase"
@@ -1441,9 +1370,7 @@ function PromiseSection() {
                   position: "absolute",
                   left: "50%",
                   bottom: "calc(100% + 30px)",
-                  transform: showComposition
-                    ? "translate(-50%, 0)"
-                    : "translate(-50%, 8px)",
+                  transform: showComposition ? "translate(-50%, 0)" : "translate(-50%, 8px)",
                 }}
               >
                 Identity
@@ -1455,9 +1382,7 @@ function PromiseSection() {
                   position: "absolute",
                   right: "calc(100% + 50px)",
                   top: "50%",
-                  transform: showComposition
-                    ? "translateY(-50%)"
-                    : "translateY(calc(-50% + 8px))",
+                  transform: showComposition ? "translateY(-50%)" : "translateY(calc(-50% + 8px))",
                 }}
               >
                 Pride
@@ -1469,9 +1394,7 @@ function PromiseSection() {
                   position: "absolute",
                   left: "50%",
                   top: "calc(100% + 30px)",
-                  transform: showComposition
-                    ? "translate(-50%, 0)"
-                    : "translate(-50%, 8px)",
+                  transform: showComposition ? "translate(-50%, 0)" : "translate(-50%, 8px)",
                 }}
               >
                 Fair Value
@@ -1488,19 +1411,11 @@ function PromiseSection() {
                 transition: `opacity 1600ms ${EASE}, transform 1600ms ${EASE}`,
               }}
             >
-              <img
-                src={kvLogo.url}
-                alt="KalaVansh"
-                draggable={false}
-                style={{ width: LOGO_W }}
-              />
+              <img src={kvLogo.url} alt="KalaVansh" draggable={false} style={{ width: LOGO_W }} />
             </div>
 
             {/* CUSTOMER */}
-            <div
-              className="font-[family-name:var(--font-editorial)]"
-              style={imgWrapStyle(showComposition)}
-            >
+            <div className="font-[family-name:var(--font-editorial)]" style={imgWrapStyle(showComposition)}>
               <div className="absolute inset-0 overflow-hidden">
                 <img
                   src={promiseCustomer.url}
@@ -1526,9 +1441,7 @@ function PromiseSection() {
                   position: "absolute",
                   left: "50%",
                   bottom: "calc(100% + 30px)",
-                  transform: showComposition
-                    ? "translate(-50%, 0)"
-                    : "translate(-50%, 8px)",
+                  transform: showComposition ? "translate(-50%, 0)" : "translate(-50%, 8px)",
                 }}
               >
                 Authenticity
@@ -1540,9 +1453,7 @@ function PromiseSection() {
                   position: "absolute",
                   left: "calc(100% + 50px)",
                   top: "50%",
-                  transform: showComposition
-                    ? "translateY(-50%)"
-                    : "translateY(calc(-50% + 8px))",
+                  transform: showComposition ? "translateY(-50%)" : "translateY(calc(-50% + 8px))",
                 }}
               >
                 Experience
@@ -1554,9 +1465,7 @@ function PromiseSection() {
                   position: "absolute",
                   left: "50%",
                   top: "calc(100% + 30px)",
-                  transform: showComposition
-                    ? "translate(-50%, 0)"
-                    : "translate(-50%, 8px)",
+                  transform: showComposition ? "translate(-50%, 0)" : "translate(-50%, 8px)",
                 }}
               >
                 Human Connection
@@ -1653,15 +1562,13 @@ function PromiseSection() {
           >
             KalaVansh doesn&rsquo;t just create better transactions.
             <br className="hidden md:block" />
-            It restores identity for artisans and creates meaningful
-            relationships with customers.
+            It restores identity for artisans and creates meaningful relationships with customers.
           </p>
         </div>
       </div>
     </section>
   );
 }
-
 
 /* ================================================================
  * JourneySection — Chapter 7: "From an idea to a movement."
@@ -1801,10 +1708,7 @@ function JourneySection() {
     >
       <div className="mx-auto max-w-6xl">
         <div ref={headRef} className="mx-auto max-w-3xl text-center">
-          <p
-            className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]"
-            style={fade(0)}
-          >
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[color:var(--warm-gray)]" style={fade(0)}>
             The Journey
           </p>
           <h2
@@ -1818,10 +1722,9 @@ function JourneySection() {
             className="mx-auto mt-10 max-w-2xl text-[17px] leading-[1.7] text-[color:var(--warm-gray)] md:text-[19px]"
             style={fade(240)}
           >
-            KalaVansh began as a student project for Cause 2026, but quickly
-            became a vision for reconnecting artisans with the people who value
-            their craft. Every interview, prototype, workshop and presentation
-            strengthened one belief:
+            KalaVansh began as a student project for Cause 2026, but quickly became a vision for reconnecting artisans
+            with the people who value their craft. Every interview, prototype, workshop and presentation strengthened
+            one belief:
           </p>
           <p
             className="mx-auto mt-8 max-w-2xl font-[family-name:var(--font-editorial)] text-2xl leading-[1.4] tracking-tight text-[color:var(--charcoal)] md:text-[30px]"
@@ -1837,10 +1740,7 @@ function JourneySection() {
           ))}
         </div>
 
-        <div
-          className="mx-auto mt-32 flex flex-col items-center text-center md:mt-40"
-          style={fade(0)}
-        >
+        <div className="mx-auto mt-32 flex flex-col items-center text-center md:mt-40" style={fade(0)}>
           <p className="text-[15px] uppercase tracking-[0.4em] text-[color:var(--charcoal)] md:text-[17px]">
             Cause 2026
           </p>
@@ -1862,12 +1762,7 @@ function JourneySection() {
           </p>
 
           <div className="mt-32 flex flex-col items-center md:mt-44">
-            <img
-              src={kvLogo.url}
-              alt="KalaVansh"
-              draggable={false}
-              className="h-24 w-auto opacity-90 md:h-32"
-            />
+            <img src={kvLogo.url} alt="KalaVansh" draggable={false} className="h-24 w-auto opacity-90 md:h-32" />
             <p className="mt-8 font-serif text-base italic tracking-wide text-[color:var(--warm-gray)] md:text-lg">
               Making the Invisible Visible.
             </p>
@@ -1877,8 +1772,3 @@ function JourneySection() {
     </section>
   );
 }
-
-
-
-
-
