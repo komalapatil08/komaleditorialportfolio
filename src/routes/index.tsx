@@ -2,12 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { Mail, Linkedin } from "lucide-react";
 import { Certifications } from "@/components/Certifications";
-import portrait from "@/assets/komal-portrait.png.asset.json";
-import meetcraftImg from "@/assets/meetcraft.png.asset.json";
-import kalavanshImg from "@/assets/kalavansh-artisan.png.asset.json";
+const portrait = { url: "/images/f0d81b80-komal-portrait.png" };
+const meetcraftImg = { url: "/images/e990168c-meetcraft.png" };
+const kalavanshImg = { url: "/images/de1d5c02-kalavansh-artisan.png" };
 
-import tajImg from "@/assets/taj.png.asset.json";
-import resumeAsset from "@/assets/resume.pdf.asset.json";
+const tajImg = { url: "/images/2be8f35e-taj.png" };
+const resumeAsset = { url: "/documents/1263b65b-resume.pdf" };
 
 export const Route = createFileRoute("/")({
   head: () => ({

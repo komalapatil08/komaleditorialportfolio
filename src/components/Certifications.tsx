@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import certPM from "@/assets/cert-product-management.pdf.asset.json";
-import certPMkt from "@/assets/cert-product-marketing.pdf.asset.json";
-import certVPD from "@/assets/cert-value-proposition.pdf.asset.json";
-import certInnov from "@/assets/cert-innovation-frameworks.pdf.asset.json";
-import certCC from "@/assets/cert-creative-confidence.pdf.asset.json";
-import certStory from "@/assets/cert-storytelling.pdf.asset.json";
+const certPM = { url: "/documents/88f9f118-product-management-fundamentals.pdf" };
+const certPMkt = { url: "/documents/229b5dae-product-marketing-fundamentals.pdf" };
+const certVPD = { url: "/documents/d864591e-value-proposition-design.pdf" };
+const certInnov = { url: "/documents/db120078-innovation-frameworks.pdf" };
+const certCC = { url: "/documents/d17a247c-building-creative-confidence.pdf" };
+const certStory = { url: "/documents/199b1292-art-of-storytelling.pdf" };
 import iplLogo from "@/assets/ipl-logo.png";
 
 type Certification = {

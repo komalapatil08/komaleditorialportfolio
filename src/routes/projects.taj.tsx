@@ -34,7 +34,7 @@ import {
   Handshake,
   Lock,
 } from "lucide-react";
-import tajImg from "@/assets/taj.png.asset.json";
+const tajImg = { url: "/images/2be8f35e-taj.png" };
 
 
 

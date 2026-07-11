@@ -1,17 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import chapter1Room from "@/assets/meetcraft-chapter1-room.png.asset.json";
-import interviewKomal from "@/assets/mc-interview-komal.png.asset.json";
-import interviewShristy from "@/assets/mc-interview-shristy.png.asset.json";
-import interviewPrashant from "@/assets/mc-interview-prashant.png.asset.json";
-import surveyEvidence from "@/assets/mc-survey.png.asset.json";
-import chapter3Insight from "@/assets/mc-chapter3-insight.png.asset.json";
-import ch7Presentation from "@/assets/mc-ch7-presentation.jpeg.asset.json";
-import ch7Judges from "@/assets/mc-ch7-judges.jpeg.asset.json";
-import ch7Award from "@/assets/mc-ch7-award.jpeg.asset.json";
-import ch7Certificate from "@/assets/mc-ch7-certificate.png.asset.json";
-import meetcraftCoverHero from "@/assets/meetcraft-cover-hero.png.asset.json";
-import meetcraftDemo from "@/assets/meetcraft-demo.mp4.asset.json";
+const chapter1Room = { url: "/images/22ef9c32-meetcraft-chapter1-room.png" };
+const interviewKomal = { url: "/images/46196a15-mc-interview-komal.png" };
+const interviewShristy = { url: "/images/8086e6a5-mc-interview-shristy.png" };
+const interviewPrashant = { url: "/images/359bbe6c-mc-interview-prashant.png" };
+const surveyEvidence = { url: "/images/14745063-mc-survey.png" };
+const chapter3Insight = { url: "/images/4991d803-mc-chapter3-insight.png" };
+const ch7Presentation = { url: "/images/d2f58057-mc-ch7-presentation-v4.jpeg" };
+const ch7Judges = { url: "/images/510b4741-mc-ch7-judges-v2.jpeg" };
+const ch7Award = { url: "/images/6b02f97b-mc-ch7-award.jpeg" };
+const ch7Certificate = { url: "/images/088b0425-mc-ch7-certificate.png" };
+const meetcraftCoverHero = { url: "/images/cf0fbf75-meetcraft-cover-hero.png" };
+const meetcraftDemo = { url: "https://komaleditorialportfolio.lovable.app/__l5e/assets-v1/d9f2db0e-ff32-4320-8a04-7ae36c2d6f26/meetcraft-demo.mp4" };
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 
