@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
-import meetcraftImg from "@/assets/meetcraft.png.asset.json";
-import kalavanshImg from "@/assets/kalavansh-artisan.png.asset.json";
+const meetcraftImg = { url: "/images/e990168c-meetcraft.png" };
+const kalavanshImg = { url: "/images/de1d5c02-kalavansh-artisan.png" };
 
-import tajImg from "@/assets/taj.png.asset.json";
+const tajImg = { url: "/images/2be8f35e-taj.png" };
 
 export const Route = createFileRoute("/projects/")({
   head: () => ({
